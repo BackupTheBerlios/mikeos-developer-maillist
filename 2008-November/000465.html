@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Development: MikeOS 2.9.2 released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Development%3A%20MikeOS%202.9.2%20released&In-Reply-To=%3C19d8b3b00811150404u6c130ddbw20b230ac4271668f%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000464.html">
+   <LINK REL="Next"  HREF="000466.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Development: MikeOS 2.9.2 released</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Development%3A%20MikeOS%202.9.2%20released&In-Reply-To=%3C19d8b3b00811150404u6c130ddbw20b230ac4271668f%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Development: MikeOS 2.9.2 released">okachi at gmail.com
+       </A><BR>
+    <I>Sat Nov 15 13:04:51 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000464.html">[mikeos-developer] And then there were two... The Great MikeOS	Fork of 2008!
+</A></li>
+        <LI>Next message: <A HREF="000466.html">[mikeos-developer] Development: MikeOS 2.9.2 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#465">[ date ]</a>
+              <a href="thread.html#465">[ thread ]</a>
+              <a href="subject.html#465">[ subject ]</a>
+              <a href="author.html#465">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi everyone,
+
+I've released MikeOS 2.9.2, the first step on the road to 3.0:
+
+<A HREF="http://download.berlios.de/mikeos/mikeos-2.9.2.tar.gz">http://download.berlios.de/mikeos/mikeos-2.9.2.tar.gz</A>
+
+(I'd already released 2.9.01 when testing out unreal mode, hence the
+version number here!) There are a lot of changes to simplify the
+source code and some things have been removed:
+
+# DOS support -- this was a great feature, but it was very limited.
+Now that MikeOS is always going to stay in a 64K segment, it means
+that few programs would ever be able to run, so it makes sense to cut
+it
+
+# Mouse support -- Tomasz has done some brilliant work, but I simply
+don't fully understand the code because I know little about the PS/2
+protocol. In order to document MikeOS as best as possible, I need to
+understand the whole codebase completely
+
+Of course, these features will live on and improve in TomOS! But for
+the simplicity approach of MikeOS, I think it's best to cut them out.
+
+Additionally, the MikeOS memory map has changed. Here's the new layout
+of the 64K segment:
+
+- 24K for kernel
+- 8K for disk operations
+- 32K for external programs
+
+This simplifies the kernel in that the system call vectors start from
+0, and we don't have to jump over a blank 32K of code at the
+beginning. And if you think 24K is too limiting for the kernel,
+currently it assembles to a mere 6.8K binary, and that's with 50+
+system calls. So there's still a relatively huge amount of room for
+new system calls and features.
+
+The source code has been split up into individual files for the
+different features: command line, screen handling, serial port and so
+forth. There's still more to be done here; I need to split out the
+FAT12 handling code from syscalls.asm.
+
+The full changelog is pasted at the bottom of this mail. In summary,
+MikeOS is now a lot simpler in terms of features, design and source
+code structure, making it a lot easier to work with! There's still a
+few things to do, and I need to go about splitting up the
+documentation into files for users, OS developers and app developers.
+
+Cheers,
+Mike
+
+
+# Major code simplification and cleanup: removed mouse support, DOS
+support, STAKAN.BIN, testzone, CLI PROMPT command
+
+# Memory map shuffled: first 24K is kernel code space; then 8K buffer
+for kernel disk operations; then 32K for external programs
+
+# Source code restructured: bootloader moved to source/bootload;
+system calls now separated into multiple files in source/features;
+os_main.asm renamed kernel.asm; kernel file is now KERNEL.BIN
+
+# When exiting a program that was launched from the menu-driven app
+selector, the &quot;Program finished&quot; message now appears in a red bar at
+the bottom
+
+# os_get_file_list now returns sanitised comma-separated list of files
+(eg &quot;FOO.BIN,HELLO.TXT&quot; instead of &quot;FOO     BIN,HELLO   TXT&quot; etc.)
+
+# os_list_dialog rewritten: now shows selected option as a black bar,
+rather than with &quot;&gt;&gt;&gt;&gt;&gt;&quot;
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000464.html">[mikeos-developer] And then there were two... The Great MikeOS	Fork of 2008!
+</A></li>
+	<LI>Next message: <A HREF="000466.html">[mikeos-developer] Development: MikeOS 2.9.2 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#465">[ date ]</a>
+              <a href="thread.html#465">[ thread ]</a>
+              <a href="subject.html#465">[ subject ]</a>
+              <a href="author.html#465">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

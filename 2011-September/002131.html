@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2 released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeShell%200.420%20and%20EDIT%200.420%20for%204.1.2%20released&In-Reply-To=%3C78fcaf80b1f271d7574fe63bd48c0a48%40cordilon.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002129.html">
+   <LINK REL="Next"  HREF="002132.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2 released</H1>
+    <B>Troy Martin</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeShell%200.420%20and%20EDIT%200.420%20for%204.1.2%20released&In-Reply-To=%3C78fcaf80b1f271d7574fe63bd48c0a48%40cordilon.net%3E"
+       TITLE="[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2 released">blacklight at cordilon.net
+       </A><BR>
+    <I>Sun Sep 11 23:21:01 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002129.html">[mikeos-developer] Memory Manipulator 2.3.1
+</A></li>
+        <LI>Next message: <A HREF="002132.html">[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2131">[ date ]</a>
+              <a href="thread.html#2131">[ thread ]</a>
+              <a href="subject.html#2131">[ subject ]</a>
+              <a href="author.html#2131">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Howdy everyone! I'm pleased to announce that the first stable, 
+feature-complete build of the new CLI, codenamed MikeShell, is available 
+for public testing. Attached is a zip file containing five files:
+
+  - cli.asm, a complete replacement file.
+  - string.txt, a pair of routines (os_string_tokenize from Matej and my 
+own os_string_comparecase) to be appended to string.asm for MikeShell to 
+run.
+  - edit.asm, an updated EDIT to fix a couple bugs and demo the 
+command-line parameter passing feature of MikeShell.
+  - edit.bin, the compiled version of EDIT.
+  - shutdown.asm, a small program to shut the computer down and power it 
+off using APM 1.2. Just for fun.
+
+The new features of the new CLI are proper handling and passing of 
+arguments, built-in file management routines (DEL, COPY, REN), and an 
+echo function for when you're really bored (ECHO). A lot of the code 
+from the original shell worked just fine, so many pieces are still 
+mostly intact. The BIN/BAS loading routines are the same as before, as 
+is CAT for the most part.
+
+Now, I've found that its DIR command has performance issues on the real 
+hardware I've tested it on (1998 Toshiba Satellite laptop). I think I 
+know the cause of it, but if it's just happening on this particular 
+machine, I'd like to know. So if you could test the DIR command on as 
+many different pieces of floppy-equipped hardware as possible, that 
+would be awesome.
+
+EDIT has simply been modified to meet the coding standards of the 
+project as well as being able to take a file to load or create as a 
+command-line parameter. Parameters are passed to programs in two parts. 
+The entire tokenized input string from the CLI is passed in SI, while 
+the number of parameters (not including the called program name is 
+passed in DX. See edit.asm for an example of using a parameter in an 
+external program and the DEL command in the shell for an example of 
+parsing an arbitrary number of parameters.
+
+Of course, screenshots are necessary:
+
+  - DIR command: <A HREF="http://i.imgur.com/5YyDP.jpg">http://i.imgur.com/5YyDP.jpg</A>
+  - RENaming a file: <A HREF="http://i.imgur.com/Gko9q.jpg">http://i.imgur.com/Gko9q.jpg</A>
+  - Performing a few more file operations on the same files: 
+<A HREF="http://i.imgur.com/cpfNB.jpg">http://i.imgur.com/cpfNB.jpg</A>
+
+Provided that there aren't any major bugs to fix, I believe these will 
+be the versions of MikeShell and EDIT that will be included in 4.2.0.
+
+And I have this horrible feeling that once someone tries MikeShell on 
+their copy of MikeOS, there's going to be horrific failures...
+
+Have fun!
+
+-- 
+Troy
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: mikeshell-0.420.zip
+Type: application/x-zip-compressed
+Size: 11701 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110911/785e3e59/attachment.bin">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110911/785e3e59/attachment.bin</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002129.html">[mikeos-developer] Memory Manipulator 2.3.1
+</A></li>
+	<LI>Next message: <A HREF="002132.html">[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2131">[ date ]</a>
+              <a href="thread.html#2131">[ thread ]</a>
+              <a href="subject.html#2131">[ subject ]</a>
+              <a href="author.html#2131">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

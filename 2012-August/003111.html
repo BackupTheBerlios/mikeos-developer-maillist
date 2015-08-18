@@ -1,0 +1,340 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] A memory allocator for MikeOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20memory%20allocator%20for%20MikeOS&In-Reply-To=%3C1345303568.91984.YahooMailClassic%40web65902.mail.ac4.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003113.html">
+   <LINK REL="Next"  HREF="003112.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] A memory allocator for MikeOS</H1>
+    <B>Matej Horvat</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20memory%20allocator%20for%20MikeOS&In-Reply-To=%3C1345303568.91984.YahooMailClassic%40web65902.mail.ac4.yahoo.com%3E"
+       TITLE="[mikeos-developer] A memory allocator for MikeOS">redjazz_slo at yahoo.com
+       </A><BR>
+    <I>Sat Aug 18 17:26:08 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003113.html">[mikeos-developer] Nano for MikeOS
+</A></li>
+        <LI>Next message: <A HREF="003112.html">[mikeos-developer] A memory allocator for MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3111">[ date ]</a>
+              <a href="thread.html#3111">[ thread ]</a>
+              <a href="subject.html#3111">[ subject ]</a>
+              <a href="author.html#3111">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello everyone,
+
+I've written a memory allocator for use by MikeOS programs (it may also be used by the OS itself, but the program needs to initialize the heap first; details follow). So far it's a simple allocator that supports allocating and freeing non-movable blocks large up to 32K (because that's the memory available to programs) with very little overhead.
+
+While it could be argued that a memory allocator would complicate MikeOS, I think it would be a good addition as it would make writing some types of programs easier and BASIC would benefit greatly from supporting variable-length strings and arrays.
+
+The allocator works like this: before allocating any memory blocks, the program must first initialize the heap, which is where all the memory blocks are allocated. The heap begins at a program-specified address and takes up the rest of the MikeOS segment. It is made up of simply all memory blocks after another, where each blocks has a 2-byte header which contains the size of the block, and the highest bit is used to indicate that it's used (which nicely gives us a maximum block size of 32K). Example of initializing the heap:
+
+========================================
+	mov ax, Heap
+	call os_init_heap
+
+	; ... Code, defb, defw, resb, resw, etc. here...
+
+Heap:
+	; End of program
+========================================
+
+After the heap is initialized, the program can begin allocating memory blocks. Currently the allocator will walk through all memory blocks, and when it finds one that's free, it will split it in two and return a pointer to the data area of the new block. If there's not enough memory for a new block, the carry will be set.
+
+Freeing a block is done by passing the pointer given by os_allocate in BX and calling os_free, which will mark the block as free and merge adjacent free blocks to maximize available memory. Example:
+
+========================================
+	mov ax, 1024	; Size of memory block (excluding overhead)
+	call os_allocate
+	jc OutOfMemory	; Not enough memory, BX destroyed
+	; Otherwise, BX now points to the memory block data area
+	call os_free
+========================================
+
+Please read the notes and questions at the end of the message before integrating the allocator into the kernel. The source code follows.
+
+========================================
+
+os_init_heap:
+	; Initializes the heap.
+	; This must be called before any memory allocation is done.
+	; Subsequent calls are equivalent to freeing all blocks and
+	; potentially resizing the heap if AX is different.
+
+	; IN:
+	; AX -&gt; start of heap
+
+	push ax
+	push bx
+
+	; Initialize heap pointer and calculate heap size.
+	mov [Heap], ax	; Note: &quot;Heap&quot; is a global variable in the kernel
+	mov bx, ax
+	neg ax		; Heap size
+
+	; Make a free block.
+	; Note: this assumes the heap will be at least 2 bytes long.
+	; Otherwise, calling this routine makes no sense anyway.
+	dec ax		; Two bytes of overhead per block
+	dec ax
+	mov [bx], ax	; Store size of free block
+
+	pop bx
+	pop ax
+
+	ret
+
+----------------------------------------
+
+os_allocate:
+	; Allocates a block of memory &amp; returns a pointer to its data area.
+
+	; IN:
+	; AX = size of block
+
+	; OUT:
+	; CF clear on success, BX -&gt; block data area
+	; CF set on error, BX destroyed
+
+	push ax
+	push cx
+
+	mov bx, [Heap]	; Address of first block
+	mov cx, ax	; Store size for comparison
+
+.next:
+	mov ax, [bx]	; Get header of block
+	test ax, 8000h	; Is it free?
+	js .notFree	; No.
+	cmp ax, cx	; Yes, is it big enough?
+	jz .exactMatch	; It's exactly the same size
+	ja .found	; It's larger than that
+.notFree:
+	inc bx		; Add overhead
+	inc bx
+	and ax, 7FFFh	; Get size
+	add bx, ax	; Add it
+	jnc .next	; Repeat if more blocks available
+
+	; No more blocks, set carry and return.
+	pop cx
+	pop ax
+	stc
+
+	ret
+
+.found:
+	mov ax, cx	; Get size of new block
+	push ax
+	or ax, 8000h	; Set used flag
+	mov cx, [bx]	; Save old size of old block
+	mov [bx], ax	; Set header of new block
+	pop ax
+	inc bx		; Add overhead
+	inc bx
+	push bx		; Save pointer to data area of new block
+	add bx, ax	; Move to next block
+	sub cx, ax	; Subtract size of new block
+	dec cx		; Subtract overhead of new block
+	dec cx
+	mov [bx], cx	; Store new size of old block
+	pop bx		; Retrieve pointer to data area of new block
+	jmp .finish	; And we're done!
+
+.exactMatch:
+	; The free memory block is of the exact size we want, so
+	; set the used flag and return.
+	or word [bx], 8000h
+
+.finish:
+	; Clear carry (is this necessary?) and return.
+	pop cx
+	pop ax
+	clc
+
+	ret
+
+----------------------------------------
+
+os_free:
+	; Frees a memory block and merges adjacent free blocks.
+
+	; IN:
+	; BX -&gt; data area of block to free, as returned by os_allocate
+
+	push ax
+	push bx
+	push cx
+	push dx
+
+	; Clear the &quot;used&quot; flag.
+	dec bx		; But move to the header first.
+	dec bx
+	and word [bx], 7FFFh
+
+	; Now let's merge adjacent free blocks.
+	mov bx, [Heap]	; Address of first block
+
+.mergeFindFirstFree:
+	; If the block is free, start merging, otherwise move on.
+	mov ax, [bx]
+	test ax, 8000h	; Used?
+	jns .mergeLoop	; No, let's start merging
+	call .getNextBlock
+	jc .finish	; No more blocks, return
+	jmp .mergeFindFirstFree
+
+.mergeLoop:
+	; The previous block was free, so is the next one too?
+	mov cx, ax	; Save size (the highest bit is already 0)
+	mov dx, bx	; Save offset
+.mergeLoopNext:
+	call .getNextBlock
+	jc .finish	; No more blocks, return
+	mov ax, [bx]
+	test ax, 8000h	; Used?
+	js .mergeNextIsUsed
+	and ax, 7FFFh	; Get size
+	mov bx, dx	; Move to previous block
+	add ax, cx	; Add sizes
+	inc ax		; We get two extra bytes from overhead
+	inc ax
+	mov [bx], ax	; Merge the blocks
+	jmp .mergeLoopNext
+
+.mergeNextIsUsed:
+	; During merging, a used block was encountered,
+	; so let's find the next free block.
+	call .getNextBlock
+	jmp .mergeFindFirstFree
+
+.getNextBlock:
+	; Returns offset of next block.
+	; Should this become a standalone OS call or at least a
+	; standalone procedure called by os_allocate and os_print_heap?
+
+	; IN:
+	; BX -&gt; current block header
+
+	; OUT:
+	; AX destroyed (= size of current block, useless)
+	; BX -&gt; next block header
+	; CF set if no more blocks
+
+	mov ax, [bx]	; Get header
+	and ax, 7FFFh	; Extract size
+	inc bx		; Add overhead
+	inc bx
+	add bx, ax	; Add size, if it wraps around, CF will be set
+
+	ret
+
+.finish:
+	pop dx
+	pop cx
+	pop bx
+	pop ax
+
+	ret
+
+----------------------------------------
+
+os_print_heap:
+	; Prints the status of the heap.
+
+	push ax
+	push bx
+	push cx
+
+	mov bx, [Heap]	; Address of first block
+
+.next:
+	mov ax, [bx]	; Get block header
+	mov cx, ax
+	and ax, 7FFFh	; Get size of block
+	call os_print_4hex
+	xchg cx, ax
+	test ax, 8000h
+	jz .notUsed
+	push bx
+	xor bh, bh
+	mov ax, 0E2Ah	; Teletype output; print an asterisk
+	int 10h
+	pop bx
+.notUsed:
+	call os_print_newline
+	inc bx		; Add overhead
+	inc bx
+	add bx, cx	; Get address of next block
+	jnc .next	; Continue if we haven't wrapped around
+	call os_print_newline
+
+	pop cx
+	pop bx
+	pop ax
+
+	ret
+
+========================================
+
+Questions:
+
+* Is this implementation even useful? Should we have a handle-based system? This would solve fragmentation problems, but would be slightly more complicated to use. Of course, if we decide to implement handles later, we can still make os_allocate a simple wrapper for eg. os_new_handle and os_lock_handle.
+
+* Should os_print_heap be included in the kernel at all? It's only a debugging function, and probably not as handy as eg. os_dump_registers. If it goes into the kernel, it should be enhanced to also display the addresses of memory blocks.
+
+* Should os_free simply clear the used flag? Probably, because the free block merging makes it very slow and in most cases there will be only two blocks to merge. Perhaps merging could be done by os_allocate when no free block large enough is found, and then the blocks would be walked through again, and if there's still not enough memory, it would return with the carry flag set.
+
+Things to be done (aside from obvious things like integration into BASIC and maybe handles):
+
+* An os_resize call. A simple implementation may be to call os_allocate, copy the block's data area, then call os_free on the old block. However, if the heap is very fragmented or almost full, it would be better to shift all blocks after the one being resized to higher addresses, but this could only be done with handles. Without handles, the block header may simply be modified to reflect the new size if there are no more blocks following it.
+
+* A separate &quot;get next block&quot; routine for use by the kernel (see os_free.getNextBlock)?
+
+Note:
+Obviously, the code presented earlier is not guaranteed to be free of bugs, though it worked properly when stepped through in a debugger in simple test. 
+
+However, I haven't tested out of memory conditions yet.
+
+Matej Horvat
+<A HREF="http://matejhorvat.si/">http://matejhorvat.si/</A>
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003113.html">[mikeos-developer] Nano for MikeOS
+</A></li>
+	<LI>Next message: <A HREF="003112.html">[mikeos-developer] A memory allocator for MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3111">[ date ]</a>
+              <a href="thread.html#3111">[ thread ]</a>
+              <a href="subject.html#3111">[ subject ]</a>
+              <a href="author.html#3111">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

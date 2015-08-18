@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Using the VGA as an I/O port
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Using%20the%20VGA%20as%20an%20I/O%20port&In-Reply-To=%3CCAPRjAGjd_7HYJjGbCeUOi2_jxWAc9MkL6jAgGu49bx7iW6u6Jg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002251.html">
+   <LINK REL="Next"  HREF="002238.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Using the VGA as an I/O port</H1>
+    <B>Paulo V</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Using%20the%20VGA%20as%20an%20I/O%20port&In-Reply-To=%3CCAPRjAGjd_7HYJjGbCeUOi2_jxWAc9MkL6jAgGu49bx7iW6u6Jg%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Using the VGA as an I/O port">paulomobilemail at gmail.com
+       </A><BR>
+    <I>Thu Sep 22 16:33:03 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002251.html">[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 41
+</A></li>
+        <LI>Next message: <A HREF="002238.html">[mikeos-developer] Using the VGA as an I/O port
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2237">[ date ]</a>
+              <a href="thread.html#2237">[ thread ]</a>
+              <a href="subject.html#2237">[ subject ]</a>
+              <a href="author.html#2237">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+As promised some more info on the VGA port
+for modern computers and screens.
+
+Note that the VGA pins I refer to are also
+available on DVI just the pin numbers are different.
+
+First a bit of history, before circa 1999 monitor
+identification was done by means of either shorting
+pins 4,11,12,15 to gnd (pin 5) or let them float.
+This would indicate the type of monitor connected
+colour, b/w, resolution or no monitor connected.
+
+With the higher resolution modes becoming the
+standard, this method was no longer satisfactory
+and a new one was created called EDID which
+is based on the standard I2C protocol.
+
+<A HREF="http://en.wikipedia.org/wiki/I%C2%B2C">http://en.wikipedia.org/wiki/I%C2%B2C</A>
+
+What EDID did is re-use pin 12 for SDA
+(bi-directional data) and pin 15 as SCL (clock).
+Pin 5 is still the gnd (common).
+
+In the monitor, the manufactures put a serial
+I2C EEPROM with details such as model, name,
+scan rates supported, etc etc.
+
+A typical eeprom used:
+
+<A HREF="http://www.atmel.com/dyn/resources/prod_documents/doc0180.pdf">http://www.atmel.com/dyn/resources/prod_documents/doc0180.pdf</A>
+
+
+Pins 4 and 11 are now &quot;obsolete&quot; but still connected
+on many monitors, video cards and cables.
+You could experiment with these two pins
+and by calling INT 11h, just don't short the other
+two pins to gnd (12 and 15) as they are for EDID.
+Most new computers ignore pins 4 and 11 and thus
+even if you change the state of pins 4 &amp; 11 and
+then execute an INT 11h, I doubt you will see a
+change in the bios data area at 0040:0010
+still it's worth a try especially if you have
+older equipment.
+
+For those with newer equipment, the only way
+is to use EDID, but before doing so it's best
+to test to see if your setup supports it.
+The chances are very very good that it does.
+
+Below is a simple pgm to test it.
+Compile with A86 (or with small changes NASM)
+and then run it under a true DOS machine
+using DEBUG.
+
+====================================
+jmp MainPgm
+
+EdidBuffer db 256 dup 0
+
+MainPgm:
+
+mov ax,4F15h
+mov bx,01
+xor cx,cx
+xor dx,dx
+mov di, offset EdidBuffer
+int 10h
+int 3h
+
+====================================
+
+Once compiled, load the resulting .com
+into DEBUG and run it.
+Now if AX=004Fh and BX=0001 it means it's supported.
+Now (D)ump the buffer (EdidBuffer) which should be
+located at CS:0102h
+
+Here you will see 128 (80h) bytes of EDID data from
+your monitor.
+I will post what each byte means when I have more time
+but for now you should see a whole bunch of FFh's at the
+start and towards the end the model/make of your monitor.
+The last byte is a checksum.
+
+Note that although the EDID data is normally 128 bytes, some
+manufactures return 256, hence the 256 bytes set aside
+for EdidBuffer in the pgm above.
+
+Since the interrupt calls above are from BIOS not DOS
+(I just made the pgm to run under DOS as it's quicker),
+you could write a small app for MikeOS to display
+the monitor info that is connected to the computer
+much like the Linux 'get-edid' tool.
+
+For those wanting to use this rather as an I/O port
+then it's quite simple, disconnect pins 12 &amp; 15
+going to your monitor and then connect them to a
+small micro (set to emulate I2C slave) or even use
+a parallel to I2C converter such as the PCF8574.
+The parallel inputs to the PCF8574 then reads your
+external data and sends it to the computer in place
+of the EDID data when you run the pgm.
+
+Since MikeOS does not need the EDID data for
+anything, you can now use it for whatever you want.
+
+Have fun,
+Paulo.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110922/24bce764/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110922/24bce764/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002251.html">[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 41
+</A></li>
+	<LI>Next message: <A HREF="002238.html">[mikeos-developer] Using the VGA as an I/O port
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2237">[ date ]</a>
+              <a href="thread.html#2237">[ thread ]</a>
+              <a href="subject.html#2237">[ subject ]</a>
+              <a href="author.html#2237">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

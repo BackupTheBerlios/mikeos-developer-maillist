@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Booting from USB flash drive
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Booting%20from%20USB%20flash%20drive&In-Reply-To=%3C4DC994389A56413C92F66575A1182BA3%40userfe6b65a555%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001298.html">
+   <LINK REL="Next"  HREF="001287.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Booting from USB flash drive</H1>
+    <B>mikegonta at gmail.com</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Booting%20from%20USB%20flash%20drive&In-Reply-To=%3C4DC994389A56413C92F66575A1182BA3%40userfe6b65a555%3E"
+       TITLE="[mikeos-developer] Booting from USB flash drive">mikegonta at gmail.com
+       </A><BR>
+    <I>Wed May 12 23:00:39 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001298.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+        <LI>Next message: <A HREF="001287.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1294">[ date ]</a>
+              <a href="thread.html#1294">[ thread ]</a>
+              <a href="subject.html#1294">[ subject ]</a>
+              <a href="author.html#1294">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+----- Original Message ----- 
+From: &quot;SASANO Takayoshi&quot;
+To: &quot;MikeOS (and similar OS) developers&quot;
+Sent: Wednesday, May 12, 2010 4:17 PM
+Subject: Re: [mikeos-developer] Booting from USB flash drive
+
+
+&gt;<i> I think the trouble comes from the
+</I>&gt;<i> differencies of Cylinder/Sector/Head paramater
+</I>&gt;<i> between FDD and HDD.
+</I>
+And this is no problem at all.
+Do not assume floppy disk geometry and do not hard code the
+parameters.
+Early on call BIOS function int 13h, ah=8 Get Drive Parameters.
+The BIOS passes the boot drive number in dl which is a
+parameter to this function.
+Save the results to global memory and use these specific
+parameters to calculate the CHS.
+Bits 0-5 of cx is the sectors per track value.
+dh plus 1 (which you can't add to dh) is the number of
+heads value.
+
+use16
+  mov [drive_number], dl        ; save for later
+  mov ah, 8
+  int 13h                       ; get drive parameters
+  and cx, 3Fh                   ; maximum sector number
+  mov [sectors_per_track], cx
+  movzx dx, dh                  ; maximum head number
+  inc dx
+  mov [number_of_heads], dx
+
+Typically (but we are making no assumptions here) the
+flash drive BIOS HDD emulation values are:
+  63 sectors per track
+  256 heads
+
+Given these three saved parameters the calculation of CHS
+from LBA for FDD or HDD is trivial.
+
+use16
+  xor dx, dx                    ; ax = LBA
+  mov bx, [sectors_per_track]
+  div bx
+  inc dx
+  mov cx, dx                    ; sector in cl
+  xor dx, dx
+  mov bx, [number_of_heads]
+  div bx
+  mov dh, dl                    ; head in dh
+  mov dl, [drive_number]
+  xchg al, ah
+  or cx, ax                     ; cylinder in ch
+
+This simple method allows a FAT12 floppy disk image to boot
+and run from a flash drive as either BIOS FDD or HDD.
+
+
+Mike Gonta
+look and see - many look but few see
+
+<A HREF="http://mikegonta.com/pdBIOS32">http://mikegonta.com/pdBIOS32</A>
+
+1. Download the file
+2. Unzip the image file
+3. Transfer the image file to a removable device (virtual floppy drive,
+   loopback device, real floppy disk, flash drive)
+4. Boot and run (with qemu or a real PC)
+and/or
+5. Use your file system explorer to access the readable files on the
+FAT12 floppy disk image
+
+
+
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001298.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+	<LI>Next message: <A HREF="001287.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1294">[ date ]</a>
+              <a href="thread.html#1294">[ thread ]</a>
+              <a href="subject.html#1294">[ subject ]</a>
+              <a href="author.html#1294">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

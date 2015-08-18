@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Nano for MikeOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Nano%20for%20MikeOS&In-Reply-To=%3CCACtjVkE%3D3PF0ZtQ2H3x5861Y4pnC3Qf7sBtkXe-463sH7UO%2BLg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003128.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Nano for MikeOS</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Nano%20for%20MikeOS&In-Reply-To=%3CCACtjVkE%3D3PF0ZtQ2H3x5861Y4pnC3Qf7sBtkXe-463sH7UO%2BLg%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Nano for MikeOS">okachi at gmail.com
+       </A><BR>
+    <I>Thu Aug 30 18:06:25 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003128.html">[mikeos-developer] Nano for MikeOS
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3129">[ date ]</a>
+              <a href="thread.html#3129">[ thread ]</a>
+              <a href="subject.html#3129">[ subject ]</a>
+              <a href="author.html#3129">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Joshua,
+
+Sorry for the delay in testing. Looks great! The only bug I've found
+is to do with lines longer than the screen width. For instance, if I
+open EXAMPLE.BAS and go to line 57, and type a load of stuff so that
+the &quot;trail behind it&quot; goes off the right of the screen, and then
+backspace what I've typed, the stuff at the end of the line doesn't
+appear again. It appears to still be in RAM, though, because the file
+is correct when saved. It doesn't matter if horizontal scrolling isn't
+possible (I found it too complex in EDIT.BIN), but it'd be cool if
+that bug could be fixed.
+
+And that's it! The only other two things I thought of are:
+
+1) You have to type the filename each time you save. I guess this is
+due to the limitations of os_input_string? In &quot;real&quot; Nano it pre-fills
+that text entry box if you're working on an existing file.
+
+2) If you try to quit without saving a modified file, you're prompted
+to enter &quot;no&quot;. In Nano, you can just hit &quot;n&quot;.
+
+BTW, what were the issues implementing os_run_basic here? Is there
+anything I can change kernel-wise to fix it?
+
+Mike
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003128.html">[mikeos-developer] Nano for MikeOS
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3129">[ date ]</a>
+              <a href="thread.html#3129">[ thread ]</a>
+              <a href="subject.html#3129">[ subject ]</a>
+              <a href="author.html#3129">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

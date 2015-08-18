@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] FAT16 bootloader
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT16%20bootloader&In-Reply-To=%3CCACtjVkEhU3AVCeJ_8NrH77ji_JGr-oDwxAFf0UF%2BwDn7o2c3tg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002570.html">
+   <LINK REL="Next"  HREF="002574.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] FAT16 bootloader</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT16%20bootloader&In-Reply-To=%3CCACtjVkEhU3AVCeJ_8NrH77ji_JGr-oDwxAFf0UF%2BwDn7o2c3tg%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] FAT16 bootloader">okachi at gmail.com
+       </A><BR>
+    <I>Wed Oct  5 14:43:16 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002570.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+        <LI>Next message: <A HREF="002574.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2573">[ date ]</a>
+              <a href="thread.html#2573">[ thread ]</a>
+              <a href="subject.html#2573">[ subject ]</a>
+              <a href="author.html#2573">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, Oct 5, 2011 at 12:50 PM, Paulo V &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">paulomobilemail at gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> So if the iso works, then the ima is also
+</I>&gt;<i> correct which means the bootloader and
+</I>&gt;<i> BPB are also ok.
+</I>
+Well, maybe. I don't know. It's quite complicated! How about this:
+please send me your latest, tested raw hard drive image (sorry, I
+deleted the last one), and I'll &quot;dd&quot; it to a USB key and try it on my
+machine here. That might help us to narrow down the problem.
+
+&gt;<i> I don't know why your images are different.
+</I>
+The disk images shouldn't be any different -- I'm just using what you sent me!
+
+&gt;<i> I know it's not a priority to convert to FAT16
+</I>&gt;<i> just yet, but when/if you do, then seriously
+</I>&gt;<i> consider standardizing on an image size
+</I>&gt;<i> of 512MB.
+</I>
+Why, when Mike Gonta said that drives under 1GB might have problems?
+If that's the case, choosing 1GB sounds better. Or perhaps having a
+1GB and a 16MB image.
+
+&gt;<i> There are FAT16 write and read routines to write
+</I>&gt;<i> and you might even have to make some changes
+</I>&gt;<i> to the memory layout of MikeOS as the current
+</I>&gt;<i> buffer is way too small for FAT16 stuff.
+</I>
+Hrm, good point. How much space would we need, do you reckon?
+
+&gt;<i> The recommended files buffer for FAT16 seems to
+</I>&gt;<i> be around 128KB
+</I>
+What's a &quot;files buffer&quot;? Surely we just need to have space for the
+root directory and FAT tables?
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002570.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+	<LI>Next message: <A HREF="002574.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2573">[ date ]</a>
+              <a href="thread.html#2573">[ thread ]</a>
+              <a href="subject.html#2573">[ subject ]</a>
+              <a href="author.html#2573">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

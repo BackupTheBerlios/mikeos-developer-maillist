@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] bootstrap16 - real mode (CPU 8086) FAT12/16/32	bootloader 2013-05-20
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2013-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20bootstrap16%20-%20real%20mode%20%28CPU%208086%29%20FAT12/16/32%0A%09bootloader%202013-05-20&In-Reply-To=%3CDB991065C28A40BD823C6CD47488708B%40usera5ad58b449%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] bootstrap16 - real mode (CPU 8086) FAT12/16/32	bootloader 2013-05-20</H1>
+    <B>Mike Gonta</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20bootstrap16%20-%20real%20mode%20%28CPU%208086%29%20FAT12/16/32%0A%09bootloader%202013-05-20&In-Reply-To=%3CDB991065C28A40BD823C6CD47488708B%40usera5ad58b449%3E"
+       TITLE="[mikeos-developer] bootstrap16 - real mode (CPU 8086) FAT12/16/32	bootloader 2013-05-20">mikegonta at gmail.com
+       </A><BR>
+    <I>Mon May 20 14:30:42 CEST 2013</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3171">[ date ]</a>
+              <a href="thread.html#3171">[ thread ]</a>
+              <a href="subject.html#3171">[ subject ]</a>
+              <a href="author.html#3171">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>bootstrap16 - real mode (CPU 8086) FAT12/16/32 bootloader
+Original code by Mike Gonta, Public Domain 2013
+
+<A HREF="http://mikegonta.com/bootstrap16.zip">http://mikegonta.com/bootstrap16.zip</A>
+
+2013-05-20
+* new version of kernel.asm
+ - includes simple version of printf
+
+2013-05-19.19.00
+* corrected longjmp routine
+
+2013-05-19
+* new vesion of setjmp/longjmp
+ - uses carry flag (assembly language style)
+ - saves/restores _ALL_ registers except ax (longjmp return value)
+ - each setjmp/longjmp pair can have its own saved state buffer
+* added qemu.bat script to emulate bootstrap16.img
+ - unzip bootstrap16.zip to your qemu folder, open
+   the bootstrap16 folder and double click qemu.bat
+ - works with qemu 32 bit and qemu 64 bit
+
+2013-05-18
+* changed formatting defines
+* added _QUICK_FORMAT define
+
+2013-05-17 (initial release)
+* 16 bit real mode Intel syntax assembly language
+* CPU 8086
+* four formats supported
+ - FAT12 1.44Mb floppy disk / flash drive
+ - FAT12 hard drive / flash drive
+ - FAT16 hard drive / flash drive
+ - FAT32 hard drive / flash drive
+* handles 1K, 2K, and 4K sector sizes _UNTESTED_
+* same code (boot16.inc) for NASM and FASM
+* NASM (boot16.nsm) and FASM (boot16.fsm) headers
+* same binary with NASM (-O1) and FASM
+* same binary code for FAT12/16/32 only the BPB is different
+ - loads a plain english &quot;8.3&quot; (&quot;kernel.bin&quot;) flat binary file
+   from the root directory to 0x1000:0
+* includes FAT32 image
+
+
+Mike Gonta
+look and see - many look but few see
+
+<A HREF="http://mikegonta.com">http://mikegonta.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3171">[ date ]</a>
+              <a href="thread.html#3171">[ thread ]</a>
+              <a href="subject.html#3171">[ subject ]</a>
+              <a href="author.html#3171">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

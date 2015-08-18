@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] FAT12 write support development
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT12%20write%20support%20development&In-Reply-To=%3C84D93F9A599B48A8BC5800483D857AFC%40VistaLaptop%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000056.html">
+   <LINK REL="Next"  HREF="000059.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] FAT12 write support development</H1>
+    <B>Troy Martin</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT12%20write%20support%20development&In-Reply-To=%3C84D93F9A599B48A8BC5800483D857AFC%40VistaLaptop%3E"
+       TITLE="[mikeos-developer] FAT12 write support development">blasterman95 at gmail.com
+       </A><BR>
+    <I>Thu Aug 28 23:31:37 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000056.html">[mikeos-developer] FAT12 write support development
+</A></li>
+        <LI>Next message: <A HREF="000059.html">[mikeos-developer] FAT12 write support development
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#58">[ date ]</a>
+              <a href="thread.html#58">[ thread ]</a>
+              <a href="subject.html#58">[ subject ]</a>
+              <a href="author.html#58">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> major change
+</I>No such command or program.
+&gt;<i> Herculean effort
+</I>No such command or program.
+
+I think I'm going to work on a serial networking interface.
+
+Troy Martin
+www.blasterman.co.nr
+
+--------------------------------------------------
+From: &quot;M Saunders&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+Sent: Thursday, August 28, 2008 2:17 PM
+To: &quot;MikeOS (and similar OS) developers&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+Subject: Re: [mikeos-developer] FAT12 write support development
+
+&gt;<i> On 8/28/08, Troy Martin &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">blasterman95 at gmail.com</A>&gt; wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>  Stable, amazing. I guess now my job is either multitasking
+</I>&gt;<i>
+</I>&gt;<i> OK, but bear in mind that it'll involve a major architectural change
+</I>&gt;<i> to the OS! You will need to allocate programs into their own segments,
+</I>&gt;<i> and transform the current os_ call system into interrupts (ie
+</I>&gt;<i> refactoring the 40+ system calls) for it to work effectively.
+</I>&gt;<i>
+</I>&gt;&gt;<i> or a TCP stack.
+</I>&gt;<i>
+</I>&gt;<i> And for that you'll need to understand everything here:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://www.faqs.org/rfcs/rfc793.html">http://www.faqs.org/rfcs/rfc793.html</A>
+</I>&gt;<i>
+</I>&gt;<i> Nice bedtime reading! Writing a TCP/IP from stack is a Herculean
+</I>&gt;<i> effort, so porting one from the likes of Contiki would be slightly
+</I>&gt;<i> simpler. But you'd still have to understand the ins-and-outs of the
+</I>&gt;<i> above document, and then code a bunch of Ethernet drivers (or try for
+</I>&gt;<i> SLIP over the serial port).
+</I>&gt;<i>
+</I>&gt;<i> I'm not saying don't go for it, but bear in mind the vast amount of
+</I>&gt;<i> work those things will take :-)
+</I>&gt;<i>
+</I>&gt;<i> M
+</I>&gt;<i>
+</I>&gt;<i> -- 
+</I>&gt;<i> Mike Saunders
+</I>&gt;<i> <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A> 
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000056.html">[mikeos-developer] FAT12 write support development
+</A></li>
+	<LI>Next message: <A HREF="000059.html">[mikeos-developer] FAT12 write support development
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#58">[ date ]</a>
+              <a href="thread.html#58">[ thread ]</a>
+              <a href="subject.html#58">[ subject ]</a>
+              <a href="author.html#58">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

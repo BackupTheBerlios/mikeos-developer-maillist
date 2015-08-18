@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Possible%20addition%20to%20MikeOS%20and%20MikeOS%20BASIC&In-Reply-To=%3C32824.95241.qm%40web113114.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001198.html">
+   <LINK REL="Next"  HREF="001200.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Possible%20addition%20to%20MikeOS%20and%20MikeOS%20BASIC&In-Reply-To=%3C32824.95241.qm%40web113114.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Tue Feb  9 20:03:23 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001198.html">[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+</A></li>
+        <LI>Next message: <A HREF="001200.html">[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1199">[ date ]</a>
+              <a href="thread.html#1199">[ thread ]</a>
+              <a href="subject.html#1199">[ subject ]</a>
+              <a href="author.html#1199">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Bazza,
+
+All valid points, however if MikeOS/BasicOS is to move forward new features will have to be added.
+Surely extra maths functions is an important addition,  (sorry no pun intended), especially on an educational OS.
+
+I like Tslil's idea of a math lib but as you say, memory is at a premium.
+On the other hand one could always use the x87 which takes up less space but I've never ever seen a 8087 myself.
+Mike does advertise the OS as requiring a 386 minimum and 80387's are much more common.
+
+Mike would obviously make the final call (oooh another one) as which way to go, but that extra maths functions need to be added
+I reckon is a must.
+
+As regards USB 1.1 support, you don't need any int 21h if all you want to have is raw I/O as opposed to HID,  HDD class, etc.
+The USB controller is &quot;hanging&quot; off the PCI bus so all one has to do is access the PCI configuration registers and retrieve the
+bus number, device number, function number and PID/VID of the USB controller.
+If you have a PCI BIOS which all modern PC's have then it's simple.
+
+Once we have that we can do a simple USB enumeration (not necessarily to full USB specs as we are only doing raw I/O)
+and get the base address of the USB end points.
+
+
+Paulo.
+
+
+
+
+----- Original Message ----
+From: &quot;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">wisecracker at tesco.net</A>&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">wisecracker at tesco.net</A>&gt;
+To: MikeOS (and similar OS) developers &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+Sent: Tue, February 9, 2010 8:20:43 PM
+Subject: Re: [mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+
+Hi All...
+
+&gt;<i> The x87 was only optional up to the 486.
+</I>&gt;<i> From there on it's part of the main CPU.
+</I>&gt;<i> But of course Intel had to make things complicated and the FPU 
+</I>&gt;<i> does not use normal registers like the x86.
+</I>&gt;<i> Instead it uses 8 x 80 bit linear &quot;addresses&quot;.
+</I>
+&gt;<i> You can still use the FPU on a 16 bit OS.
+</I>&gt;<i> The x87 will write a 32 or 64 bit number to memory and you could use
+</I>&gt;<i> the opcodes CWD (convert word to double word) and
+</I>&gt;<i> CWDE (convert word to extended double word) to simplify things.
+</I>
+All good stuff except...
+
+BEAWRE...
+
+1) We have only (pseudo-)64KB of memory to play with.
+2) There weren`t many - if any - 8088/8086 machines with an 8087.
+3) If loaded libraries are used then there are only two segments
+available - the &quot;user&quot; one at 2000:0 and the boot one at 0000:0
+This already makes 128KB of available memory so MikeOS is in
+danger of slipping into a serious OS tool instead of a learning tool.
+4) If we want as a group the full base memory of 640 (+ 384) KB
+then fine by me, but the OS is &quot;sold&quot; on the MikeOS site for its primary
+restriction of 64KB, which is what attracted me to it in the first place.
+5) As I have said before it already is not true 8088 16 bit code.
+6) If 4) is valid then why not generate dedicated MikeOS interrupt vectors
+like MS-DOSs INT 21 and on and have much more flexibility such as USB 1.1
+support as a minimum...
+
+Just my 5 pennoth...
+
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+_______________________________________________
+mikeos-developer mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001198.html">[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+</A></li>
+	<LI>Next message: <A HREF="001200.html">[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1199">[ date ]</a>
+              <a href="thread.html#1199">[ thread ]</a>
+              <a href="subject.html#1199">[ subject ]</a>
+              <a href="author.html#1199">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

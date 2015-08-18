@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Single byte KB I/O code...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Single%20byte%20KB%20I/O%20code...&In-Reply-To=%3C20100201223058.KMA1H.18567.root%40web11-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001019.html">
+   <LINK REL="Next"  HREF="001022.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Single byte KB I/O code...</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Single%20byte%20KB%20I/O%20code...&In-Reply-To=%3C20100201223058.KMA1H.18567.root%40web11-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] Single byte KB I/O code...">wisecracker at tesco.net
+       </A><BR>
+    <I>Mon Feb  1 23:30:58 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001019.html">[mikeos-developer] Single byte KB I/O code...
+</A></li>
+        <LI>Next message: <A HREF="001022.html">[mikeos-developer] Single byte KB I/O code...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1020">[ date ]</a>
+              <a href="thread.html#1020">[ thread ]</a>
+              <a href="subject.html#1020">[ subject ]</a>
+              <a href="author.html#1020">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all again...
+
+I forgot to add that the Alt and Ctrl keys also give real time input,
+
+AND
+
+The Caps Lock, Scroll Lock, Num Lock and Insert keys give toggle
+modes too setting/resetting the relevant bits in the byte PEEKed... :D
+
+---- <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">wisecracker at tesco.net</A> wrote: 
+&gt;<i> Hi all...
+</I>&gt;<i> 
+</I>&gt;<i> Real time KB access for the two caps shift keys for input.
+</I>&gt;<i> 
+</I>&gt;<i> There are NO interrupts needed for the assembly code...
+</I>&gt;<i> 
+</I>&gt;<i> AD86 assembly code first...
+</I>&gt;<i> 
+</I>&gt;<i> 	pushf
+</I>&gt;<i> 	push	ax
+</I>&gt;<i> 	push	dx
+</I>&gt;<i> 	push	ds
+</I>&gt;<i> 	mov	dx,0040h
+</I>&gt;<i> 	mov	ds,dx
+</I>&gt;<i> 	mov	al,[0017h]
+</I>&gt;<i> 	pop	ds
+</I>&gt;<i> 	pop	dx
+</I>&gt;<i> 	mov	[store],al
+</I>&gt;<i> 	pop	ax
+</I>&gt;<i> 	popf
+</I>&gt;<i> 	ret
+</I>&gt;<i> store	db	0c3h
+</I>&gt;<i> 
+</I>&gt;<i> Now the Mike BASIC code...
+</I>&gt;<i> 
+</I>&gt;<i> POKE 156 65500
+</I>&gt;<i> POKE 80 65501
+</I>&gt;<i> POKE 82 65502
+</I>&gt;<i> POKE 30 65503
+</I>&gt;<i> POKE 186 65504
+</I>&gt;<i> POKE 64 65505
+</I>&gt;<i> POKE 0 65506
+</I>&gt;<i> POKE 142 65507
+</I>&gt;<i> POKE 218 65508
+</I>&gt;<i> POKE 160 65509
+</I>&gt;<i> POKE 23 65510
+</I>&gt;<i> POKE 0 65511
+</I>&gt;<i> POKE 31 65512
+</I>&gt;<i> POKE 90 65513
+</I>&gt;<i> POKE 162 65514
+</I>&gt;<i> POKE 240 65515
+</I>&gt;<i> POKE 255 65516
+</I>&gt;<i> POKE 88 65517
+</I>&gt;<i> POKE 157 65518
+</I>&gt;<i> POKE 195 65519
+</I>&gt;<i> POKE 195 65520
+</I>&gt;<i> begin:
+</I>&gt;<i> CALL 65500
+</I>&gt;<i> PEEK c 65520
+</I>&gt;<i> PRINT c ;
+</I>&gt;<i> PRINT &quot; &quot; ;
+</I>&gt;<i> IF c = 3 THEN GOTO cleanexit
+</I>&gt;<i> GOTO begin
+</I>&gt;<i> cleanexit:
+</I>&gt;<i> PAUSE 20
+</I>&gt;<i> END
+</I>&gt;<i> 
+</I>&gt;<i> Enjoy finding sinple solutions to often very difficult problems... :)
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001019.html">[mikeos-developer] Single byte KB I/O code...
+</A></li>
+	<LI>Next message: <A HREF="001022.html">[mikeos-developer] Single byte KB I/O code...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1020">[ date ]</a>
+              <a href="thread.html#1020">[ thread ]</a>
+              <a href="subject.html#1020">[ subject ]</a>
+              <a href="author.html#1020">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

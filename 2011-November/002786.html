@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Mouse problems
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Mouse%20problems&In-Reply-To=%3Cfff2466a974e34c635c5323719a84cd6%40cordilon.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002785.html">
+   <LINK REL="Next"  HREF="002791.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Mouse problems</H1>
+    <B>Troy Martin</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Mouse%20problems&In-Reply-To=%3Cfff2466a974e34c635c5323719a84cd6%40cordilon.net%3E"
+       TITLE="[mikeos-developer] Mouse problems">blacklight at cordilon.net
+       </A><BR>
+    <I>Mon Nov 28 22:20:23 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002785.html">[mikeos-developer] Mouse problems
+</A></li>
+        <LI>Next message: <A HREF="002791.html">[mikeos-developer] Mouse problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2786">[ date ]</a>
+              <a href="thread.html#2786">[ thread ]</a>
+              <a href="subject.html#2786">[ subject ]</a>
+              <a href="author.html#2786">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Dan,
+
+There seems to be some ISR functions under int 15h (AX=C200 through 
+C209) that handle setup and initialization of the mouse in a way the 
+BIOS feels comfortable with. I'd advise against using C208 and C209 
+though since they're not supported by all BIOSes (IBM classifies them as 
+optional). Maybe you could find some way to use these to set up a 
+&quot;driver&quot; of sorts instead of continually polling the keyboard (which I 
+assume takes a fair bit of time in comparison to waiting on an interrupt 
+of sorts.)
+
+Information on how stuff is passed to the driver via the stack: 
+<A HREF="http://www.ctyme.com/intr/rb-1603.htm">http://www.ctyme.com/intr/rb-1603.htm</A>
+
+I'm also seeing if I can come up with a solution for your problem. I'll 
+let you know if I find anything. In the meantime, go nuts!
+
+-- 
+Troy
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002785.html">[mikeos-developer] Mouse problems
+</A></li>
+	<LI>Next message: <A HREF="002791.html">[mikeos-developer] Mouse problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2786">[ date ]</a>
+              <a href="thread.html#2786">[ thread ]</a>
+              <a href="subject.html#2786">[ subject ]</a>
+              <a href="author.html#2786">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

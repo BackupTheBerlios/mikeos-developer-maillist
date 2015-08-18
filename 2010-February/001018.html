@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Extra for MikeOS BASIC
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Extra%20for%20MikeOS%20BASIC&In-Reply-To=%3C635117.93736.qm%40web113115.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="001021.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Extra for MikeOS BASIC</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Extra%20for%20MikeOS%20BASIC&In-Reply-To=%3C635117.93736.qm%40web113115.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] Extra for MikeOS BASIC">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Mon Feb  1 19:15:54 CET 2010</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="001021.html">[mikeos-developer] Extra for MikeOS BASIC
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1018">[ date ]</a>
+              <a href="thread.html#1018">[ thread ]</a>
+              <a href="subject.html#1018">[ subject ]</a>
+              <a href="author.html#1018">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Mike,
+
+What do you think about adding the following commands/functions to your BASIC
+which would then allow more flexibility especially when calling BIOS int's:
+
+1) INTS.ON   enables h/ware interrupts -  sti
+2_ INTS.OFF disables h/ware interrupts - cli
+
+Then for registers, something like this:
+
+To get the value in a register:
+
+a = (reg.AX)  or a = (reg.AH)  or a = (reg.AL) etc.
+
+To set a value in a register:
+
+reg.AX = a  etc.
+
+And finally, INT(xxh) to call a BIOS interrupt.
+
+In this way one could from BASIC populate some regs and do a BIOS call:
+An example to read character and attribute at cursor position:
+
+reg.AH = 8
+reg.BH = 0
+INT(10h)
+a = (reg.AL)   ; character returned in al
+b = (reg.AH)   ; character's colour returned in ah
+
+Paulo.
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="001021.html">[mikeos-developer] Extra for MikeOS BASIC
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1018">[ date ]</a>
+              <a href="thread.html#1018">[ thread ]</a>
+              <a href="subject.html#1018">[ subject ]</a>
+              <a href="author.html#1018">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Better random number generator for 4.1 --	any takers?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Better%20random%20number%20generator%20for%204.1%20--%0A%09any%20takers%3F&In-Reply-To=%3C4f03362c0912151301h40b5dc82j2c65c9ab73964e57%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000862.html">
+   <LINK REL="Next"  HREF="000874.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Better random number generator for 4.1 --	any takers?</H1>
+    <B>Ian Seyler</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Better%20random%20number%20generator%20for%204.1%20--%0A%09any%20takers%3F&In-Reply-To=%3C4f03362c0912151301h40b5dc82j2c65c9ab73964e57%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Better random number generator for 4.1 --	any takers?">iseyler at gmail.com
+       </A><BR>
+    <I>Tue Dec 15 22:01:19 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000862.html">[mikeos-developer] determining CPU speed
+</A></li>
+        <LI>Next message: <A HREF="000874.html">[mikeos-developer] Better random number generator for 4.1 --	any takers?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#858">[ date ]</a>
+              <a href="thread.html#858">[ thread ]</a>
+              <a href="subject.html#858">[ subject ]</a>
+              <a href="author.html#858">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'm taking a look. I'll let you know what I come up with.
+
+-Ian
+
+On Sat, Nov 28, 2009 at 6:03 AM, M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt; wrote:
+
+&gt;<i> Hi all,
+</I>&gt;<i>
+</I>&gt;<i> I'm off to drink beer and look at cool old stuff in Europe for a few
+</I>&gt;<i> days, but while I'm gone someone might want to dig out (or write) a
+</I>&gt;<i> new random number generator. The one we have currently in MikeOS is
+</I>&gt;<i> pretty bad -- it'd be great to have a system call like this:
+</I>&gt;<i>
+</I>&gt;<i> os_generate_random -- Generates random positive integer between two
+</I>&gt;<i> specified values
+</I>&gt;<i> IN: AX = lower limit, BX = upper limit (inclusive)
+</I>&gt;<i> OUT: AX = random number
+</I>&gt;<i>
+</I>&gt;<i> From a quick search, I've found a few random number generators in
+</I>&gt;<i> 16-bit x86 assembly, presumably some of which could be adapted to
+</I>&gt;<i> MikeOS pretty easily.
+</I>&gt;<i>
+</I>&gt;<i> A little project to take up if anyone fancies!
+</I>&gt;<i>
+</I>&gt;<i> Cheers,
+</I>&gt;<i> Mike
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Mike Saunders
+</I>&gt;<i> <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20091215/471fa9e2/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20091215/471fa9e2/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000862.html">[mikeos-developer] determining CPU speed
+</A></li>
+	<LI>Next message: <A HREF="000874.html">[mikeos-developer] Better random number generator for 4.1 --	any takers?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#858">[ date ]</a>
+              <a href="thread.html#858">[ thread ]</a>
+              <a href="subject.html#858">[ subject ]</a>
+              <a href="author.html#858">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS32 - 32 bit PM translation
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2013-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS32%20-%2032%20bit%20PM%20translation&In-Reply-To=%3C117E29CF253F4CDAB941A0F7FFBCE2FD%40usera5ad58b449%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003176.html">
+   <LINK REL="Next"  HREF="003178.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS32 - 32 bit PM translation</H1>
+    <B>Mike Gonta</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS32%20-%2032%20bit%20PM%20translation&In-Reply-To=%3C117E29CF253F4CDAB941A0F7FFBCE2FD%40usera5ad58b449%3E"
+       TITLE="[mikeos-developer] MikeOS32 - 32 bit PM translation">mikegonta at gmail.com
+       </A><BR>
+    <I>Sat Aug  3 12:58:33 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003176.html">[mikeos-developer] MikeOS32 - 32 bit PM translation
+</A></li>
+        <LI>Next message: <A HREF="003178.html">[mikeos-developer] MikeOS32 - 32 bit PM translation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3177">[ date ]</a>
+              <a href="thread.html#3177">[ thread ]</a>
+              <a href="subject.html#3177">[ subject ]</a>
+              <a href="author.html#3177">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&quot;Bob Moss&quot; wrote: 
+&gt;<i> &quot;Mike Gonta&quot; wrote:
+</I>&gt;&gt;<i> &quot;M Saunders&quot; wrote:
+</I>
+&gt;&gt;<i> Hi,
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> <A HREF="http://mikegonta.com/MikeOS32.zip">http://mikegonta.com/MikeOS32.zip</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> I'm probably missing something here, but I can't see the switch to
+</I>&gt;&gt;&gt;<i> protected mode in the source...
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> M
+</I>&gt;&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;&gt;<i> mikeos-developer mailing list
+</I>&gt;&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Hi Mike,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> No need for a switch. The code is a pure 32 bit PM translation.
+</I>&gt;&gt;<i> Even the MikeOS boot sector is 32 bit PM.
+</I>&gt;&gt;<i> Of course, the code must run in a 32 bit PM environment.
+</I>&gt;&gt;<i> Unlike DOS extenders there is no code for initialization, or
+</I>&gt;&gt;<i> special code to make standard BIOS function calls.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> aeBIOS is a 13k completely self contained binary blob.
+</I>&gt;&gt;<i> It is loaded by the user configurable 16 bit real mode boot sector
+</I>&gt;&gt;<i> to 0x2000. A far call to the entry (at 0:0x2000)and PM32 is fully
+</I>&gt;&gt;<i> initialized with all interrupts enabled. In this demo the IPL
+</I>&gt;&gt;<i> boot sector reloacates itself (like an MBR) and loads the user supplied
+</I>&gt;&gt;<i> 4K PM32 boot sector (located at LBA 28) to 0x7C00.
+</I>&gt;&gt;<i> A jump to 0x7C00 runs the MikeOS boot sector just as if the PC started
+</I>&gt;&gt;<i> in PM32.
+</I>&gt;<i>
+</I>&gt;<i> Hi Mike,
+</I>&gt;<i> 
+</I>&gt;<i> Where is the source code for 'aeBIOS'? Your explanation isn't entirely
+</I>&gt;<i> clear. I'll explain my reservations... There *has* to be a switch to
+</I>&gt;<i> pmode somewhere, otherwise you can't be in pmode (any CPU that's booted
+</I>&gt;<i> by a BIOS will ALWAYS start in real mode). You also still rely on modules
+</I>&gt;<i> in the functions folder. These modules point to BIOS interrupts that are
+</I>&gt;<i> unavailable to you once you hit pmode. You can't far-jump your way around
+</I>&gt;<i> it - if you're in pmode, you can't use them! (There is a work-around if
+</I>&gt;<i> you're using V8086, but as you don't manage memory I'm fairly sure you
+</I>&gt;<i> haven't done this). Without those BIOS interrupts it's down to you to
+</I>&gt;<i> write your own interrupt handlers and hardware drivers (at the very least
+</I>&gt;<i> there should be a GDT to explain how to store code &amp; data). There doesn't
+</I>&gt;<i> seem to be any indication of this in your source code, which suggests
+</I>&gt;<i> that if you *were* in pmode nothing would be happening!
+</I>&gt;<i> 
+</I>&gt;<i> Bob
+</I>
+Hi Bob,
+
+It appears that you have the &quot;shoe on the other foot&quot;.
+I see that you are the author of ApolloOS, a PM32 kernel derived from
+MikeOS 1.3.1 and bkerndev.
+<A HREF="http://apolloos.googlecode.com/svn/trunk/apolloOS_0.0.5/">http://apolloos.googlecode.com/svn/trunk/apolloOS_0.0.5/</A>
+I did not create aeBIOS in order to make a PM32 version of MikeOS.
+Actually, I simply translated MikeOS to PM32 to demo the latest version
+of aeBIOS.
+
+aeBIOS is off topic here. I have &quot;crossposted&quot; your message and answered
+it here:
+<A HREF="https://groups.google.com/forum/#!topic/alt.os.development/DBMyOo1NWVc">https://groups.google.com/forum/#!topic/alt.os.development/DBMyOo1NWVc</A>
+
+<A HREF="http://mikegonta.com/MikeOS32.zip">http://mikegonta.com/MikeOS32.zip</A>
+
+
+Mike Gonta
+look and see - many look but few see
+
+<A HREF="http://mikegonta.com">http://mikegonta.com</A>
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20130803/6204ef7a/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20130803/6204ef7a/attachment.html</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003176.html">[mikeos-developer] MikeOS32 - 32 bit PM translation
+</A></li>
+	<LI>Next message: <A HREF="003178.html">[mikeos-developer] MikeOS32 - 32 bit PM translation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3177">[ date ]</a>
+              <a href="thread.html#3177">[ thread ]</a>
+              <a href="subject.html#3177">[ subject ]</a>
+              <a href="author.html#3177">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

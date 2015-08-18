@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] New memory layout: offset problems / triplefaulting
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%0A%09%3D%3Futf-8%3Fq%3FNew_memory_layout%3D3A_offset_problems%3F%3D%0A%09%3D%3Futf-8%3Fq%3F_/_triplefaulting%3F%3D&In-Reply-To=%3C5d29ebf.36c509d7.490c4769.37223%40o2.pl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000446.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] New memory layout: offset problems / triplefaulting</H1>
+    <B>Tomasz Gorol</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%0A%09%3D%3Futf-8%3Fq%3FNew_memory_layout%3D3A_offset_problems%3F%3D%0A%09%3D%3Futf-8%3Fq%3F_/_triplefaulting%3F%3D&In-Reply-To=%3C5d29ebf.36c509d7.490c4769.37223%40o2.pl%3E"
+       TITLE="[mikeos-developer] New memory layout: offset problems / triplefaulting">gavian at tlen.pl
+       </A><BR>
+    <I>Sat Nov  1 13:11:21 CET 2008</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000446.html">[mikeos-developer] libmikeos current status
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#445">[ date ]</a>
+              <a href="thread.html#445">[ thread ]</a>
+              <a href="subject.html#445">[ subject ]</a>
+              <a href="author.html#445">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> When it comes to this, though:
+</I>&gt;<i> 
+</I>&gt;<i> 	mov esi, msg
+</I>&gt;<i> 	mov ax, 0x0101
+</I>&gt;<i> 	int MIKEOS		; os_print_string
+</I>&gt;<i> 
+</I>&gt;<i> 	jmp $
+</I>&gt;<i> 
+</I>&gt;<i> 	msg db 'Woo', 0
+</I>&gt;<i> 
+</I>&gt;<i> Here we're using an offset instead of an immediate value. But if I add
+</I>&gt;<i> ORG 75264 to the start of the code, in order to make offsets work
+</I>&gt;<i> correctly (because that's where the kernel is loaded in RAM), MikeOS
+</I>&gt;<i> triple-faults when switching to unreal mode at the start of the
+</I>&gt;<i> kernel.
+</I>
+I think it should be done 
+        mov esi, msg + 75264
+
+We can use a macro to do it for us:
+
+    %macro ADDR_esi 1
+        mov esi,%1 + 75264
+    %endmacro
+
+It crash when ORG 75264 is included during switching to the PM because of:
+
+; peice of code from switch_to_unreal_mode:
+
+    xor eax,eax
+    mov ax, cs          ; ax consists cs which is equal to 0x1260
+    shl eax, 4          ; eax now is 0x1260 * 0x10 = 0x12600
+    xor edx, edx
+    mov dx, GDT         ; when ORG exists dx = (GDT + 0x12600); (0x1260 = 75264)
+    add eax, edx        ; now eax = (GDT + 0x12600) + 0x12600 = 0x24C00 + GDT  
+    push eax            
+    push GDT_END - GDT
+
+eax before going to the stack should has linear addrss of GDT which is 0x12600 + GDT but when we specify ORG 75264 the address changes to 0x24C000 + GDT which is incorrect.
+
+Linear address should be the same in both cases but it isn't.
+
+changed the code:
+    xor eax,eax
+    ;mov ax, cs          ;
+    ;shl eax, 4          ;
+    ;xor edx, edx
+    mov edx, GDT         ; when ORG exists dx = (GDT + 0x12600)
+    add eax, edx        ; now eax = 0 + (GDT + 0x12600) = 0x12600 + GDT  
+    push eax            
+    push GDT_END - GDT
+
+Now the address is correct.
+
+Now I think the code should switch to unreal mode.
+
+Tomasz Gorol
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000446.html">[mikeos-developer] libmikeos current status
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#445">[ date ]</a>
+              <a href="thread.html#445">[ thread ]</a>
+              <a href="subject.html#445">[ subject ]</a>
+              <a href="author.html#445">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

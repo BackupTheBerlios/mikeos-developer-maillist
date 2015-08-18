@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] single line-if's
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20single%20line-if%27s&In-Reply-To=%3CCACtjVkG43pZAW0H%2BMHhD5hYOq7149OA3jvaDbPKEUak6rdcYjg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002324.html">
+   <LINK REL="Next"  HREF="002326.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] single line-if's</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20single%20line-if%27s&In-Reply-To=%3CCACtjVkG43pZAW0H%2BMHhD5hYOq7149OA3jvaDbPKEUak6rdcYjg%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] single line-if's">okachi at gmail.com
+       </A><BR>
+    <I>Tue Sep 27 19:31:39 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002324.html">[mikeos-developer] single line-if's
+</A></li>
+        <LI>Next message: <A HREF="002326.html">[mikeos-developer] single line-if's
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2325">[ date ]</a>
+              <a href="thread.html#2325">[ thread ]</a>
+              <a href="subject.html#2325">[ subject ]</a>
+              <a href="author.html#2325">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, Sep 27, 2011 at 3:35 PM, Dan Dart &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">dandart at googlemail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> if y != 2
+</I>&gt;<i>
+</I>&gt;<i> Does that exist? I forget.
+</I>
+No, and please check the BASIC manual before guessing on the list Dan.
+I've put a lot of effort into it!
+
+Meanwhile, I will introduce a &quot;not equals&quot; operator in 4.3 BASIC.
+There are no plans for IF and ELSEIF blocks though -- just think of
+ways around it. For instance, you don't need a succession of IF
+statements, when you can branch execution like this:
+
+
+if $8 = &quot;get shield&quot; then goto shield_obtained
+print &quot;No shield&quot;
+return
+
+shield_obtained:
+print &quot;You exchange your bag of coins for the shield.&quot;
+i = 2
+f = 1
+return
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002324.html">[mikeos-developer] single line-if's
+</A></li>
+	<LI>Next message: <A HREF="002326.html">[mikeos-developer] single line-if's
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2325">[ date ]</a>
+              <a href="thread.html#2325">[ thread ]</a>
+              <a href="subject.html#2325">[ subject ]</a>
+              <a href="author.html#2325">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

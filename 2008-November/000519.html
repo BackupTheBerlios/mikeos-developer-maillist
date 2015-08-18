@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Suggestion for next version of MikeOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Suggestion%20for%20next%20version%20of%20MikeOS&In-Reply-To=%3C1c1812d20811291525x63f8a355xad1748441813e9ce%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000518.html">
+   <LINK REL="Next"  HREF="000520.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Suggestion for next version of MikeOS</H1>
+    <B>Paul Sommers</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Suggestion%20for%20next%20version%20of%20MikeOS&In-Reply-To=%3C1c1812d20811291525x63f8a355xad1748441813e9ce%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Suggestion for next version of MikeOS">paul.sommers.mail at gmail.com
+       </A><BR>
+    <I>Sun Nov 30 00:25:20 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000518.html">[mikeos-developer] My first submission
+</A></li>
+        <LI>Next message: <A HREF="000520.html">[mikeos-developer] Suggestion for next version of MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#519">[ date ]</a>
+              <a href="thread.html#519">[ thread ]</a>
+              <a href="subject.html#519">[ subject ]</a>
+              <a href="author.html#519">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Bob,
+
+Nope ain't the same Paul Sommers.
+
+I quite like the idea of introducing &quot;how to&quot; guides for developers
+wishing to put back some of the features taken out of MikeOS.
+Dos compatibility comes to mind.
+Surely I can't be the only one with old favourites which I'd like to use
+under MikeOS.
+
+I understand that not all the Dos INTs have been ported but what I've
+started to do is the following:
+
+1) Open the Dos app under a debugger/disassembler and make a note of the
+INTs used.
+2) Add them into os_dos.asm file.
+
+Just keep in mind that quite a few Dos apps are actually compressed with exe
+packers/compressors
+such as UPX , PKLITE and of course Microsoft used their own when pgms are
+compiled with QB4.5
+Make sure you decompress them before disassembly.
+To see which compressor has been used, open the executable in a hex editor
+and look in the first 500
+bytes or so.
+There will be ascii text with the name of the compressor.
+
+The  decompresors are available at:
+
+<A HREF="http://upx.sourceforge.net/">http://upx.sourceforge.net/</A>   and Pklite
+<A HREF="ftp://ftp.simtel.net/pub/simtelnet/msdos/execomp/pklts201.zip">ftp://ftp.simtel.net/pub/simtelnet/msdos/execomp/pklts201.zip</A>
+
+For more links for other decompresses:
+
+<A HREF="http://www.bookcase.com/library/software/msdos.archive.compress.html">http://www.bookcase.com/library/software/msdos.archive.compress.html</A>
+
+For the disassembler I use a nice simple one called D86 (actually part of
+A86) available here:
+
+<A HREF="http://eji.com/a86.zip">http://eji.com/a86.zip</A>
+
+One could always use &quot;debug&quot; which comes with every single Microsoft OS
+since Dos and even under XP
+Not too sure about Vista.
+
+Don't have any info for Linux as I don't use it.
+
+All the best,
+Paul.
+
+P.S.
+
+What I would really like to see is FAT16 support for MikeOS, although I
+understand the extra complexity
+it would add.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20081130/04745b4c/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20081130/04745b4c/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000518.html">[mikeos-developer] My first submission
+</A></li>
+	<LI>Next message: <A HREF="000520.html">[mikeos-developer] Suggestion for next version of MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#519">[ date ]</a>
+              <a href="thread.html#519">[ thread ]</a>
+              <a href="subject.html#519">[ subject ]</a>
+              <a href="author.html#519">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

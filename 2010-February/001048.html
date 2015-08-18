@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Extra for MikeOS BASIC
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Extra%20for%20MikeOS%20BASIC&In-Reply-To=%3Cb5aca8071002021142m3ecfb0edsdaaddc4b04455cca%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001046.html">
+   <LINK REL="Next"  HREF="001050.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Extra for MikeOS BASIC</H1>
+    <B>Tslil Clingman</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Extra%20for%20MikeOS%20BASIC&In-Reply-To=%3Cb5aca8071002021142m3ecfb0edsdaaddc4b04455cca%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Extra for MikeOS BASIC">hiato1 at gmail.com
+       </A><BR>
+    <I>Tue Feb  2 20:42:06 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001046.html">[mikeos-developer] Extra for MikeOS BASIC
+</A></li>
+        <LI>Next message: <A HREF="001050.html">[mikeos-developer] Extra for MikeOS BASIC
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1048">[ date ]</a>
+              <a href="thread.html#1048">[ thread ]</a>
+              <a href="subject.html#1048">[ subject ]</a>
+              <a href="author.html#1048">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Have a look at source/features/basic.asm and the code beneath each
+</I>&gt;<i> BASIC instruction. There are certainly some system calls in MikeOS
+</I>&gt;<i> that wouldn't need to be retained. I'm not sure what you mean by
+</I>&gt;<i> &quot;recoded in BASIC&quot; though -- right now we have an interpreter written
+</I>&gt;<i> in assembly language. We can't just arbitrarily mix BASIC instructions
+</I>&gt;<i> in with that.
+</I>&gt;<i>
+</I>
+Right, will do. What I meant was that, say, the interpreter only needs
+functions x, y and z and function a is not needed to run BASIC. Then, say,
+functions y and z rely on x, such that it is possible to build a simpler
+interpreter that only depends on function x, and code z and y in it's
+version of BASIC to then run the full scale BASIC which in turn could
+emulate a. It makes sense in my head, and by the looks of things, that's
+exactly where it's gonna stay :P
+
+
+&gt;<i> How would FASM make binaries smaller? I can't see how that's possible.
+</I>&gt;<i> Also, for a simple OS I'm not bothered about heavy use of macros, and
+</I>&gt;<i> the OSDev point is moot I reckon -- I don't think we're missing any
+</I>&gt;<i> developers because of the choice assembler.
+</I>
+
+Multi-pass -&gt; heavier code optimisations, this is so far as I understand,
+but again, sure not a big one. As for the rest, I guess that really just
+does come down to personal preference, with the big whopper being that FASM
+is self-hosting, but I guess that's pretty irrelevant for this project.
+
+So you have a BASIC program loaded into RAM, and then a BASIC
+&gt;<i> interpreter that goes through the BASIC program? That sounds like
+</I>&gt;<i> massive overkill. Besides, as it is such a system would fall back to
+</I>&gt;<i> machine code and BIOS interrupts most of the time.
+</I>&gt;<i>
+</I>
+Well, no, that's not exactly what I meant. Rather, that from within BASIC we
+can have access to BIOS ints (or interrupts in general) so that for both
+elegance and readability, we can, for example create an entire CLI in 'pure'
+BASIC, with the character printing interrupts and so on embedded in the
+code, otherwise I fail to see how, exactly, we can claim an OS in basic if
+you just call some or other function/command (label?) in basic like PRINT X
+without actually having that do anything in BASIC as opposed to being picked
+up by the tokeniser of the interpreter (or however you have written it,
+multiple-if's and so on). IE, if you wanted to code a new call/function ABC
+in BASIC, you could and still have the power of actually
+outputting/triggering system events and so on. Perhaps that's a better
+explanation.
+
+... from here it's not hard to fork the project, rip out
+&gt;<i> unneeded bits and make BASIC the centre of everything
+</I>&gt;<i>
+</I>
+Although unclear, that's exactly what I am hopefully getting at :)
+
+
+&gt;<i> Then we can go about adding new instructions and features to BASIC --
+</I>&gt;<i> there's lots more I'd like to add but I don't have the time! If we had
+</I>&gt;<i> a few of us working on it, we could really extend it.
+</I>&gt;<i>
+</I>.. I would hate MikeOS being abandoned for a fork of it, and would
+feel guilty ..
+
+Agreed.
+
+Best,
+Tslil
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100202/aff28c4f/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100202/aff28c4f/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001046.html">[mikeos-developer] Extra for MikeOS BASIC
+</A></li>
+	<LI>Next message: <A HREF="001050.html">[mikeos-developer] Extra for MikeOS BASIC
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1048">[ date ]</a>
+              <a href="thread.html#1048">[ thread ]</a>
+              <a href="subject.html#1048">[ subject ]</a>
+              <a href="author.html#1048">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

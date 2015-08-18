@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] PAUSE...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20PAUSE...&In-Reply-To=%3C652453.97963.qm%40web113109.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001410.html">
+   <LINK REL="Next"  HREF="001413.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] PAUSE...</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20PAUSE...&In-Reply-To=%3C652453.97963.qm%40web113109.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] PAUSE...">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Fri May 28 09:30:53 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001410.html">[mikeos-developer] PAUSE...
+</A></li>
+        <LI>Next message: <A HREF="001413.html">[mikeos-developer] New user here
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1412">[ date ]</a>
+              <a href="thread.html#1412">[ thread ]</a>
+              <a href="subject.html#1412">[ subject ]</a>
+              <a href="author.html#1412">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Mike,
+
+
+&gt;<i>Is there going to be os_pause_v3.1_for_workgroups.asm? :-)
+</I>
+Funny you should ask, 'cause here it is:  :-)
+
+;----------------------------------------------------------------------
+main_kernel_loop:
+;---------------------------------------------------------------------
+
+nop
+nop
+nop
+nop
+
+call os_wait_mouse_event
+cmp ax,[.anything]
+jne main_kernel loop
+
+mov si, print_msg
+call os_print_screen
+call os_reboot
+
+print msg db 'You have moved the mouse, Windoze needs to restart',0
+
+.anything dw 0
+
+times 1000000000 db 0    ; pad with a gazillion zeroes to make compulsory bloatware.
+
+Paulo.
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001410.html">[mikeos-developer] PAUSE...
+</A></li>
+	<LI>Next message: <A HREF="001413.html">[mikeos-developer] New user here
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1412">[ date ]</a>
+              <a href="thread.html#1412">[ thread ]</a>
+              <a href="subject.html#1412">[ subject ]</a>
+              <a href="author.html#1412">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] On the cho(m)p functions
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20On%20the%20cho%28m%29p%20functions&In-Reply-To=%3Cb5aca8070901121306j8bf788aj98064b2dd7795986%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000617.html">
+   <LINK REL="Next"  HREF="000620.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] On the cho(m)p functions</H1>
+    <B>Hiato</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20On%20the%20cho%28m%29p%20functions&In-Reply-To=%3Cb5aca8070901121306j8bf788aj98064b2dd7795986%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] On the cho(m)p functions">hiato1 at gmail.com
+       </A><BR>
+    <I>Mon Jan 12 22:06:01 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000617.html">[mikeos-developer] On the cho(m)p functions
+</A></li>
+        <LI>Next message: <A HREF="000620.html">[mikeos-developer] On the cho(m)p functions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#618">[ date ]</a>
+              <a href="thread.html#618">[ thread ]</a>
+              <a href="subject.html#618">[ subject ]</a>
+              <a href="author.html#618">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Nice work; good comments too -- I'll try out the latest code and
+</I>&gt;<i> replace the current os_int_to_string implementation with it providing
+</I>&gt;<i> everything's OK. Thanks for the help!
+</I>
+Thank you, and it's a pleasure. Let me know if the chopl/r/a makes it,
+I'd be interested to see how that one gets implemented
+
+&gt;<i> Yep, simplicity is the overriding goal, but I still want to have a
+</I>&gt;<i> good API to encourage more external program development. MikeOS is
+</I>&gt;<i> working in a limited environment with only 64K to play around with (as
+</I>&gt;<i> I want to avoid segment register horrors), but given that the kernel
+</I>&gt;<i> is only around 7K right now, there's loads of space for more system
+</I>&gt;<i> calls.
+</I>
+Heh, there's always room ;) Though I can definitely say I know where
+you're coming from
+
+&gt;<i> So please feel free to keep submitting code -- if it's right for
+</I>&gt;<i> MikeOS I'll use it, or I'll take it as inspiration for more ideas! My
+</I>&gt;<i> goal has been to replicate as many features of a typical C library as
+</I>&gt;<i> possible (within the goals and constraints of MikeOS), thereby making
+</I>&gt;<i> it easier to write apps. So more system calls are definitely welcome
+</I>&gt;<i> :-)
+</I>
+Roger that, will keep scratching about
+
+&gt;<i> You mentioned working on a kernel -- how's that going? I assume it's
+</I>&gt;<i> also 16-bit and at least primarily in assembly?
+</I>
+Heh, I'll say it could be going better. I've got 80% of what I would
+seem to need for a cli-only OS and kernel done and ready, though NASM
+seems to be hating my bootloader and main kernel proc. It is purely
+16bit asm, and that's probably how it's going to stay. If I include
+some string handling to assemble, it refuses to run, even though it's
+not called. I'm struggling with my own take on setting up the IVT,
+but, with perseverance, it should all work out. I'm not sure whether
+you went through the same problem as I face now, but I lack an aim.
+Currently I'm just coding, hoping it will mean something eventually :P
+
+Finally, if it's OK with you, I think I'm going to have to start
+copying code/concepts from MikeOS v2/3 as I can't seem to make some
+things work anymore. All the necessary copyright will be kept.
+
+Tslil
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000617.html">[mikeos-developer] On the cho(m)p functions
+</A></li>
+	<LI>Next message: <A HREF="000620.html">[mikeos-developer] On the cho(m)p functions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#618">[ date ]</a>
+              <a href="thread.html#618">[ thread ]</a>
+              <a href="subject.html#618">[ subject ]</a>
+              <a href="author.html#618">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

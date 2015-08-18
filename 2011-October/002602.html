@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Updated Basic.asm for review: (NEW LEN , DEL,	and SAVE)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Updated%20Basic.asm%20for%20review%3A%20%28NEW%20LEN%20%2C%20DEL%2C%0A%09and%20SAVE%29&In-Reply-To=%3CCAEz6_zgEQ6DAeUe-q6JFsOH9n2wpcqx7B0frLLWw4xWiLsGF8Q%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002642.html">
+   <LINK REL="Next"  HREF="002604.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Updated Basic.asm for review: (NEW LEN , DEL,	and SAVE)</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Updated%20Basic.asm%20for%20review%3A%20%28NEW%20LEN%20%2C%20DEL%2C%0A%09and%20SAVE%29&In-Reply-To=%3CCAEz6_zgEQ6DAeUe-q6JFsOH9n2wpcqx7B0frLLWw4xWiLsGF8Q%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Updated Basic.asm for review: (NEW LEN , DEL,	and SAVE)">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Sat Oct  8 04:44:14 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002642.html">[mikeos-developer] Updated Basic.asm for review: (NEW LEN , DEL, and SAVE)
+</A></li>
+        <LI>Next message: <A HREF="002604.html">[mikeos-developer] Updated Basic.asm for review: (NEW LEN , DEL,	and SAVE)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2602">[ date ]</a>
+              <a href="thread.html#2602">[ thread ]</a>
+              <a href="subject.html#2602">[ subject ]</a>
+              <a href="author.html#2602">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Justin,
+I tested the new commands.
+First I tried them in my interactive interpreter,
+I expected it to be &quot;delete&quot; rather then &quot;del&quot;. I tried
+deleting files with &quot;DEL &quot;FOO.BAR&quot; X&quot; but it didn't work.
+I couldn't figure out why until I realized I had to use
+a string variable. Then it worked.
+Next I added it to ASCII Artist.
+I used an MB++ ASKBOX to verify whether the user wanted
+to overwrite the file if R = 2, which deleted and save it.
+This work okay, but when I loaded the file again the OS
+froze up with the floppy repetitively searching.
+This happened every time I tried to load the file in
+ASCII Artist even after a restart.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002642.html">[mikeos-developer] Updated Basic.asm for review: (NEW LEN , DEL, and SAVE)
+</A></li>
+	<LI>Next message: <A HREF="002604.html">[mikeos-developer] Updated Basic.asm for review: (NEW LEN , DEL,	and SAVE)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2602">[ date ]</a>
+              <a href="thread.html#2602">[ thread ]</a>
+              <a href="subject.html#2602">[ subject ]</a>
+              <a href="author.html#2602">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

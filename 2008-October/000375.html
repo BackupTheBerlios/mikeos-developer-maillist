@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Planning for MikeOS 2.1 and 3.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Planning%20for%20MikeOS%202.1%20and%203.0&In-Reply-To=%3C19d8b3b00810220333hd79d0ban9d1c799321c3d63%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000374.html">
+   <LINK REL="Next"  HREF="000376.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Planning for MikeOS 2.1 and 3.0</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Planning%20for%20MikeOS%202.1%20and%203.0&In-Reply-To=%3C19d8b3b00810220333hd79d0ban9d1c799321c3d63%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Planning for MikeOS 2.1 and 3.0">okachi at gmail.com
+       </A><BR>
+    <I>Wed Oct 22 12:33:27 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000374.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+        <LI>Next message: <A HREF="000376.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#375">[ date ]</a>
+              <a href="thread.html#375">[ thread ]</a>
+              <a href="subject.html#375">[ subject ]</a>
+              <a href="author.html#375">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/22/08, Bob Moss &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">bobbyjmoss at googlemail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> limitting factor for 32-bit (as you still need to send 16-bit instructions
+</I>&gt;<i> to the BIOS - it is an ancient piece of technology after all!).
+</I>
+Hang on a sec... I think you're confusing protected mode with 32-bit
+addressing. With the 386 and upwards you can use 32-bit registers in
+real mode; the issue here is whether 32-bit memory offsets are allowed
+in BIOS calls (you don't &quot;send instructions&quot; to the BIOS).
+
+&gt;<i> I do like the idea of memory segments by the way as it seems the most
+</I>&gt;<i> logical way to do it. But leaving it to the apps to allocate the memory is a
+</I>&gt;<i> bad idea (as it'll bite you in the bum later if you run a badly-written app
+</I>&gt;<i> or if someone wants to exploit a MikeOS system
+</I>
+And you're confusing segments with memory protection here :-) Whether
+or not we use a single or multiple segments, and whether or not apps
+allocate their own memory or via the kernel, we are still operating in
+real mode so apps can stomp over any part of RAM. The only realistic
+way around this is with protected mode, which would leave a large
+chunk of the MikeOS source code dealing with floppy disk drivers and
+the like, so that's not going to happen.
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000374.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+	<LI>Next message: <A HREF="000376.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#375">[ date ]</a>
+              <a href="thread.html#375">[ thread ]</a>
+              <a href="subject.html#375">[ subject ]</a>
+              <a href="author.html#375">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

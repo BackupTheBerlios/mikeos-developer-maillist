@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Planning for MikeOS 2.1 and 3.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Planning%20for%20MikeOS%202.1%20and%203.0&In-Reply-To=%3C19d8b3b00810200654w503abd79w313810dc542258b1%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000353.html">
+   <LINK REL="Next"  HREF="000355.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Planning for MikeOS 2.1 and 3.0</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Planning%20for%20MikeOS%202.1%20and%203.0&In-Reply-To=%3C19d8b3b00810200654w503abd79w313810dc542258b1%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Planning for MikeOS 2.1 and 3.0">okachi at gmail.com
+       </A><BR>
+    <I>Mon Oct 20 15:54:28 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000353.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+        <LI>Next message: <A HREF="000355.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#354">[ date ]</a>
+              <a href="thread.html#354">[ thread ]</a>
+              <a href="subject.html#354">[ subject ]</a>
+              <a href="author.html#354">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>GRUB and protected mode will never happen for MikeOS -- at least, not
+under the current project. Maybe one day there'll be scope for a PM
+MikeOS spin-off, and of course anyone is free to make one, but it's a
+no-go area for now :-)
+
+&gt;<i> Breaking down modules into 'components' is a good idea. After all, when you
+</I>&gt;<i> start adding drivers (which are inevitable with protected mode) separating
+</I>&gt;<i> 'kernel' from 'driver' can be very important (as I'm finding out with
+</I>&gt;<i> ApolloOS!).
+</I>
+Yeppers. They'll still be pulled into the main kernel file, but in
+organising the code more cleanly, it should make it easy for others to
+benefit. For instance, if someone wants to use a FAT12 driver or
+string handling routines in their OS, they can look at or re-use the
+appropriate code without poring through syscalls.asm.
+
+&gt;<i> Why do you need 64K and a 512K external program segments - or is this for
+</I>&gt;<i> binaries to go in one and operations to go in the other? (hmmm...)
+</I>
+Well, as mentioned, unreal mode doesn't provide flat memory benefits
+for CS:IP so we still need to work with 64K segments for executable
+code. Hence why I'm thinking of one segment for the kernel, and one
+segment for applications. We're still wallowing in free RAM, however,
+so I think marking 512K of space for programs to use (ie file data,
+image data etc.) would be useful.
+
+I've only briefly looked over the workings of unreal mode so I may be
+missing something, but this looks feasible. Then programs will have
+plenty of space to do more interesting stuff.
+
+&gt;<i> MikeOS (which would be getting far more complex). At least then you could
+</I>&gt;<i> still call MikeOS a 'learning tool'! (If you would like me to write this
+</I>&gt;<i> document, I'd be more than happy to ;) )
+</I>
+Cool, thanks! I actually want to make MikeOS simpler for 3.0 --
+simpler codebase, more comments, better structuring of the source
+code, and a crystal clear memory map (instead of the current
+lump-it-all-into-64K situation). Currently, the 'Making an OS' guide
+in the Handbook serves as an introduction to the skills required for
+working on the MikeOS internals, but as things change for 3.0, it
+might need to be rewritten. So we can talk about new guides closer to
+the time -- and it'd be great to get input from someone who's not too
+wrapped up in the code like me!
+
+Cheers,
+Mike
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000353.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+	<LI>Next message: <A HREF="000355.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#354">[ date ]</a>
+              <a href="thread.html#354">[ thread ]</a>
+              <a href="subject.html#354">[ subject ]</a>
+              <a href="author.html#354">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

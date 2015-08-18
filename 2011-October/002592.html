@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] New game - Muncher
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20game%20-%20Muncher&In-Reply-To=%3CCAEz6_zgfRk%3D62FOPvt_3SFKauBccnX%3DrYfKO2qj-2EpPit7h1w%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002596.html">
+   <LINK REL="Next"  HREF="002598.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] New game - Muncher</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20game%20-%20Muncher&In-Reply-To=%3CCAEz6_zgfRk%3D62FOPvt_3SFKauBccnX%3DrYfKO2qj-2EpPit7h1w%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] New game - Muncher">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Fri Oct  7 12:50:54 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002596.html">[mikeos-developer] New game - Muncher
+</A></li>
+        <LI>Next message: <A HREF="002598.html">[mikeos-developer] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2592">[ date ]</a>
+              <a href="thread.html#2592">[ thread ]</a>
+              <a href="subject.html#2592">[ subject ]</a>
+              <a href="author.html#2592">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Woops, forgot to upload attachment. Here it is.
+-------------- next part --------------
+25a26
+&gt;<i>   cursor off
+</I>37a39,40
+&gt;<i>   gosub changelook
+</I>&gt;<i> 
+</I>39a43,54
+&gt;<i> changelook:
+</I>&gt;<i>   for b = 0 to 24
+</I>&gt;<i>     for a = 0 to 78
+</I>&gt;<i>       move a b
+</I>&gt;<i>       curschar c
+</I>&gt;<i>       if c = '#' then c = 219
+</I>&gt;<i>       if c = '=' then c = 220
+</I>&gt;<i>       print chr c ;
+</I>&gt;<i>     next a
+</I>&gt;<i>   next b
+</I>&gt;<i> return
+</I>&gt;<i> 
+</I>101c116,117
+&lt;   if c = 'x' then gosub finish
+---
+&gt;<i>   if c = 'x' then goto finish
+</I>&gt;<i>   if c = 178 then goto finish
+</I>128a145
+&gt;<i>   a = 178
+</I>132c149
+&lt;     print &quot;x&quot; ;
+---
+&gt;<i>     print chr a ;
+</I>137c154
+&lt;     print &quot;x&quot; ;
+---
+&gt;<i>     print chr a ;
+</I>142c159
+&lt;     print &quot;x&quot; ;
+---
+&gt;<i>     print chr a ;
+</I>147c164
+&lt;     print &quot;x&quot; ;
+---
+&gt;<i>     print chr a ;
+</I>163,164c180,181
+&lt;   if q = x then gosub addapple
+&lt;   if r = y then gosub addapple
+---
+&gt;<i>   if q = x then goto addapple
+</I>&gt;<i>   if r = y then goto addapple
+</I>166a184,190
+&gt;<i> 
+</I>&gt;<i>   rem generate random number of wallpieces
+</I>&gt;<i>   if s &lt; 500 then rand g 1 2
+</I>&gt;<i>   if s &gt; 499 then rand g 2 5
+</I>&gt;<i>   if s &gt; 999 then rand g 5 10
+</I>&gt;<i>   if s &gt; 1999 then rand g 10 20
+</I>&gt;<i>   morewallz:
+</I>167a192,193
+&gt;<i>   g = g - 1
+</I>&gt;<i>   if g &gt; 0 then goto morewallz
+</I>175,178c201,212
+&lt;   if l = q then gosub wallpiece
+&lt;   if l = x then gosub wallpiece
+&lt;   if m = r then gosub wallpiece
+&lt;   if m = y then gosub wallpiece
+---
+&gt;<i>   if l = q then goto wallpiece
+</I>&gt;<i>   if l = x then goto wallpiece
+</I>&gt;<i>   if m = r then goto wallpiece
+</I>&gt;<i>   if m = y then goto wallpiece
+</I>&gt;<i> 
+</I>&gt;<i>   rem is the wall piece too close to the character?
+</I>&gt;<i>   if l &gt; x then a = l - x
+</I>&gt;<i>   if l &lt; x then a = x - l
+</I>&gt;<i>   if m &gt; y then b = m - y
+</I>&gt;<i>   if m &lt; y then b = y - m
+</I>&gt;<i>   if a &lt; 7 then goto wallpiece
+</I>&gt;<i>   if b &lt; 4 then goto wallpiece
+</I>186a221,232
+&gt;<i>   g = 1
+</I>&gt;<i>   print chr g
+</I>&gt;<i>   pause 1
+</I>&gt;<i>   move x y
+</I>&gt;<i>   g = 2
+</I>&gt;<i>   print chr g
+</I>&gt;<i>   pause 1
+</I>&gt;<i>   move x y
+</I>&gt;<i>   g = 1
+</I>&gt;<i>   print chr g
+</I>&gt;<i>   pause 1
+</I>&gt;<i>   move x y
+</I>201a248
+&gt;<i>   cursor off
+</I>223c270
+&lt; 
+---
+&gt;<i>   gosub changelook
+</I>236c283
+&lt;   
+\ No newline at end of file
+---
+&gt;<i>   
+</I>-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: MUNCHER.BAS
+Type: application/octet-stream
+Size: 5804 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111007/1ad29ed2/attachment.obj">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111007/1ad29ed2/attachment.obj</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002596.html">[mikeos-developer] New game - Muncher
+</A></li>
+	<LI>Next message: <A HREF="002598.html">[mikeos-developer] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2592">[ date ]</a>
+              <a href="thread.html#2592">[ thread ]</a>
+              <a href="subject.html#2592">[ subject ]</a>
+              <a href="author.html#2592">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

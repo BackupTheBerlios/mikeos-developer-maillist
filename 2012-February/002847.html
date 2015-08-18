@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Updates for 4.3
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Updates%20for%204.3&In-Reply-To=%3CCAEz6_zgx8Pa0-iFmvUbEGeQYE2aE%3Dtp5XUYz3p8FMOi6v8mRcg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="002848.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Updates for 4.3</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Updates%20for%204.3&In-Reply-To=%3CCAEz6_zgx8Pa0-iFmvUbEGeQYE2aE%3Dtp5XUYz3p8FMOi6v8mRcg%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Updates for 4.3">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Thu Feb  2 10:29:57 CET 2012</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="002848.html">[mikeos-developer] Updates for 4.3
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2847">[ date ]</a>
+              <a href="thread.html#2847">[ thread ]</a>
+              <a href="subject.html#2847">[ subject ]</a>
+              <a href="author.html#2847">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>G'day all,
+I released some updates for a few of my main applications:
+
+###MB++###
+Release version 3.0 (finally), no more beta's.
+Changes since 3.0b3:
+ * Making an error message too long now causes a fatal error.
+ * Fixed border drawing.
+ * 'SETTITLE' once again prints the title, for compatibility.
+ * 'SETTITLE' will now fill the whole title line.
+ * 'SETTITLE' does not run if the length of $T is not between 1-78 characters.
+ * 'OPENBOX' now checks the length of all the text strings before use.
+ * Added a method of preserving and restoring cursor position and ink
+colour (SAVELOC/LOADLOC), used in TITLE, SETTITLE, OPENBOX, CLOSEBOX
+ * Menu's will not highlight starting indent.
+ * Fixed 'SAVEVAR' and 'LOADVAR' functions getting the wrong numbers.
+ * Errors 'SAVEVAR' and 'LOADVAR' are now crash the program (&quot;FATAL:&quot;).
+ * Fixed 'TITLE' and 'SETTITLE' not printing.
+ * 'SETTITLE' no longer accepts a colour, uses border colour instead.
+ * 'BORDER' now preserves your variables, cursor position and ink colour.
+ * Cleaned up 'MENUBOX'.
+ * Some work on 'LOADBOX'.
+ * 'CONTENT' sub is now optional.
+ * New implimentation of 'STARTPRG'.
+ * Fixed inbalance in 'SAVEVAR' and 'LOADVAR' saved location.
+
+
+###ASCII Artist###
+version 2.2.1
+ * Rewritten to use MB++ version 3.0
+
+&gt;<i>CALC.BAS does not let you return to the main menu from Advanced Maths.
+</I>I already fixed this bug in version 1.2.1 of Calculator.
+
+###Calculator###
+version 1.2.1
+* Fixed a bug that causes the Advanced Math menu to be unreturnable.
+
+As per usual you can get all these updates off my Google Code
+
+Joshua,
+<A HREF="http://code.google.com/p/mikebasic-applications/">http://code.google.com/p/mikebasic-applications/</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="002848.html">[mikeos-developer] Updates for 4.3
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2847">[ date ]</a>
+              <a href="thread.html#2847">[ thread ]</a>
+              <a href="subject.html#2847">[ subject ]</a>
+              <a href="author.html#2847">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

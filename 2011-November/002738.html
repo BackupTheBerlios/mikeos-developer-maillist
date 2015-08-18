@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Severe CLI bug and working patch
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Severe%20CLI%20bug%20and%20working%20patch&In-Reply-To=%3C31ac66d63fb00444086cbb89b7907299%40cordilon.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002740.html">
+   <LINK REL="Next"  HREF="002739.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Severe CLI bug and working patch</H1>
+    <B>Troy Martin</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Severe%20CLI%20bug%20and%20working%20patch&In-Reply-To=%3C31ac66d63fb00444086cbb89b7907299%40cordilon.net%3E"
+       TITLE="[mikeos-developer] Severe CLI bug and working patch">blacklight at cordilon.net
+       </A><BR>
+    <I>Thu Nov  3 06:03:28 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002740.html">[mikeos-developer] READ bug
+</A></li>
+        <LI>Next message: <A HREF="002739.html">[mikeos-developer] Severe CLI bug and working patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2738">[ date ]</a>
+              <a href="thread.html#2738">[ thread ]</a>
+              <a href="subject.html#2738">[ subject ]</a>
+              <a href="author.html#2738">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Found a bug in the CLI where any program name that starts with an 
+internal command that takes arguments (for instance SIZE or COPY) can 
+never be executed, even if you add the .bin or .bas extension, since the 
+CLI reads the program name that you typed as being the internal command 
+name it starts with.
+
+For example, if you have a program called &quot;COPYFLPY.BIN&quot;, and you type 
+COPYFLPY or COPYFLPY.BIN, you get the COPY command. If you spell it 
+wrong by accident, say as &quot;COPYFPLY&quot;, you still get the COPY command. If 
+you type something inane, like &quot;COPYISTAKINGOVERMYMIKEOSSHELL&quot;, you 
+still get the COPY command.
+
+This happens because the CLI compares, say, the first four bytes of the 
+inputted string to &quot;COPY&quot;, and if the first four bytes match, it decides 
+to ignore the possibility that you could have a &quot;COPYFLPY.BIN&quot; on the 
+disk and try to execute the COPY command.
+
+Fixing this is probably easiest done by using os_string_parse on the 
+input string and do your comparisons (in fact, you could do all of them, 
+not just the argument-based commands) on the string returned in AX. And 
+that is the approach I have taken in my solution which is attached as a 
+diff. It does not break compatibility with any programs, as tested most 
+thoroughly with EDIT.
+
+Cheers!
+-- 
+Troy
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: cli.patch
+Type: application/octet-stream
+Size: 727 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111102/ee3e9253/attachment.obj">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111102/ee3e9253/attachment.obj</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002740.html">[mikeos-developer] READ bug
+</A></li>
+	<LI>Next message: <A HREF="002739.html">[mikeos-developer] Severe CLI bug and working patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2738">[ date ]</a>
+              <a href="thread.html#2738">[ thread ]</a>
+              <a href="subject.html#2738">[ subject ]</a>
+              <a href="author.html#2738">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

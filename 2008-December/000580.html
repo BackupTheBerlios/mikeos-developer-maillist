@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 3.0 released!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%203.0%20released%21&In-Reply-To=%3C19d8b3b00812210220w4531b7fblc3e5f947a12fadc2%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000579.html">
+   <LINK REL="Next"  HREF="000581.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 3.0 released!</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%203.0%20released%21&In-Reply-To=%3C19d8b3b00812210220w4531b7fblc3e5f947a12fadc2%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 3.0 released!">okachi at gmail.com
+       </A><BR>
+    <I>Sun Dec 21 11:20:53 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000579.html">[mikeos-developer] MikeOS 2.9.6 released -- code complete!
+</A></li>
+        <LI>Next message: <A HREF="000581.html">[mikeos-developer] MikeOS 3.0 released!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#580">[ date ]</a>
+              <a href="thread.html#580">[ thread ]</a>
+              <a href="subject.html#580">[ subject ]</a>
+              <a href="author.html#580">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+It's available from here: <A HREF="http://prdownload.berlios.de/mikeos/mikeos-3.0.zip">http://prdownload.berlios.de/mikeos/mikeos-3.0.zip</A>
+
+Essentially the same as 2.9.6, but with the new Handbooks included and
+a 'mkdosfs' bit in the build-linux.sh script as suggested by Tomasz.
+
+Thanks to everyone for your help and ideas! Over the Christmas break,
+time permitting, I'll write a mini line editor for 3.1.
+
+Full changelog (from 2.0) below.
+
+Cheers,
+Mike
+
+
+# Memory map shuffled: first 24K is kernel code space; then 8K buffer
+for kernel disk operations; then 32K for external programs
+
+# Major code simplification and cleanup: removed mouse support, DOS
+support, STAKAN.BIN, testzone, CLI PROMPT command; many of these
+features will continue to be developed in the TomOS project
+
+# Source code restructured: bootloader moved to source/bootload;
+system calls now separated into multiple files in source/features/;
+os_main.asm renamed kernel.asm; kernel file is now KERNEL.BIN
+
+# More code cleanup work: use 'mov ax, 0' instead of 'xor ax, ax' and
+'mov si, foo' instead of 'lea si, [foo]'; more comments; instances of
+8 spaces changed to tabs; hex notation now always uses 'h' suffix (eg
+always '10h' and never '0x10') for consistency
+
+# Certain disk routines for manipulating the FAT and root directory
+have been made internal to source/features/disk.asm, and not
+accessible to user programs, to simplify the disk API
+
+# New system call: os_string_parse takes a string pointer in SI and
+breaks it into zero-terminated smaller string pieces based on spaces;
+eg SI = 'Foo bar baz stuff' returns AX = 'Foo', BX = 'bar', CX =
+'baz', DX = 'stuff'
+
+# New system call: os_string_to_int takes a decimal string (max
+'65535') in SI and returns the numerical value in AX
+
+# File manager (FILEMAN.BIN) can now copy files (up to 28K in size),
+using external program RAM -- first 4K is reserved for the file
+manager itself
+
+# os_get_file_list now returns sanitised comma-separated list of files
+(eg &quot;FOO.BIN,HELLO.TXT&quot; instead of &quot;FOO     BIN,HELLO   TXT&quot; etc.)
+
+# dosbuild.bat renamed build-win.bat -- it now adds boot block and
+programs to mikeos.flp using third-party tools
+
+# os_list_dialog rewritten: now shows selected option as a black bar,
+rather than with &quot;&gt;&gt;&gt;&gt;&gt;&quot; indicator
+
+# MONITOR.BIN updated for new memory map; now runs code ORGed at 36864
+
+# When exiting a program that was launched from the menu-driven app
+selector, the &quot;Program finished&quot; message now appears in a red bar at
+the bottom
+
+# Text with bright attributes should no longer blink on the screen
+
+# FILEMAN.BIN now refuses to rename a file to an existing filename
+
+# build-linux.sh script now creates disk_images/mikeos.flp if that
+file cannot be found
+
+# Added README.TXT to disk/images directory; explains the purpose of
+each file and how to recreate the floppy disk image
+
+# Removed os_get_int_handler and os_modify_int_handler system calls
+
+# Removed os_execute_program syscall; no longer needed
+
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000579.html">[mikeos-developer] MikeOS 2.9.6 released -- code complete!
+</A></li>
+	<LI>Next message: <A HREF="000581.html">[mikeos-developer] MikeOS 3.0 released!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#580">[ date ]</a>
+              <a href="thread.html#580">[ thread ]</a>
+              <a href="subject.html#580">[ subject ]</a>
+              <a href="author.html#580">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

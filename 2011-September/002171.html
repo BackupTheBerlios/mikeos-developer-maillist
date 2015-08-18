@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] mikeos-developer Digest, Vol 36, Issue 28
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20mikeos-developer%20Digest%2C%20Vol%2036%2C%20Issue%2028&In-Reply-To=%3CCAEz6_ziRvBT3bT9AqvfABWSo4bSSAWdU1%3DO%3DYEDdd%3DnAkWwXNg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002170.html">
+   <LINK REL="Next"  HREF="002172.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 28</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20mikeos-developer%20Digest%2C%20Vol%2036%2C%20Issue%2028&In-Reply-To=%3CCAEz6_ziRvBT3bT9AqvfABWSo4bSSAWdU1%3DO%3DYEDdd%3DnAkWwXNg%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 28">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Mon Sep 19 09:39:01 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002170.html">[mikeos-developer] Using string variables (esp for Joshua)
+</A></li>
+        <LI>Next message: <A HREF="002172.html">[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 28
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2171">[ date ]</a>
+              <a href="thread.html#2171">[ thread ]</a>
+              <a href="subject.html#2171">[ subject ]</a>
+              <a href="author.html#2171">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>Apparently that's already possible. I should have read the handbook more carefully.
+</I>Don't work it took me ages to figure that out to.
+
+&gt;<i>It might not be too late to squeeze
+</I>&gt;<i>Pacman into 4.2, if you're happy with it. I plan to have a two-week
+</I>&gt;<i>testing period for 4.2
+</I>That should be enough time.
+
+&gt;<i>just sos you know, in draw.bas the &quot;rem colour subroutine&quot; is spelled wrong
+</I>Thanks for the heads up, but there are a probably a lot of these in my
+programs, I don't exactly use the world's best spelling and grammar in
+my comment lines :-\ , there are probably a lot more.
+
+&gt;<i>Joshua is using $a, $b etc, which will be overflowing that allocated space.
+</I>It was a really bad idea from the start, the problem was, it worked.
+I learn that using some such as $a or $d (case sensitive) would cause
+trouble, so I avoided them. I actually don't use that many text variables
+and 1-9 would probably suffice in most cases.
+However it would take an extensive amount of rewriting to almost all my
+programs and it would break all MB++ programs when updating to the latest
+version (like Calculator and Pacman) as the function inputs would be
+different and I take pride in never breaking compatibility.
+
+In saying that, it will a 64k RAM limit using an extra 3.5k that is usually not
+needed may not be sure a good thing because it would reduce the usable memory,
+even if it was in the &quot;secret&quot; unused area between the kernel and the
+disk cache.
+
+If I have to make a call on this one (call 65515?) I'd say do, you don't have to
+do all possible characters, just to case insensitive letters. Most of the time
+I don't use the full 128 characters anyway, that doesn't even fit on one line.
+The most one could use would be 71 characters when using EDIT.BIN on MikeOS.
+I'd never use more than 36 (maximum box text length), so maybe you
+could make them
+say, half size or less to conserve RAM and keep numbers the full length.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002170.html">[mikeos-developer] Using string variables (esp for Joshua)
+</A></li>
+	<LI>Next message: <A HREF="002172.html">[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 28
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2171">[ date ]</a>
+              <a href="thread.html#2171">[ thread ]</a>
+              <a href="subject.html#2171">[ subject ]</a>
+              <a href="author.html#2171">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

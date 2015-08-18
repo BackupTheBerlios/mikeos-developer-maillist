@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] mcc 0.0.1 released!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20mcc%200.0.1%20released%21&In-Reply-To=%3CBAY142-DS14FC613DD1ACC93C91CCE81650%40phx.gbl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000012.html">
+   <LINK REL="Next"  HREF="000014.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] mcc 0.0.1 released!</H1>
+    <B>Troy Martin</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20mcc%200.0.1%20released%21&In-Reply-To=%3CBAY142-DS14FC613DD1ACC93C91CCE81650%40phx.gbl%3E"
+       TITLE="[mikeos-developer] mcc 0.0.1 released!">blasterman_95 at hotmail.com
+       </A><BR>
+    <I>Sat Aug 23 05:24:20 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000012.html">[mikeos-developer] C Cross-Compiler 0.0.1
+</A></li>
+        <LI>Next message: <A HREF="000014.html">[mikeos-developer] mcc 0.0.1 released!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#13">[ date ]</a>
+              <a href="thread.html#13">[ thread ]</a>
+              <a href="subject.html#13">[ subject ]</a>
+              <a href="author.html#13">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hey there everybody,
+
+The first beta of mcc, the MikeOS C Cross-Compiler, is out in platform-independent C source and Win32 binary! It's line-by-line, like old BASIC interpreters, but no line numbers are needed. Just type commands and end your program with return 0; and it will compile, but have these files in the same directory: mcc, nasm, mikedev.inc, stdio.inc. Type #help to get a little help screen with the list of functions/statements implemented so far.
+
+Remember, there's no fixing things in mcc, if you need to change something, you have to do it in temp.asm and then assemble it with nasm by hand. The compiling sequence is as follows: mcc -&gt; temp.asm -&gt; nasm -&gt; mccout.bin    You can then rename mccout.bin to whatever you want to name your program. A lot of user-friendliness things will be in the next release, not as many C-related things.
+
+Download link:
+<A HREF="http://willhostforfood.com/users/blasterman/mcc-0.0.1.zip">http://willhostforfood.com/users/blasterman/mcc-0.0.1.zip</A>
+
+Email me or post a reply (preferably reply) with questions/comments! Have fun!
+
+Troy Martin
+www.blasterman.co.nr
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080822/391f0ac6/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080822/391f0ac6/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000012.html">[mikeos-developer] C Cross-Compiler 0.0.1
+</A></li>
+	<LI>Next message: <A HREF="000014.html">[mikeos-developer] mcc 0.0.1 released!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#13">[ date ]</a>
+              <a href="thread.html#13">[ thread ]</a>
+              <a href="subject.html#13">[ subject ]</a>
+              <a href="author.html#13">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

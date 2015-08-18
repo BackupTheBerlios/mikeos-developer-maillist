@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] The USB KB I/O is near completion...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-March/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20The%20USB%20KB%20I/O%20is%20near%20completion...&In-Reply-To=%3C20100307190636.3H042.92338.root%40web11-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001224.html">
+   <LINK REL="Next"  HREF="001226.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] The USB KB I/O is near completion...</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20The%20USB%20KB%20I/O%20is%20near%20completion...&In-Reply-To=%3C20100307190636.3H042.92338.root%40web11-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] The USB KB I/O is near completion...">wisecracker at tesco.net
+       </A><BR>
+    <I>Sun Mar  7 20:06:36 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001224.html">[mikeos-developer] MikeBASIC RAND command...
+</A></li>
+        <LI>Next message: <A HREF="001226.html">[mikeos-developer] MikeBASIC RAND command...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1234">[ date ]</a>
+              <a href="thread.html#1234">[ thread ]</a>
+              <a href="subject.html#1234">[ subject ]</a>
+              <a href="author.html#1234">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all...
+
+Well I will be finishing the hardware mods to the KB for TTL level
+INPUT this week.
+
+Here is the BASIC and finished Assembly code for the &quot;real time&quot; OUTPUT.
+The real time INPUT code has already been posted on here...
+
+The BASIC is just a DEMO of switching the CAPSLOCK ON and OFF every
+half second or so...
+
+ENTER or Space Bar quits the DEMO...
+ENTER will exit leaving the KB in CAPSLOCK mode.
+Space Bar will exit with the CAPSLOCK turned OFF.
+
+Watch for any wordwrapping, etc, etc...
+
+MikeBASIC code first:-
+
+====================================================
+
+  CAPSLOCK.BAS:-
+
+
+REM DEMO to toggle the CAPSLOCK key in MikeBASIC.
+REM Original idea copyright, (C)2010, B.Walker, G0LCU.
+REM Issued as Public Domain for MikeOS, MikeBASIC.
+
+REM Load the binary... NOTE! This CAN be POKEd in to make it purely MikeBASIC.
+LOAD &quot;CAPSLOCK.DAT&quot; 65000
+CLS
+CURSOR OFF
+
+REM The only variable is for keyboard access.
+k = 13
+
+REM This is a continuous loop to toggle the CAPSLOCK only.
+REM The NUMLOCK and SCROLL LOCK are also available by POKE(ing) the correct
+REM values into the correct locations.
+
+toggle:
+REM This CALL toggles the CAPSLOCK to ON.
+REM Address 65013 is POKEd to enable the various key locks.
+REM POKE 96 65013 enables NUMLOCK and CAPSLOCK.
+
+CALL 65000
+REM [ENTER/RETURN] to exit this call with the LED ON.
+GETKEY k
+IF k = 13 THEN GOTO cleanexit
+MOVE 0 1
+PRINT &quot;Capslock ON!   &quot;
+PAUSE 5
+
+REM This CALL toggles tha CAPSLOCK to OFF.
+REM Address 65037 is POKEd to disable the various key locks.
+REM POKE 159 65037 disables NUMLOCK and CAPSLOCK.
+
+CALL 65024
+REM [Space Bar] to exit this call with the LED OFF.
+GETKEY k
+IF k = 32 THEN GOTO cleanexit
+MOVE 0 1
+PRINT &quot;Capslock OFF!  &quot;
+PAUSE 5
+GOTO toggle
+
+REM Clean exit back to MikeOS.
+cleanexit:
+CURSOR ON
+PAUSE 20
+CLS
+END
+REM DEMO program end...
+
+====================================================
+
+Now the Assembly code:-
+
+====================================================
+
+  CAPSLOCK.ASM:-
+
+
+; CAPSLOCK ON/OFF sub-routines for MikeOS.
+; Original copyright, (C)2010, B.Walker, G0LCU.
+; For use with MikeBASIC and issued as Public Domain.
+
+; CAPSLOCK.ASM, Version 0.00.10, assembly code.
+
+; Assembled under MS-DOS using the AD86 combination.
+; The binary is 48 bytes in size.
+
+;CAPSON:
+	pushf			;Store flags and all of the used
+	push	ax		;registers.
+	push	dx		;
+	push	ds		;
+	mov	dx,0040h	;Point to the SEGMENT to access
+	mov	ds,dx		;the REAL time BYTE KB storage.
+	mov	al,[0017h]	;Move the BYTE value from memory
+				;into the AL register.
+	or	al,040h		;SET the required bit, (bit 6),
+				;to a ~1~.
+				;NOTE, change this value for NUMLOCK!
+	mov	[0017h],al	;Replace the modified byte back
+				;into the memory location.
+	int	9		;Now execute the necessary interrupt.
+	pop	ds		;Restore the registers back to
+	pop	dx		;their original values...
+	pop	ax		;
+	popf			;And the flags too.
+	ret			;Return to the calling routine.
+
+;CAPSOFF:
+	pushf			;Store flags and all of the used
+	push	ax		;registers.
+	push	dx		;
+	push	ds		;
+	mov	dx,0040h	;Point to the SEGMENT to access
+	mov	ds,dx		;the REAL time BYTE KB storage.
+	mov	al,[0017h]	;Move the BYTE value from memory
+				;into the AL register.
+	and	al,0bfh		;RESET the required bit, (bit 6),
+				;to a ~0~, keeping all other bits intact.
+				;NOTE, change this value for NUMLOCK!
+	mov	[0017h],al	;Replace the modified byte back
+				;into the memory location.
+	int	9		;Now execute the necessary interrupt.
+	pop	ds		;Restore the registers back to
+	pop	dx		;their original values...
+	pop	ax		;
+	popf			;And the flags too.
+	ret			;Return to the calling routine.
+
+; CAPSLOCK.ASM assembly code end.
+
+====================================================
+
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001224.html">[mikeos-developer] MikeBASIC RAND command...
+</A></li>
+	<LI>Next message: <A HREF="001226.html">[mikeos-developer] MikeBASIC RAND command...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1234">[ date ]</a>
+              <a href="thread.html#1234">[ thread ]</a>
+              <a href="subject.html#1234">[ subject ]</a>
+              <a href="author.html#1234">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

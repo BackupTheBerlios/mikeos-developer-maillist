@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] New memory layout: offset problems / triple	faulting
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20memory%20layout%3A%20offset%20problems%20/%20triple%0A%09faulting&In-Reply-To=%3C19d8b3b00810290919n49747b4cgb8d55fe707f0fc45%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000435.html">
+   <LINK REL="Next"  HREF="000437.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] New memory layout: offset problems / triple	faulting</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20memory%20layout%3A%20offset%20problems%20/%20triple%0A%09faulting&In-Reply-To=%3C19d8b3b00810290919n49747b4cgb8d55fe707f0fc45%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] New memory layout: offset problems / triple	faulting">okachi at gmail.com
+       </A><BR>
+    <I>Wed Oct 29 17:19:44 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000435.html">[mikeos-developer] Potential Bug
+</A></li>
+        <LI>Next message: <A HREF="000437.html">[mikeos-developer] New memory layout: offset problems / triple	faulting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#436">[ date ]</a>
+              <a href="thread.html#436">[ thread ]</a>
+              <a href="subject.html#436">[ subject ]</a>
+              <a href="author.html#436">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+I've made a version of MikeOS with the memory map at the bottom of
+this email. It switches to unreal mode, and also implements the start
+of an interrupt-based system call mechanism. So, at the start of the
+kernel you can see:
+
+	mov edi, RAM_START
+	mov byte [edi], 'M'
+	mov byte [edi+1], 'O'
+	mov byte [edi+2], 'S'
+	mov byte [edi+3], 0
+
+	mov esi, RAM_START
+	mov ax, 0x0101		; os_print_string
+	int MIKEOS
+
+MIKEOS is just an equ for 0x4D, which is the system call interrupt.
+RAM_START is a high place in RAM (see the chart below). So this
+demonstrates unreal mode working correctly, in that we can use 32-bit
+offsets, and the new interrupt system.
+
+When it comes to this, though:
+
+	mov esi, msg
+	mov ax, 0x0101
+	int MIKEOS		; os_print_string
+
+	jmp $
+
+	msg db 'Woo', 0
+
+Here we're using an offset instead of an immediate value. But if I add
+ORG 75264 to the start of the code, in order to make offsets work
+correctly (because that's where the kernel is loaded in RAM), MikeOS
+triple-faults when switching to unreal mode at the start of the
+kernel.
+
+Is this something daft I'm missing, or Tomasz, can you have a look at
+the switch_to_unreal_mode routine please in os_main.asm and see if it
+conflicts with the ORG?
+
+Code is here: <A HREF="http://prdownload.berlios.de/mikeos/mikeos-2.9.01.tar.gz">http://prdownload.berlios.de/mikeos/mikeos-2.9.01.tar.gz</A>
+
+This is the current memory layout, with the stack where Takayoshi
+wants it. We can easily move things around though...
+
+0x0-0x3FF (0-1023)		Interrupt vectors
+0x400-0x5FF (1024-1535)		BIOS/system RAM
+
+0x600-0x9FFFF (1536-214527)	MikeOS, of which:
+
+	1536 - 9727		8K disk buffer
+
+	9728 - 75263		64K external program segment
+
+	75264 - 140799		64K kernel segment
+
+	140800 - 148991		8K stack
+
+	148992 - 655359		494.5K general purpose RAM
+
+0xA0000-0xBFFFF (655360+)	Video RAM
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000435.html">[mikeos-developer] Potential Bug
+</A></li>
+	<LI>Next message: <A HREF="000437.html">[mikeos-developer] New memory layout: offset problems / triple	faulting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#436">[ date ]</a>
+              <a href="thread.html#436">[ thread ]</a>
+              <a href="subject.html#436">[ subject ]</a>
+              <a href="author.html#436">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Comparing two strings
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Comparing%20two%20strings&In-Reply-To=%3CAANLkTik5T9h9Oti7dt1sHjKYN0NpjaieXOCn2Ou8Lr_-%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001561.html">
+   <LINK REL="Next"  HREF="001564.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Comparing two strings</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Comparing%20two%20strings&In-Reply-To=%3CAANLkTik5T9h9Oti7dt1sHjKYN0NpjaieXOCn2Ou8Lr_-%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Comparing two strings">okachi at gmail.com
+       </A><BR>
+    <I>Mon Nov 29 17:48:11 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001561.html">[mikeos-developer] Comparing two strings
+</A></li>
+        <LI>Next message: <A HREF="001564.html">[mikeos-developer] Comparing two strings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1563">[ date ]</a>
+              <a href="thread.html#1563">[ thread ]</a>
+              <a href="subject.html#1563">[ subject ]</a>
+              <a href="author.html#1563">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, Nov 26, 2010 at 4:00 PM, Paulo Valongo
+&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">paulovalongo at rocketmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> ; ========== change to ==============
+</I>&gt;<i>
+</I>&gt;<i> .nobackspace:
+</I>&gt;<i> &#160;&#160; &#160;pusha
+</I>&gt;<i> &#160;&#160; &#160;mov al, '*'
+</I>&gt;<i> &#160;&#160; &#160;mov ah, 0Eh&#160;&#160; &#160;&#160;&#160; &#160;&#160;&#160; &#160;; Output entered, printable character
+</I>&gt;<i> &#160;&#160; &#160;int 10h
+</I>&gt;<i> &#160;&#160; &#160;popa
+</I>&gt;<i>
+</I>&gt;<i> &#160;&#160; &#160;stosb&#160;&#160; &#160;&#160;&#160; &#160;&#160;&#160; &#160;&#160;&#160; &#160;; Store character in designated buffer
+</I>
+I don't think that will work; the stosb will always store the asterisk
+(*) character from AL in the buffer. You'd need to push AL, use an
+asterisk and pop AL back to use the original keyboard char.
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001561.html">[mikeos-developer] Comparing two strings
+</A></li>
+	<LI>Next message: <A HREF="001564.html">[mikeos-developer] Comparing two strings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1563">[ date ]</a>
+              <a href="thread.html#1563">[ thread ]</a>
+              <a href="subject.html#1563">[ subject ]</a>
+              <a href="author.html#1563">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

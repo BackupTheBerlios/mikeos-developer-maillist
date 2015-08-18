@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Pong for MikeOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-June/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Pong%20for%20MikeOS&In-Reply-To=%3C709420.16727.qm%40web56107.mail.re3.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001453.html">
+   <LINK REL="Next"  HREF="001465.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Pong for MikeOS</H1>
+    <B>M. Horvat</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Pong%20for%20MikeOS&In-Reply-To=%3C709420.16727.qm%40web56107.mail.re3.yahoo.com%3E"
+       TITLE="[mikeos-developer] Pong for MikeOS">redjazz_slo at yahoo.com
+       </A><BR>
+    <I>Sat Jun 19 19:45:02 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001453.html">[mikeos-developer] OS_PAUSE
+</A></li>
+        <LI>Next message: <A HREF="001465.html">[mikeos-developer] A new system call: os_exponentation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1456">[ date ]</a>
+              <a href="thread.html#1456">[ thread ]</a>
+              <a href="subject.html#1456">[ subject ]</a>
+              <a href="author.html#1456">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello again.
+I've been busy with a clone of Pong for MikeOS for a while. I would have
+finished it myself if there weren't so many bugs in the code. It's mostly
+complete but for some reason the collision detection doesn't work and the
+AI does strange things. So I'm releasing the code here in hope that
+someone with interest and time will fix it, or at least tell me where the
+errors might be. Thanks in advance.
+
+-Matej Horvat
+
+-------------------------------------------------------------------------
+
+; Pong for MikeOS by Matej Horvat
+; (assemble with NASM)
+
+; <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">matej.horvat at guest.arnes.si</A>
+
+; You may use this code as long as you give credit to me and the MikeOS developers.
+
+; ********** DIRECTIVES **********
+	BITS 16
+	%INCLUDE &quot;mikedev.inc&quot;
+	ORG 32768
+
+; ********** MAIN PROGRAM CODE **********
+	call os_clear_screen		; Clear screen
+	call os_hide_cursor		; Hide cursor
+
+Start:
+	; Randomly set the ball direction.
+	mov ax, 1
+	mov bx, 4
+	call os_get_random
+	mov [BallDir], cl
+
+MainLoop:
+	mov ax, 1
+	call os_pause			; Pause for 0.1 sec.
+
+	; Now let's move the player paddle
+	call os_check_for_key
+
+	cmp al, 'q'			; Is it Q?
+	jne KeyIsA			; If not, check whether it's A
+	dec byte [PlayerPos]		; If it is Q, then decrease player's paddle position
+KeyIsA:
+	cmp al, 'a'			; Is it A?
+	jne KeyIsEsc			; If not, check whether it's Esc
+	inc byte [PlayerPos]		; If it is A, then increase player's paddle position
+
+KeyIsEsc:
+	cmp al, 27			; Is it Esc?
+	jne CheckBounds			; If not, proceed with bounds checking
+	call os_clear_screen		; But if it is, clear screen...
+	ret				; ... and give control to the shell.
+
+CheckBounds:
+	cmp [PlayerPos], byte 255	; Is the player's paddle too high and offscreen? (The first row is 0, and if you dec that, you get 255)
+	jne .Bottom
+	inc byte [PlayerPos]		; If yes, move it back...
+	jmp ComputerAI			; ... and handle computer AI
+.Bottom:
+	cmp [PlayerPos], byte 23	; (Same here, except it checks for bottom)
+	jne ComputerAI
+	dec byte [PlayerPos]
+
+ComputerAI:
+	; First we'll randomly choose where the computer will move its paddle.
+	xor ax, ax			; Set the minimum random number to 0
+	mov bx, 1			; Set the maximum random number to 1
+	call os_get_random		; Now get the random number; it is located in CX.
+	cmp cl, 1			; Will the computer move its paddle?
+	jne MoveBall			; If not, move the ball.
+	call os_get_random		; Else, let's call the RNG into what direction.
+	cmp cl, 1			; Up?
+	jne .MoveIt			; No.
+	not cl				; Yes.
+.MoveIt:
+	add [CompPos], cl
+
+	cmp [CompPos], byte 255		; Same tricks as before.
+	jne .Bottom
+	inc byte [CompPos]
+.Bottom:
+	cmp [CompPos], byte 23
+	jne MoveBall
+	dec byte [CompPos]
+
+MoveBall:
+	cmp ah, 1			; Is the ball direction upper-left?
+	jne .UpperRight			; ...
+	dec byte [BallX]
+	dec byte [BallY]
+.UpperRight:
+	cmp ah, 2			; (By now it should be all self-explanatory.)
+	jne .LowerLeft
+	inc byte [BallX]
+	dec byte [BallY]
+.LowerLeft:
+	cmp ah, 3
+	jne .LowerRight
+	dec byte [BallX]
+	inc byte [BallY]
+	jmp BounceBall
+.LowerRight:
+	inc byte [BallX]
+	inc byte [BallY]
+
+BounceBall:
+	cmp [BallY], byte 0		; Is the ball at the top of the screen?
+	jne .IsItAtTheBottom
+	add [BallDir], byte 2		; If it is, increase direction by 2 so that direction 1 becomes 3 and 2 becomes 4
+	jmp RedrawScreen
+.IsItAtTheBottom:
+	cmp [BallY], byte 24		; (Same here)
+	jne .IsItOnTheLeft
+	sub [BallDir], byte 2
+	jmp RedrawScreen
+.IsItOnTheLeft:
+	cmp [BallX], byte 1
+	jne .IsItOnTheRight
+	mov dh, [BallY]
+	mov dl, [BallX]
+	dec dl
+	call os_move_cursor		; Move the cursor to the ball's left.
+
+	; Get character at cursor
+	mov ah, 08h
+	xor bx, bx
+	int 10h				; Get char at current cursor location
+	xor bx, bx			; We only want the lower byte (the char, not attribute)
+	mov bl, al
+
+	cmp bx, 219			; Is there a paddle on the left?
+	jne IncScoreForComputer		; If not, too bad, because the computer gets a point.
+	inc byte [BallDir]		; ... increase ball direction...
+	jmp RedrawScreen
+.IsItOnTheRight:
+	cmp [BallX], byte 78
+	jne RedrawScreen
+	mov dh, [BallY]
+	mov dl, [BallX]
+	inc dl
+	call os_move_cursor		; Move the cursor to the ball's right.
+
+	; Get character at cursor
+	mov ah, 08h
+	xor bx, bx
+	int 10h				; Get char at current cursor location
+	xor bx, bx			; We only want the lower byte (the char, not attribute)
+	mov bl, al
+
+	cmp bx, [Paddle]		; Is there a paddle on the right?
+	jne IncScoreForPlayer		; If not, that's great, because the player gets a point.
+	dec byte [BallDir]		; If yes, decrease ball direction.
+
+	jmp RedrawScreen		; Redraw the screen.
+
+IncScoreForComputer:
+	inc byte [CompScore]
+	jmp NewRound
+
+IncScoreForPlayer:
+	inc byte [PlayerScore]
+
+NewRound:
+	mov ax, 10
+	call os_pause
+	mov [BallX], byte 40
+	mov [BallY], byte 12
+	jmp Start
+
+RedrawScreen:
+	call os_clear_screen		; Get us a fresh new screen
+
+	; Draw the ball
+	mov dh, [BallY]
+	mov dl, [BallX]
+	call os_move_cursor
+	mov si, Ball
+	call os_print_string
+
+	; Display the score (this could probably be improved so the colon would only be 1 space away from the player score according to string length)
+	xor dh, dh
+	mov dl, 10
+	call os_move_cursor
+	xor bh, bh
+	mov bl, [PlayerScore]
+	mov ax, bx
+	call os_int_to_string
+	mov si, ax
+	call os_print_string		; Print player score
+
+	xor dh, dh
+	mov dl, 14
+	call os_move_cursor
+	mov si, Colon
+	call os_print_string		; Print colon
+
+	xor dh, dh
+	mov dl, 16
+	call os_move_cursor
+	mov bh, [CompScore]
+	xor bl, bl
+	mov ax, bx
+	call os_int_to_string
+	mov si, ax
+	call os_print_string		; Print computer score
+
+	; Draw the paddles:
+	; Player paddle:
+	mov dh, [PlayerPos]
+	xor dl, dl
+	call os_move_cursor
+	mov si, Paddle
+	call os_print_string		; We have to do this three times because the paddles are 3 characters high.
+	inc dh
+	call os_move_cursor
+	call os_print_string
+	inc dh
+	call os_move_cursor
+	call os_print_string
+
+	; Computer paddle: (same trick as before, but we don't need to copy Paddle to SI this time)
+	mov dh, [CompPos]
+	mov dl, 79
+	call os_move_cursor
+	call os_print_string
+	inc dh
+	call os_move_cursor
+	call os_print_string
+	inc dh
+	call os_move_cursor
+	call os_print_string
+
+	jmp MainLoop			; And let's repeat the process.
+	
+
+; ********** STRINGS AND STUFF **********
+	Paddle		db 219, 0
+	Ball		db 'O', 0
+	Colon		db ':', 0
+
+	BallDir		db 0		; (Randomly set at the start of the game)
+
+	PlayerScore	db 0
+	CompScore	db 0
+
+	; Starting positions:
+	BallX		db 40
+	BallY		db 12
+	PlayerPos	db 11
+	CompPos		db 11
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001453.html">[mikeos-developer] OS_PAUSE
+</A></li>
+	<LI>Next message: <A HREF="001465.html">[mikeos-developer] A new system call: os_exponentation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1456">[ date ]</a>
+              <a href="thread.html#1456">[ thread ]</a>
+              <a href="subject.html#1456">[ subject ]</a>
+              <a href="author.html#1456">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

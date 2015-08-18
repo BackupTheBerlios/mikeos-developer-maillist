@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Possible%20addition%20to%20MikeOS%20and%20MikeOS%20BASIC&In-Reply-To=%3C19d8b3b01002081251p319b06bdjfa5f83188fa58b1a%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001178.html">
+   <LINK REL="Next"  HREF="001181.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Possible%20addition%20to%20MikeOS%20and%20MikeOS%20BASIC&In-Reply-To=%3C19d8b3b01002081251p319b06bdjfa5f83188fa58b1a%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC">okachi at gmail.com
+       </A><BR>
+    <I>Mon Feb  8 21:51:17 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001178.html">[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+</A></li>
+        <LI>Next message: <A HREF="001181.html">[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1180">[ date ]</a>
+              <a href="thread.html#1180">[ thread ]</a>
+              <a href="subject.html#1180">[ subject ]</a>
+              <a href="author.html#1180">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Should be a good learning exercise as I've never coded an interpreter before.
+</I>
+The workings of the BASIC interpreter are quite simple:
+
+The core is the get_token routine, which returns a 'piece' of the
+BASIC code (ie a number, quote, variable etc.) After you call
+get_token, AX contains the type -- eg VARIABLE, QUOTE, STRING VAR etc.
+
+The interpreter looks at the first item in a line, and jumps to the
+corresponding routine for the instruction (eg if it's GOTO we jump to
+do_goto). Then do_goto, as with the other instruction routines, calls
+the tokenizer to get chunks and work out what to do with them.
+
+When we're done with the line, we jump back to 'mainloop' where the
+next line is processed.
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001178.html">[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+</A></li>
+	<LI>Next message: <A HREF="001181.html">[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1180">[ date ]</a>
+              <a href="thread.html#1180">[ thread ]</a>
+              <a href="subject.html#1180">[ subject ]</a>
+              <a href="author.html#1180">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

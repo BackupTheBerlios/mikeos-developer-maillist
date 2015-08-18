@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.2 beta 1 released for testing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.2%20beta%201%20released%20for%20testing&In-Reply-To=%3CCACtjVkEvtE-0VfEdEQU-jDoRLWWqMpkUtv%3Dmjs%2B4t%3D4K8WJGBQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002160.html">
+   <LINK REL="Next"  HREF="002162.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.2 beta 1 released for testing</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.2%20beta%201%20released%20for%20testing&In-Reply-To=%3CCACtjVkEvtE-0VfEdEQU-jDoRLWWqMpkUtv%3Dmjs%2B4t%3D4K8WJGBQ%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 4.2 beta 1 released for testing">okachi at gmail.com
+       </A><BR>
+    <I>Sun Sep 18 15:01:15 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002160.html">[mikeos-developer] MikeOS 4.2 beta 1 released for testing
+</A></li>
+        <LI>Next message: <A HREF="002162.html">[mikeos-developer] MikeOS 4.2 beta 1 released for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2161">[ date ]</a>
+              <a href="thread.html#2161">[ thread ]</a>
+              <a href="subject.html#2161">[ subject ]</a>
+              <a href="author.html#2161">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>And now I've just implemented parameter passing, more along Matej's
+line of thinking: the program receives a string in SI with all the
+parameters excluding the program name, so it can do as it pleases.
+
+The reason is, I've implemented it in the BASIC interpreter too! On
+startup of a BASIC program, $1 contains the parameter string passed,
+or it's empty otherwise. So if you have this BASIC program:
+
+print &quot;The CLI passed us:&quot;
+print $1
+end
+
+And then run it from the CLI like this:
+
+foo.bas Some words here
+
+Then it will print &quot;Some words here&quot;. Hopefully that'll be useful to
+Bazza and Joshua :-)
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002160.html">[mikeos-developer] MikeOS 4.2 beta 1 released for testing
+</A></li>
+	<LI>Next message: <A HREF="002162.html">[mikeos-developer] MikeOS 4.2 beta 1 released for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2161">[ date ]</a>
+              <a href="thread.html#2161">[ thread ]</a>
+              <a href="subject.html#2161">[ subject ]</a>
+              <a href="author.html#2161">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

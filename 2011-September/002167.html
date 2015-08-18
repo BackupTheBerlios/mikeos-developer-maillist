@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] mikeos-developer Digest, Vol 36, Issue 26
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20mikeos-developer%20Digest%2C%20Vol%2036%2C%20Issue%2026&In-Reply-To=%3CEE753BAF-C37F-4C4C-A745-B10E161E057E%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002166.html">
+   <LINK REL="Next"  HREF="002168.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 26</H1>
+    <B>David Lougheed</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20mikeos-developer%20Digest%2C%20Vol%2036%2C%20Issue%2026&In-Reply-To=%3CEE753BAF-C37F-4C4C-A745-B10E161E057E%40gmail.com%3E"
+       TITLE="[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 26">david.lougheed at gmail.com
+       </A><BR>
+    <I>Sun Sep 18 17:57:49 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002166.html">[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 26
+</A></li>
+        <LI>Next message: <A HREF="002168.html">[mikeos-developer] Using string variables (esp for Joshua)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2167">[ date ]</a>
+              <a href="thread.html#2167">[ thread ]</a>
+              <a href="subject.html#2167">[ subject ]</a>
+              <a href="author.html#2167">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>just sos you know, in draw.bas the &quot;rem colour subroutine&quot; is spelled wrong (in the code, its spelled subroutein).
+On 2011-09-17, at 6:00 AM, <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer-request at lists.berlios.de</A> wrote:
+
+&gt;<i> Send mikeos-developer mailing list submissions to
+</I>&gt;<i> 	<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> 
+</I>&gt;<i> To subscribe or unsubscribe via the World Wide Web, visit
+</I>&gt;<i> 	<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i> or, via email, send a message with subject or body 'help' to
+</I>&gt;<i> 	<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer-request at lists.berlios.de</A>
+</I>&gt;<i> 
+</I>&gt;<i> You can reach the person managing the list at
+</I>&gt;<i> 	<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer-owner at lists.berlios.de</A>
+</I>&gt;<i> 
+</I>&gt;<i> When replying, please edit your Subject line so it is more specific
+</I>&gt;<i> than &quot;Re: Contents of mikeos-developer digest...&quot;
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Today's Topics:
+</I>&gt;<i> 
+</I>&gt;<i>   1. Re: MikeShell 0.420 and EDIT 0.420 for 4.1.2	released (M Saunders)
+</I>&gt;<i>   2. MikeOS 4.2 beta 1 released for testing (M Saunders)
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> ----------------------------------------------------------------------
+</I>&gt;<i> 
+</I>&gt;<i> Message: 1
+</I>&gt;<i> Date: Fri, 16 Sep 2011 17:27:21 +0100
+</I>&gt;<i> From: M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+</I>&gt;<i> To: &quot;MikeOS (and similar OS) developers&quot;
+</I>&gt;<i> 	&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+</I>&gt;<i> Subject: Re: [mikeos-developer] MikeShell 0.420 and EDIT 0.420 for
+</I>&gt;<i> 	4.1.2	released
+</I>&gt;<i> Message-ID:
+</I>&gt;<i> 	&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">CACtjVkGW2y4znXen4nOR1Y08jQPPRx6dBBiT1P-JFOJ1aEg9QQ at mail.gmail.com</A>&gt;
+</I>&gt;<i> Content-Type: text/plain; charset=ISO-8859-1
+</I>&gt;<i> 
+</I>&gt;<i> Troy: there are still various places where you could make the code
+</I>&gt;<i> simpler. For instance, here in cli.asm:
+</I>&gt;<i> 
+</I>&gt;<i> ------------------------------
+</I>&gt;<i> shell_builtin_echo:
+</I>&gt;<i>        mov si, input
+</I>&gt;<i>        mov ax, si                      ; Get the first token.
+</I>&gt;<i>        call os_string_length
+</I>&gt;<i>        add si, ax
+</I>&gt;<i>        inc si
+</I>&gt;<i> 
+</I>&gt;<i>        mov cx, word [input_tokens]
+</I>&gt;<i>        mov ax, cx                      ; Record the number of tokens we have
+</I>&gt;<i>        inc cx
+</I>&gt;<i> ------------------------------
+</I>&gt;<i> 
+</I>&gt;<i> You don't need to do all the addition -- you have the tokenize
+</I>&gt;<i> routine. And you don't need the &quot;mov ax&quot; operation either, as you
+</I>&gt;<i> don't use it. So you could do:
+</I>&gt;<i> 
+</I>&gt;<i> ------------------------------
+</I>&gt;<i> shell_builtin_echo:
+</I>&gt;<i>        mov si, input
+</I>&gt;<i>        mov al, 0
+</I>&gt;<i>        call os_string_tokenize
+</I>&gt;<i> 
+</I>&gt;<i>        mov si, di
+</I>&gt;<i>        call os_string_tokenize
+</I>&gt;<i> 
+</I>&gt;<i>        mov cx, word [input_tokens]
+</I>&gt;<i>        inc cx
+</I>&gt;<i> ------------------------------
+</I>&gt;<i> 
+</I>&gt;<i> I've found a few other things like this, where it could be simpler or
+</I>&gt;<i> registers are being wasted. Not a big deal, but I might have to do
+</I>&gt;<i> some rewriting for the final release!
+</I>&gt;<i> 
+</I>&gt;<i> M
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> ------------------------------
+</I>&gt;<i> 
+</I>&gt;<i> Message: 2
+</I>&gt;<i> Date: Fri, 16 Sep 2011 17:37:42 +0100
+</I>&gt;<i> From: M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+</I>&gt;<i> To: &quot;MikeOS (and similar OS) developers&quot;
+</I>&gt;<i> 	&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+</I>&gt;<i> Subject: [mikeos-developer] MikeOS 4.2 beta 1 released for testing
+</I>&gt;<i> Message-ID:
+</I>&gt;<i> 	&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">CACtjVkHPwfjLDwyGWEmJAK1Z09s3W+ZNL4Q2k6irZj+EkWsszw at mail.gmail.com</A>&gt;
+</I>&gt;<i> Content-Type: text/plain; charset=ISO-8859-1
+</I>&gt;<i> 
+</I>&gt;<i> Hi folks,
+</I>&gt;<i> 
+</I>&gt;<i> Here it is: <A HREF="http://prdownload.berlios.de/mikeos/mikeos-4.2b1.zip">http://prdownload.berlios.de/mikeos/mikeos-4.2b1.zip</A>
+</I>&gt;<i> 
+</I>&gt;<i> Full changelog below. All testing would be muchly appreciated! NOTE:
+</I>&gt;<i> the original EDIT.BIN is on the disk, and Troy's modified version is
+</I>&gt;<i> TROYEDIT.BIN.
+</I>&gt;<i> 
+</I>&gt;<i> This is because there appears to be something funny happening with
+</I>&gt;<i> Troy's version -- try opening MEMEDIT.BAS or CALC.BAS in it and
+</I>&gt;<i> hitting F8 to execute BASIC. Then quit the BASIC program, and the
+</I>&gt;<i> system locks up back in the editor. Troy: please look into this, as it
+</I>&gt;<i> works OK with the normal EDIT.BIN. I think I've traced the culprit to
+</I>&gt;<i> somewhere in the &quot;setup_screen&quot; routine and all the string joins it
+</I>&gt;<i> does -- does it need to do those every refresh?
+</I>&gt;<i> 
+</I>&gt;<i> Anyway, thanks in advance for any testing reports folks!
+</I>&gt;<i> 
+</I>&gt;<i> Mike
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> # New program: Memory Manipulator (MEMEDIT.BAS) from Joshua Beck: a
+</I>&gt;<i> colourful program for editing bytes in memory, written in BASIC
+</I>&gt;<i> 
+</I>&gt;<i> # New program: ASCII Artist (DRAW.BAS) from Joshua Beck: lets you
+</I>&gt;<i> draw, load and save images created with ASCII characters
+</I>&gt;<i> 
+</I>&gt;<i> # New program: MikeTron Reloaded (MIKETRON.BAS) from Joshua Beck: new
+</I>&gt;<i> features, bonuses and explosion effects
+</I>&gt;<i> 
+</I>&gt;<i> # New program: Calculator (CALC.BAS) from Joshua Beck
+</I>&gt;<i> 
+</I>&gt;<i> # Updated CLI from Troy Martin: can now pass parameters to programs.
+</I>&gt;<i> The tokenised (elements separated by zeros) CLI string is passed in
+</I>&gt;<i> SI, and the number of arguments in DX. Plus: new file management
+</I>&gt;<i> routines to DEL, COPY and REN files
+</I>&gt;<i> 
+</I>&gt;<i> # Updated EDIT program from Troy Martin: takes filename at CLI prompt,
+</I>&gt;<i> plus new keybindings to create a new file and save with different name
+</I>&gt;<i> 
+</I>&gt;<i> # New system call: os_string_tokenize from Matej Horvat -- reads
+</I>&gt;<i> tokens separated by specific char from a string, returning pointer to
+</I>&gt;<i> next token
+</I>&gt;<i> 
+</I>&gt;<i> # New system call: os_string_compare_casei from Troy Martin -- like
+</I>&gt;<i> os_string_compare, but case-insensitive
+</I>&gt;<i> 
+</I>&gt;<i> # Bumped API to version 14
+</I>&gt;<i> 
+</I>&gt;<i> # TEST.PCX file (in programs directory) renamed SAMPLE.PCX
+</I>&gt;<i> 
+</I>&gt;<i> # Bugfix: os_get_time_string vector is 0054h, not 0055h
+</I>&gt;<i> 
+</I>&gt;<i> # Bugfix: can no longer call BASIC in EDIT.BIN when file is empty
+</I>&gt;<i> 
+</I>&gt;<i> # Handbook updates
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> ------------------------------
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> End of mikeos-developer Digest, Vol 36, Issue 26
+</I>&gt;<i> ************************************************
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002166.html">[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 26
+</A></li>
+	<LI>Next message: <A HREF="002168.html">[mikeos-developer] Using string variables (esp for Joshua)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2167">[ date ]</a>
+              <a href="thread.html#2167">[ thread ]</a>
+              <a href="subject.html#2167">[ subject ]</a>
+              <a href="author.html#2167">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

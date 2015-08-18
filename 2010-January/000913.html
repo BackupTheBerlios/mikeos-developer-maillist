@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] major upgrade for mikeos?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20major%20upgrade%20for%20mikeos%3F&In-Reply-To=%3C593735.63020.qm%40web113106.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000911.html">
+   <LINK REL="Next"  HREF="000907.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] major upgrade for mikeos?</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20major%20upgrade%20for%20mikeos%3F&In-Reply-To=%3C593735.63020.qm%40web113106.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] major upgrade for mikeos?">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Thu Jan 21 14:57:53 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000911.html">[mikeos-developer] major upgrade for mikeos?
+</A></li>
+        <LI>Next message: <A HREF="000907.html">[mikeos-developer] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#913">[ date ]</a>
+              <a href="thread.html#913">[ thread ]</a>
+              <a href="subject.html#913">[ subject ]</a>
+              <a href="author.html#913">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thanks for the links Mike.
+
+Although after reading them, it's still clear as mud to me.
+I did however manage to pick up a few bits of important information:
+
+1) If the BIOS does indeed mess with the segment registers, it would be
+   completely dependent on each individual call.
+  Although I'm not convinced it will happen at all.
+
+2) I quite like the idea of making a subroutine which one would call with 32 bit code
+    which would then make the BIOS call for us.
+
+3) Enabling the A20 line is much easier than I thought so I'm going to start using it
+    in Real mode for now.
+    Every bit of extra available memory helps.
+    It just bugs me that I can only use 640KB maximum.(I'm used to coding in a 32 bit environment
+    where memory is ample and cheap).
+
+4) Going to investigate Unreal mode for myself to see what happens.
+
+One of the main reasons I would like access to ooodles of RAM is so when MikeOS boots, the kernel first
+loads a whole stack of binaries at different locations in RAM.
+When we need to run them they are simply fetched from RAM, placed at start location 32768 of segment 2000h and executed from there.
+The nice thing about this is that all the ORG's can stay the same.
+
+Much quicker then running them from floppy/CD each time.
+
+Paulo.
+
+
+
+
+
+
+----- Original Message ----
+From: M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+To: MikeOS (and similar OS) developers &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+Sent: Thu, January 21, 2010 1:39:32 PM
+Subject: Re: [mikeos-developer] major upgrade for mikeos?
+
+Hi Paulo,
+
+Here's the OSDev.org discussion about unreal mode. My concerns were
+triggered by Firestryke31's post in the middle of the second page --
+the discussion following it is very interesting:
+
+<A HREF="http://forum.osdev.org/viewtopic.php?f=1&amp;t=21179">http://forum.osdev.org/viewtopic.php?f=1&amp;t=21179</A>
+
+Some people think BIOS interrupts could mess around with segment
+registers, whereas others say it's not possible. So I have no idea :-)
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+_______________________________________________
+mikeos-developer mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000911.html">[mikeos-developer] major upgrade for mikeos?
+</A></li>
+	<LI>Next message: <A HREF="000907.html">[mikeos-developer] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#913">[ date ]</a>
+              <a href="thread.html#913">[ thread ]</a>
+              <a href="subject.html#913">[ subject ]</a>
+              <a href="author.html#913">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

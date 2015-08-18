@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] OS_PAUSE
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20OS_PAUSE&In-Reply-To=%3C177E207E22C04FC8856EF3B94DFA1CAD%40userfe6b65a555%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001316.html">
+   <LINK REL="Next"  HREF="001363.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] OS_PAUSE</H1>
+    <B>mikegonta at gmail.com</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20OS_PAUSE&In-Reply-To=%3C177E207E22C04FC8856EF3B94DFA1CAD%40userfe6b65a555%3E"
+       TITLE="[mikeos-developer] OS_PAUSE">mikegonta at gmail.com
+       </A><BR>
+    <I>Tue May 25 22:41:51 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001316.html">[mikeos-developer] OS_PAUSE
+</A></li>
+        <LI>Next message: <A HREF="001363.html">[mikeos-developer] OS_PAUSE
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1362">[ date ]</a>
+              <a href="thread.html#1362">[ thread ]</a>
+              <a href="subject.html#1362">[ subject ]</a>
+              <a href="author.html#1362">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+----- Original Message ----- 
+From: &quot;M Saunders&quot;
+To: &quot;MikeOS (and similar OS) developers&quot;
+Sent: Tuesday, May 18, 2010 7:07 AM
+Subject: Re: [mikeos-developer] OS_PAUSE
+
+
+&gt;<i> Hi Paulo,
+</I>&gt;<i>
+</I>&gt;&gt;<i> Do you have any ideas for a &quot;replacement&quot; of the current os_pause as it 
+</I>&gt;&gt;<i> relies
+</I>&gt;&gt;<i> on INT15h sub-function 86h which many modern BIOS' don't support for some 
+</I>&gt;&gt;<i> reason.
+</I>&gt;<i>
+</I>&gt;<i> It's a bit scary that BIOS makers are removing things! Anyway, another
+</I>&gt;<i> option is this, assuming BIOSes still support it:
+</I>
+I hope all of this OS_PAUSE business is not some how related to a small bug
+in the original code.
+
+; ------------------------------------------------------------------
+; os_pause -- Delay execution for specified microseconds
+; IN: AX = number of tenths of a second to wait (so 10 = 1 second)
+
+os_pause:
+ pusha
+
+ mov bx, ax
+
+ mov cx, 1h
+ mov dx, 86A0h
+ mov ax, 0
+ mov ah, 86h
+
+.loop:
+ int 15h
+
+;&gt;&gt;&gt; at this point this BIOS function returns ah=0 for success
+
+ dec bx
+ jne .loop
+
+;&gt;&gt;&gt; on the next loop iteration a non supported BIOS function int 15h
+;&gt;&gt;&gt; ah=0 will be called. The BIOS is supposed to return ah=86h (function
+;&gt;&gt;&gt; not supported) but this may vary depending on the BIOS.
+;&gt;&gt;&gt; If 86h is returned then half of the loop count will result in
+;&gt;&gt;&gt; waits, but it's possible that on some BIOS unexpected results may
+;&gt;&gt;&gt; occur. Int 15h provides error checking with the carry flag,
+;&gt;&gt;&gt; carry clear for success.
+
+ popa
+ ret
+
+Worst still, is if there is a wait in progress ah=83h will be returned.
+This means that on the next iteration, BIOS function int 15h ah=83h will
+be called. With al=0, a wait interval of cx:dx microseconds will result,
+and then bit 7 of the byte pointed to by es:bx will be set, which could
+potentially result in a crash.
+
+The simple fix of course, is to put the &quot;mov ah, 86h&quot; at the beginning
+inside the loop.
+
+
+Mike Gonta
+look and see - many look but few see
+
+<A HREF="http://mikegonta.com/pdBIOS32">http://mikegonta.com/pdBIOS32</A>
+
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001316.html">[mikeos-developer] OS_PAUSE
+</A></li>
+	<LI>Next message: <A HREF="001363.html">[mikeos-developer] OS_PAUSE
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1362">[ date ]</a>
+              <a href="thread.html#1362">[ thread ]</a>
+              <a href="subject.html#1362">[ subject ]</a>
+              <a href="author.html#1362">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

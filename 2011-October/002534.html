@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] int 33h? ps/2 mouse?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20%3D%3Futf-8%3Fq%3Fint_33h%3D3F_ps/2_mouse%3D3F%3F%3D&In-Reply-To=%3Cfc24d69a3c668812928b7d19958533a8%40cordilon.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002532.html">
+   <LINK REL="Next"  HREF="002535.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] int 33h? ps/2 mouse?</H1>
+    <B>Troy Martin</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20%3D%3Futf-8%3Fq%3Fint_33h%3D3F_ps/2_mouse%3D3F%3F%3D&In-Reply-To=%3Cfc24d69a3c668812928b7d19958533a8%40cordilon.net%3E"
+       TITLE="[mikeos-developer] int 33h? ps/2 mouse?">blacklight at cordilon.net
+       </A><BR>
+    <I>Tue Oct  4 05:01:00 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002532.html">[mikeos-developer] int 33h? ps/2 mouse?
+</A></li>
+        <LI>Next message: <A HREF="002535.html">[mikeos-developer] int 33h? ps/2 mouse?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2534">[ date ]</a>
+              <a href="thread.html#2534">[ thread ]</a>
+              <a href="subject.html#2534">[ subject ]</a>
+              <a href="author.html#2534">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, 3 Oct 2011 20:42:38 -0500, Justin Tokarchuk wrote:
+&gt;<i> is 33h reserved for DOS? Do I have to write my own driver?
+</I>Yup, int 33h is a DOS mouse driver interrupt. All you have available is 
+the keyboard controller and/or int 15h AX=C200h through C209h. These 
+interrupt functions allow you to initialize the PS/2 mouse port, 
+configure it, and do read/write operations on it.
+
+A good-looking resource for the PS/2 mouse protocol can be found here: 
+<A HREF="http://www.computer-engineering.org/ps2mouse/">http://www.computer-engineering.org/ps2mouse/</A>
+
+-- 
+Troy
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002532.html">[mikeos-developer] int 33h? ps/2 mouse?
+</A></li>
+	<LI>Next message: <A HREF="002535.html">[mikeos-developer] int 33h? ps/2 mouse?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2534">[ date ]</a>
+              <a href="thread.html#2534">[ thread ]</a>
+              <a href="subject.html#2534">[ subject ]</a>
+              <a href="author.html#2534">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

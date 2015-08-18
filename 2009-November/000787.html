@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] int13_diskette_function: read error
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20int13_diskette_function%3A%20read%20error&In-Reply-To=%3C4B112936.8090208%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000793.html">
+   <LINK REL="Next"  HREF="000788.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] int13_diskette_function: read error</H1>
+    <B>Matthew Hall</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20int13_diskette_function%3A%20read%20error&In-Reply-To=%3C4B112936.8090208%40gmail.com%3E"
+       TITLE="[mikeos-developer] int13_diskette_function: read error">asmasdev at googlemail.com
+       </A><BR>
+    <I>Sat Nov 28 14:44:22 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000793.html">[mikeos-developer] Well it`s working - woohoo...
+</A></li>
+        <LI>Next message: <A HREF="000788.html">[mikeos-developer] int13_diskette_function: read error
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#787">[ date ]</a>
+              <a href="thread.html#787">[ thread ]</a>
+              <a href="subject.html#787">[ subject ]</a>
+              <a href="author.html#787">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi everyone, I've just started trying to write a touch-like program for  
+the CLI, all it should do is create a file - there's no real error checking:
+
+touch:
+    pusha
+    mov si, input
+    call os_string_parse
+    cmp bx, 0
+    jne .filename_provided
+
+    mov si, nofilename_msg
+    call os_print_string
+    popa
+    jmp get_cmd
+
+.filename_provided:
+    mov ax, bx
+    call os_create_file
+    popa
+    jmp get_cmd
+
+when I run this it gives these errors (copied from Bochs):
+00057670701i tried to write disk 0, which is write-protected
+&lt; --snip-- &gt;
+00057670701i tried to write disk 0, which is write-protected
+00057697432p[BIOS ] &gt;&gt;PANIC&lt;&lt; int13_diskette_function: read error
+
+Is this my code?
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000793.html">[mikeos-developer] Well it`s working - woohoo...
+</A></li>
+	<LI>Next message: <A HREF="000788.html">[mikeos-developer] int13_diskette_function: read error
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#787">[ date ]</a>
+              <a href="thread.html#787">[ thread ]</a>
+              <a href="subject.html#787">[ subject ]</a>
+              <a href="author.html#787">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

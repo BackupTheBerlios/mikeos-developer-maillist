@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] libmikeos-4.1 released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20libmikeos-4.1%20released&In-Reply-To=%3C4f03362c1001210941j4b0114dck1bb67357c920cab5%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000888.html">
+   <LINK REL="Next"  HREF="000916.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] libmikeos-4.1 released</H1>
+    <B>Ian Seyler</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20libmikeos-4.1%20released&In-Reply-To=%3C4f03362c1001210941j4b0114dck1bb67357c920cab5%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] libmikeos-4.1 released">iseyler at gmail.com
+       </A><BR>
+    <I>Thu Jan 21 18:41:00 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000888.html">[mikeos-developer] libmikeos-4.1 released
+</A></li>
+        <LI>Next message: <A HREF="000916.html">[mikeos-developer] libmikeos-4.1 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#915">[ date ]</a>
+              <a href="thread.html#915">[ thread ]</a>
+              <a href="subject.html#915">[ subject ]</a>
+              <a href="author.html#915">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>There is a bug.
+
+os_get_random:
+	push dx
+	push bx
+	push ax
+
+	sub bx, ax			; We want a number between 0 and (high-low)
+	call .generate_random		; Return a random number in AX
+	mov dx, bx
+	add dx, 1       ; &lt;- If DX is 65535 (0xFFFF) then adding 1 will
+overflow DX to 0 (0x0000)
+	mul dx           ; And multiplying anything by 0 will give you 0
+	mov cx, dx
+
+	pop ax
+	pop bx
+	pop dx
+	add cx, ax			; Add the low offset back
+	ret
+
+I'll try to figure it out.
+
+-Ian
+
+
+On Tue, Jan 19, 2010 at 3:16 PM, Ian Seyler &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">iseyler at gmail.com</A>&gt; wrote:
+&gt;<i> I'll take a look into it.
+</I>&gt;<i>
+</I>&gt;<i> Sent from my iPod
+</I>&gt;<i>
+</I>&gt;<i> On Jan 19, 2010, at 1:23 PM, M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> On Tue, Jan 19, 2010 at 1:57 PM, SASANO Takayoshi &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">uaa at mx5.nisiq.net</A>&gt;
+</I>&gt;&gt;<i> wrote:
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> BTW, the result of os_get_random is always zero when I set AX(low)=0x0000
+</I>&gt;&gt;&gt;<i> and BX(high)=0xffff, is this correct or bug? Difficult to judge...
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> That does indeed sound like a bug. Ian, any ideas?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i> Mike Saunders
+</I>&gt;&gt;<i> <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> mikeos-developer mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000888.html">[mikeos-developer] libmikeos-4.1 released
+</A></li>
+	<LI>Next message: <A HREF="000916.html">[mikeos-developer] libmikeos-4.1 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#915">[ date ]</a>
+              <a href="thread.html#915">[ thread ]</a>
+              <a href="subject.html#915">[ subject ]</a>
+              <a href="author.html#915">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

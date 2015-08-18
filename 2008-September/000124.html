@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] TBOS2 Progress
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20TBOS2%20Progress&In-Reply-To=%3C8d87c8a30809131416x62f8f5c2oc3dc5676a1ae268%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000123.html">
+   <LINK REL="Next"  HREF="000122.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] TBOS2 Progress</H1>
+    <B>Bob Moss</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20TBOS2%20Progress&In-Reply-To=%3C8d87c8a30809131416x62f8f5c2oc3dc5676a1ae268%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] TBOS2 Progress">bobbyjmoss at googlemail.com
+       </A><BR>
+    <I>Sat Sep 13 23:16:15 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000123.html">[mikeos-developer] TBOS2 Progress
+</A></li>
+        <LI>Next message: <A HREF="000122.html">[mikeos-developer] FAT12 write driver 0.6
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#124">[ date ]</a>
+              <a href="thread.html#124">[ thread ]</a>
+              <a href="subject.html#124">[ subject ]</a>
+              <a href="author.html#124">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>just look 4 a web colour chart - #rrggbb (that would be #000000 to
+#ffffff of course, but that's what the colors stand for). u cud save
+one as foreground colour, one as back.
+you'll find that mikeos binary colours when changed 2 hex become
+#00-#ff (#ab a=foreground and b=background). if u use a similar scheme
+- #rgbrgb (1st 3=fore, 2nd=back) then ur stuck with trial and error
+i'm afraid!
+
+On 9/13/08, Troy Martin &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">blasterman95 at gmail.com</A>&gt; wrote:
+&gt;<i> WRITTEN A FEW NIGHTS AGO BUT NEVER SENT OFF:
+</I>&gt;<i>
+</I>&gt;<i> The keyboard driver is still messed up. It's my next project. It was
+</I>&gt;<i> recently labeled stroke-induced by someone at the OSDev forums for the lack
+</I>&gt;<i> of a jump table and the continuous re-usage of &quot;printing character, moving
+</I>&gt;<i> cursor&quot; in EVERY CHARACTER SECTION (wait until you see the source for it,
+</I>&gt;<i> you'll die in horror.)
+</I>&gt;<i>
+</I>&gt;<i> WRITTEN TODAY:
+</I>&gt;<i>
+</I>&gt;<i> The 4GB flat memory model is going to be fun to work with. Not that TBOS
+</I>&gt;<i> will ever grow to need all that though. :P
+</I>&gt;<i>
+</I>&gt;<i> My continous re-usage stated above is no more, since doing a &quot;call
+</I>&gt;<i> .printandmove&quot; is much more efficient. Let's see what medical condition
+</I>&gt;<i> induced this one...
+</I>&gt;<i>
+</I>&gt;<i> I think the next TBOS core project will be a shell and some more syscalls.
+</I>&gt;<i> My goal is to work on a FAT12 read driver and toss in syscall vectors in
+</I>&gt;<i> between revisions and have FAT12 ready by 0.2.10. Version scheme below:
+</I>&gt;<i>
+</I>&gt;<i> Beta versions: 0.2.xx
+</I>&gt;<i> Release versions: 2.x.x
+</I>&gt;<i> First 'x' is major revision number, second 'x' is minor revision number.
+</I>&gt;<i> Current version is 0.2.01.
+</I>&gt;<i>
+</I>&gt;<i> And BTW, does anyone have a VGA 256-color chart that maps it to 6-digit
+</I>&gt;<i> hexadecimal numbers?
+</I>&gt;<i>
+</I>&gt;<i> Troy Martin
+</I>&gt;<i> www.blasterman.co.nr
+</I>
+-- 
+Sent from Google Mail for mobile | mobile.google.com
+
+This email is not intended to offend, annoy or inconvenience anyone.
+If it has, email me and state that it has, and we'll sort out the
+problem in an amicable way. Thank you for reading this message, I hope
+for a reply from you soon!
+
+Why not visit my tech site?: <A HREF="http://bjm1904.741.com/">http://bjm1904.741.com/</A>
+or Apollo OS?:
+<A HREF="http://apolloopsys.sourceforge.net/">http://apolloopsys.sourceforge.net/</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000123.html">[mikeos-developer] TBOS2 Progress
+</A></li>
+	<LI>Next message: <A HREF="000122.html">[mikeos-developer] FAT12 write driver 0.6
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#124">[ date ]</a>
+              <a href="thread.html#124">[ thread ]</a>
+              <a href="subject.html#124">[ subject ]</a>
+              <a href="author.html#124">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

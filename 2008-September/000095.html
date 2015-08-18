@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Looking ahead to 2.0: segments and DOS	compatibility
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Looking%20ahead%20to%202.0%3A%20segments%20and%20DOS%0A%09compatibility&In-Reply-To=%3C8d87c8a30808311614r3388c301q19b030ee3272f55%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000096.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Looking ahead to 2.0: segments and DOS	compatibility</H1>
+    <B>Bob Moss</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Looking%20ahead%20to%202.0%3A%20segments%20and%20DOS%0A%09compatibility&In-Reply-To=%3C8d87c8a30808311614r3388c301q19b030ee3272f55%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Looking ahead to 2.0: segments and DOS	compatibility">bobbyjmoss at googlemail.com
+       </A><BR>
+    <I>Mon Sep  1 01:14:16 CEST 2008</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000096.html">[mikeos-developer] Looking ahead to 2.0: segments and	DOScompatibility
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#95">[ date ]</a>
+              <a href="thread.html#95">[ thread ]</a>
+              <a href="subject.html#95">[ subject ]</a>
+              <a href="author.html#95">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It depends on your ambitions for MikeOS.
+
+I always thought that the DOS Compatibility was a bit gimmicky (I'm not
+going out of my way to include it in Apollo!) - it adds very few apps to the
+OS's already very small armoury but takes a fair amount of already limited
+resources. It's pretty cool as an experimental feature - but engineering it
+into the core of MikeOS does seem a little strange (when you consider what
+DOS and MikeOS stand for on licensing principles, etc.). You could perhaps
+use 'dos-like' routines to help out new developers, but going for native
+support (even partially) would be very difficult (and each MikeOS would have
+to be tailored to accomadate DOS routines to avoid breaking DOS code).
+
+Hmm... MikeOS seems to me like a project that looks to stretch 16-bit to the
+absolute limit. I think that so long as you have a seperate 'tutorial' OS
+you still maintain the principle of teaching kernel-design, and offering
+MikeOS (or their own personal OS) as the 'next step'.
+Of course, I finally get to snigger at this point as you concede that you
+need to move from real mode to 'unreal' (or 'protected?') mode to gain
+additional functionality (I'm having to do this from the start, as well as
+rewriting most of the OS from scratch to fully utilise 32-bit operation). If
+you are planning to head to a protected mode OS, then using grub as a
+bootloader would take far less effort - but you would unfortunately lose
+your access to BIOS calls, so you would then need interrupt handling (again
+a bane of my life at the moment - thank goodness for bkerndev...!). It all
+depends on which processor architecture you wanted to support - the earlier
+the choice, the simpler the interrupt handling (in theory...!).
+
+There's definitely some food for thought there!
+
+
+
+
+
+2008/8/31 Ian Seyler &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">iseyler at gmail.com</A>&gt;
+
+&gt;<i> I've never thought that the DOS compatility was a big feature.
+</I>&gt;<i> Personally I have always commented those DOS sections out when
+</I>&gt;<i> compiling MikeOS.
+</I>&gt;<i>
+</I>&gt;<i> I also like the idea with staying within one 64K segment. It is
+</I>&gt;<i> interesting to see what you can do with that amount of memory.
+</I>&gt;<i>
+</I>&gt;<i> Just my thoughts...
+</I>&gt;<i>
+</I>&gt;<i> -Ian
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On 8/31/08, M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; Hi everyone,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Some general thoughts here - skip to the end if you're too busy to read
+</I>&gt;<i> :-)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Right now there are two features being worked on for the next release
+</I>&gt;<i> &gt; of MikeOS, as you know:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; 1) FAT 12 write support
+</I>&gt;<i> &gt; 2) Mouse support
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; But there's something else I'm looking into - memory handling.
+</I>&gt;<i> &gt; Currently, MikeOS exists in a single 64K segment of RAM, and never
+</I>&gt;<i> &gt; strays out of it. The upper 32K is devoted to the kernel (of which 8K
+</I>&gt;<i> &gt; is scratch space). So programs are limited to 32K, and it's all
+</I>&gt;<i> &gt; getting a bit tight.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; What are the solutions? Unreal mode (aka flat real mode) dispenses the
+</I>&gt;<i> &gt; 20-bit addressing scheme and provides access to a full 4GB of RAM - at
+</I>&gt;<i> &gt; least, in terms of data. For executable code (CS:IP) however, you're
+</I>&gt;<i> &gt; still stuck with 20-bit addressing, segment hassles, and a 1MB code
+</I>&gt;<i> &gt; limit.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; So it wouldn't really make things any easier - we'd still have the
+</I>&gt;<i> &gt; segmentation annoyances. (For those who've not looked into segments
+</I>&gt;<i> &gt; yet, see the Real Mode bit of
+</I>&gt;<i> &gt; <A HREF="http://en.wikipedia.org/wiki/Segment_register">http://en.wikipedia.org/wiki/Segment_register</A> - it's pretty messy
+</I>&gt;<i> &gt; stuff.)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; One solution may be to define three segments for MikeOS: the kernel,
+</I>&gt;<i> &gt; external programs, and external program data; and engineer it in such
+</I>&gt;<i> &gt; a way that the user doesn't really have to know much about
+</I>&gt;<i> &gt; segmentation (ie after an os_load_file routine they manipulate the
+</I>&gt;<i> &gt; data with ES:DI and that's that). I'm not sure how much we can make it
+</I>&gt;<i> &gt; transparent, but it'd clearly make the OS more capable.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Of course, for this transition the current system call method will
+</I>&gt;<i> &gt; have to go out of the window, and be replaced with an int XXh
+</I>&gt;<i> &gt; alternative. That's a shame, but with an appropriate mikedev.inc we
+</I>&gt;<i> &gt; can still, say, have
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;   os_print_string equ 01h
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; and then programmers can use:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;   mov si, msgtext
+</I>&gt;<i> &gt;   mov ax, os_print_string
+</I>&gt;<i> &gt;   int 25h
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; and so forth.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; The other issue is DOS compatibility. It's cool, and Peter Nemeth and
+</I>&gt;<i> &gt; co have done some fantastic work, but it's still extremely limited and
+</I>&gt;<i> &gt; can only run a tiny number of DOS apps (mostly games). I'm wondering
+</I>&gt;<i> &gt; if it's better off to remove it, and incorporate it into a separate
+</I>&gt;<i> &gt; project - eg the 'OS in 7 steps' guide I mentioned before. It'd
+</I>&gt;<i> &gt; arguably make the MikeOS code a lot cleaner, and I'm not sure how much
+</I>&gt;<i> &gt; anyone else wants to hack on that side of things.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; So, SUMMARY: 1) The MikeOS design, in terms of memory, is very
+</I>&gt;<i> &gt; limiting. Would switching to a three-segment model make it too
+</I>&gt;<i> &gt; complex? And 2) Is the DOS code a killer feature, or an infrequently
+</I>&gt;<i> &gt; updated complication that doesn't really make MikeOS DOS compatible?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Opinions and (realistic!) ideas muchly sought - thanks :-)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; M
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Mike Saunders
+</I>&gt;<i> &gt; <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; mikeos-developer mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Sent from Gmail for mobile | mobile.google.com
+</I>&gt;<i>  _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+This email is not intended to offend, annoy or inconvenience anyone. If it
+has, email me and state that it has, and we'll sort out the problem in an
+amicable way. Thank you for reading this message, I hope for a reply from
+you soon!
+
+Why not visit my tech site?: <A HREF="http://bjm1904.741.com/">http://bjm1904.741.com/</A>
+or Apollo OS?:
+<A HREF="http://apolloopsys.sourceforge.net/">http://apolloopsys.sourceforge.net/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080901/f363e670/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080901/f363e670/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000096.html">[mikeos-developer] Looking ahead to 2.0: segments and	DOScompatibility
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#95">[ date ]</a>
+              <a href="thread.html#95">[ thread ]</a>
+              <a href="subject.html#95">[ subject ]</a>
+              <a href="author.html#95">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

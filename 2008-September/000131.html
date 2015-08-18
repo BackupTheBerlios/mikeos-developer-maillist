@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Testing libmikeos for Bruce Evans'	bcc	(dev86)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Testing%20libmikeos%20for%20Bruce%20Evans%27%0A%09bcc%09%28dev86%29&In-Reply-To=%3C87y71lbrcl.wl%25uaa%40mx5.nisiq.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000130.html">
+   <LINK REL="Next"  HREF="000132.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Testing libmikeos for Bruce Evans'	bcc	(dev86)</H1>
+    <B>SASANO Takayoshi</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Testing%20libmikeos%20for%20Bruce%20Evans%27%0A%09bcc%09%28dev86%29&In-Reply-To=%3C87y71lbrcl.wl%25uaa%40mx5.nisiq.net%3E"
+       TITLE="[mikeos-developer] Testing libmikeos for Bruce Evans'	bcc	(dev86)">uaa at mx5.nisiq.net
+       </A><BR>
+    <I>Sun Sep 21 14:44:58 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000130.html">[mikeos-developer] Testing libmikeos for Bruce Evans' bcc	(dev86)
+</A></li>
+        <LI>Next message: <A HREF="000132.html">[mikeos-developer] Testing libmikeos for Bruce Evans' bcc	(dev86)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#131">[ date ]</a>
+              <a href="thread.html#131">[ thread ]</a>
+              <a href="subject.html#131">[ subject ]</a>
+              <a href="author.html#131">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello, here is current libmikeos status.
+
+<A HREF="http://www.bi.a.u-tokyo.ac.jp/~uaa/gomitext/2008/20080921/20080921.tar.gz">http://www.bi.a.u-tokyo.ac.jp/~uaa/gomitext/2008/20080921/20080921.tar.gz</A>
+
+There is four new tests, all API-wrapper of MikeOS
+(except os_long_int_negate) have been covered.
+
+	test06	move cursor
+	test07	interrupt handler (with INT instruction)
+	test08	serial port in/out
+	test09	file operation
+
+	----
+	test00	&quot;Hello, World!&quot;
+	test01	play sound
+	test02	date/time string
+	test03	string operations
+	test04	string input, show/hide cursor
+	test05	misc(1)
+
+I will write test code for os_long_int_negate and fundamentals of bcc
+(add/subtract/multiply... to int/long int).
+
+And I will release libmikeos-#1 when pile of current sources have passed
+all tests.
+----
+
+Mike, I am very glad to contribute your OS and merge libmikeos into
+source tree. But please check my code carefully before merging.
+
+The libraries included in bcc is under LGPL license, and some parts of
+libmikeos' code resemble bcc's library - for example, 16bit division
+operation (__idiv.asm).
+
+Does anyone have any good idea to show libmikeos is completely GPL-free?
+I think libmikeos should be under MikeOS' license.
+----
+SASANO Takayoshi (JG1UAA/1) [<A HREF="http://www.uaa.org.uk/">http://www.uaa.org.uk/</A>] &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">uaa at uaa.org.uk</A>&gt;
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000130.html">[mikeos-developer] Testing libmikeos for Bruce Evans' bcc	(dev86)
+</A></li>
+	<LI>Next message: <A HREF="000132.html">[mikeos-developer] Testing libmikeos for Bruce Evans' bcc	(dev86)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#131">[ date ]</a>
+              <a href="thread.html#131">[ thread ]</a>
+              <a href="subject.html#131">[ subject ]</a>
+              <a href="author.html#131">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

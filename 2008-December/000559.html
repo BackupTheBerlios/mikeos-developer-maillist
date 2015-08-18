@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Development: MikeOS 2.9.5 released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Development%3A%20MikeOS%202.9.5%20released&In-Reply-To=%3C87d4g27uh6.wl%25uaa%40mx5.nisiq.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000556.html">
+   <LINK REL="Next"  HREF="000560.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Development: MikeOS 2.9.5 released</H1>
+    <B>SASANO Takayoshi</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Development%3A%20MikeOS%202.9.5%20released&In-Reply-To=%3C87d4g27uh6.wl%25uaa%40mx5.nisiq.net%3E"
+       TITLE="[mikeos-developer] Development: MikeOS 2.9.5 released">uaa at mx5.nisiq.net
+       </A><BR>
+    <I>Mon Dec  8 12:54:29 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000556.html">[mikeos-developer] Development: MikeOS 2.9.5 released
+</A></li>
+        <LI>Next message: <A HREF="000560.html">[mikeos-developer] Development: MikeOS 2.9.5 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#559">[ date ]</a>
+              <a href="thread.html#559">[ thread ]</a>
+              <a href="subject.html#559">[ subject ]</a>
+              <a href="author.html#559">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi, 
+
+&gt;<i> 1) Programs now start at 32K (ORGed to 32768)
+</I>&gt;<i> 2) Several system calls have been removed, and a few new ones added
+</I>&gt;<i> 
+</I>&gt;<i> So it's not a drastic change, 
+</I>
+No, it will be drastic change to C library.
+
+The memory map of MikeOS 2.0 was :-
+
+
+        0000:8000 +----------------------+
+                  | Stack area   (SS)    |
+        0000:F000 +----------------------+
+
+        2000:0000 +----------------------+
+                  | User code    (CS,DS) |
+        2000:8000 +----------------------+
+                  | Kernel code  (CS)    |
+        2000:FFFF +----------------------+
+
+And, libmikeos uses these area as :-
+
+        xxxx:0000 +----------------------+
+                  | User code    (CS,DS) |
+        xxxx:8000 +----------------------+----------------------+
+                  | Kernel code  (CS)    | Stack area   (SS)    |
+        xxxx:FFFF +----------------------+----------------------+
+
+Standard C, compact model requires :-
+
+        xxxx:0000 +----------------------+
+                  | User/Kernel code and |
+                  | Stack area (CS,DS,SS)|
+        xxxx:FFFF +----------------------+
+
+
+libmikeos 0.1.x selects DS/SS by the pointer value, 0x0000-0x7fff or
+0x8000-0xffff.
+
+If user code lies on 0x8000-0xFFFF, all of DS/SS selector scheme are
+required to change.
+From calling MikeOS API glue, to arithmetic library (mul/div/shift..).
+
+
+Now, think about MikeOS 3.0 memory map, well....
+Is there any different from these values?
+
+&gt;<i> 0x600-0x9FFFF (1536-214527)	MikeOS, of which:
+</I>&gt;<i> 	1536 - 9727		8K disk buffer
+</I>&gt;<i> 	9728 - 75263		64K external program segment
+</I>&gt;<i> 	75264 - 140799		64K kernel segment
+</I>&gt;<i> 	140800 - 148991		8K stack
+</I>&gt;<i> 	148992 - 655359		494.5K general purpose RAM
+</I>&gt;<i> 0xA0000-0xBFFFF (655360+)	Video RAM
+</I>
+Maybe this is written with linear address, so I have to rewrite
+segment:offset style. The kernel code shows SS=0000, CS=DS=0x2000, 
+I use these values.
+
+&gt;<i>                               and maybe I'll be able to update the
+</I>&gt;<i> library to fit (unless Takayoshi wants to pop out of retirement for a
+</I>&gt;<i> day!). It's a great addition to MikeOS and will help in getting new
+</I>&gt;<i> programs, so I'd love to keep it going.
+</I>
+I don't have enough time to fully-maintenance the code now,
+but I will do some help if possible.
+
+(In fact, my job is too busy and I am going to move into a new house.)
+
+And I have one question... Is there any problems to come back?
+-- 
+SASANO Takayoshi (JG1UAA/1) [<A HREF="http://www.uaa.org.uk/">http://www.uaa.org.uk/</A>] &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">uaa at uaa.org.uk</A>&gt;
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000556.html">[mikeos-developer] Development: MikeOS 2.9.5 released
+</A></li>
+	<LI>Next message: <A HREF="000560.html">[mikeos-developer] Development: MikeOS 2.9.5 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#559">[ date ]</a>
+              <a href="thread.html#559">[ thread ]</a>
+              <a href="subject.html#559">[ subject ]</a>
+              <a href="author.html#559">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

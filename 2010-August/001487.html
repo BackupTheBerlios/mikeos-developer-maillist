@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Updated OS_PAUSE
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Updated%20OS_PAUSE&In-Reply-To=%3C80768.69249.qm%40web113107.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001486.html">
+   <LINK REL="Next"  HREF="001488.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Updated OS_PAUSE</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Updated%20OS_PAUSE&In-Reply-To=%3C80768.69249.qm%40web113107.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] Updated OS_PAUSE">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Fri Aug 27 09:55:19 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001486.html">[mikeos-developer] Idea For Feature
+</A></li>
+        <LI>Next message: <A HREF="001488.html">[mikeos-developer] Updated OS_PAUSE
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1487">[ date ]</a>
+              <a href="thread.html#1487">[ thread ]</a>
+              <a href="subject.html#1487">[ subject ]</a>
+              <a href="author.html#1487">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+I have updated and simplified the os_pause routine.
+
+The required number of 110 millisecond &quot;ticks&quot; are passed in AX as before,
+but keep in mind that the maximum value is 32767 as this number is multiplied by
+2 automatically since the routine is based on int 1Ah which uses 55 millisecond 
+increments.
+
+The max value of 32767 equates to a delay of 1802 seconds or 30 minutes.
+I doubt anyone will require an even greater delay but if they do, simply call 
+os_pause repeatedly.
+
+The code is straight forward and simply checks for a count change in the low 16 
+bits (DX).
+This way the high 16 bits (CX) can be safely ignored as the count will always 
+increment except
+when it goes back to zero at midnight.
+This does not present a problem as the roll over to zero still represents a 
+change in the count which in turn indicates
+that another 55 milliseconds has elapsed.
+
+I have attached the code as a separate text file.
+Regards,
+Paulo.
+
+
+      
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: os_pause.txt
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100827/715e80c4/attachment.txt">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100827/715e80c4/attachment.txt</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001486.html">[mikeos-developer] Idea For Feature
+</A></li>
+	<LI>Next message: <A HREF="001488.html">[mikeos-developer] Updated OS_PAUSE
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1487">[ date ]</a>
+              <a href="thread.html#1487">[ thread ]</a>
+              <a href="subject.html#1487">[ subject ]</a>
+              <a href="author.html#1487">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Two GUI's?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2013-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Two%20GUI%27s%3F&In-Reply-To=%3C52E9019CEBF84458AF48C9766916F1C0%40BlakeBurgessPC%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003231.html">
+   <LINK REL="Next"  HREF="003233.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Two GUI's?</H1>
+    <B>Blake Burgess</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Two%20GUI%27s%3F&In-Reply-To=%3C52E9019CEBF84458AF48C9766916F1C0%40BlakeBurgessPC%3E"
+       TITLE="[mikeos-developer] Two GUI's?">blakeburgess at gamenetstudios.com
+       </A><BR>
+    <I>Wed Oct 30 01:06:55 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003231.html">[mikeos-developer] Two GUI's?
+</A></li>
+        <LI>Next message: <A HREF="003233.html">[mikeos-developer] Memory Management Library
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3232">[ date ]</a>
+              <a href="thread.html#3232">[ thread ]</a>
+              <a href="subject.html#3232">[ subject ]</a>
+              <a href="author.html#3232">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Alright, here's how it would work.
+
+The user would have to execute the loader, which would load the entire 
+manager into the next segment above MikeOS. Then an application which 
+utilizes the manager is run, and reads a small string from 1234:5678h (???) 
+to ensure compatibility. To display windows, the program points the DX 
+register at whichever window information block it wants, and performs a CALL 
+statement. For window controls, the window ID number (specified in whichever 
+info block was loaded for the window) is loaded into the AX register, and DX 
+to the control's info block, and performs yet another CALL. So on and so 
+forth.
+
+That's about as far as I got whenever I wrote out the info block draft 
+nearly two years ago.
+
+At second thought, I think I'm wrong about the keyboard control part. I 
+think what I had in mind to begin with was that a tab order number could be 
+specified in the control info block, and the program would check if the user 
+pressed Tab, which if he did, would then call &quot;control.selectNext:&quot;. There 
+would of course be &quot;mov AX, controlNumber // CALL control.select&quot; and 
+&quot;control.selectPrev&quot; as well.
+
+All done in 80x25 textmode. I might try to implement lowres graphics support 
+in the distant future if I'm feeling hardcore. I'm not even sure you could 
+call this thing a true manager, I mean it's really just a package of screen 
+drawing routines. Any real management is being handled by the program.
+
+I've attached the original info block draft.
+
+-----Original Message----- 
+From: Joshua Beck
+Sent: Tuesday, October 29, 2013 4:41 PM
+To: MikeOS Mailing List
+Subject: [mikeos-developer] Two GUI's?
+
+I have been planning a widget toolkit (i.e. a series of event driven
+gadget such as textboxes) and I want to synchronise my efforts with
+your window manager. I have some questions about your scheme.
+
+What graphics mode/method are you going to use?
+How are you going to draw text or primatives?
+How do the windows work? Are they managed?
+_______________________________________________
+mikeos-developer mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A> 
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: infoblock draft.txt
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131029/84fdb87a/attachment-0001.txt">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131029/84fdb87a/attachment-0001.txt</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003231.html">[mikeos-developer] Two GUI's?
+</A></li>
+	<LI>Next message: <A HREF="003233.html">[mikeos-developer] Memory Management Library
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3232">[ date ]</a>
+              <a href="thread.html#3232">[ thread ]</a>
+              <a href="subject.html#3232">[ subject ]</a>
+              <a href="author.html#3232">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

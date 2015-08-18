@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS BASIC
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%20BASIC&In-Reply-To=%3C19d8b3b00911180449v5f83ff3cq89278dd5ccdc2c06%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000736.html">
+   <LINK REL="Next"  HREF="000731.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS BASIC</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%20BASIC&In-Reply-To=%3C19d8b3b00911180449v5f83ff3cq89278dd5ccdc2c06%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS BASIC">okachi at gmail.com
+       </A><BR>
+    <I>Wed Nov 18 13:49:01 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000736.html">[mikeos-developer] MikeOS BASIC
+</A></li>
+        <LI>Next message: <A HREF="000731.html">[mikeos-developer] MikeOS on a stick
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#737">[ date ]</a>
+              <a href="thread.html#737">[ thread ]</a>
+              <a href="subject.html#737">[ subject ]</a>
+              <a href="author.html#737">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;<i> Great job, but just another little question : why is the basic interpreter
+</I>&gt;<i> inside the kernel and not an external program ?
+</I>
+Good question. Originally it was a standalone program, but that
+started to make things complicated: MikeOS had to load BASIC, which
+had to then load the .BAS program. If you wanted to run code directly
+in the editor (EDIT.BIN), you'd have:
+
+1 - MikeOS loads EDIT.BIN
+2 - EDIT.BIN loads .BAS file
+3 - EDIT.BIN has to load BASIC somewhere else in RAM
+
+So it was easier to have os_run_basic as a kernel routine. Also, this
+frees up more RAM in the program part of the MikeOS segment -- the
+second 32K.
+
+Cheers,
+Mike
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000736.html">[mikeos-developer] MikeOS BASIC
+</A></li>
+	<LI>Next message: <A HREF="000731.html">[mikeos-developer] MikeOS on a stick
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#737">[ date ]</a>
+              <a href="thread.html#737">[ thread ]</a>
+              <a href="subject.html#737">[ subject ]</a>
+              <a href="author.html#737">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

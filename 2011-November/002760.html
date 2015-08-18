@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Need help with application
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Need%20help%20with%20application&In-Reply-To=%3CCACtjVkGwXxSaRCkda3DSEzuA49CjCTz_FT8sa%3DsvN%3DHuqQB39Q%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002759.html">
+   <LINK REL="Next"  HREF="002761.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Need help with application</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Need%20help%20with%20application&In-Reply-To=%3CCACtjVkGwXxSaRCkda3DSEzuA49CjCTz_FT8sa%3DsvN%3DHuqQB39Q%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Need help with application">okachi at gmail.com
+       </A><BR>
+    <I>Sun Nov 13 12:44:56 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002759.html">[mikeos-developer] Need help with application
+</A></li>
+        <LI>Next message: <A HREF="002761.html">[mikeos-developer] MikeOS 4.3 beta 7 for testing -- this is feature	freeze!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2760">[ date ]</a>
+              <a href="thread.html#2760">[ thread ]</a>
+              <a href="subject.html#2760">[ subject ]</a>
+              <a href="author.html#2760">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Nov 13, 2011 at 11:36 AM, Joshua Beck &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeosdeveloper at gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Can you add os_command_line as a system call after the
+</I>&gt;<i> existing ones in beta 7, so my program will work?
+</I>
+Not in its current state, no. Exposing this API to external programs
+is potentially a huge source of problems. os_command_line loads
+programs at 32768, so what happens if RANDOM.BIN calls
+os_command_line, which then loads a new file over where RANDOM.BIN is?
+Where do we &quot;ret&quot; back to in the end? It can get very messy.
+
+So this would be a bad move, in terms of design. It's far more
+sensible if, one day, we have a completely independent
+os_command_parse which any code (including the kernel's own CLI) can
+use. Will think about it for 4.4.
+
+Mike
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002759.html">[mikeos-developer] Need help with application
+</A></li>
+	<LI>Next message: <A HREF="002761.html">[mikeos-developer] MikeOS 4.3 beta 7 for testing -- this is feature	freeze!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2760">[ date ]</a>
+              <a href="thread.html#2760">[ thread ]</a>
+              <a href="subject.html#2760">[ subject ]</a>
+              <a href="author.html#2760">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

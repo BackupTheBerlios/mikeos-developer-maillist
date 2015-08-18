@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Problem with code...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Problem%20with%20code...&In-Reply-To=%3CBAY151-W26CC6CDDF63DE9DF6DDFF383A70%40phx.gbl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002813.html">
+   <LINK REL="Next"  HREF="002815.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Problem with code...</H1>
+    <B>Dan Barry</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Problem%20with%20code...&In-Reply-To=%3CBAY151-W26CC6CDDF63DE9DF6DDFF383A70%40phx.gbl%3E"
+       TITLE="[mikeos-developer] Problem with code...">danbarry at hotmail.co.uk
+       </A><BR>
+    <I>Mon Dec 19 23:21:13 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002813.html">[mikeos-developer] Sound Frequencies
+</A></li>
+        <LI>Next message: <A HREF="002815.html">[mikeos-developer] Problem with code...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2814">[ date ]</a>
+              <a href="thread.html#2814">[ thread ]</a>
+              <a href="subject.html#2814">[ subject ]</a>
+              <a href="author.html#2814">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hello,
+ 
+A little problem I am having...
+ 
+I have honestly spent ages looking at this code below and can't figure out what I have done wrong? It is supposed to display something that looks like a mouse...
+ 
+------------------------------------------------------------------------------------------
+; -- DRAW THE MOUSE
+ mov al, 00h   ; Make outline Black
+ mov bx, word [mouse_y1]  ; Setup Y1 Data
+ mov cx, mouse_dat  ; Move mouse Data ready to print
+ mov si, word [mouse_x1]  ; Setup X1 Data
+ call print_data   ; Call our data printing
+ jmp $    ; Hang
+ 
+; #### Input: AL=Colour, BX=Y1, CX=Data, SI=X1    ## Output: ####
+
+print_data:
+ mov word [Y1_temp], si  ; Store original X1 data here
+ mov word [Y2_temp], 0
+ mov byte [counter], 0
+ mov byte [.bit_up], 0
+ mov byte [colour_temp], al
+ 
+.repeat:
+ mov word [.si_temp], si
+ mov byte [.bit_up], 0
+ mov si, cx
+ lodsb
+ mov si, cx
+ mov cl, byte [counter]
+ shl al, cl
+ cmp al, 127
+ jg .bit_high
+ 
+.continue_1:
+ inc cl
+ cmp cl, 8
+ je .next_byte
+ 
+.continue_3:
+ mov byte [counter], cl
+ mov cx, si
+ mov si, word [.si_temp]
+ mov ax, 320   ; 320 pixels per line
+ mul bx    ; Multiply this by how many rows down we start
+ mov word [X1_temp], si
+ add si, ax
+ mov word [width_temp], si
+ mov ax, dx
+ add ax, 0xA000   ; Add A000h so that we are where video memory is
+ mov es, ax
+ mov di, si
+ 
+ mov al, byte [.bit_up]
+ cmp al, 255
+ je .print_pixel
+ 
+.continue_2:
+ mov si, word [X1_temp]
+ mov dx, word [Y1_temp]
+ add dx, 4
+ cmp si, dx
+ je .next_check
+ inc si
+ jmp .repeat
+ 
+.next_check:
+ mov dx, word [Y2_temp]
+ cmp dx, 6
+ je .done
+ inc dx
+ mov word [Y2_temp], dx
+ mov si, word [Y1_temp]
+ inc bx
+ jmp .repeat
+ 
+.next_byte:
+ mov cl, 0
+ inc si
+ jmp .continue_3
+ 
+.bit_high:
+ mov byte [.bit_up], 255
+ jmp .continue_1
+ 
+.print_pixel:
+ mov al, byte [colour_temp] ; Set up Colour
+ stosb
+ jmp .continue_2
+ 
+.done: 
+ ret
+.si_temp dw 0
+.bit_up  db 0
+ 
+; Variables #############################################
+ 
+colour_temp db 0
+X1_temp  dw 0
+Y1_temp  dw 0
+width_temp dw 0
+Y2_temp  dw 0
+mouse_x1 dw 160
+mouse_y1 dw 100
+counter  db 0
+ 
+; Printable Data (5x7) #############################################
+ 
+mouse_dat db 10000110b, 00101001b, 00101000b, 11011011b, 00000000b
+------------------------------------------------------------------------------------------
+ 
+I am terribly sorry about the formatting but hotmail will not let me do it any other way. I know it is very close to working - but I have missed something extremely small.
+ 
+Any help is GREATLY appreciated,
+ 
+Dan 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111219/152749e5/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111219/152749e5/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002813.html">[mikeos-developer] Sound Frequencies
+</A></li>
+	<LI>Next message: <A HREF="002815.html">[mikeos-developer] Problem with code...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2814">[ date ]</a>
+              <a href="thread.html#2814">[ thread ]</a>
+              <a href="subject.html#2814">[ subject ]</a>
+              <a href="author.html#2814">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

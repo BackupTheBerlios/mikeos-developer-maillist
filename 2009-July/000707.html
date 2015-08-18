@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 3.4 beta 1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-July/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%203.4%20beta%201&In-Reply-To=%3C19d8b3b00907090116u69424a03y9f1264078cbf90ab%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000706.html">
+   <LINK REL="Next"  HREF="000708.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 3.4 beta 1</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%203.4%20beta%201&In-Reply-To=%3C19d8b3b00907090116u69424a03y9f1264078cbf90ab%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 3.4 beta 1">okachi at gmail.com
+       </A><BR>
+    <I>Thu Jul  9 10:16:38 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000706.html">[mikeos-developer] MikeOS 3.4 beta 1
+</A></li>
+        <LI>Next message: <A HREF="000708.html">[mikeos-developer] MikeOS 3.4 beta 1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#707">[ date ]</a>
+              <a href="thread.html#707">[ thread ]</a>
+              <a href="subject.html#707">[ subject ]</a>
+              <a href="author.html#707">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Ian,
+
+Looks good! I'll see what I can integrate when I get back (on holiday
+at the moment).
+
+M
+
+On Wednesday, July 8, 2009, Ian Seyler &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">iseyler at gmail.com</A>&gt; wrote:
+&gt;<i> Further to my last message here is an updated os_string_strip function
+</I>&gt;<i>
+</I>&gt;<i> This version doesn't need a temporary string location (Saves 256 bytes).
+</I>&gt;<i>
+</I>&gt;<i> ; -----------------------------------------------------------------------------
+</I>&gt;<i> ; os_string_strip -- Removes specified character from a string
+</I>&gt;<i> ;&#160; IN:&#160;&#160;&#160; RSI = string location
+</I>&gt;<i> ;&#160;&#160;&#160; &#160;&#160;&#160; AL = character to remove
+</I>&gt;<i> ; OUT:&#160;&#160;&#160; Nothing. All registers preserved
+</I>&gt;<i> os_string_strip:
+</I>&gt;<i> &#160;&#160;&#160; push rsi
+</I>&gt;<i> &#160;&#160;&#160; push rdi
+</I>&gt;<i> &#160;&#160;&#160; push rbx
+</I>&gt;<i> &#160;&#160;&#160; push rax
+</I>&gt;<i>
+</I>&gt;<i> &#160;&#160;&#160; mov rdi, rsi
+</I>&gt;<i>
+</I>&gt;<i> &#160;&#160;&#160; mov bl, al&#160;&#160;&#160; &#160;&#160;&#160; ; copy the char into BL since LODSB and STOSB use AL
+</I>&gt;<i> nextchar:
+</I>&gt;<i> &#160;&#160;&#160; lodsb
+</I>&gt;<i> &#160;&#160;&#160; stosb
+</I>&gt;<i> &#160;&#160;&#160; cmp al, 0x00&#160;&#160;&#160; ; check if we reached the end of the string
+</I>&gt;<i> &#160;&#160;&#160; je finish&#160;&#160;&#160; &#160;&#160;&#160; ; if so bail out
+</I>&gt;<i> &#160;&#160;&#160; cmp al, bl&#160;&#160;&#160; &#160;&#160;&#160; ; check to see if the character we read is the interesting char
+</I>&gt;<i> &#160;&#160;&#160; jne nextchar&#160;&#160;&#160; ; if not skip to the next character
+</I>&gt;<i>
+</I>&gt;<i> skip:&#160;&#160;&#160; &#160;&#160;&#160; &#160;&#160;&#160; &#160;&#160;&#160; ; if so the fall through to here
+</I>&gt;<i> &#160;&#160;&#160; dec rdi&#160;&#160;&#160; &#160;&#160;&#160; &#160;&#160;&#160; ; decrement RDI so we overwrite on the next pass
+</I>&gt;<i> &#160;&#160;&#160; jmp nextchar
+</I>&gt;<i>
+</I>&gt;<i> finish:
+</I>&gt;<i> &#160;&#160;&#160; pop rax
+</I>&gt;<i> &#160;&#160;&#160; pop rbx
+</I>&gt;<i> &#160;&#160;&#160; pop rdi
+</I>&gt;<i> &#160;&#160;&#160; pop rsi
+</I>&gt;<i> &#160;&#160;&#160; ret
+</I>&gt;<i> ; -----------------------------------------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i> Also a jump can be saved in my os_string_chomp function by changing:
+</I>&gt;<i>
+</I>&gt;<i> &#160; &#160; &#160;&#160; jne os_string_chomp_foundend
+</I>&gt;<i>  &#160; &#160; &#160; &#160;jmp os_string_chomp_findend
+</I>&gt;<i>
+</I>&gt;<i> to this:
+</I>&gt;<i>
+</I>&gt;<i> &#160; &#160; &#160;&#160; je os_string_chomp_findend
+</I>&gt;<i>
+</I>&gt;<i> -Ian
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On Mon, Jun 29, 2009 at 3:50 PM, M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt; wrote:
+</I>&gt;<i> Hi all,
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://prdownload.berlios.de/mikeos/mikeos-3.4b1.zip">http://prdownload.berlios.de/mikeos/mikeos-3.4b1.zip</A>
+</I>&gt;<i>
+</I>&gt;<i> It's not particularly exciting, but in this release, the BASIC
+</I>&gt;<i> interpreter is now rolled into the kernel. So in the app launcher or
+</I>&gt;<i> at the command line, you can run .BAS programs just as you would .BIN.
+</I>&gt;<i> I've renamed TEST.BAS to EXAMPLE.BAS, so you can run it just by
+</I>&gt;<i> entering 'EXAMPLE' at the command line.
+</I>&gt;<i>
+</I>&gt;<i> I've also made sure that EXAMPLE.BAS is copied to the disk (as per
+</I>&gt;<i> Takayoshi's fix) on OpenBSD, OS X and Windows.
+</I>&gt;<i>
+</I>&gt;<i> Next step is to add more commands to BASIC, so that people can write
+</I>&gt;<i> simple games! MOVE and GETKEY are coming up...
+</I>&gt;<i>
+</I>&gt;<i> M
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Mike Saunders
+</I>&gt;<i> <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000706.html">[mikeos-developer] MikeOS 3.4 beta 1
+</A></li>
+	<LI>Next message: <A HREF="000708.html">[mikeos-developer] MikeOS 3.4 beta 1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#707">[ date ]</a>
+              <a href="thread.html#707">[ thread ]</a>
+              <a href="subject.html#707">[ subject ]</a>
+              <a href="author.html#707">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

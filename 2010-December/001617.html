@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] os_write_file
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20os_write_file&In-Reply-To=%3C20101212105738.5PNT5.17400.root%40web11-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001622.html">
+   <LINK REL="Next"  HREF="001620.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] os_write_file</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20os_write_file&In-Reply-To=%3C20101212105738.5PNT5.17400.root%40web11-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] os_write_file">wisecracker at tesco.net
+       </A><BR>
+    <I>Sun Dec 12 11:57:38 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001622.html">[mikeos-developer] os_write_file
+</A></li>
+        <LI>Next message: <A HREF="001620.html">[mikeos-developer] A useful book...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1617">[ date ]</a>
+              <a href="thread.html#1617">[ thread ]</a>
+              <a href="subject.html#1617">[ subject ]</a>
+              <a href="author.html#1617">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Matthew...
+
+&gt;<i> I'm spending a lot of time learning assembly, and I just
+</I>&gt;<i> learned/figured out that 'times' is multiply (pretty obvious, but
+</I>&gt;<i> still different than a compiled language).
+</I>
+You should really get to grips with assembl(er)(y) first by experimenting
+ON top an OS not IN an OS.
+
+Take MS-DOS for example that has Assemblers that run ON top of it.
+
+E.G. the ad86 combination.
+
+Then try writing code to work under MS-DOS using MikeOS restrictions
+so that the tools are always available help in your bug tracing.
+
+Make the programs simple so as to understand what is going on.
+
+Even IF the program IS working use MS-DOS`s DEBUG.EXE and step
+through the code line by line to see what all of the registers are doing.
+
+This might be a guideline:-
+
+DATA REGISTERS.
+AX == Accumulator.
+BX == Base.
+CX == Counter.
+DX == Data.
+
+POINTER + INDEX REGISTERS.
+SP == Stack Pointer.
+BP == Base Pointer.
+SI == Source Index.
+DI == Destination Index.
+
+SEGMENT REGISTERS
+CS == Code Segment.
+DS == Data Segment.
+SS == Stack Segment.
+ES == Extended Segment.
+(Note, FS and GS do not exist in PURE REAL MODE only from 80286 and above.)
+
+OTHER REGISTERS.
+IP == Instruction Pointer, (PC == Program Counter in 680x0.)
+Status Flags == Note, a very important register to observe on conditional
+branching when debugging.
+
+IGNORE all MS-DOS interrupts as MikeOS has no concept of them.
+
+LBNL, don`t run before you can walk.
+
+Hope this helps.
+
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+<A HREF="http://homepages.tesco.net/wisecracker/">http://homepages.tesco.net/wisecracker/</A>
+
+<A HREF="http://main.aminet.net/search?readme=wisecracker">http://main.aminet.net/search?readme=wisecracker</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001622.html">[mikeos-developer] os_write_file
+</A></li>
+	<LI>Next message: <A HREF="001620.html">[mikeos-developer] A useful book...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1617">[ date ]</a>
+              <a href="thread.html#1617">[ thread ]</a>
+              <a href="subject.html#1617">[ subject ]</a>
+              <a href="author.html#1617">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

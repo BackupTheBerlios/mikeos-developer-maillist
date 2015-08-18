@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] A quick question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20quick%20question&In-Reply-To=%3C19d8b3b00911171354g21eef37uf2716b765679a54d%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000734.html">
+   <LINK REL="Next"  HREF="000743.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] A quick question</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20quick%20question&In-Reply-To=%3C19d8b3b00911171354g21eef37uf2716b765679a54d%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] A quick question">okachi at gmail.com
+       </A><BR>
+    <I>Tue Nov 17 22:54:10 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000734.html">[mikeos-developer] A quick question
+</A></li>
+        <LI>Next message: <A HREF="000743.html">[mikeos-developer] A quick question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#735">[ date ]</a>
+              <a href="thread.html#735">[ thread ]</a>
+              <a href="subject.html#735">[ subject ]</a>
+              <a href="author.html#735">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> This leads me to my question, how would one parse arguments to a programme that
+</I>&gt;<i> is being run?
+</I>
+I've been thinking about this too, for a future version of MikeOS. My
+idea is this:
+
+* The CLI takes a string
+* It parses it into multiple chunks (there's an os_string_parse call
+in MikeOS that could do this)
+* It writes subsequent arguments after the program name to a specific
+point in RAM
+* You then create a new system call, eg os_get_args, that takes AX as
+the argument to retrieve, and it returns a pointer to the string
+
+os_string_parse in MikeOS is pretty rudimentary (essentially replacing
+spaces with zero-termination to make strings within a string) but it
+could be used in my case. If you're using multiple segments it might
+be more complicated and my idea may not be suitable. But it might
+help!
+
+Have you got a website or anything for COS? I'll link to it on the
+MikeOS site if so.
+
+&gt;<i> PS: My apologies if this is not the appropriate place to pose this question
+</I>
+No need to apologise :-) The more x86 real mode OS dev discussion here
+the better, I think -
+we're all working with the same tech and languages, and have similar
+goals. I like the OSDev.org forums but 99% of stuff is about
+(understandably) C++ kernels, protected mode etc. All questions
+relating to the cheerfully bare-metal real mode world of OS
+development are welcome here :-)
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000734.html">[mikeos-developer] A quick question
+</A></li>
+	<LI>Next message: <A HREF="000743.html">[mikeos-developer] A quick question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#735">[ date ]</a>
+              <a href="thread.html#735">[ thread ]</a>
+              <a href="subject.html#735">[ subject ]</a>
+              <a href="author.html#735">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

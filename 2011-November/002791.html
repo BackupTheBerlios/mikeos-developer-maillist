@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Mouse problems
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Mouse%20problems&In-Reply-To=%3CBAY151-W3F02D95A9D7B8C9370FA183B30%40phx.gbl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002786.html">
+   <LINK REL="Next"  HREF="002787.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Mouse problems</H1>
+    <B>Dan Barry</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Mouse%20problems&In-Reply-To=%3CBAY151-W3F02D95A9D7B8C9370FA183B30%40phx.gbl%3E"
+       TITLE="[mikeos-developer] Mouse problems">danbarry at hotmail.co.uk
+       </A><BR>
+    <I>Tue Nov 29 17:12:28 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002786.html">[mikeos-developer] Mouse problems
+</A></li>
+        <LI>Next message: <A HREF="002787.html">[mikeos-developer] A preview of what I'm working on!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2791">[ date ]</a>
+              <a href="thread.html#2791">[ thread ]</a>
+              <a href="subject.html#2791">[ subject ]</a>
+              <a href="author.html#2791">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Troy,
+ 
+First things first - thanks for replying.
+ 
+&gt;<i> There seems to be some ISR functions under int 15h (AX=C200 through 
+</I>&gt;<i> C209) that handle setup and initialization of the mouse in a way the 
+</I>&gt;<i> BIOS feels comfortable with. I'd advise against using C208 and C209 
+</I>&gt;<i> though since they're not supported by all BIOSes (IBM classifies them as 
+</I>&gt;<i> optional). 
+</I> 
+Totally agree with not using it - looked at this page or similar before. It's okay some bioses saying they will offer this feature, but to be totally honest unless the bios is going to use it then it is pretty much useless to anybody. The amount of code you would need to test if it exists, and then act if it doesn't is far greater than just writing your own (at least that's the conclusion I come to.)
+ 
+&gt;<i> Maybe you could find some way to use these to set up a 
+</I>&gt;<i> &quot;driver&quot; of sorts instead of continually polling the keyboard (which I 
+</I>&gt;<i> assume takes a fair bit of time in comparison to waiting on an interrupt 
+</I>&gt;<i> of sorts.)
+</I>
+Again I totally agree, but I was hoping to get something working before doing so. If I can't even get the keyboard and mouse to respond accordingly then it is either going to fail being polled, or interupted. I was also looking at doing all of the interupts in one hit - once I've got all of my features sorted so that I can make the code as efficient as possible.
+ 
+&gt;<i> I'm also seeing if I can come up with a solution for your problem. I'll 
+</I>&gt;<i> let you know if I find anything. In the meantime, go nuts!
+</I>
+Thanks very much. I am struggling to find a good tutorial on how to program a ps/2 mouse in general. Every one I have looked at contridicts another... Some say do it one way - some another. I wouldn't be surprised if half of the people writing the code even know if it'll work - I've seen so many that have needed correcting after original writing. If I can find a way of doing it correctly (and get it working) it would probably be a good idea to write a little tutorial - aimed mainly at NASM but with full explanation so that it could be used with other programming languages... I suppose that would cause the problem as where to put it... :) Cue a possible MikeOS mini Wiki maybe???
+ 
+Again thanks for your time,
+ 
+Dan 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111129/d6862287/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111129/d6862287/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002786.html">[mikeos-developer] Mouse problems
+</A></li>
+	<LI>Next message: <A HREF="002787.html">[mikeos-developer] A preview of what I'm working on!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2791">[ date ]</a>
+              <a href="thread.html#2791">[ thread ]</a>
+              <a href="subject.html#2791">[ subject ]</a>
+              <a href="author.html#2791">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] On the cho(m)p functions
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20On%20the%20cho%28m%29p%20functions&In-Reply-To=%3Cb5aca8070901120700i33bdc078q65a2176565af710b%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000612.html">
+   <LINK REL="Next"  HREF="000615.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] On the cho(m)p functions</H1>
+    <B>Hiato</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20On%20the%20cho%28m%29p%20functions&In-Reply-To=%3Cb5aca8070901120700i33bdc078q65a2176565af710b%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] On the cho(m)p functions">hiato1 at gmail.com
+       </A><BR>
+    <I>Mon Jan 12 16:00:02 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000612.html">[mikeos-developer] libmikeos-0.2.0 released
+</A></li>
+        <LI>Next message: <A HREF="000615.html">[mikeos-developer] On the cho(m)p functions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#614">[ date ]</a>
+              <a href="thread.html#614">[ thread ]</a>
+              <a href="subject.html#614">[ subject ]</a>
+              <a href="author.html#614">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I couldn't help noticing that the chomp function is rather long and
+slightly difficult to follow, so I took it upon myself to write
+separate functions for strip left,right and both. That also had the
+side effect of creating a potentially useful function string reverse.
+Either way, here are my replacements for your function, feel free to
+ignore them if there is some other reason. I have included in this
+email an attachment with the above-mentioned functions, as well as a
+tiny modification on my original into-to-str function. I have now
+tested and confirmed it to work for values in the range -4367..4367,
+which I believe to be the valid range for two's compliment, 16 bit.
+The modification was only the swapping on two lines.
+
+Tslil
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: temp.asm
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20090112/c6e898c0/attachment.ksh">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20090112/c6e898c0/attachment.ksh</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000612.html">[mikeos-developer] libmikeos-0.2.0 released
+</A></li>
+	<LI>Next message: <A HREF="000615.html">[mikeos-developer] On the cho(m)p functions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#614">[ date ]</a>
+              <a href="thread.html#614">[ thread ]</a>
+              <a href="subject.html#614">[ subject ]</a>
+              <a href="author.html#614">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

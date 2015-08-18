@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] ORG
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20ORG&In-Reply-To=%3CSNT123-W6428C4600833581EA91AE7AF0D0%40phx.gbl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001732.html">
+   <LINK REL="Next"  HREF="001734.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] ORG</H1>
+    <B>Muzaffar Auhammud</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20ORG&In-Reply-To=%3CSNT123-W6428C4600833581EA91AE7AF0D0%40phx.gbl%3E"
+       TITLE="[mikeos-developer] ORG">muzhacker at scalux.tk
+       </A><BR>
+    <I>Sun Jan  9 20:04:01 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001732.html">[mikeos-developer] Loading files off the disk
+</A></li>
+        <LI>Next message: <A HREF="001734.html">[mikeos-developer] ORG
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1733">[ date ]</a>
+              <a href="thread.html#1733">[ thread ]</a>
+              <a href="subject.html#1733">[ subject ]</a>
+              <a href="author.html#1733">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+What does the ORG instruction actually means? I've made a bootloader to load the kernel into 1000h:0000h 
+
+1000h is the segment and 0000h is the offset. After setting all the correct parameters for loading a file on a disk, I used jmp 0000h:1000h instead of 1000h:0000h and It won't load the file. (it will load if it is the reverse). I've read that they both relate to the same memory location. Why it don't work then?
+
+And what is the role of ORG in nasm? I've tried settings ORG to different values and the kernel is still being loaded. wasn't it supposed to define the segment?
+ 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110109/71ba274e/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110109/71ba274e/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001732.html">[mikeos-developer] Loading files off the disk
+</A></li>
+	<LI>Next message: <A HREF="001734.html">[mikeos-developer] ORG
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1733">[ date ]</a>
+              <a href="thread.html#1733">[ thread ]</a>
+              <a href="subject.html#1733">[ subject ]</a>
+              <a href="author.html#1733">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

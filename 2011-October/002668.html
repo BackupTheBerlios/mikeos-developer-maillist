@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Future of MikeOS?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Future%20of%20MikeOS%3F&In-Reply-To=%3CCAPRjAGjeOVBpk2pm3-5ZM0JauC%2B9wWUKzaBm9F_-2MOgHi8P%2BQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002667.html">
+   <LINK REL="Next"  HREF="002669.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Future of MikeOS?</H1>
+    <B>Paulo V</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Future%20of%20MikeOS%3F&In-Reply-To=%3CCAPRjAGjeOVBpk2pm3-5ZM0JauC%2B9wWUKzaBm9F_-2MOgHi8P%2BQ%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Future of MikeOS?">paulomobilemail at gmail.com
+       </A><BR>
+    <I>Mon Oct 17 11:14:08 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002667.html">[mikeos-developer] Future of MikeOS?
+</A></li>
+        <LI>Next message: <A HREF="002669.html">[mikeos-developer] Future of MikeOS?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2668">[ date ]</a>
+              <a href="thread.html#2668">[ thread ]</a>
+              <a href="subject.html#2668">[ subject ]</a>
+              <a href="author.html#2668">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+UEFI is already here and at work we have been
+using boards that have both traditional BIOS
+and UEFI for the past 2 years in assorted projects.
+Most new Intel mobos have BIOS and UEFI
+as a standard.
+
+The way I read it is that for at least a while, PCs
+will come out with BIOS and UEFI and the user
+can simply select which one it should boot from.
+For backward compatibility reasons, when ever
+BIOS boot is enabled, the PC will always start
+in RM16.
+
+Quote from <A HREF="http://www.uefi.org/about/">http://www.uefi.org/about/</A>
+&quot;Does UEFI completely replace a PC BIOS?
+
+No. While UEFI uses a different interface for
+&quot;boot services&quot; and &quot;runtime services&quot;,
+some platform firmware must perform the functions
+BIOS uses for system configuration
+(a.k.a. &quot;Power On Self Test&quot; or &quot;POST&quot;) and Setup.
+UEFI does not specify how POST &amp; Setup are implemented.&quot;
+
+UEFI also allows the OS to rely on EFI for
+basic graphics and network functions until
+OS specific drivers are loaded.
+
+EFI provides a shell environment and this shell can be used
+to execute other EFI applications.
+See <A HREF="http://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface">http://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface</A>
+
+So it's not all doom and gloom as UEFI does
+have support for disk access, basic video drivers
+and HID support (keyboard and mouse).
+Furthermore, the native UEFI format is 32 bit PE
+which is very similar to the Windows DLL format.
+
+For more info on writing/compiling UEFI code:
+<A HREF="http://wiki.osdev.org/UEFI">http://wiki.osdev.org/UEFI</A>
+
+Another advantage of (U)EFI is the ability to specify
+which device &quot;apps&quot; should be run from without
+the need of bootloaders such as GRUB and the like.
+
+Yes, if someone wants to do something really
+fancy, some &quot;drivers&quot; will be required which
+could be unique to a mobo or family of mobos
+but I suspect that once UEFI becomes more
+mainstream, manufacturers themselves will
+publish some and since the format is PE,
+it will be relatively easy to interface to them.
+Although it could get messy, the situation
+will be similar to that of Windows users
+having to get certain drivers
+if they want more than the basic resolution
+for say a video card.
+Any software that then wants to write or
+read to the video card would then go via
+the API of that driver.
+
+So perhaps the question should be, when
+will we see/start a MikeOS UEFI port?
+
+Paulo.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111017/ce8418cb/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111017/ce8418cb/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002667.html">[mikeos-developer] Future of MikeOS?
+</A></li>
+	<LI>Next message: <A HREF="002669.html">[mikeos-developer] Future of MikeOS?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2668">[ date ]</a>
+              <a href="thread.html#2668">[ thread ]</a>
+              <a href="subject.html#2668">[ subject ]</a>
+              <a href="author.html#2668">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

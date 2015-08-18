@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] GUI layer for applications
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-March/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20GUI%20layer%20for%20applications&In-Reply-To=%3CCAEz6_zjE6o0zEx-o-Q_3YSrThjxsF1WCcLAOBTy9a2%3D2fyAAtg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003011.html">
+   <LINK REL="Next"  HREF="003000.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] GUI layer for applications</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20GUI%20layer%20for%20applications&In-Reply-To=%3CCAEz6_zjE6o0zEx-o-Q_3YSrThjxsF1WCcLAOBTy9a2%3D2fyAAtg%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] GUI layer for applications">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Sun Mar 25 13:53:18 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003011.html">[mikeos-developer] GUI layer for applications
+</A></li>
+        <LI>Next message: <A HREF="003000.html">[mikeos-developer] GUI layer for applications
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2999">[ date ]</a>
+              <a href="thread.html#2999">[ thread ]</a>
+              <a href="subject.html#2999">[ subject ]</a>
+              <a href="author.html#2999">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>Yes, well maybe the kernel could set-up directly changing system calls
+</I>&gt;<i>(through a binary or else methods) If a multi-tasking thing eventually gets
+</I>&gt;<i>implemented for this, the old apps should still be able to access the GUI.
+</I>&gt;<i>(or at least have a window, perhaps moveable)
+</I>
+Why? It's easy to just change to location of them.
+Just do:
+mov si, os_print_string
+inc si
+mov ax, my_print_string
+stosw
+
+Did someone say multi-tasking?
+My new killer app, UltraTasker is attached (untested).
+
+&gt;<i>Multitasking...ouch! It's a pain in protected mode, the BIOS doesn't
+</I>&gt;<i>support (I think at least), you'd have to write drivers for a driver...am I
+</I>&gt;<i>over-complicating this?
+</I>
+Yes, just a bit.
+ I hooked mine onto interrupt 1Ch, it gets called everytime the system
+clock &quot;ticks&quot;. The API is hooked to interrupt 22h with 10 API calls so far.
+
+Can everyone stop saying GUI, it's a TUI    :-)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: taskmgr.asm
+Type: application/octet-stream
+Size: 9117 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120325/28739c03/attachment.obj">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120325/28739c03/attachment.obj</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003011.html">[mikeos-developer] GUI layer for applications
+</A></li>
+	<LI>Next message: <A HREF="003000.html">[mikeos-developer] GUI layer for applications
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2999">[ date ]</a>
+              <a href="thread.html#2999">[ thread ]</a>
+              <a href="subject.html#2999">[ subject ]</a>
+              <a href="author.html#2999">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

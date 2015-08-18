@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Mouse problems
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Mouse%20problems&In-Reply-To=%3CBAY151-W500CD2E56E95AAA00A3A9683B20%40phx.gbl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002784.html">
+   <LINK REL="Next"  HREF="002786.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Mouse problems</H1>
+    <B>Dan Barry</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Mouse%20problems&In-Reply-To=%3CBAY151-W500CD2E56E95AAA00A3A9683B20%40phx.gbl%3E"
+       TITLE="[mikeos-developer] Mouse problems">danbarry at hotmail.co.uk
+       </A><BR>
+    <I>Mon Nov 28 20:38:45 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002784.html">[mikeos-developer] Mouse problems
+</A></li>
+        <LI>Next message: <A HREF="002786.html">[mikeos-developer] Mouse problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2785">[ date ]</a>
+              <a href="thread.html#2785">[ thread ]</a>
+              <a href="subject.html#2785">[ subject ]</a>
+              <a href="author.html#2785">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Thankyou very much, I will definately have to implement this.
+
+&gt;<i> Well, the problem it that this is a potentially infinite loop.
+</I>&gt;<i> What if the mouse wasn't producing the right output, what if there was
+</I>&gt;<i> no mouse connected?
+</I> 
+I wasn't worried about that for the moment, I was literally just trying to get it to work - but thanks for the feedback.
+
+&gt;<i> PS I found this mouse driver on the OSDEV forums:
+</I>&gt;<i> <A HREF="http://forum.osdev.org/viewtopic.php?t=24277">http://forum.osdev.org/viewtopic.php?t=24277</A>
+</I>
+I've looked at this code already. The problem was that I didn't want to have a 4th or 5th button (just left click and the ability to move the mouse).
+ 
+The other problem was it wasn't commented out very well and has comments such as 'some compaq voodoo magic to enable irq12' - brilliant for understanding.
+ 
+I'm going to keep searching, although that would do the trick. I have adjusted the code as below and can now get output - but it seems to be arriving in the wrong order?!?!?!?
+ 
+--------------------------------------------
+; Mouse Calls #############################################
+mouse_start:
+   pusha
+ 
+   call mouse_wait
+   mov al, 0xA8
+   out 0x64, al   ; Intialise mouse
+ 
+   call mouse_wait
+   mov al, 0x20   ; Get compaq status byte
+   out 0x64, al
+ 
+   call mouse_wait
+   in al, 0x60   ; Retrieve compaq status byte
+   or al, 2
+   xor cx, cx
+   mov cl, al
+   mov al, 0x60
+   out 0x64, al
+   mov al, cl
+   out 0x60, al
+   call mouse_wait
+
+   mov dl, 0xF6   ; Set the mouse into defualt settings
+   call mouse_write
+   call mouse_read
+ 
+; ## May not be needed below 'chunk', as it is for stream mode only.
+   mov dl, 0xF4   ; Enable Data Reporting
+   call mouse_write
+   call mouse_read
+ 
+   mov dl, 0xF0   ; Enable Mouse (Remote Mode)
+   call mouse_write
+   call mouse_read
+ 
+   popa
+   ret
+ 
+mouse_wait:
+   in al, 0x64   ; Read from keyboard controller
+   test al, 1   ; Processing data?
+   jnz mouse_wait   ; Jump if not able to write
+ 
+   in al, 0x64   ; Read from keyboard controller
+   test al, 2   ; Processing data?
+   jnz mouse_wait   ; Jump if not able to read
+ 
+   ret
+ 
+; #### Input:       ## Output: DL=Byte ####
+mouse_read:
+   call mouse_wait
+   in al, 0x60
+   mov dl, al
+ 
+.done:
+   ret
+ 
+; #### Input: DL=Byte(Input)    ## Output:  ####
+mouse_write:
+   call mouse_wait
+   mov al, 0xD4
+   out 0x64, al
+ 
+   call mouse_wait
+   mov al, dl
+   out 0x60, al
+ 
+   ret
+ 
+--------------------------------------
+ 
+I'm requesting the data packet with:
+ 
+----------------------------------------
+ 
+ mov dl, 0xEB
+ call mouse_write
+ 
+ call mouse_read   ; Read Acknowledge byte
+ 
+ call mouse_read   ; Read first byte
+ mov byte [mouse_byte1], dl
+ 
+ call mouse_read   ; Read second byte
+ mov byte [mouse_byte2], dl
+ 
+ call mouse_read   ; Read third byte
+ mov byte [mouse_byte3], dl
+ 
+--------------------------------------------------
+ 
+I get a different result dependant on what machine I use - sometimes I am able to see if the mouse is clicking, sometimes not. The mouse also hangs, and then comes back after 10 or so seconds. I also can't seem to get the mouse to read the difference between the X byte, and the Y byte - but it does detect movement.
+ 
+I can't thank you enough for taking the time to reply. It's been a real &quot;pull my hair out&quot; sort of problem. The ridiculous thing is I have been able to do everything else I want perfectly fine, butthis just doesn't appear to work for love nor money.
+ 
+Dan 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111128/41fb5d3a/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111128/41fb5d3a/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002784.html">[mikeos-developer] Mouse problems
+</A></li>
+	<LI>Next message: <A HREF="002786.html">[mikeos-developer] Mouse problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2785">[ date ]</a>
+              <a href="thread.html#2785">[ thread ]</a>
+              <a href="subject.html#2785">[ subject ]</a>
+              <a href="author.html#2785">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

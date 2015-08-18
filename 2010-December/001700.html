@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Boot from usb and/or hard drive
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Boot%20from%20usb%20and/or%20hard%20drive&In-Reply-To=%3C20101228130212.D10AU.259878.root%40web10-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001703.html">
+   <LINK REL="Next"  HREF="001701.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Boot from usb and/or hard drive</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Boot%20from%20usb%20and/or%20hard%20drive&In-Reply-To=%3C20101228130212.D10AU.259878.root%40web10-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] Boot from usb and/or hard drive">wisecracker at tesco.net
+       </A><BR>
+    <I>Tue Dec 28 14:02:12 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001703.html">[mikeos-developer] [ANN] MikeOS translated to 32 bit protected	mode
+</A></li>
+        <LI>Next message: <A HREF="001701.html">[mikeos-developer] [BUG] os_check_for_key
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1700">[ date ]</a>
+              <a href="thread.html#1700">[ thread ]</a>
+              <a href="subject.html#1700">[ subject ]</a>
+              <a href="author.html#1700">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Matthew...
+
+&gt;<i> If so, are there (I hope) BIOS interrupts for grabbing and writing data
+</I>&gt;<i> to the USB?
+</I>
+No.
+
+STANDARD BIOS uses Interrupts 00h to 1Fh, and can possibly include int 4Fh.
+
+USB socket I/O doesn`t exist here BUT emulates KB and Boot systems down
+to LEGACY levels, this icludes original I/O addresses and to PS/2 I/O also;
+the Mouse can also be supported, down to PS/2 levels.
+
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+<A HREF="http://homepages.tesco.net/wisecracker/">http://homepages.tesco.net/wisecracker/</A>
+
+<A HREF="http://main.aminet.net/search?readme=wisecracker">http://main.aminet.net/search?readme=wisecracker</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001703.html">[mikeos-developer] [ANN] MikeOS translated to 32 bit protected	mode
+</A></li>
+	<LI>Next message: <A HREF="001701.html">[mikeos-developer] [BUG] os_check_for_key
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1700">[ date ]</a>
+              <a href="thread.html#1700">[ thread ]</a>
+              <a href="subject.html#1700">[ subject ]</a>
+              <a href="author.html#1700">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

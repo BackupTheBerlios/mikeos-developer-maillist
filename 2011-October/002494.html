@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Head and Tail
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Head%20and%20Tail&In-Reply-To=%3CCAEz6_zh-fgbsf2dwrXO-UZ_DMi5ykS5wHsu%2BoCB-WufUwsaU0A%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002499.html">
+   <LINK REL="Next"  HREF="002495.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Head and Tail</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Head%20and%20Tail&In-Reply-To=%3CCAEz6_zh-fgbsf2dwrXO-UZ_DMi5ykS5wHsu%2BoCB-WufUwsaU0A%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Head and Tail">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Mon Oct  3 11:19:16 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002499.html">[mikeos-developer] Problem compiling on OS X
+</A></li>
+        <LI>Next message: <A HREF="002495.html">[mikeos-developer] Head and Tail
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2494">[ date ]</a>
+              <a href="thread.html#2494">[ thread ]</a>
+              <a href="subject.html#2494">[ subject ]</a>
+              <a href="author.html#2494">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>You should compile them as bin files and it
+</I>&gt;<i>will make them even more useful.
+</I>What? How? As far as I know there is no compiler
+for MikeBASIC programs on MikeOS.
+
+&gt;<i>I quite like the CLI memory viewer idea.
+</I>
+Great, only took 50 lines and 20 minutes.
+Everything should be do-able via command line.
+I can hardly take credit for coming up with
+head and tail as original ideas.
+
+&gt;<i>For example with head and tail you could add
+</I>&gt;<i>an extra command line parameter such as '&gt;'
+</I>&gt;<i>which would mean redirect output to a file
+</I>&gt;<i>as follows:
+</I>&gt;<i>
+</I>&gt;<i>tail myfile.bas 20 &gt; myfiletoo.txt
+</I>
+Yes, it would require a bit of work but it's a
+good idea! At the moment that would print 20 lines
+not 20 bytes though, since we only handle text files.
+Unfortunately we cannot overwrite files. This is the
+reason behind limitations on this in ASCII Artist
+and Memory Manipulator. The programs will present an
+error message, like &quot;Cannot create file.&quot;.
+If you have a file called foo.bar and you do
+&quot;save foo.bar 12345&quot; then it will set R to 1 and
+not do the save. This is the same as an illegal filename
+so my programs will treat it in the same way.
+
+If you were to fix this problem, so we could overwrite
+files then I would create this, but right now I can't.
+Maybe we could have an command to verify if a file exists.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002499.html">[mikeos-developer] Problem compiling on OS X
+</A></li>
+	<LI>Next message: <A HREF="002495.html">[mikeos-developer] Head and Tail
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2494">[ date ]</a>
+              <a href="thread.html#2494">[ thread ]</a>
+              <a href="subject.html#2494">[ subject ]</a>
+              <a href="author.html#2494">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

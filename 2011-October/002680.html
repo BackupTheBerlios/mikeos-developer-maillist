@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Check my Assembly
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Check%20my%20Assembly&In-Reply-To=%3C1136303222-1318936799-cardhu_decombobulator_blackberry.rim.net-2130566212-%40b25.c15.bise6.blackberry%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002679.html">
+   <LINK REL="Next"  HREF="002681.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Check my Assembly</H1>
+    <B>jtokarchukalerts at gmail.com</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Check%20my%20Assembly&In-Reply-To=%3C1136303222-1318936799-cardhu_decombobulator_blackberry.rim.net-2130566212-%40b25.c15.bise6.blackberry%3E"
+       TITLE="[mikeos-developer] Check my Assembly">jtokarchukalerts at gmail.com
+       </A><BR>
+    <I>Tue Oct 18 13:19:59 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002679.html">[mikeos-developer] Check my Assembly
+</A></li>
+        <LI>Next message: <A HREF="002681.html">[mikeos-developer] Check my Assembly
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2680">[ date ]</a>
+              <a href="thread.html#2680">[ thread ]</a>
+              <a href="subject.html#2680">[ subject ]</a>
+              <a href="author.html#2680">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Unreal mode on the table? Or no
+Sent from my BlackBerry&#174; smartphone on the MTS High Speed Mobility Network
+
+-----Original Message-----
+From: M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+Sender: <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer-bounces at lists.berlios.de</A>
+Date: Tue, 18 Oct 2011 11:45:08 
+To: MikeOS (and similar OS) developers&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+Reply-To: &quot;MikeOS \(and similar OS\) developers&quot;
+	&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+Subject: Re: [mikeos-developer] Check my Assembly
+
+On Tue, Oct 18, 2011 at 11:29 AM, Joshua Beck &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeosdeveloper at gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> call os_get_file_list
+</I>&gt;<i> mov di, 65432
+</I>&gt;<i> stosw
+</I>
+Yep, that should store the result in AX into mem location 65432
+
+&gt;<i> Also, in my assembly guide I've been learning about segments, would
+</I>&gt;<i> it be possible to put the BASIC code in, say 3000h?
+</I>
+Possible, but much, much more complicated and messy. You have one
+segment register for code, another for data, and jumping around
+between segments is NOT fun. So that's not going to happen. I'd rather
+focus on making the BASIC implementation leaner rather than turning
+MikeOS into a segment-handling mess.
+
+M
+_______________________________________________
+mikeos-developer mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002679.html">[mikeos-developer] Check my Assembly
+</A></li>
+	<LI>Next message: <A HREF="002681.html">[mikeos-developer] Check my Assembly
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2680">[ date ]</a>
+              <a href="thread.html#2680">[ thread ]</a>
+              <a href="subject.html#2680">[ subject ]</a>
+              <a href="author.html#2680">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

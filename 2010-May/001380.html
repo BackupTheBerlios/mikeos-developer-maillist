@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] OS_PAUSE
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20OS_PAUSE&In-Reply-To=%3CAANLkTin84mu7vOYmTmBiYdPICDrWQF4T0M4q2mb-_CdD%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001376.html">
+   <LINK REL="Next"  HREF="001381.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] OS_PAUSE</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20OS_PAUSE&In-Reply-To=%3CAANLkTin84mu7vOYmTmBiYdPICDrWQF4T0M4q2mb-_CdD%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] OS_PAUSE">okachi at gmail.com
+       </A><BR>
+    <I>Wed May 26 10:57:10 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001376.html">[mikeos-developer] OS_PAUSE
+</A></li>
+        <LI>Next message: <A HREF="001381.html">[mikeos-developer] OS_PAUSE
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1380">[ date ]</a>
+              <a href="thread.html#1380">[ thread ]</a>
+              <a href="subject.html#1380">[ subject ]</a>
+              <a href="author.html#1380">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Paulo, have you had a chance to try Mike Gonta's suggestion (below)?
+That'll help us to narrow down the exact problem here. Ta!
+
+M
+
+
+
+&gt;<i> Hi Paulo,
+</I>&gt;<i>
+</I>&gt;<i> Try fixing &gt;&gt;&gt;
+</I>&gt;<i>
+</I>&gt;<i> ; ------------------------------------------------------------------
+</I>&gt;<i> ; os_pause -- Delay execution for specified microseconds
+</I>&gt;<i> ; IN: AX = number of tenths of a second to wait (so 10 = 1 second)
+</I>&gt;<i>
+</I>&gt;<i> os_pause:
+</I>&gt;<i> pusha
+</I>&gt;<i>
+</I>&gt;<i> mov bx, ax
+</I>&gt;<i>
+</I>&gt;<i> mov cx, 1h
+</I>&gt;<i> mov dx, 86A0h
+</I>&gt;<i> mov ax, 0
+</I>&gt;<i> ; mov ah, 86h &#160; &#160; &#160; &#160; &#160; &#160;&lt;&lt;&lt;&lt;&lt; remove from here
+</I>&gt;<i>
+</I>&gt;<i> .loop:
+</I>&gt;<i> mov ah, 86h &#160; &#160; &#160; &#160; &#160; &#160; ;&lt;&lt;&lt;&lt; put here instead
+</I>&gt;<i> int 15h
+</I>&gt;<i> dec bx
+</I>&gt;<i> jne .loop
+</I>&gt;<i>
+</I>&gt;<i> popa
+</I>&gt;<i> ret
+</I>
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001376.html">[mikeos-developer] OS_PAUSE
+</A></li>
+	<LI>Next message: <A HREF="001381.html">[mikeos-developer] OS_PAUSE
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1380">[ date ]</a>
+              <a href="thread.html#1380">[ thread ]</a>
+              <a href="subject.html#1380">[ subject ]</a>
+              <a href="author.html#1380">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

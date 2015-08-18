@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] (no subject)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20%28no%20subject%29&In-Reply-To=%3C19d8b3b01001200217r5a2f9aacx9c76c9dcda3ee6ca%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000907.html">
+   <LINK REL="Next"  HREF="000909.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] (no subject)</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20%28no%20subject%29&In-Reply-To=%3C19d8b3b01001200217r5a2f9aacx9c76c9dcda3ee6ca%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] (no subject)">okachi at gmail.com
+       </A><BR>
+    <I>Wed Jan 20 11:17:45 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000907.html">[mikeos-developer] (no subject)
+</A></li>
+        <LI>Next message: <A HREF="000909.html">[mikeos-developer] mikeos-developer Digest, Vol 17, Issue 8
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#908">[ date ]</a>
+              <a href="thread.html#908">[ thread ]</a>
+              <a href="subject.html#908">[ subject ]</a>
+              <a href="author.html#908">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Dan,
+
+&gt;<i> Just a little question, you know when Mike OS loads the kernel into RAM, it
+</I>&gt;<i> preserves enough space for how big it is&#8230;.
+</I>
+That's not actually what happens: the first 32K of the 64K segment is
+allocated to the kernel, regardless of its size. Currently the MikeOS
+kernel assembles to around a 13K binary, so there's plenty of space
+left.
+
+&gt;<i> Well what would I have to change
+</I>&gt;<i> to make it so that the Kernel only has 1kb, and the applications are given
+</I>&gt;<i> the rest of the RAM, (excluding the buffer).
+</I>
+That entirely depends on the design of your OS. If it's like MikeOS,
+you simply begin loading programs at kernel size+8K buffer point. Of
+course, your programs will need to be ORGed to a certain point, and if
+your kernel grows your programs will stop working, hence why it's best
+to give the kernel plenty of room.
+
+If your OS is going to be very small, give 8K for the kernel and 8K
+for the buffer, so programs can begin loading at the 16K mark and
+therefore have the remaining 48K of the segment to play with.
+
+&gt;<i> As another add on, I am also trying to figure out how to use the mouse in 16
+</I>&gt;<i> bit, so has anyone got any idea how I can use the bios to do this
+</I>
+Unfortunately you can't use the BIOS solely to operate the mouse.
+There are some initialisation things as you mentioned, but ultimately
+you have to read and write bytes to the keyboard controller to handle
+PS/2 mice. (USB mice in protected mode require a USB stack, but in
+real mode the PC should emulate them as PS/2.)
+
+Ages ago I wrote a mouse driver based on these two sources:
+
+<A HREF="http://wiki.osdev.org/Mouse_Input">http://wiki.osdev.org/Mouse_Input</A>
+<A HREF="http://forum.osdev.org/viewtopic.php?t=10247">http://forum.osdev.org/viewtopic.php?t=10247</A>
+
+That has all the info you need. The latter can be converted into asm
+pretty easily. Also, see TomOS, a MikeOS spin-off project that
+includes a mouse driver:
+
+<A HREF="http://tomos.sourceforge.net">http://tomos.sourceforge.net</A>
+
+Good luck!
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000907.html">[mikeos-developer] (no subject)
+</A></li>
+	<LI>Next message: <A HREF="000909.html">[mikeos-developer] mikeos-developer Digest, Vol 17, Issue 8
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#908">[ date ]</a>
+              <a href="thread.html#908">[ thread ]</a>
+              <a href="subject.html#908">[ subject ]</a>
+              <a href="author.html#908">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

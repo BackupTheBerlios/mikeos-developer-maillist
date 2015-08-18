@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Bits 'n bobs for 3.2.1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Bits%20%27n%20bobs%20for%203.2.1&In-Reply-To=%3C19d8b3b00901280738o5bdc53dckc7eb4dbdffd6cf3%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000664.html">
+   <LINK REL="Next"  HREF="000666.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Bits 'n bobs for 3.2.1</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Bits%20%27n%20bobs%20for%203.2.1&In-Reply-To=%3C19d8b3b00901280738o5bdc53dckc7eb4dbdffd6cf3%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Bits 'n bobs for 3.2.1">okachi at gmail.com
+       </A><BR>
+    <I>Wed Jan 28 16:38:37 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000664.html">[mikeos-developer] Bits 'n bobs for 3.2.1
+</A></li>
+        <LI>Next message: <A HREF="000666.html">[mikeos-developer] Bits 'n bobs for 3.2.1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#665">[ date ]</a>
+              <a href="thread.html#665">[ thread ]</a>
+              <a href="subject.html#665">[ subject ]</a>
+              <a href="author.html#665">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 1/28/09, Hiato &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">hiato1 at gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>  Firstly, line 572 and 616, string.asm &quot; add dl, '0'     ; Snd ...&quot; Snd
+</I>&gt;<i>  should be And :P This is mostly my doing.
+</I>
+Yup, caught that before -- one of the typos I've fixed in the cleanup :-)
+
+&gt;<i>  Secondly, attached are a few procedures (for strings) that may or may
+</I>&gt;<i>  not be vaguely useful
+</I>
+Ta. I'm a bit stumped by this though:
+
+;IN AX=String CX=Index
+;OUT AX=String BX=String
+k_str_split:
+	add si,cx
+	mov byte [si],0
+	inc si
+	mov bx,si
+	dec si
+	sub si,cx
+	mov ax,si
+	ret
+
+Is this routine meant to split, for example, 'FOOBAR', 0 into 'FOO', 0
+and 'BAR', 0? The zero-termination will overwrite one of the
+characters in this case.
+
+Also, I guess the comment at the start is wrong because it appears
+that the string location is passed in SI and not AX (otherwise SI is
+undefined). You could make that shorter:
+
+;IN SI=String CX=Index
+;OUT AX=String BX=String
+k_str_split:
+	mov ax, si
+	add si,cx
+	mov byte [si],0
+	inc si
+	mov bx,si
+	ret
+
+That still doesn't solve the problem of the zero-termination
+overwriting a character though. You'd need to shift the second
+substring onwards one char for that.
+
+Meanwhile, nice work on the automatic interrupt table system! That's
+definitely way beyond the keep-everything-simple scope of MikeOS but
+I'm sure it'll make your life a lot easier.
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000664.html">[mikeos-developer] Bits 'n bobs for 3.2.1
+</A></li>
+	<LI>Next message: <A HREF="000666.html">[mikeos-developer] Bits 'n bobs for 3.2.1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#665">[ date ]</a>
+              <a href="thread.html#665">[ thread ]</a>
+              <a href="subject.html#665">[ subject ]</a>
+              <a href="author.html#665">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

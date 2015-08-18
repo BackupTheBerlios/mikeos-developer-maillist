@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Switching to protected mode
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Switching%20to%20protected%20mode&In-Reply-To=%3C059BFC2CCB2D4C71B0B1AE8023EA0444%40userfe6b65a555%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001735.html">
+   <LINK REL="Next"  HREF="001738.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Switching to protected mode</H1>
+    <B>Mike Gonta</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Switching%20to%20protected%20mode&In-Reply-To=%3C059BFC2CCB2D4C71B0B1AE8023EA0444%40userfe6b65a555%3E"
+       TITLE="[mikeos-developer] Switching to protected mode">mikegonta at gmail.com
+       </A><BR>
+    <I>Sun Jan  9 21:35:59 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001735.html">[mikeos-developer] Switching to protected mode
+</A></li>
+        <LI>Next message: <A HREF="001738.html">[mikeos-developer] Switching to protected mode
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1736">[ date ]</a>
+              <a href="thread.html#1736">[ thread ]</a>
+              <a href="subject.html#1736">[ subject ]</a>
+              <a href="author.html#1736">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>----- Original Message ----- 
+From: Muzaffar Auhammud 
+To: MikeOS Developpers 
+Sent: Sunday, January 09, 2011 2:54 PM
+Subject: [mikeos-developer] Switching to protected mode
+
+
+&gt;<i> In what order should the following thing be done to switch
+</I>&gt;<i> to protected mode?
+</I>
+&gt;<i> 1. Enable A20 Gate
+</I>&gt;<i> 2. Set up GTD
+</I>&gt;<i> 4. mov cr0, 0
+</I>
+That's the correct order.
+
+  lgdt [GDT]                    ; load Global Descriptor Table Register
+  mov eax, cr0
+  or al, 1                      ; set PE bit
+  mov cr0, eax
+  jmp 8:.1
+GDT:
+  dw 23                         ; Global Descriptor Table size - 1
+  dd GDT                        ; pointer to table, null selector
+  dw 0                          ; is a good location for this
+  dw 0FFFFh, 0, 9A00h, 0CFh     ; maximum pm code selector
+  dw 0FFFFh, 0, 9200h, 0CFh     ; maximum pm data selector
+bits 32
+.1:
+  mov eax, 16
+  mov ds, ax
+  mov es, ax
+  mov fs, ax
+  mov gs, ax
+  mov ss, ax
+
+What will you do now?
+
+
+Mike Gonta
+look and see - many look but few see
+
+<A HREF="http://aeBIOS.com">http://aeBIOS.com</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001735.html">[mikeos-developer] Switching to protected mode
+</A></li>
+	<LI>Next message: <A HREF="001738.html">[mikeos-developer] Switching to protected mode
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1736">[ date ]</a>
+              <a href="thread.html#1736">[ thread ]</a>
+              <a href="subject.html#1736">[ subject ]</a>
+              <a href="author.html#1736">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

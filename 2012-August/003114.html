@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] A memory allocator for MikeOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20memory%20allocator%20for%20MikeOS&In-Reply-To=%3CCACtjVkEvusyrzNuZ7qbG20Ccevwm%2BDQd8cVeWg8p2LWfgW%3Djfg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003112.html">
+   <LINK REL="Next"  HREF="003116.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] A memory allocator for MikeOS</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20memory%20allocator%20for%20MikeOS&In-Reply-To=%3CCACtjVkEvusyrzNuZ7qbG20Ccevwm%2BDQd8cVeWg8p2LWfgW%3Djfg%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] A memory allocator for MikeOS">okachi at gmail.com
+       </A><BR>
+    <I>Sat Aug 18 23:52:17 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003112.html">[mikeos-developer] A memory allocator for MikeOS
+</A></li>
+        <LI>Next message: <A HREF="003116.html">[mikeos-developer] A memory allocator for MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3114">[ date ]</a>
+              <a href="thread.html#3114">[ thread ]</a>
+              <a href="subject.html#3114">[ subject ]</a>
+              <a href="author.html#3114">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Matej,
+
+I really like this -- it's clean, simple, and fits in perfectly with
+the MikeOS ethos. Best of all, it can be implemented without impacting
+anything else, so I'm up for adding it to 4.4, if nobody has any
+objections.
+
+I've been thinking about moving the text editor inside the kernel so
+that the bottom 32K of the segment is always available to programs
+(instead of the current system, whereby programs can run at 32K or at
+32K+(size of EDIT.BIN), which is a bit messy).
+
+On the other hand, the kernel is already around 20K and we don't have
+much space left (with the current disk_buffer implementation, the
+kernel can only be 24K max). If only there were a solution to all
+this... We could try unreal mode, but I don't know how reliable that
+is, and AFAIK code segments are still limited to 64K.
+
+Maybe at some point we'll have to use segments (*shudder*). As in, a
+64K segment for the kernel, and a 64K segment for programs. I worry
+that it'd all become extremely messy though...
+
+Mike
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003112.html">[mikeos-developer] A memory allocator for MikeOS
+</A></li>
+	<LI>Next message: <A HREF="003116.html">[mikeos-developer] A memory allocator for MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3114">[ date ]</a>
+              <a href="thread.html#3114">[ thread ]</a>
+              <a href="subject.html#3114">[ subject ]</a>
+              <a href="author.html#3114">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

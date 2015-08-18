@@ -1,0 +1,405 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] PS2
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20PS2&In-Reply-To=%3C20100513174404.M09BB.795709.root%40web10-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001305.html">
+   <LINK REL="Next"  HREF="001307.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] PS2</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20PS2&In-Reply-To=%3C20100513174404.M09BB.795709.root%40web10-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] PS2">wisecracker at tesco.net
+       </A><BR>
+    <I>Thu May 13 18:44:04 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001305.html">[mikeos-developer] PS2
+</A></li>
+        <LI>Next message: <A HREF="001307.html">[mikeos-developer] PS2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1306">[ date ]</a>
+              <a href="thread.html#1306">[ thread ]</a>
+              <a href="subject.html#1306">[ subject ]</a>
+              <a href="author.html#1306">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi both...
+ 
+&gt;<i> Better not I reckon -- I came across it a few months ago, the only
+</I>&gt;<i> copy I have, and it's royally broken. I have no idea what's wrong so
+</I>&gt;<i> it's much better to re-implement from scratch than try to fathom out
+</I>&gt;<i> what's happening in my old code!
+</I>
+It`s years since I tried it and IIRC you have to make it a TSR...
+
+I found this sometime ago...
+
+Watch for wordwrapping etc...
+
+=====================================================
+
+AH = C2H  Int 15 BIOS function
+
+AL  Subfunction
+0,  BH = 0  Disable mouse
+0,  BH = 1  Enable mouse
+1,          Reset mouse
+2,          Set sample rate
+3,          Set resolution
+4,          Get device ID
+5,          Initialize mouse
+6,  BH = 0  Return status
+6,  BH = 1  Set scaling factor to 1:1
+6,  BH = 2  Set scaling factor to  2:1
+7,          Set mouse handler address (device driver to update)
+
+
+
+
+PS/2 Mouse Request (C2h) (int 15h)
+
+The PS/2 Mouse Request BIOS function is called to process an application or operating system
+request to read the status of, or control the operation of, the PS/2 mouse.
+Input Parameters:
+AH - C2h, indicating the PS/2 Mouse Request Function.
+AL - subfunction, as follows:
+00h - Enable/Disable mouse.
+01h - Reset mouse.
+02h - Set sample rate.
+03h - Set resolution.
+04h - Get mouse type.
+05h - Initialize mouse interface.
+06h - Get mouse status/set scaling factor.
+07h - Register callout address.
+BH - sub-subfunction code or parameter for subfunction.
+  0-disable
+  1-enable(I think)
+Output Parameters:
+CY - clear if success, else set if failure.
+AH - status code, as follows:
+00h - no error.
+01h - invalid subfunction code (code in AL.)
+02h - invalid input value (value in BH.)
+03h - I/O communications error.
+04h - resend status received from mouse.
+05h - no callout address registered.
+86h - function not supported (if OPTION_SUPPORT_PS2MOUSE disabled.)
+
+
+
+;=========================================================================
+.model small, c
+.386
+include support.asm
+.stack
+;=========================================================================
+
+ERROR_SUCCESS           equ 0
+ERROR_INVALID_FUNCTION  equ 1
+ERROR_INVALID_INPUT     equ 2
+ERROR_INTERFACE         equ 3
+ERROR_RESEND_COMMAND    equ 4
+ERROR_NO_HANDLER        equ 5
+ERROR_NOT_IMPLEMENTED1  equ 80h
+ERROR_NOT_IMPLEMENTED2  equ 86h
+
+;--------------------------------------------------------------------
+; Sample rate is 10, 20, 40, 60, 80, 100, or 200 samples per second.
+;--------------------------------------------------------------------
+
+SAMPLE_RATE_10          equ 0
+SAMPLE_RATE_20          equ 1
+SAMPLE_RATE_40          equ 2
+SAMPLE_RATE_60          equ 3
+SAMPLE_RATE_80          equ 4
+SAMPLE_RATE_100         equ 5
+SAMPLE_RATE_200         equ 6
+
+;-----------------------------------------
+; Resolution 1, 2, 4, or 8 counts per mm.
+;-----------------------------------------
+
+RESOLUTION_1            equ 0
+RESOLUTION_2            equ 1
+RESOLUTION_3            equ 2
+RESOLUTION_8            equ 3
+
+;---------------------------------------------------------------------
+; Structure to hold status values returned by ReturnStatus procedure.
+;---------------------------------------------------------------------
+
+_STATUS STRUCT
+  statusByte db ?
+  resolution db ?
+  sampleRate db ?
+_STATUS ENDS
+
+;=========================================================================
+.data
+    status    _STATUS &lt;&gt;
+    deviceID  db      0
+.code
+;=========================================================================
+ShowErrorStatus proc npCaption:WORD, wStatus:WORD
+    .if wStatus == ERROR_SUCCESS
+        print npCaption,&quot;ERROR_SUCCESS&quot;,NL
+    .elseif wStatus == ERROR_INVALID_FUNCTION
+        print npCaption,&quot;ERROR_INVALID_FUNCTION&quot;,NL
+    .elseif wStatus == ERROR_INVALID_INPUT
+        print npCaption,&quot;ERROR_INVALID_INPUT&quot;,NL
+    .elseif wStatus == ERROR_INTERFACE
+        print npCaption,&quot;ERROR_INTERFACE&quot;,NL
+    .elseif wStatus == ERROR_RESEND_COMMAND
+        print npCaption,&quot;ERROR_RESEND_COMMAND&quot;,NL
+    .elseif wStatus == ERROR_NO_HANDLER
+        print npCaption,&quot;ERROR_NO_HANDLER&quot;,NL
+    .elseif wStatus == ERROR_NOT_IMPLEMENTED1 || ERROR_NOT_IMPLEMENTED2
+        print npCaption,&quot;ERROR_NOT_IMPLEMENTED&quot;,NL
+    .endif
+    ret
+ShowErrorStatus endp
+;=========================================================================
+DisableMouse proc uses bx
+    mov ax, 0c200h
+    xor bh, bh
+    int 15h
+    movzx ax, ah
+    jc  @f
+    xor ax, ax
+  @@:
+    ret
+DisableMouse endp
+;=========================================================================
+EnableMouse proc uses bx
+    mov ax, 0c200h
+    mov bh, 1
+    int 15h
+    movzx ax, ah
+    jc  @f
+    xor ax, ax
+  @@:
+    ret
+EnableMouse endp
+;=========================================================================
+ResetMouse proc
+    mov ax, 0c201h
+    int 15h
+    movzx ax, ah
+    jc  @f
+    xor ax, ax
+  @@:
+    ret
+ResetMouse endp
+;=========================================================================
+SetSampleRate proc uses bx sampleRate:WORD
+    mov ax, 0c202h
+    mov bx, sampleRate
+    mov bh, bl
+    int 15h
+    movzx ax, ah
+    jc  @f
+    xor ax, ax
+  @@:
+    ret
+SetSampleRate endp
+;=========================================================================
+SetResolution proc uses bx resolution:WORD
+    mov ax, 0c203h
+    mov bx, resolution
+    mov bh, bl
+    int 15h
+    movzx ax, ah
+    jc  @f
+    xor ax, ax
+  @@:
+    ret
+SetResolution endp
+;=========================================================================
+GetDeviceID proc uses bx di npID:WORD
+    mov ax, 0c204h
+    int 15h
+    movzx ax, ah
+    jc  @f
+    mov di, npID
+    mov [di], bh
+    xor ax, ax
+  @@:
+    ret
+GetDeviceID endp
+;=========================================================================
+InitializeMouse proc uses bx dataPackageSize:WORD
+    mov ax, 0c205h
+    mov bx, dataPackageSize
+    mov bh, bl
+    int 15h
+    movzx ax, ah
+    jc  @f
+    xor ax, ax
+  @@:
+    ret
+InitializeMouse endp
+;=========================================================================
+ReturnStatus proc uses di bx cx dx npStatus:WORD
+    mov ax, 0c206h
+    xor bh, bh
+    int 15h
+    movzx ax, ah
+    jc  @f
+    mov di, npStatus
+    mov [di]._STATUS.statusByte, bl
+    mov [di]._STATUS.resolution, cl
+    mov [di]._STATUS.sampleRate, dl
+    xor ax, ax
+  @@:
+    ret
+ReturnStatus endp
+;=========================================================================
+SetHandler proc uses es bx handlerSeg:WORD, handlerOffset:WORD
+    mov ax, 0c207h
+    mov es, handlerSeg
+    mov bx, handlerOffset
+    int 15h
+    movzx ax, ah
+    jc  @f
+    xor ax, ax
+  @@:
+    ret
+SetHandler endp
+;=========================================================================
+;-----------------------------------------------------------------------
+; The current handler partially processes the X and Y deltas and stores
+; the result in two word vars in the code segement. Note that I am
+; depending on MASM to take care of the segment overrides.
+;
+; WORD 1: status (see #00525)
+; WORD 2: X data (high byte = 00h)
+; WORD 3: Y data (high byte = 00h)
+; 15-8 reserved (0)
+;  7   Y data overflowed
+;  6   X data overflowed
+;  5   Y data is negative
+;  4   X data is negative
+;  3   reserved (1)
+;  2   reserved (0)
+;  1   right button pressed
+;  0   left button pressed
+;
+; I had to explicitly set the packet size to 3 bytes.
+;
+; I decided to try a 640x200 virtual screen, so the cursor
+; positions should be limited to 0-639, 0-199.
+;
+; I left the resolution at the default 4 counts per mm.
+;
+; And after a few days away from it, I see some obvious errors in the
+; handler code.
+;-----------------------------------------------------------------------
+
+_X dw 0
+_Y dw 0
+
+Handler proc far uses ax bx cx dx w3:WORD,w2:WORD,w1:WORD,w0:WORD
+    mov dx, w2      ; dY low 8 bits
+    neg dx
+    mov cx, w1      ; dX low 8 bits
+    mov ax, w0
+    shl ax, 3       ; shift Y sign into bit 8
+    mov dh, ah      ; copy to dY
+    xor ah, ah
+    shl ax, 1       ; shift X sign into bit 8
+    mov ch, ah      ; copy to dX
+    add _X, cx
+    test _X, 8000h
+    jz  @f
+    mov _X, 0
+  @@:
+    add _Y, dx
+    test _Y, 8000h
+    jz  @f
+    mov _Y, 0
+  @@:
+    ret
+Handler endp
+
+;=========================================================================
+.startup
+;=========================================================================
+
+    ;-------------------------------------------------------
+    ; This initialization sequence works on my test system.
+    ;-------------------------------------------------------
+    
+    invoke DisableMouse
+    invoke ShowErrorStatus, chr$(&quot;Disable : &quot;), ax
+    invoke InitializeMouse, 3
+    invoke ShowErrorStatus, chr$(&quot;Initialize : &quot;), ax
+    invoke SetHandler, seg handler, offset handler
+    invoke ShowErrorStatus, chr$(&quot;SetHandler : &quot;), ax
+    invoke EnableMouse
+    invoke ShowErrorStatus, chr$(&quot;Enable : &quot;), ax
+    call WaitKey
+    cls
+  @@:
+    loc 0,0
+    mov ax, _X
+    xor dx, dx
+    mov cx, 640
+    div cx
+    print word$(dx),chr$(9)
+    mov ax, _Y
+    xor dx, dx
+    mov cx, 200
+    div cx
+    print word$(dx)
+    jmp @b
+
+    call WaitKey
+;====================================================
+.exit
+end
+
+; ===============================================================
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001305.html">[mikeos-developer] PS2
+</A></li>
+	<LI>Next message: <A HREF="001307.html">[mikeos-developer] PS2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1306">[ date ]</a>
+              <a href="thread.html#1306">[ thread ]</a>
+              <a href="subject.html#1306">[ subject ]</a>
+              <a href="author.html#1306">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

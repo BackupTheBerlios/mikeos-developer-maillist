@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Added LEN command to basic.asm
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Added%20LEN%20command%20to%20basic.asm&In-Reply-To=%3CCAEz6_zjkUvEDPjOeYuyOA1s2u%2BTYqBaHatQTesT07LVRbUcq0w%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002595.html">
+   <LINK REL="Next"  HREF="002591.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Added LEN command to basic.asm</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Added%20LEN%20command%20to%20basic.asm&In-Reply-To=%3CCAEz6_zjkUvEDPjOeYuyOA1s2u%2BTYqBaHatQTesT07LVRbUcq0w%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Added LEN command to basic.asm">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Fri Oct  7 09:16:14 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002595.html">[mikeos-developer] Added LEN command to basic.asm
+</A></li>
+        <LI>Next message: <A HREF="002591.html">[mikeos-developer] New game - Muncher
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2588">[ date ]</a>
+              <a href="thread.html#2588">[ thread ]</a>
+              <a href="subject.html#2588">[ subject ]</a>
+              <a href="author.html#2588">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>I'm going to look into basic.asm and add a few things. (I want len), any requests?
+</I>
+Yea, if you could modify save/load to allow for &quot;file exists&quot; (by setting two
+instead of one. Mike said he'll be adding a delete command but how
+will the program
+know if the save error is cause by a file already existing or an invalid name.
+I don't want to just blindly delete before save, I want to warn people
+if they're
+about to overwrite a file.
+How about DO...LOOP UNTIL?
+i.e.
+DO
+  PEEK Z X
+  X = X + 1
+LOOP UNTIL Z = 32
+
+There are many situation where this would be useful, such as finding
+the end of a
+single command line parameter.
+
+
+&gt;<i> mov byte al, 'L'
+</I>
+Please don't output to a fixed numerical variable.
+It's hard enough to get permanent variable (save/load annoy me).
+I'd prefer if you could allow a custom one, i.e. &quot;LEN $1 X&quot;,
+so I could assign it to a throw away variable.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002595.html">[mikeos-developer] Added LEN command to basic.asm
+</A></li>
+	<LI>Next message: <A HREF="002591.html">[mikeos-developer] New game - Muncher
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2588">[ date ]</a>
+              <a href="thread.html#2588">[ thread ]</a>
+              <a href="subject.html#2588">[ subject ]</a>
+              <a href="author.html#2588">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

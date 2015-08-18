@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] using MikeOs to deploy images
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20using%20MikeOs%20to%20deploy%20images&In-Reply-To=%3CCACtjVkFkxzKfg0FM2R7rt%2BaEs8Kjo8UNtmvN%3DreyyTafuM%2BLpA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002050.html">
+   <LINK REL="Next"  HREF="002052.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] using MikeOs to deploy images</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20using%20MikeOs%20to%20deploy%20images&In-Reply-To=%3CCACtjVkFkxzKfg0FM2R7rt%2BaEs8Kjo8UNtmvN%3DreyyTafuM%2BLpA%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] using MikeOs to deploy images">okachi at gmail.com
+       </A><BR>
+    <I>Thu Aug 25 12:07:58 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002050.html">[mikeos-developer] using MikeOs to deploy images
+</A></li>
+        <LI>Next message: <A HREF="002052.html">[mikeos-developer] APPDEV 2.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2051">[ date ]</a>
+              <a href="thread.html#2051">[ thread ]</a>
+              <a href="subject.html#2051">[ subject ]</a>
+              <a href="author.html#2051">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Scott,
+
+&gt;<i> 1. Boot into MikeOS via PXE (is this possible?)
+</I>
+I don't know much about PXE, but if it's possible to send a floppy
+disk image over the network to a machine, put it somewhere in RAM and
+load it like a virtual floppy, that's doable!
+
+&gt;<i> 2. &quot;dd&quot; or some other mechanism to transfer complete bits of a
+</I>&gt;<i> filesystem to the hard drive (over the network)
+</I>
+MikeOS has no concept of hard drives, only floppy drives, so something
+like that wouldn't be possible without a lot of recoding.
+
+&gt;<i> 3. Boot the first sector of the hard drive (withOUT &quot;rebooting&quot;)
+</I>
+Well, via MikeOS you could load a bit of code into somewhere in RAM,
+jump to that code, and then have it load the first sector from the
+hard drive into the usual place (7C00h) and jump to it. You can read
+hard drive sectors using BIOS calls so you could do it with a bit of
+assembly code.
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002050.html">[mikeos-developer] using MikeOs to deploy images
+</A></li>
+	<LI>Next message: <A HREF="002052.html">[mikeos-developer] APPDEV 2.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2051">[ date ]</a>
+              <a href="thread.html#2051">[ thread ]</a>
+              <a href="subject.html#2051">[ subject ]</a>
+              <a href="author.html#2051">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

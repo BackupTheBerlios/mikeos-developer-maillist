@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Booting from USB flash drive
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Booting%20from%20USB%20flash%20drive&In-Reply-To=%3CB69950B6856C42C2B0B284FBA81341E6%40userfe6b65a555%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001287.html">
+   <LINK REL="Next"  HREF="001266.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Booting from USB flash drive</H1>
+    <B>mikegonta at gmail.com</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Booting%20from%20USB%20flash%20drive&In-Reply-To=%3CB69950B6856C42C2B0B284FBA81341E6%40userfe6b65a555%3E"
+       TITLE="[mikeos-developer] Booting from USB flash drive">mikegonta at gmail.com
+       </A><BR>
+    <I>Wed May 12 21:45:04 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001287.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+        <LI>Next message: <A HREF="001266.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1289">[ date ]</a>
+              <a href="thread.html#1289">[ thread ]</a>
+              <a href="subject.html#1289">[ subject ]</a>
+              <a href="author.html#1289">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+----- Original Message ----- 
+From: &quot;M Saunders&quot;
+To: &quot;MikeOS (and similar OS) developers&quot;
+Sent: Wednesday, May 12, 2010 7:27 AM
+Subject: Re: [mikeos-developer] Booting from USB flash drive
+
+
+&gt;<i> On Wed, May 12, 2010 at 12:07 PM,  Mike Gonta wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> We are assembly language programmers. Everything can be done with
+</I>&gt;&gt;<i> a text editor, an assembler and dd. Use dd-removeable to write directly 
+</I>&gt;&gt;<i> to
+</I>&gt;&gt;<i> the physical flash drive (see previous post).
+</I>&gt;&gt;<i> Don't use utilies to build the ultra simple FAT12 file structure.
+</I>&gt;<i>
+</I>&gt;<i> No utilities? So the build script shouldn't use 'mkdosfs' to create
+</I>&gt;<i> the floppy image, but instead we should use a hex editor to create the
+</I>&gt;<i> FAT tables and edit it from there?
+</I>
+No hex editor is required.
+The FAT12 file system structure is very simple.
+The following assembly language code will assemble an empty FAT12 image,
+just add the boot sector to the beginning snd transfer the image to the
+device.
+
+fat1:
+  db 0F0h,0FFh,0FFh
+  times 512*9-($-fat1)            db 0
+fat2:
+  db 0F0h,0FFh,0FFh
+  times 512*9-($-fat2)            db 0
+root:
+  times 512*14-($-root)           db 0
+
+In fact the second fat table is optional, but at 5 whole lines what
+could be simpler.
+Then use your file system explorer to copy the readable files.
+
+&gt;&gt;<i> See fat.asm in pdBIOS32.
+</I>&gt;<i>
+</I>&gt;<i> Where is this file? The link in your .sig is just to a direct download
+</I>&gt;<i> of a binary
+</I>
+
+Mike Gonta
+look and see - many look but few see
+
+<A HREF="http://mikegonta.com/pdBIOS32">http://mikegonta.com/pdBIOS32</A>
+
+1. Download the file
+2. Unzip the image file
+3. Transfer the image file to a removable device (virtual floppy drive,
+   loopback device, real floppy disk, flash drive)
+4. Boot and run (with qemu or a real PC)
+and/or
+5. Use your file system explorer to access the readable files on the
+FAT12 floppy disk image
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001287.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+	<LI>Next message: <A HREF="001266.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1289">[ date ]</a>
+              <a href="thread.html#1289">[ thread ]</a>
+              <a href="subject.html#1289">[ subject ]</a>
+              <a href="author.html#1289">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

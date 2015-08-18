@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] BFM 1.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20BFM%201.0&In-Reply-To=%3CAANLkTimQdzLWZWPLckzWT4yBc9sAKB%3Dr0%2Bt7JiF0OGE0%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001831.html">
+   <LINK REL="Next"  HREF="001833.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] BFM 1.0</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20BFM%201.0&In-Reply-To=%3CAANLkTimQdzLWZWPLckzWT4yBc9sAKB%3Dr0%2Bt7JiF0OGE0%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] BFM 1.0">okachi at gmail.com
+       </A><BR>
+    <I>Fri Feb 18 16:49:11 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001831.html">[mikeos-developer] BFM 1.0
+</A></li>
+        <LI>Next message: <A HREF="001833.html">[mikeos-developer] BFM 1.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1832">[ date ]</a>
+              <a href="thread.html#1832">[ thread ]</a>
+              <a href="subject.html#1832">[ subject ]</a>
+              <a href="author.html#1832">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Righto, BFM is now in the Downloads section of the MikeOS website.
+(I've also split up Downloads into sections for add-on software and
+Bazza's hardware projects.)
+
+Ondrej, I spotted a couple of bugs:
+
+1) Run BFM, run EDIT.BIN inside that, open EXAMPLE.BAS, hit F8 to run
+BASIC and then exit the BASIC program. Hit Esc to leave EDIT.BIN and
+strange stuff happens. Presumably this is to do with the complicated
+memory arrangements.
+
+2) In the BFM editor: open EXAMPLE.BAS and go to the start of the
+&quot;cls&quot; line. Hit backspace and it removes the blank line before (good),
+but it moves the cursor to the end of the &quot;cls&quot; line (when it should
+remain at the start).
+
+I like your editor though, and it seems to handle long lines better
+than my EDIT.BIN! (Mine doesn't handle backspace to remove lines
+because that'd involve the cursor jumping back to the end of the
+previous line, which could be longer than the screen, which I don't
+cater for yet).
+
+It'd be great to have a more powerful editor for MikeOS.
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001831.html">[mikeos-developer] BFM 1.0
+</A></li>
+	<LI>Next message: <A HREF="001833.html">[mikeos-developer] BFM 1.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1832">[ date ]</a>
+              <a href="thread.html#1832">[ thread ]</a>
+              <a href="subject.html#1832">[ subject ]</a>
+              <a href="author.html#1832">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

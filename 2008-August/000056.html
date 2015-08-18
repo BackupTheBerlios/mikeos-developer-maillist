@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] FAT12 write support development
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT12%20write%20support%20development&In-Reply-To=%3C8d87c8a30808281425u3873a32cwbe97e310266aadb7%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000055.html">
+   <LINK REL="Next"  HREF="000058.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] FAT12 write support development</H1>
+    <B>Bob Moss</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT12%20write%20support%20development&In-Reply-To=%3C8d87c8a30808281425u3873a32cwbe97e310266aadb7%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] FAT12 write support development">bobbyjmoss at googlemail.com
+       </A><BR>
+    <I>Thu Aug 28 23:25:50 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000055.html">[mikeos-developer] FAT12 write support development
+</A></li>
+        <LI>Next message: <A HREF="000058.html">[mikeos-developer] FAT12 write support development
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#56">[ date ]</a>
+              <a href="thread.html#56">[ thread ]</a>
+              <a href="subject.html#56">[ subject ]</a>
+              <a href="author.html#56">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Good Old C...
+
+:<i>D
+</I>
+2008/8/28 Ian Seyler &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">iseyler at gmail.com</A>&gt;
+
+&gt;<i> TCP is a huge item to implement. MenuetOS <A HREF="http://www.menuetos.net/">http://www.menuetos.net/</A>
+</I>&gt;<i> supports a few NIC cards and has TCP/IP and it is all written in
+</I>&gt;<i> Assembly. That could be used as a guide but it is very complex.
+</I>&gt;<i>
+</I>&gt;<i> -Ian
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On Thu, Aug 28, 2008 at 5:17 PM, M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; On 8/28/08, Troy Martin &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">blasterman95 at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;  Stable, amazing. I guess now my job is either multitasking
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; OK, but bear in mind that it'll involve a major architectural change
+</I>&gt;<i> &gt; to the OS! You will need to allocate programs into their own segments,
+</I>&gt;<i> &gt; and transform the current os_ call system into interrupts (ie
+</I>&gt;<i> &gt; refactoring the 40+ system calls) for it to work effectively.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;&gt; or a TCP stack.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; And for that you'll need to understand everything here:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; <A HREF="http://www.faqs.org/rfcs/rfc793.html">http://www.faqs.org/rfcs/rfc793.html</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Nice bedtime reading! Writing a TCP/IP from stack is a Herculean
+</I>&gt;<i> &gt; effort, so porting one from the likes of Contiki would be slightly
+</I>&gt;<i> &gt; simpler. But you'd still have to understand the ins-and-outs of the
+</I>&gt;<i> &gt; above document, and then code a bunch of Ethernet drivers (or try for
+</I>&gt;<i> &gt; SLIP over the serial port).
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I'm not saying don't go for it, but bear in mind the vast amount of
+</I>&gt;<i> &gt; work those things will take :-)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; M
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Mike Saunders
+</I>&gt;<i> &gt; <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; mikeos-developer mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+This email is not intended to offend, annoy or inconvenience anyone. If it
+has, email me and state that it has, and we'll sort out the problem in an
+amicable way. Thank you for reading this message, I hope for a reply from
+you soon!
+
+Why not visit my tech site?: <A HREF="http://bjm1904.741.com/">http://bjm1904.741.com/</A>
+or Apollo OS?:
+<A HREF="http://apolloopsys.sourceforge.net/">http://apolloopsys.sourceforge.net/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080828/745e2b79/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080828/745e2b79/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000055.html">[mikeos-developer] FAT12 write support development
+</A></li>
+	<LI>Next message: <A HREF="000058.html">[mikeos-developer] FAT12 write support development
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#56">[ date ]</a>
+              <a href="thread.html#56">[ thread ]</a>
+              <a href="subject.html#56">[ subject ]</a>
+              <a href="author.html#56">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

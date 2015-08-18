@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] First BASIC addition: CURSPOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20First%20BASIC%20addition%3A%20CURSPOS&In-Reply-To=%3CCAEz6_ziX9z-HccFQf4ZdzX-dZp-4z4jqx4Q%2B4t8yvMdoX%3DhDaQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002686.html">
+   <LINK REL="Next"  HREF="002688.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] First BASIC addition: CURSPOS</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20First%20BASIC%20addition%3A%20CURSPOS&In-Reply-To=%3CCAEz6_ziX9z-HccFQf4ZdzX-dZp-4z4jqx4Q%2B4t8yvMdoX%3DhDaQ%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] First BASIC addition: CURSPOS">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Wed Oct 19 12:47:02 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002686.html">[mikeos-developer] Check my Assembly
+</A></li>
+        <LI>Next message: <A HREF="002688.html">[mikeos-developer] First BASIC addition: CURSPOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2687">[ date ]</a>
+              <a href="thread.html#2687">[ thread ]</a>
+              <a href="subject.html#2687">[ subject ]</a>
+              <a href="author.html#2687">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>G'day all,
+
+I have been learning assembly and I made my first addition to the MikeOS
+source code. I added a BASIC command &quot;CURSPOS&quot;.
+Basically it read the position of the cursor (via os_get_cursor_pos) and
+saves it to two variables. i.e. &quot;CURSPOS X Y&quot;.
+
+Next I'll write a function to get the colour of the selected
+byte but I'm not sure what to call it, &quot;CURSCOL&quot; make it sound like it
+gets the column and &quot;CURSCOLOUR&quot; is a bit too cumbersome. If anyone has
+any ideas on what to call it please let me know.
+
+I also modified the &quot;PRINT CHR&quot; command, so it would print to the ink colour.
+
+I suppose I only made the modification to help my own applications, in
+particular the MB++ rewrite but it's good to be able to do it yourself
+rather than pestering others.
+
+I upload the new BASIC.ASM and a &quot;diff&quot; output to show what I added.
+
+Joshua
+<A HREF="http://code.google.com/p/mikebasic-applications/">http://code.google.com/p/mikebasic-applications/</A>
+-------------- next part --------------
+[<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">joshua at joshuapc</A> features]$ diff basic.asm_new basic.asm_old
+93,96d92
+&lt; 
+&lt;         mov di, curspos_cmd
+&lt;         call os_string_compare
+&lt;         jc near do_curspos
+679,710d674
+&lt; ; CURSPOS
+&lt; 
+&lt; do_curspos:
+&lt;         call os_get_cursor_pos
+&lt; 
+&lt; 	call get_token
+&lt; 	cmp ax, VARIABLE
+&lt; 	jne .error
+&lt; 
+&lt;         mov ah, 0
+&lt; 	mov byte al, [token]
+&lt;         mov bx, 0
+&lt;         mov bl, dl
+&lt;         call set_var
+&lt; 
+&lt; 	call get_token
+&lt; 	cmp ax, VARIABLE
+&lt; 	jne .error
+&lt; 
+&lt;         mov ah, 0
+&lt; 	mov byte al, [token]
+&lt;         mov bx, 0
+&lt;         mov bl, dh
+&lt;         call set_var
+&lt;         
+&lt;         jmp mainloop
+&lt; 
+&lt; .error:
+&lt; 	mov si, err_syntax
+&lt; 	jmp error
+&lt; 
+&lt; ; ------------------------------------------------------------------
+1988,1991c1952
+&lt; 	mov ah, 09h
+&lt; 	mov byte bl, [ink_colour]
+&lt; 	mov bh, 0
+&lt; 	mov cx, 1
+---
+&gt;<i> 	mov ah, 0Eh
+</I>2885d2845
+&lt;         curspos_cmd             db &quot;CURSPOS&quot;, 0
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: basic.asm
+Type: application/octet-stream
+Size: 46354 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111019/575814c5/attachment.obj">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111019/575814c5/attachment.obj</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002686.html">[mikeos-developer] Check my Assembly
+</A></li>
+	<LI>Next message: <A HREF="002688.html">[mikeos-developer] First BASIC addition: CURSPOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2687">[ date ]</a>
+              <a href="thread.html#2687">[ thread ]</a>
+              <a href="subject.html#2687">[ subject ]</a>
+              <a href="author.html#2687">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

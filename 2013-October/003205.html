@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] thanks for the boot code (update)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2013-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20thanks%20for%20the%20boot%20code%20%28update%29&In-Reply-To=%3C20131026154837.GH20373%40myrrdin%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003203.html">
+   <LINK REL="Next"  HREF="003194.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] thanks for the boot code (update)</H1>
+    <B>Jagged O'Neill</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20thanks%20for%20the%20boot%20code%20%28update%29&In-Reply-To=%3C20131026154837.GH20373%40myrrdin%3E"
+       TITLE="[mikeos-developer] thanks for the boot code (update)">jagged_4mos at jagged.tk
+       </A><BR>
+    <I>Sat Oct 26 17:48:37 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003203.html">[mikeos-developer] Bug Alert [Was: thanks for the boot code]
+</A></li>
+        <LI>Next message: <A HREF="003194.html">[mikeos-developer] GUI Mouse Driver Repair (Maybe?)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3205">[ date ]</a>
+              <a href="thread.html#3205">[ thread ]</a>
+              <a href="subject.html#3205">[ subject ]</a>
+              <a href="author.html#3205">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Just in case someone wants to play with the files, and makes changes
+to the loader code. Most probably this would change the addresses of
+the print and printe functions.
+
+To not have to manually change them in the &quot;kernel&quot;, i have changed
+the mk script to automatically deal with this.
+
+Btw, the HLT instruction in line 177 of boot_1n.s is unnecessary.
+Removing it hits the mentioned issue already. Also, the ADD in line
+171 could be (size) optimized to `add $2,bh`, also effecting the
+relevant addresses.
+
+Jagged
+
+-- 
+  ...
+-------------- next part --------------
+	.code16
+
+	.org	0x2000
+
+	.global _start
+
+	### being lazy... but it shows that the loader works
+
+_start:	lea	wcm,bp
+	lea	ewcm,cx
+	sub	bp,cx
+	#calll	0x7cef		# loader's print
+	call	bl.print
+
+	lea	pkr,bp
+	lea	epkr,cx
+	sub	bp,cx
+	#call	0x7cec		# loader's printe
+	call	bl.printe
+
+
+wcm:	.ascii	&quot;Welcome to YaOS&quot;
+	.byte	0xa,0xd
+ewcm:
+pkr:	.ascii	&quot;Press ESC to reboot&quot;
+	.byte	0xa,0xd
+epkr:
+_end:
+-------------- next part --------------
+#!/bin/zsh
+
+[[ -z $* ]] &amp;&amp;
+  arg=&quot;1n&quot; \
+||<i>
+</I>  arg=$1
+
+as -mtune i8086 -mnaked-reg -g -o boot_$arg.o boot_$arg.s &amp;&amp;
+  ld --oformat=binary -Ttext=0x0 boot_$arg.o -o boot_$arg &amp;&amp;
+  {
+    dd if=boot_$arg of=boot_$arg.bs bs=512 count=1 skip=62 2&gt;/dev/null
+    x=( $(objdump -t boot_$arg.o) )
+    l1=$((x[(i)eobc]-4))
+    a1=$x[l1]
+    d1=$((16#$a1))
+    l2=$((x[(i)strings]-4))
+    a2=$x[l2]
+    d2=$((16#$a2))
+    s=$((d1-0x7c00))
+    print &quot;size:$((s)), left: $((d2-d1))&quot;
+    p=$x[$((x[(i)print]-4))]	# custom export of print and printe
+    pe=$x[$((x[(i)printe]-4))]
+    print $p $pe
+  }
+
+as -mtune i8086 -mnaked-reg -g -o kern_$arg.o kern_$arg.s &amp;&amp;
+  ld --oformat=binary -Ttext=0x0 \
+     --defsym bl.print=0x$p        \
+     --defsym bl.printe=0x$pe      \
+     kern_$arg.o -o kern_$arg &amp;&amp;
+  {
+    x=( $(objdump -t kern_$arg.o) )
+    l1=$((x[(i)_start]-4))
+    a1=$x[l1]
+    d1=$((16#$a1))
+    l2=$((x[(i)_end]-4))
+    a2=$x[l2]
+    d2=$((16#$a2))
+    s=$((d2-d1))
+    f=$((s/512))
+    ((s%512)) &amp;&amp; ((f++))
+    dd if=kern_$arg of=kernel.bin bs=512 count=$f skip=16 2&gt;/dev/null
+  }
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003203.html">[mikeos-developer] Bug Alert [Was: thanks for the boot code]
+</A></li>
+	<LI>Next message: <A HREF="003194.html">[mikeos-developer] GUI Mouse Driver Repair (Maybe?)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3205">[ date ]</a>
+              <a href="thread.html#3205">[ thread ]</a>
+              <a href="subject.html#3205">[ subject ]</a>
+              <a href="author.html#3205">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

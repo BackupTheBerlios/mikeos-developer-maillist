@@ -1,0 +1,238 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.1b1 released for testing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.1b1%20released%20for%20testing&In-Reply-To=%3C988943.78845.qm%40web113104.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000868.html">
+   <LINK REL="Next"  HREF="000870.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.1b1 released for testing</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.1b1%20released%20for%20testing&In-Reply-To=%3C988943.78845.qm%40web113104.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] MikeOS 4.1b1 released for testing">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Tue Dec 22 22:14:47 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000868.html">[mikeos-developer] MikeOS 4.1b1 released for testing
+</A></li>
+        <LI>Next message: <A HREF="000870.html">[mikeos-developer] MikeOS 4.1b1 released for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#869">[ date ]</a>
+              <a href="thread.html#869">[ thread ]</a>
+              <a href="subject.html#869">[ subject ]</a>
+              <a href="author.html#869">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Mike,
+
+Pity, but I understand that more testing is required.
+As far as testing the serial port is concerned, it works well
+and I'm very close to completing the bin uploader app.
+
+I've included a simplified version of your serial app at the end of this posting
+so hopefully more people will be able to test the serial ports without having
+to worry about the VT100 stuff.
+Simply connect two pc's together with a null modem cable and type away.
+
+As far as the LPT port stuff goes, herewith my results/findings:
+(All measured with a Agilent Technologies 16823A logic analyser courtesy of the boss!!!! shhhhhhh.)
+
+No-Name brand (PI 200MHz MMX)  got 450 KB/sec
+Old Micron Transport TREK II laptop (PII 266MHz MMX) got 410 KB/sec
+HP/Compaq nx7010 (Intel M centrino 1.7GHz) got 711 KB/sec
+
+Notice how the P1 is actually faster than the PII on the LPT.
+This is due to the fact that the I/O controllers which are built into
+the motherboards are generally a tad slower than add-on cards.
+I've noticed this too on quite a few pc's at the office.
+Have no idea why.
+
+The routine I used on all the pc's was as follows:
+Please note that to get maximum speed, it enters into an endless loop.
+
+;=================================================
+    BITS 16
+
+    %INCLUDE &quot;mikedev.inc&quot;
+    ORG 32768
+
+    mov dx, 378h
+    mov al, 0
+
+endless_loop:
+
+    not al
+    call os_port_byte_out
+    not al
+    call os_port_byte_out
+    jmp endless_loop
+
+;==================================================    
+
+To read the ports, I didn't bother with speed, just checked that it worked
+by retransmitting what ever I got on the LPT back onto the serial port.
+
+;=================================================
+    BITS 16
+
+    %INCLUDE &quot;mikedev.inc&quot;
+    ORG 32768
+
+    mov dx, 378h
+    os_serial_port_enable
+
+start:
+
+    call os_port_byte_in
+    call os_send_via_serial
+
+    mov ax, 200
+    call os_pause
+
+    mov ax, 0
+    os_check_for_key
+    cmp ax, 0
+    je start
+
+    ret
+
+;==================================================
+    
+Wishing everyone a very merry Christmas and a great New Year.
+Paulo.
+
+; -------------------------------------------------------------------------------
+; Serial2 to check rx and tx of characters via serial port.
+; ------------------------------------------------------------------------------
+; connects at 9600 N 8 1 or 1200 N 8 1
+; needs null modem cable to work.
+; Press the F8 key to exit.
+
+
+    BITS 16
+
+    %INCLUDE &quot;mikedev.inc&quot;
+    ORG 32768
+
+
+start:
+    ; uncomment next line to enable at 1200 baud instead.
+    ; mov ax, 1   
+
+    call os_serial_port_enable
+
+    mov si, start_msg
+    call os_print_string
+
+
+main_loop:
+    mov dx, 0            ; Set port to COM1
+    mov ax, 0
+    mov ah, 03h         ; Check COM1 status
+    int 14h
+
+    bt ax, 8            ; Data received?
+    jc received_byte
+
+    mov ax, 0            ; If not, have we something to send?
+    call os_check_for_key
+
+    cmp ax, 4200h            ; F8 key pressed?
+    je finish                      ; Quit if so
+
+    cmp al, 0            ; If no other key pressed, go back
+    je main_loop
+
+    call os_send_via_serial        ; Otherwise send it
+    jmp main_loop
+
+received_byte:                ; Print data received
+
+    call os_get_via_serial
+
+    mov ah, 0Eh            ; Print char
+    int 10h
+    jmp main_loop
+
+finish:
+    mov si, finish_msg
+    call os_print_string
+
+    call os_wait_for_key
+
+    ret
+
+start_msg    db 'Serial2 -- Press F8 to quit', 13, 10, 'Connecting....', 13, 10, 13, 10, 0
+finish_msg    db 13, 10, 13, 10, 'Press a key to return to OS', 13, 10, 0
+
+;========================================================================
+
+    
+
+
+----- Original Message ----
+From: M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+To: MikeOS (and similar OS) developers &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+Sent: Tue, December 22, 2009 12:30:23 PM
+Subject: Re: [mikeos-developer] MikeOS 4.1b1 released for testing
+
+Hi all,
+
+Just a quick update: I won't be releasing 4.1 before Christmas now --
+I'd ideally like to get some good testing of the BASIC SERIAL and PORT
+commands before going final with the code. Also, I haven't heard back
+from Gene yet so I'm not sure if the file size listing in DIR will
+make it into 4.1.
+
+Anyway, I hope everyone has a great Christmas and New Year!
+
+Mike
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+_______________________________________________
+mikeos-developer mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000868.html">[mikeos-developer] MikeOS 4.1b1 released for testing
+</A></li>
+	<LI>Next message: <A HREF="000870.html">[mikeos-developer] MikeOS 4.1b1 released for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#869">[ date ]</a>
+              <a href="thread.html#869">[ thread ]</a>
+              <a href="subject.html#869">[ subject ]</a>
+              <a href="author.html#869">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

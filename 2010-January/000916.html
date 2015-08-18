@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] libmikeos-4.1 released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20libmikeos-4.1%20released&In-Reply-To=%3C20100121181217.2GFRW.648498.root%40web11-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000915.html">
+   <LINK REL="Next"  HREF="000917.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] libmikeos-4.1 released</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20libmikeos-4.1%20released&In-Reply-To=%3C20100121181217.2GFRW.648498.root%40web11-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] libmikeos-4.1 released">wisecracker at tesco.net
+       </A><BR>
+    <I>Thu Jan 21 19:12:17 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000915.html">[mikeos-developer] libmikeos-4.1 released
+</A></li>
+        <LI>Next message: <A HREF="000917.html">[mikeos-developer] libmikeos-4.1 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#916">[ date ]</a>
+              <a href="thread.html#916">[ thread ]</a>
+              <a href="subject.html#916">[ subject ]</a>
+              <a href="author.html#916">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Ian...
+
+How about not allowing zero at all for dx......
+
+&gt;<i> os_get_random:
+</I>&gt;<i> 	push dx
+</I>&gt;<i> 	push bx
+</I>&gt;<i> 	push ax
+</I>&gt;<i> 
+</I>&gt;<i> 	sub bx, ax			; We want a number between 0 and (high-low)
+</I>&gt;<i> 	call .generate_random		; Return a random number in AX
+</I>&gt;<i> 	mov dx, bx
+</I>&gt;<i> 	add dx, 1       ; &lt;- If DX is 65535 (0xFFFF) then adding 1 will
+</I>&gt;<i> overflow DX to 0 (0x0000)
+</I>
+&lt;HERE&gt;
+
+                cmp dx, 0
+                jmp nz, exit
+                add dx, 1
+exit:
+
+&gt;<i> 	mul dx           ; And multiplying anything by 0 will give you 0
+</I>&gt;<i> 	mov cx, dx
+</I>&gt;<i> 
+</I>&gt;<i> 	pop ax
+</I>&gt;<i> 	pop bx
+</I>&gt;<i> 	pop dx
+</I>&gt;<i> 	add cx, ax			; Add the low offset back
+</I>&gt;<i> 	ret
+</I>&gt;<i> 
+</I>&gt;<i> I'll try to figure it out.
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000915.html">[mikeos-developer] libmikeos-4.1 released
+</A></li>
+	<LI>Next message: <A HREF="000917.html">[mikeos-developer] libmikeos-4.1 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#916">[ date ]</a>
+              <a href="thread.html#916">[ thread ]</a>
+              <a href="subject.html#916">[ subject ]</a>
+              <a href="author.html#916">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

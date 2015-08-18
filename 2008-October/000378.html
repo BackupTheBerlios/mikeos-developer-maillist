@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Planning for MikeOS 2.1 and 3.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Planning%20for%20MikeOS%202.1%20and%203.0&In-Reply-To=%3C19d8b3b00810220429q41253514t3db7345d7ce7eca4%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000377.html">
+   <LINK REL="Next"  HREF="000381.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Planning for MikeOS 2.1 and 3.0</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Planning%20for%20MikeOS%202.1%20and%203.0&In-Reply-To=%3C19d8b3b00810220429q41253514t3db7345d7ce7eca4%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Planning for MikeOS 2.1 and 3.0">okachi at gmail.com
+       </A><BR>
+    <I>Wed Oct 22 13:29:40 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000377.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+        <LI>Next message: <A HREF="000381.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#378">[ date ]</a>
+              <a href="thread.html#378">[ thread ]</a>
+              <a href="subject.html#378">[ subject ]</a>
+              <a href="author.html#378">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/22/08, Bob Moss &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">bobbyjmoss at googlemail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> So you're wondering whether 32-bit offsets are ok for BIOS calls, which
+</I>&gt;<i> traditionally take 16-bit ones? You are also still remaining in real mode
+</I>&gt;<i> while doing this?
+</I>
+Correct. For instance, int13h / ah=03 (write sectors to disk) expects
+the data location in ES:BX (16-bit). If it can't take ES:EBX (32-bit)
+then my planned unreal mode memory map won't work.
+
+&gt;<i> trapsing everywhere in real mode? So memory is not allocated dynamically,
+</I>&gt;<i> and memory protection is not really something you can implement in real
+</I>&gt;<i> mode?
+</I>
+Whether or not to have a memory manager vs letting apps grab what they
+want is a kernel design issue -- hence why Tomasz and I are discussing
+the possibility of memory management functions. But regardless of
+design, in real mode you can't stop one app writing bytes over any
+part of memory. In protected mode you use CPU features to limit
+applications to their own memory area.
+
+Hope that's clearer!
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000377.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+	<LI>Next message: <A HREF="000381.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#378">[ date ]</a>
+              <a href="thread.html#378">[ thread ]</a>
+              <a href="subject.html#378">[ subject ]</a>
+              <a href="author.html#378">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

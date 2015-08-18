@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] mikeos-developer Digest, Vol 17, Issue 8
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20mikeos-developer%20Digest%2C%20Vol%2017%2C%20Issue%208&In-Reply-To=%3C615841BDD12E79468AF651241E51C4AB0349AB0F%40CCS-MB-002.colnecommunity.internal%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000908.html">
+   <LINK REL="Next"  HREF="000922.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] mikeos-developer Digest, Vol 17, Issue 8</H1>
+    <B>05Barry</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20mikeos-developer%20Digest%2C%20Vol%2017%2C%20Issue%208&In-Reply-To=%3C615841BDD12E79468AF651241E51C4AB0349AB0F%40CCS-MB-002.colnecommunity.internal%3E"
+       TITLE="[mikeos-developer] mikeos-developer Digest, Vol 17, Issue 8">05Barry at colne.essex.sch.uk
+       </A><BR>
+    <I>Wed Jan 20 15:36:58 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000908.html">[mikeos-developer] (no subject)
+</A></li>
+        <LI>Next message: <A HREF="000922.html">[mikeos-developer] MikeOS 4.1 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#909">[ date ]</a>
+              <a href="thread.html#909">[ thread ]</a>
+              <a href="subject.html#909">[ subject ]</a>
+              <a href="author.html#909">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thanks For the help :)
+
+Sorry for the confusion in the Kernel sizes...
+
+The problem I seem to be faced now is that I will have to find a way of
+programming it all in NASM... :S
+
+Good fun I guess?
+
+Thanks for the help, and you will all be seeing my new 16bit OS soon...
+
+Thanks,
+
+Dan
+
+-----Original Message-----
+From: <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer-bounces at lists.berlios.de</A>
+[mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer-bounces at lists.berlios.de</A>] On Behalf Of
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer-request at lists.berlios.de</A>
+Sent: 20 January 2010 11:02
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+Subject: mikeos-developer Digest, Vol 17, Issue 8
+
+Send mikeos-developer mailing list submissions to
+	<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+
+To subscribe or unsubscribe via the World Wide Web, visit
+	<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+or, via email, send a message with subject or body 'help' to
+	<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer-request at lists.berlios.de</A>
+
+You can reach the person managing the list at
+	<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer-owner at lists.berlios.de</A>
+
+When replying, please edit your Subject line so it is more specific
+than &quot;Re: Contents of mikeos-developer digest...&quot;
+
+
+Today's Topics:
+
+   1. Re: (no subject) (M Saunders)
+
+
+----------------------------------------------------------------------
+
+Message: 1
+Date: Wed, 20 Jan 2010 10:17:45 +0000
+From: M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+Subject: Re: [mikeos-developer] (no subject)
+To: &quot;MikeOS (and similar OS) developers&quot;
+	&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+Message-ID:
+	&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">19d8b3b01001200217r5a2f9aacx9c76c9dcda3ee6ca at mail.gmail.com</A>&gt;
+Content-Type: text/plain; charset=windows-1252
+
+Hi Dan,
+
+&gt;<i> Just a little question, you know when Mike OS loads the kernel into
+</I>RAM, it
+&gt;<i> preserves enough space for how big it is?.
+</I>
+That's not actually what happens: the first 32K of the 64K segment is
+allocated to the kernel, regardless of its size. Currently the MikeOS
+kernel assembles to around a 13K binary, so there's plenty of space
+left.
+
+&gt;<i> Well what would I have to change
+</I>&gt;<i> to make it so that the Kernel only has 1kb, and the applications are
+</I>given
+&gt;<i> the rest of the RAM, (excluding the buffer).
+</I>
+That entirely depends on the design of your OS. If it's like MikeOS,
+you simply begin loading programs at kernel size+8K buffer point. Of
+course, your programs will need to be ORGed to a certain point, and if
+your kernel grows your programs will stop working, hence why it's best
+to give the kernel plenty of room.
+
+If your OS is going to be very small, give 8K for the kernel and 8K
+for the buffer, so programs can begin loading at the 16K mark and
+therefore have the remaining 48K of the segment to play with.
+
+&gt;<i> As another add on, I am also trying to figure out how to use the mouse
+</I>in 16
+&gt;<i> bit, so has anyone got any idea how I can use the bios to do this
+</I>
+Unfortunately you can't use the BIOS solely to operate the mouse.
+There are some initialisation things as you mentioned, but ultimately
+you have to read and write bytes to the keyboard controller to handle
+PS/2 mice. (USB mice in protected mode require a USB stack, but in
+real mode the PC should emulate them as PS/2.)
+
+Ages ago I wrote a mouse driver based on these two sources:
+
+<A HREF="http://wiki.osdev.org/Mouse_Input">http://wiki.osdev.org/Mouse_Input</A>
+<A HREF="http://forum.osdev.org/viewtopic.php?t=10247">http://forum.osdev.org/viewtopic.php?t=10247</A>
+
+That has all the info you need. The latter can be converted into asm
+pretty easily. Also, see TomOS, a MikeOS spin-off project that
+includes a mouse driver:
+
+<A HREF="http://tomos.sourceforge.net">http://tomos.sourceforge.net</A>
+
+Good luck!
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+
+------------------------------
+
+_______________________________________________
+mikeos-developer mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+
+
+End of mikeos-developer Digest, Vol 17, Issue 8
+***********************************************
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000908.html">[mikeos-developer] (no subject)
+</A></li>
+	<LI>Next message: <A HREF="000922.html">[mikeos-developer] MikeOS 4.1 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#909">[ date ]</a>
+              <a href="thread.html#909">[ thread ]</a>
+              <a href="subject.html#909">[ subject ]</a>
+              <a href="author.html#909">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

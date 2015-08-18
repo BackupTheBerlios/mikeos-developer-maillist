@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Excellent!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Excellent%21&In-Reply-To=%3C8d87c8a30808271528o289c9b46i26314d91c8211ef2%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000019.html">
+   <LINK REL="Next"  HREF="000034.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Excellent!</H1>
+    <B>Bob Moss</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Excellent%21&In-Reply-To=%3C8d87c8a30808271528o289c9b46i26314d91c8211ef2%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Excellent!">bobbyjmoss at googlemail.com
+       </A><BR>
+    <I>Thu Aug 28 00:28:03 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000019.html">[mikeos-developer] Excellent!
+</A></li>
+        <LI>Next message: <A HREF="000034.html">[mikeos-developer] Excellent!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#33">[ date ]</a>
+              <a href="thread.html#33">[ thread ]</a>
+              <a href="subject.html#33">[ subject ]</a>
+              <a href="author.html#33">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In terms of the ApolloOS GUI I'm nowhere (I'm still focussing on getting
+some stable code - in the next few months...)
+
+In terms of MikeOS, I did make a start on a mouse driver. I set up a few
+routines to draw a cursor to a screen at a given pixel location, but as your
+graphics don't continuously refresh (or at least don't seem to) then you
+can't really map mouse movements (it is static - as you move your mouse a
+value for the movement of the ball can be sent to the stack per processor
+cycle, but if your graphics don't refresh then you can't draw a cursor to
+the screen as you move the mouse!). As I didn't fancy rewriting all of
+MikeOS's graphics (as I'll confess at this point that I simply don't
+understand them!) I stopped there! It is also possible to get a right/left
+click from a mouse by setting a 'status' (essentially, when you click on a
+mouse, you send an interrupt which sends a value to the stack. When you
+release the button that stops sending the interrupt, so you would set it
+back to 0). Depending on how many processor cycles 1 remains at (or how
+quickly 1 returns again) gives you the functionality of a
+single/double-click - and even a click and drag (which would give rise to a
+windowing interface, buttons, icons, etc.!)
+
+As you can see, I did a heck of a lot of research, but I won't be building a
+complete mouse driver for MikeOS (as it would involve rewriting most of
+it!). However, as I'm writing ApolloOS as a 32-bit C equivalent of MikeOS
+(in that it is structurally similar and uses similar routines and
+algorithms, albeit in a different language) I have a clean slate with which
+I can produce a desktop GUI - though it will be a while before that comes to
+fruition. ApolloOS 0.1.0 (when I finally finish it) will be simply the most
+stable OS I can build in the next few months - the following version will be
+far more exciting as I'll be able to build upon the ground work I've been
+trying to lay since February!
+
+Also - those of you using the <A HREF="http://apolloopsys.sourceforge.net/">http://apolloopsys.sourceforge.net/</A> portal are
+seeing outdated info. Head to <A HREF="http://apolloopsys.googlepages.com/">http://apolloopsys.googlepages.com/</A> instead
+(it works via the 'website' link on my sourceforge summary page). I've
+written a PHP redirect script but since SF.NET have changed everything to
+'ssh' (which I know nothing about) I haven't been able to upload it. Any
+help on that front would be wonderful!
+
+Anyways, I hope that details my current progress - I'm determined to get a
+raw MikeOS bootloader to see my kernel binary - if all else fails I will
+revert to grub, but there's no reason it shouldn't work!).
+
+2008/8/27 M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+
+&gt;<i> Lo Bob,
+</I>&gt;<i>
+</I>&gt;<i> Indeed, a simple serial-based communication system shouldn't be hard
+</I>&gt;<i> to implement. There's no form of threading in MikeOS, however, and
+</I>&gt;<i> that does drain resources a bit when it comes to checking for
+</I>&gt;<i> keypresses AND checking for bytes in the serial buffer at the same
+</I>&gt;<i> time.
+</I>&gt;<i>
+</I>&gt;<i> Right now, in serial.asm for instance, the program fires off an rapid
+</I>&gt;<i> loop to check for both instances. I might be able to mitigate this
+</I>&gt;<i> with 'hlt' -- I'll have a look this evening.
+</I>&gt;<i>
+</I>&gt;<i> Looking forward to seeing your work. How far did you get with the GUI?
+</I>&gt;<i> I think that's still out of the question for MikeOS right now, but
+</I>&gt;<i> someone has submitted a complete mouse driver implementation, so it'd
+</I>&gt;<i> be good to see other code. (When the developer is happy with the mouse
+</I>&gt;<i> driver I'll post a test image here.)
+</I>&gt;<i>
+</I>&gt;<i> Cheers,
+</I>&gt;<i> Mike
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Mike Saunders
+</I>&gt;<i> <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+This email is not intended to offend, annoy or inconvenience anyone. If it
+has, email me and state that it has, and we'll sort out the problem in an
+amicable way. Thank you for reading this message, I hope for a reply from
+you soon!
+
+Why not visit my tech site?: <A HREF="http://bjm1904.741.com/">http://bjm1904.741.com/</A>
+or Apollo OS?:
+<A HREF="http://apolloopsys.sourceforge.net/">http://apolloopsys.sourceforge.net/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080827/3ae9bc26/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080827/3ae9bc26/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000019.html">[mikeos-developer] Excellent!
+</A></li>
+	<LI>Next message: <A HREF="000034.html">[mikeos-developer] Excellent!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#33">[ date ]</a>
+              <a href="thread.html#33">[ thread ]</a>
+              <a href="subject.html#33">[ subject ]</a>
+              <a href="author.html#33">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

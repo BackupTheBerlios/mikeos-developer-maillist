@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Planning for MikeOS 2.1 and 3.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Planning%20for%20MikeOS%202.1%20and%203.0&In-Reply-To=%3C8d87c8a30810220532u788350fbt6efa919af01e8cf%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000378.html">
+   <LINK REL="Next"  HREF="000385.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Planning for MikeOS 2.1 and 3.0</H1>
+    <B>Bob Moss</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Planning%20for%20MikeOS%202.1%20and%203.0&In-Reply-To=%3C8d87c8a30810220532u788350fbt6efa919af01e8cf%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Planning for MikeOS 2.1 and 3.0">bobbyjmoss at googlemail.com
+       </A><BR>
+    <I>Wed Oct 22 14:32:19 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000378.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+        <LI>Next message: <A HREF="000385.html">[mikeos-developer] wiki.osdev.org unreal mode has a bug
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#381">[ date ]</a>
+              <a href="thread.html#381">[ thread ]</a>
+              <a href="subject.html#381">[ subject ]</a>
+              <a href="author.html#381">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Correct. For instance, int13h / ah=03  (write sectors to disk) expects
+</I>&gt;<i> the data location in ES:BX (16-bit). If it can't take ES:EBX (32-bit)
+</I>&gt;<i> then my planned unreal mode memory map won't work.
+</I>&gt;<i>
+</I>
+
+Ok... I get it now! (The cogs have come unstuck!)
+
+
+&gt;<i>
+</I>&gt;<i> &gt; trapsing everywhere in real mode? So memory is not allocated dynamically,
+</I>&gt;<i> &gt; and memory protection is not really something you can implement in real
+</I>&gt;<i> &gt; mode?
+</I>&gt;<i>
+</I>&gt;<i> Whether or not to have a memory manager vs letting apps grab what they
+</I>&gt;<i> want is a kernel design issue -- hence why Tomasz and I are discussing
+</I>&gt;<i> the possibility of memory management functions. But regardless of
+</I>&gt;<i> design, in real mode you can't stop one app writing bytes over any
+</I>&gt;<i> part of memory. In protected mode you use CPU features to limit
+</I>&gt;<i> applications to their own memory area.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+Yeah - in pmode processes can be put under a 'supervisor mode' in the x86
+architecture (which I'm still figuring out how to implement and need to do
+more research on!). I do finally get what you're on about - as my boss says
+on a frequent basis, &quot;If you don't know - ASK!&quot; :-)
+
+Thanx for clearing this up! ;)
+
+
+
+-- 
+This email is not intended to offend, annoy or inconvenience anyone. If it
+has, email me and state that it has, and we'll sort out the problem in an
+amicable way. Thank you for reading this message, I hope for a reply from
+you soon!
+
+Why not visit my tech site?: <A HREF="http://bjm1904.741.com/">http://bjm1904.741.com/</A>
+or Apollo OS?:
+<A HREF="http://apolloopsys.sourceforge.net/">http://apolloopsys.sourceforge.net/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20081022/82d80f3f/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20081022/82d80f3f/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000378.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+	<LI>Next message: <A HREF="000385.html">[mikeos-developer] wiki.osdev.org unreal mode has a bug
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#381">[ date ]</a>
+              <a href="thread.html#381">[ thread ]</a>
+              <a href="subject.html#381">[ subject ]</a>
+              <a href="author.html#381">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

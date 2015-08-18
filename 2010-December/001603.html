@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Command Line arguments?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Command%20Line%20arguments%3F&In-Reply-To=%3C484477.20515.qm%40web56105.mail.re3.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001602.html">
+   <LINK REL="Next"  HREF="001604.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Command Line arguments?</H1>
+    <B>M. Horvat</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Command%20Line%20arguments%3F&In-Reply-To=%3C484477.20515.qm%40web56105.mail.re3.yahoo.com%3E"
+       TITLE="[mikeos-developer] Command Line arguments?">redjazz_slo at yahoo.com
+       </A><BR>
+    <I>Mon Dec  6 23:52:15 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001602.html">[mikeos-developer] Command Line arguments?
+</A></li>
+        <LI>Next message: <A HREF="001604.html">[mikeos-developer] Command Line arguments?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1603">[ date ]</a>
+              <a href="thread.html#1603">[ thread ]</a>
+              <a href="subject.html#1603">[ subject ]</a>
+              <a href="author.html#1603">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> With the MikeOS kernel (which I'm using as a little test
+</I>&gt;<i> thing for the
+</I>&gt;<i> CLI and colors and drivers), would this work (due to stand
+</I>&gt;<i> alone
+</I>&gt;<i> assembly)?:
+</I>&gt;<i> 
+</I>&gt;<i> CLI code:
+</I>&gt;<i> &#160; &#160; mov&#160; &#160; &#160; al, cmd_line
+</I>&gt;<i> &#160; &#160; call&#160; &#160;
+</I>&gt;<i> &#160;&#160;&#160;os_load_file
+</I>&gt;<i> 
+</I>&gt;<i> CAT.bin code:
+</I>&gt;<i> 
+</I>&gt;<i> start:
+</I>&gt;<i> &#160; &#160; mov&#160; &#160;&#160;&#160;al,
+</I>&gt;<i> bx&#160;&#160;&#160;; al is the cmd_line
+</I>&gt;<i> &#160; &#160; ; and use bx for the filename
+</I>
+Loading a 16-bit value to an 8-bit register? Nope.
+
+How about having the command line interpreter place the command line string somewhere in memory, and then using a system call to get its location and length? Or maybe passing them through the registers when the program starts.
+
+-Matej Horvat
+
+
+      
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001602.html">[mikeos-developer] Command Line arguments?
+</A></li>
+	<LI>Next message: <A HREF="001604.html">[mikeos-developer] Command Line arguments?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1603">[ date ]</a>
+              <a href="thread.html#1603">[ thread ]</a>
+              <a href="subject.html#1603">[ subject ]</a>
+              <a href="author.html#1603">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

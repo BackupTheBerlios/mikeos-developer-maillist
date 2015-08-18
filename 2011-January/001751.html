@@ -1,0 +1,253 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] GUI
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20GUI&In-Reply-To=%3CAANLkTi%3DppE627DC%2BCi4jEARr2V8TW3LLoDgK3ZDvtXGY%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001750.html">
+   <LINK REL="Next"  HREF="001752.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] GUI</H1>
+    <B>Raghav Sood</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20GUI&In-Reply-To=%3CAANLkTi%3DppE627DC%2BCi4jEARr2V8TW3LLoDgK3ZDvtXGY%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] GUI">raghavsood at gmail.com
+       </A><BR>
+    <I>Wed Jan 12 11:17:50 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001750.html">[mikeos-developer] GUI
+</A></li>
+        <LI>Next message: <A HREF="001752.html">[mikeos-developer] GUI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1751">[ date ]</a>
+              <a href="thread.html#1751">[ thread ]</a>
+              <a href="subject.html#1751">[ subject ]</a>
+              <a href="author.html#1751">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>The mouse, sadly doesn't start in Virtual PC. I will see if I can fix it. I
+also have have two new calls that I and Paulo made for a password dialog
+box.(See below)
+
+os_input_dialog_pwd:
+    pusha
+
+    push ax                ; Save string location
+    push bx                ; Save message to show
+
+
+    mov dh, 10            ; First, draw red background box
+    mov dl, 12
+
+.redbox:                ; Loop to draw all lines of box
+    call os_move_cursor
+
+    pusha
+    mov ah, 09h
+    mov bh, 0
+    mov cx, 55
+    mov bl, 00001111b        ; White on red
+    mov al, ' '
+    int 10h
+    popa
+
+    inc dh
+    cmp dh, 16
+    je .boxdone
+    jmp .redbox
+
+
+.boxdone:
+    mov dl, 14
+    mov dh, 11
+    call os_move_cursor
+
+
+    pop bx                ; Get message back and display it
+    mov si, bx
+    call os_print_string
+
+    mov dl, 14
+    mov dh, 13
+    call os_move_cursor
+
+
+    pop ax                ; Get input string back
+    call os_input_string_pwd
+
+    popa
+    ret
+
+and the other one:
+
+os_input_string_pwd:
+    pusha
+
+    mov di, ax            ; DI is where we'll store input (buffer)
+    mov cx, 0            ; Character received counter for backspace
+
+
+.more:                    ; Now onto string getting
+    call os_wait_for_key
+
+    cmp al, 13            ; If Enter key pressed, finish
+    je .done
+
+    cmp al, 8            ; Backspace pressed?
+    je .backspace            ; If not, skip following checks
+
+    cmp al, ' '            ; In ASCII range (32 - 126)?
+    jb .more            ; Ignore most non-printing characters
+
+    cmp al, '~'
+    ja .more
+
+    jmp .nobackspace
+
+
+.backspace:
+    cmp cx, 0            ; Backspace at start of string?
+    je .more            ; Ignore it if so
+
+    call os_get_cursor_pos        ; Backspace at start of screen line?
+    cmp dl, 0
+    je .backspace_linestart
+
+    pusha
+    mov ah, 0Eh            ; If not, write space and move cursor back
+    mov al, 8
+    int 10h                ; Backspace twice, to clear space
+    mov al, 32
+    int 10h
+    mov al, 8
+    int 10h
+    popa
+
+    dec di                ; Character position will be overwritten by new
+                    ; character or terminator at end
+
+    dec cx                ; Step back counter
+
+    jmp .more
+
+
+.backspace_linestart:
+    dec dh                ; Jump back to end of previous line
+    mov dl, 79
+    call os_move_cursor
+
+    mov al, ' '            ; Print space there
+    mov ah, 0Eh
+    int 10h
+
+    mov dl, 79            ; And jump back before the space
+    call os_move_cursor
+
+    dec di                ; Step back position in string
+    dec cx                ; Step back counter
+
+    jmp .more
+
+
+.nobackspace:
+    pusha
+    mov al, '*'
+    mov ah, 0Eh            ; Output entered, printable character
+    int 10h
+    popa
+
+    stosb                ; Store character in designated buffer
+    inc cx                ; Characters processed += 1
+    cmp cx, 254            ; Make sure we don't exhaust buffer
+    jae near .done
+
+    jmp near .more
+
+
+.done:
+    mov ax, 0
+    stosb
+
+    popa
+    ret
+
+
+They have the same IN/OUT as their default counter parts.
+(I know its not exactly in place inside a GUI thread. If you want I'll start
+another thread.)
+
+On Wed, Jan 12, 2011 at 3:37 PM, M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt; wrote:
+
+&gt;<i> On Wed, Jan 12, 2011 at 10:01 AM, Raghav Sood &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">raghavsood at gmail.com</A>&gt;
+</I>&gt;<i> wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Apparently Virtual PC renders the dialog box as seen in your screen shot
+</I>&gt;<i> &gt; without editing out the mouse initialize but QEMU doesn't.
+</I>&gt;<i>
+</I>&gt;<i> Interesting, thanks. But does the mouse actually work in Virtual PC?
+</I>&gt;<i>
+</I>&gt;<i> &gt; Exactly what is wrong in the driver?
+</I>&gt;<i>
+</I>&gt;<i> I've no idea, unfortunately. All I remember is that it was once
+</I>&gt;<i> working, and in the latest (and only) code I have (in mikeos-gui.tgz)
+</I>&gt;<i> it doesn't work. Might be in the initialisation bit. The IRQ handler
+</I>&gt;<i> stuff should be totally fine and not need messing with.
+</I>&gt;<i>
+</I>&gt;<i> Here are the two resources I used to write the driver:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://houbysoft.com/download/ps2mouse.html">http://houbysoft.com/download/ps2mouse.html</A>
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://forum.osdev.org/viewtopic.php?t=10247">http://forum.osdev.org/viewtopic.php?t=10247</A>
+</I>&gt;<i>
+</I>&gt;<i> They're both in C, but not using any library calls or anything -- just
+</I>&gt;<i> ports and checking bits, so you can see how it translates into asm in
+</I>&gt;<i> the MikeOS code.
+</I>&gt;<i>
+</I>&gt;<i> M
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+Raghav Sood
+<A HREF="http://www.raghavsood.com/">http://www.raghavsood.com/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110112/b7e125dd/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110112/b7e125dd/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001750.html">[mikeos-developer] GUI
+</A></li>
+	<LI>Next message: <A HREF="001752.html">[mikeos-developer] GUI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1751">[ date ]</a>
+              <a href="thread.html#1751">[ thread ]</a>
+              <a href="subject.html#1751">[ subject ]</a>
+              <a href="author.html#1751">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

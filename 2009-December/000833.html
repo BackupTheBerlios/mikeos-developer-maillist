@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] The BASIC interpreter...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20The%20BASIC%20interpreter...&In-Reply-To=%3C198334.89483.qm%40web113102.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000831.html">
+   <LINK REL="Next"  HREF="000834.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] The BASIC interpreter...</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20The%20BASIC%20interpreter...&In-Reply-To=%3C198334.89483.qm%40web113102.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] The BASIC interpreter...">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Wed Dec  9 19:20:38 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000831.html">[mikeos-developer] The BASIC interpreter...
+</A></li>
+        <LI>Next message: <A HREF="000834.html">[mikeos-developer] The BASIC interpreter...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#833">[ date ]</a>
+              <a href="thread.html#833">[ thread ]</a>
+              <a href="subject.html#833">[ subject ]</a>
+              <a href="author.html#833">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Using PAROUT and PARIN LPT1 is too restrictive for the following reasons:
+
+1) LPT addresses vary (see my help file)
+
+2) The LPT port actually consists of 3 registers (data,status and control) with 3 different addresses
+    The data port (base address is normally write only unless it has bi-directional capabilities
+     and it must be switched by software to input mode by writing to bit 5 of the control register first.)
+     (again see my help file)
+
+3) A pc may have up to 3 LPTs so by hardcoding LPT1 is no good.
+
+
+A much better way to go is:
+
+OUT address,data       for 8 bit output ports such as the LPT
+A = IN(address)          for 8 bit input ports such as the status register of the LPT
+
+I also believe there should be the capability for 16 bit port access.
+This would allow access to sound cards, PATA hard-drives , ATAPI cd-roms, etc.
+
+OUTW address,data      data in this case is 16 bit
+A = INW(address)        as above.
+
+Just my 2 cents worth.
+Paulo.
+
+
+
+
+
+
+----- Original Message ----
+From: Tomasz Gorol &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">gavian at o2.pl</A>&gt;
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+Sent: Wed, November 25, 2009 1:13:07 AM
+Subject: Re: [mikeos-developer] The BASIC interpreter...
+
+On Tue, 24 Nov 2009 22:07:13 +0000
+M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt; wrote:
+&gt;<i> Should I add IN and OUT instructions to the BASIC
+</I>&gt;<i> interpreter to read and write to ports?
+</I>
+My idea is to wrap the accessing of a parallel port in PAROUT and PARIN
+functions.
+
+Example:
+
+    PAROUT LPT1 , 12       &lt;-- write 12 to the port
+    PARIN LPT1, $A         &lt;-- read port and store in A variable.
+
+This basic interpreter is cool by the way, great job :)
+
+Tomasz Gorol
+_______________________________________________
+mikeos-developer mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+
+
+
+      
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000831.html">[mikeos-developer] The BASIC interpreter...
+</A></li>
+	<LI>Next message: <A HREF="000834.html">[mikeos-developer] The BASIC interpreter...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#833">[ date ]</a>
+              <a href="thread.html#833">[ thread ]</a>
+              <a href="subject.html#833">[ subject ]</a>
+              <a href="author.html#833">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

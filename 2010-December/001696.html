@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Screen matrix for bios text mode.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Screen%20matrix%20for%20bios%20text%20mode.&In-Reply-To=%3C20101223150249.SED4V.735410.root%40web09-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001694.html">
+   <LINK REL="Next"  HREF="001695.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Screen matrix for bios text mode.</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Screen%20matrix%20for%20bios%20text%20mode.&In-Reply-To=%3C20101223150249.SED4V.735410.root%40web09-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] Screen matrix for bios text mode.">wisecracker at tesco.net
+       </A><BR>
+    <I>Thu Dec 23 16:02:49 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001694.html">[mikeos-developer] Screen matrix for bios text mode.
+</A></li>
+        <LI>Next message: <A HREF="001695.html">[mikeos-developer] Screen matrix for bios text mode.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1696">[ date ]</a>
+              <a href="thread.html#1696">[ thread ]</a>
+              <a href="subject.html#1696">[ subject ]</a>
+              <a href="author.html#1696">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Matthew...
+
+&gt;<i> Ahhh. Learning about int 10.  Didn't think interrupts could be so fun
+</I>&gt;<i> (sorry but computer programming is what I do for fun).
+</I>
+You don`t need interrupt 10 for much of Video Mode 3, (CGA text mode.
+
+The default page starts at absolute address 0xB8000 and every EVEN address is the character
+and every ODD address is the colour, both are byte values, and as the screen contains 2000 characters
+linearly related then bit is easy to produce XY values of your own without the need of many
+INT 10h functions.
+
+Plus on slow machines it would be faster too.
+
+Take a look at the TESTCARD.ZIP archive for a full screen example.
+I`m sure the assembly code is in there.
+
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+<A HREF="http://homepages.tesco.net/wisecracker/">http://homepages.tesco.net/wisecracker/</A>
+
+<A HREF="http://main.aminet.net/search?readme=wisecracker">http://main.aminet.net/search?readme=wisecracker</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001694.html">[mikeos-developer] Screen matrix for bios text mode.
+</A></li>
+	<LI>Next message: <A HREF="001695.html">[mikeos-developer] Screen matrix for bios text mode.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1696">[ date ]</a>
+              <a href="thread.html#1696">[ thread ]</a>
+              <a href="subject.html#1696">[ subject ]</a>
+              <a href="author.html#1696">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

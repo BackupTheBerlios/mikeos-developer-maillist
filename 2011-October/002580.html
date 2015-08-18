@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeBASIC Flashing Patch
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeBASIC%20Flashing%20Patch&In-Reply-To=%3CCADY6QCmJuy%3DsGoq_rcf_amG7ki_otwcvHnGwGhcvwzSGfHQgjg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002572.html">
+   <LINK REL="Next"  HREF="002581.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeBASIC Flashing Patch</H1>
+    <B>Robert Looney</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeBASIC%20Flashing%20Patch&In-Reply-To=%3CCADY6QCmJuy%3DsGoq_rcf_amG7ki_otwcvHnGwGhcvwzSGfHQgjg%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeBASIC Flashing Patch">rli1223 at gmail.com
+       </A><BR>
+    <I>Thu Oct  6 01:51:50 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002572.html">[mikeos-developer] Adventure! v2.3
+</A></li>
+        <LI>Next message: <A HREF="002581.html">[mikeos-developer] Adventure! v2.3
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2580">[ date ]</a>
+              <a href="thread.html#2580">[ thread ]</a>
+              <a href="subject.html#2580">[ subject ]</a>
+              <a href="author.html#2580">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This patch takes the code from viewer.ASM and puts it in BASIC.ASM. The code
+is in one place only, like Mike wanted it and worked for me. The places that
+I patched are under the labels on this email.
+Code attached.
+
+do_mode:
+call get_token
+cmp ax, VARIABLE
+je .is_var
+
+mov si, token
+call os_string_to_int
+jmp .do_int
+
+.is_var:
+mov ax, 0
+mov byte al, [token]
+call get_var
+
+.do_int:
+mov byte [vid_mode], al
+mov ah, 0
+int 10h
+
+cmp byte [vid_mode], 3 ; Switching to normal text mode?
+jne mainloop
+
+mov ax, 3 ; Back to text mode
+mov bx, 0
+int 10h
+mov ax, 1003h ; No blinking text!
+int 10h
+
+mov ax, 2000h ; Reset ES back to original value
+mov es, ax
+jmp mainloop
+
+-----------------------------------------------------------------------------------------------------------------------
+
+error:
+mov byte al, [vid_mode] ; Need to switch back to text mode?
+cmp al, 3
+je .in_text_mode
+
+mov ax, 3 ; Back to text mode
+mov bx, 0
+int 10h
+mov ax, 1003h ; No blinking text!
+int 10h
+
+mov ax, 2000h ; Reset ES back to original value
+mov es, ax
+
+.in_text_mode:
+call os_print_newline
+call os_print_string ; Print error message
+call os_print_newline
+
+mov word sp, [orig_stack] ; Restore the stack to as it was when BASIC
+started
+
+ret ; And finish
+
+-- 
+Robert Looney
+<A HREF="http://code.google.com/p/blue-jay-project/">http://code.google.com/p/blue-jay-project/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111005/c89ddfd6/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111005/c89ddfd6/attachment.html</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: basic.asm
+Type: application/octet-stream
+Size: 47094 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111005/c89ddfd6/attachment.obj">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111005/c89ddfd6/attachment.obj</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002572.html">[mikeos-developer] Adventure! v2.3
+</A></li>
+	<LI>Next message: <A HREF="002581.html">[mikeos-developer] Adventure! v2.3
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2580">[ date ]</a>
+              <a href="thread.html#2580">[ thread ]</a>
+              <a href="subject.html#2580">[ subject ]</a>
+              <a href="author.html#2580">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

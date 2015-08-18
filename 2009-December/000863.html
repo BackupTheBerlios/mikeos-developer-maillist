@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.1b1 released for testing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.1b1%20released%20for%20testing&In-Reply-To=%3C19d8b3b00912180439q920f793m7826663db6c738a6%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000875.html">
+   <LINK REL="Next"  HREF="000864.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.1b1 released for testing</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.1b1%20released%20for%20testing&In-Reply-To=%3C19d8b3b00912180439q920f793m7826663db6c738a6%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 4.1b1 released for testing">okachi at gmail.com
+       </A><BR>
+    <I>Fri Dec 18 13:39:03 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000875.html">[mikeos-developer] Better random number generator for 4.1 --	any takers?
+</A></li>
+        <LI>Next message: <A HREF="000864.html">[mikeos-developer] MikeOS 4.1b1 released for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#863">[ date ]</a>
+              <a href="thread.html#863">[ thread ]</a>
+              <a href="subject.html#863">[ subject ]</a>
+              <a href="author.html#863">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi everyone,
+
+<A HREF="http://prdownload.berlios.de/mikeos/mikeos-4.1b1.zip">http://prdownload.berlios.de/mikeos/mikeos-4.1b1.zip</A>
+
+Changes listed below. The SERIAL and PORT commands for BASIC are
+completely untested -- I'm relying on you guys to give them a good
+hammering :-) Please let me know if you find any bugs or need any
+extra features in the commands (nothing too complex though!). The
+SERIAL and PORT commands are described in
+doc/handbook-appdev-basic.html
+
+Cheers,
+Mike
+
+
+# BASIC variable assignment enhanced: can now take multiple values and
+variables, eg &quot;x = a + 2 * b + 3&quot; (thanks Steve)
+
+# Two new system calls: os_port_byte_out and os_port_byte_in --
+send/receive bytes from ports (thanks Paulo)
+
+# os_serial_port_enable system call: now takes 0 in AX for normal mode
+(9600 baud as before), or 1 for a new slow mode (1200 baud)
+
+# New SERIAL command in BASIC: &quot;SERIAL ON 1200&quot; or &quot;SERIAL ON 9600&quot; to
+enable, &quot;SERIAL SEND X&quot; or &quot;SERIAL SEND 50&quot; to send a byte, and
+&quot;SERIAL REC X&quot; to receive a byte into a variable
+
+# New PORT command in BASIC: &quot;PORT OUT 1234 X&quot; or &quot;PORT OUT 1234 20&quot;
+to send byte to a port, and &quot;PORT IN 1234 X&quot; to receive a byte
+
+# source/features/serial.asm renamed to source/features/ports.asm as
+it now contains new non-serial routines
+
+# CLI command checking code simplified -- no need to point SI to the
+input string each time (thanks Ian)
+
+# BASIC CURSORCHAR command is now CURSCHAR, so that it doesn't look
+like a superset of the CURSOR command
+
+# API bumped to version 13
+
+# Handbook updates and fixes
+
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000875.html">[mikeos-developer] Better random number generator for 4.1 --	any takers?
+</A></li>
+	<LI>Next message: <A HREF="000864.html">[mikeos-developer] MikeOS 4.1b1 released for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#863">[ date ]</a>
+              <a href="thread.html#863">[ thread ]</a>
+              <a href="subject.html#863">[ subject ]</a>
+              <a href="author.html#863">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

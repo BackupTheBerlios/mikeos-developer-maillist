@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 3.4 beta 1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-July/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%203.4%20beta%201&In-Reply-To=%3C4f03362c0907071930i203c81b6l30dbc53b0b883898%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000706.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 3.4 beta 1</H1>
+    <B>Ian Seyler</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%203.4%20beta%201&In-Reply-To=%3C4f03362c0907071930i203c81b6l30dbc53b0b883898%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 3.4 beta 1">iseyler at gmail.com
+       </A><BR>
+    <I>Wed Jul  8 04:30:17 CEST 2009</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000706.html">[mikeos-developer] MikeOS 3.4 beta 1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#705">[ date ]</a>
+              <a href="thread.html#705">[ thread ]</a>
+              <a href="subject.html#705">[ subject ]</a>
+              <a href="author.html#705">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Mike,
+
+It's good to see that MikeOS is still developing. I'm still plugging
+away at BareMetal as well.
+
+I rewrote the os_string_chomp function for my OS and wanted to share
+the code. This code is for 64-bit but can be adapted to 16-bit and
+also still use AX as the string pointer. I find it to be a little
+simpler.
+
+; -----------------------------------------------------------------------------
+; os_string_chomp -- Strip leading and trailing spaces from a string
+;  IN:	RSI = string location
+; OUT:	Nothing. All registers preserved
+os_string_chomp:
+	push rsi
+	push rdi
+	push rax
+
+	mov rdi, rsi	; RDI will point to the start of the string
+	push rdi		; while RSI will point to the &quot;actual&quot; start (without the spaces)
+	call os_string_length
+	add rdi, rax
+
+os_string_chomp_findend:	; we start at the end of the string and move
+backwards until we don't find a space
+	dec rdi
+	cmp byte [rdi], ' '
+	jne os_string_chomp_foundend
+	jmp os_string_chomp_findend
+
+os_string_chomp_foundend:	; we found the real end of the string so
+null terminate it
+	inc rdi
+	mov byte [rdi], 0x00
+	pop rdi
+
+os_string_chomp_start_count:	; read through string until we find a
+non-space character
+	cmp byte [rsi], ' '
+	jne copyit
+	inc rsi
+	jmp os_string_chomp_start_count
+
+; At this point RSI points to the actual start of the string (minus
+the leading spaces, if any)
+; And RDI point to the start of the string
+
+copyit:		; Copy a byte from RSI to RDI one byte at a time until we find a NULL
+	lodsb
+	stosb
+	cmp al, 0x00
+	jne copyit
+
+os_string_chomp_done:
+	pop rax
+	pop rdi
+	pop rsi
+	ret
+; -----------------------------------------------------------------------------
+
+-Ian
+
+
+On Mon, Jun 29, 2009 at 3:50 PM, M Saunders&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt; wrote:
+&gt;<i> Hi all,
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://prdownload.berlios.de/mikeos/mikeos-3.4b1.zip">http://prdownload.berlios.de/mikeos/mikeos-3.4b1.zip</A>
+</I>&gt;<i>
+</I>&gt;<i> It's not particularly exciting, but in this release, the BASIC
+</I>&gt;<i> interpreter is now rolled into the kernel. So in the app launcher or
+</I>&gt;<i> at the command line, you can run .BAS programs just as you would .BIN.
+</I>&gt;<i> I've renamed TEST.BAS to EXAMPLE.BAS, so you can run it just by
+</I>&gt;<i> entering 'EXAMPLE' at the command line.
+</I>&gt;<i>
+</I>&gt;<i> I've also made sure that EXAMPLE.BAS is copied to the disk (as per
+</I>&gt;<i> Takayoshi's fix) on OpenBSD, OS X and Windows.
+</I>&gt;<i>
+</I>&gt;<i> Next step is to add more commands to BASIC, so that people can write
+</I>&gt;<i> simple games! MOVE and GETKEY are coming up...
+</I>&gt;<i>
+</I>&gt;<i> M
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Mike Saunders
+</I>&gt;<i> <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000706.html">[mikeos-developer] MikeOS 3.4 beta 1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#705">[ date ]</a>
+              <a href="thread.html#705">[ thread ]</a>
+              <a href="subject.html#705">[ subject ]</a>
+              <a href="author.html#705">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

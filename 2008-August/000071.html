@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] FAT12 write support development
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT12%20write%20support%20development&In-Reply-To=%3C19d8b3b00808281451q2b24cc4co566d86bc6a9321e5%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000070.html">
+   <LINK REL="Next"  HREF="000073.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] FAT12 write support development</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT12%20write%20support%20development&In-Reply-To=%3C19d8b3b00808281451q2b24cc4co566d86bc6a9321e5%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] FAT12 write support development">okachi at gmail.com
+       </A><BR>
+    <I>Thu Aug 28 23:51:36 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000070.html">[mikeos-developer] FAT12 write support development
+</A></li>
+        <LI>Next message: <A HREF="000073.html">[mikeos-developer] FAT12 write support development
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#71">[ date ]</a>
+              <a href="thread.html#71">[ thread ]</a>
+              <a href="subject.html#71">[ subject ]</a>
+              <a href="author.html#71">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 8/28/08, Bob Moss &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">bobbyjmoss at googlemail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Hmm... When you are in floppy emulation mode, your OS boots and loads itself
+</I>&gt;<i> into memory. You could therefore remove the ISO image/CD with no ill effects
+</I>&gt;<i> (as it's running like a Live system). Therefore, MikeOS knows it's in
+</I>&gt;<i> memory. Now, suppose we insert a floppy disk/image. That still sends an
+</I>&gt;<i> interrupt as a result (as it would if you removed it). If we wrote in some
+</I>&gt;<i> simple hardware detection to deal with those interrupts, it could be
+</I>&gt;<i> possible to do it without an ISO9660 driver.
+</I>
+That's an interesting point, and one which I don't know much about :-)
+If you could convince the BIOS that yep, we're loaded in RAM now and
+it doesn't matter how we got here, perhaps then you could activate the
+real floppy drive. That would be excellent. I guess it all depends on
+how stubborn the BIOS is in letting us make changes :-)
+
+&gt;<i> (Before I get berated, I know it wouldn't be easy - I think I'd need more
+</I>&gt;<i> research however!)
+</I>
+I don't think anything's really difficult - it's just all about time.
+I wanted to avoid the FAT12 writing stuff as it's really laborious in
+terms of testing, when I'd rather be coding cooler stuff :-) But that
+had to be done.
+
+Certainly any of us, with enough time and patience, could implement a
+TCP/IP stack for MikeOS (and, making it black-box-ish enough, it'd
+work on our other projects). But the vast amount of research, hacking
+and testing involved would turn it into a one-year project, and as
+mere humans we all like to see instant results :-)
+
+&gt;<i> Also, booting off a FAT16 partition would be interesting. You would however
+</I>&gt;<i> have to consider the MBR (to allow a boot) - so would that mean we would
+</I>&gt;<i> need support for existing bootloaders  (to add 'MikeOS' as an option) or to
+</I>&gt;<i> allow other OS's to use the same bootloader?
+</I>
+This is also an interesting point. GRUB can boot nigh-on any OS,
+providing that the kernel has an appropriate header (ie string of
+bytes identifying itself). However, GRUB automatically sets up
+protected mode as I understand it, which'd be a nightmare to resolve
+if we can't switch back easily.
+
+However, with Ian's plans of hard drive booting, I'd love to chuck
+away the current bootload.asm and have MikeOS booting by GRUB, as it'd
+unify booting whether from the hard drive or floppy drive. That would
+rock the Earth to its core.
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000070.html">[mikeos-developer] FAT12 write support development
+</A></li>
+	<LI>Next message: <A HREF="000073.html">[mikeos-developer] FAT12 write support development
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#71">[ date ]</a>
+              <a href="thread.html#71">[ thread ]</a>
+              <a href="subject.html#71">[ subject ]</a>
+              <a href="author.html#71">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

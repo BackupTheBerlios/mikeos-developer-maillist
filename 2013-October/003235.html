@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Memory Management Library
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2013-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Memory%20Management%20Library&In-Reply-To=%3CCAEz6_zgMPW%3DJbDOfRm4vsX338j_ueh9LkuemF7m%3Dwioq48iaMA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003234.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Memory Management Library</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Memory%20Management%20Library&In-Reply-To=%3CCAEz6_zgMPW%3DJbDOfRm4vsX338j_ueh9LkuemF7m%3Dwioq48iaMA%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Memory Management Library">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Wed Oct 30 12:49:47 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003234.html">[mikeos-developer] Memory Management Library
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3235">[ date ]</a>
+              <a href="thread.html#3235">[ thread ]</a>
+              <a href="subject.html#3235">[ subject ]</a>
+              <a href="author.html#3235">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>Sounds really similar to my memory manager which I posted in August 2012.
+</I>&gt;<i>I guess there's really only one way you can implement such a simple memory
+</I>&gt;<i>manager.
+</I>I forgot about that. I just needed a simple memory manager for my
+program, so I got some theory from the OSDev wiki. I guess there's
+only so many ways one can implement the wheel!
+One difference between the initialisation is, your memory manager
+allocates all the memory after a given point while mine uses a defined
+area.
+
+On TachyonOS I created a system that used a bitmap with a large block
+sizes and handles. Since the owner of each block was marked on the
+bitmap and the blocks in a handle could be non-sequential, it had the
+advantage of being immune to fragmentation. However it was more a
+system of swapping memory with a larger memory mass than managing
+memory.
+
+&gt;<i>Mine only uses a 1-word header though; the highest bit indicates whether
+</I>&gt;<i>the block is free or not. You only need 15 bits for the size because the
+</I>&gt;<i>heap is never going to be larger than 32K, unless you leave the kernel
+</I>&gt;<i>segment.
+</I>
+This is pretty good space efficient as every little bit of overhead
+counts. I was planning on using the extra bits of support some more
+advanced features. I already use a special value to mark the end of
+the allocatable memory area.
+
+&gt;<i>I think you should only merge adjacent free blocks when you can't allocate
+</I>&gt;<i>a block large enough, to improve performance. Mine has the same flaw
+</I>&gt;<i>though.
+</I>
+I disagree. It is true that merging adjacent free block causes slower
+performance in freeing memory. However the performance loss is fairly
+minor and there's a far worse performance loss if the memory manager
+needs to sort through a lot of blocks to find one it can use, also the
+memory manager will need to merge blocks on demand when allocating.
+It's far easier just to keep everything organised and compact so it
+will be efficient when it's needed.
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003234.html">[mikeos-developer] Memory Management Library
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3235">[ date ]</a>
+              <a href="thread.html#3235">[ thread ]</a>
+              <a href="subject.html#3235">[ subject ]</a>
+              <a href="author.html#3235">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

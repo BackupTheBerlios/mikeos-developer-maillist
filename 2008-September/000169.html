@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Testing libmikeos for Bruce Evans' bcc(dev86)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Testing%20libmikeos%20for%20Bruce%20Evans%27%20bcc%28dev86%29&In-Reply-To=%3C8d87c8a30809271612j3c4f5179gf6ea538ab9ef5e6c%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000166.html">
+   <LINK REL="Next"  HREF="000172.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Testing libmikeos for Bruce Evans' bcc(dev86)</H1>
+    <B>Bob Moss</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Testing%20libmikeos%20for%20Bruce%20Evans%27%20bcc%28dev86%29&In-Reply-To=%3C8d87c8a30809271612j3c4f5179gf6ea538ab9ef5e6c%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Testing libmikeos for Bruce Evans' bcc(dev86)">bobbyjmoss at googlemail.com
+       </A><BR>
+    <I>Sun Sep 28 01:12:40 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000166.html">[mikeos-developer] Testing libmikeos for Bruce Evans' bcc(dev86)
+</A></li>
+        <LI>Next message: <A HREF="000172.html">[mikeos-developer] Our own edlin!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#169">[ date ]</a>
+              <a href="thread.html#169">[ thread ]</a>
+              <a href="subject.html#169">[ subject ]</a>
+              <a href="author.html#169">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'm probably as guilty as Troy on that front, so I empathise with his
+position. Firstly, I have yet to produce a 0.1 I'm happy with, and second,
+my early aims were the following:
+
+- Mouse driver (fail, but I'm doing a bit  of research on that front)
+- Mouse-driven GUI (as I failed the above, this would be somewhat difficult)
+
+However, ApolloOS is 32-bit and it is in C, and my CLI (before I felt the
+need to delete it accidentally) could handle parentheses and could send an
+interrupt (div/0). I also had the beginnings of some user privalages (by
+using a global variable called 'perm' (much like the hair style!!!), and
+with each command's handler checking 'perm' to see if it matched it's
+permission level (0-3) and some CLI commands to allow 'logins' (without
+passwords...) and 'logouts', though these were just ways of setting the
+'perm' value.
+
+[Feel free to ignore the following part - I go into detail about my
+programming experience which would quite happily bore the back teeth off
+anyone but myself!).
+
+I'm 17 years old. I wrote my first program aged 15 (which was a web browser
+in VB.NET). I've since created a few console apps in C++ (a random number
+guessing game and a demo of derived classes and inheritance to name a few)
+and recently wrote a VB.NET mobile app as a college project (for orders in a
+pizza shop) which was linked to a SQL Server database. I've also had a go at
+writing some XNA games in C# (the only game I've made off my own back was a
+noughts-and-crosses game, but it's great to play your own games on the XBOX
+360!).
+
+I decided to have a go at kernel development as it's something I've never
+tried before, and gave me a good excuse to develop something using Linux
+tools rather than Visual Studio. Until January this year I didn't even know
+it was possible (or an awful lot about operating systems generally). I then
+noticed that Mike had mentioned MikeOS in LXF, and on further investigation
+really liked the idea. I've gone down the road of 32-bit C as I have some
+C++ experience, and like the familiarity. This is the most ambitious project
+I've undertaken, and juggling it with my busy lifestyle (two part-time jobs,
+a college course, driving lessons and a social life) means it has taken 8
+months to get this far, and up until the accidental deletion of my source
+code, I was tantalisingly close to releasing something!!! (I remain very,
+very gutted about that...)
+
+[Ok, boring part over!!!]
+
+2008/9/27 M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+
+&gt;<i> On 9/27/08, Troy Martin &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">blasterman95 at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Trackball. It's an old one.
+</I>&gt;<i>
+</I>&gt;<i> Is that an in-built trackball? I had an old 486 laptop like that --
+</I>&gt;<i> strange beast :-)
+</I>&gt;<i>
+</I>&gt;<i> &gt; Does batch file stuff count as programming?
+</I>&gt;<i>
+</I>&gt;<i> Kinda -- more like scripting. It teaches some useful principles but is
+</I>&gt;<i> still miles away from assembly. For perspective, writing a batch
+</I>&gt;<i> script vs writing a TCP/IP stack/C compiler is like assembling a
+</I>&gt;<i> doll's house vs designing a nuclear power station.
+</I>&gt;<i>
+</I>&gt;<i> The first teaches you some important stuff about how pieces fit
+</I>&gt;<i> together, but you need a gigantic amount of knowledge in many, many
+</I>&gt;<i> fields to accomplish the latter. That's what this is all about --
+</I>&gt;<i> getting a perspective on things. I'd have a hard time writing a TCP/IP
+</I>&gt;<i> stack or C compiler. It's out of the question at your level.
+</I>&gt;<i>
+</I>&gt;<i> You've got to think of what these things entail. This is what you need
+</I>&gt;<i> to understand to write a TCP/IP stack:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://www.faqs.org/rfcs/rfc793.html">http://www.faqs.org/rfcs/rfc793.html</A>
+</I>&gt;<i>
+</I>&gt;<i> It's INCREDIBLY complicated. That kind of stuff takes months to absorb
+</I>&gt;<i> for mere mortals, and that's without the implementation. Same for a C
+</I>&gt;<i> compiler -- you need to know about lexical analysis, parsing, the
+</I>&gt;<i> inner workings of the x86, and loads of other topics. It's just not
+</I>&gt;<i> feasible now Troy.
+</I>&gt;<i>
+</I>&gt;<i> So I just want to get a perspective on this, and stop talking about
+</I>&gt;<i> stuff that's never going to happen. You have a passion for coding and
+</I>&gt;<i> that's brilliant -- but expand yourself realistically. A coin
+</I>&gt;<i> collector can't suddenly switch to being head of the world bank.
+</I>&gt;<i> Similarly, a hobbyist coder who's done some batch scripting and a
+</I>&gt;<i> smattering of C/asm can't tackle insanely complex subjects like
+</I>&gt;<i> TCP/IP. It's orders of magnitude away. We have to be realistic.
+</I>&gt;<i>
+</I>&gt;<i> When I was your age, I was writing games. Simple little affairs, but
+</I>&gt;<i> fun to program. Look at gfxdemo.asm for information on switching to
+</I>&gt;<i> graphics mode and plotting pixels -- then start playing around. It's
+</I>&gt;<i> fun and you might be able to make a mini Snake-like game in a month or
+</I>&gt;<i> so. But stay realistic, and don't make grandiose comments before
+</I>&gt;<i> you've got code to show :-)
+</I>&gt;<i>
+</I>&gt;<i> Anyway, enough of this -- I don't want to fill up the mailing list
+</I>&gt;<i> with it. Let's focus on the testing for MikeOS 1.9.1!
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Mike Saunders
+</I>&gt;<i> <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+This email is not intended to offend, annoy or inconvenience anyone. If it
+has, email me and state that it has, and we'll sort out the problem in an
+amicable way. Thank you for reading this message, I hope for a reply from
+you soon!
+
+Why not visit my tech site?: <A HREF="http://bjm1904.741.com/">http://bjm1904.741.com/</A>
+or Apollo OS?:
+<A HREF="http://apolloopsys.sourceforge.net/">http://apolloopsys.sourceforge.net/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080928/04ec4388/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080928/04ec4388/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000166.html">[mikeos-developer] Testing libmikeos for Bruce Evans' bcc(dev86)
+</A></li>
+	<LI>Next message: <A HREF="000172.html">[mikeos-developer] Our own edlin!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#169">[ date ]</a>
+              <a href="thread.html#169">[ thread ]</a>
+              <a href="subject.html#169">[ subject ]</a>
+              <a href="author.html#169">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

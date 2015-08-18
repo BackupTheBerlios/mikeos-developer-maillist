@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Planning for MikeOS 2.1 and 3.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%0A%09%3D%3Futf-8%3Fq%3FPlanning_for_MikeOS_2%3D2E1_and_3%3D2E0%3F%3D&In-Reply-To=%3C42650170.2b978390.48fdcc5a.c9d6a%40o2.pl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000383.html">
+   <LINK REL="Next"  HREF="000362.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Planning for MikeOS 2.1 and 3.0</H1>
+    <B>Tomasz Gorol</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%0A%09%3D%3Futf-8%3Fq%3FPlanning_for_MikeOS_2%3D2E1_and_3%3D2E0%3F%3D&In-Reply-To=%3C42650170.2b978390.48fdcc5a.c9d6a%40o2.pl%3E"
+       TITLE="[mikeos-developer] Planning for MikeOS 2.1 and 3.0">gavian at tlen.pl
+       </A><BR>
+    <I>Tue Oct 21 14:34:34 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000383.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+        <LI>Next message: <A HREF="000362.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#361">[ date ]</a>
+              <a href="thread.html#361">[ thread ]</a>
+              <a href="subject.html#361">[ subject ]</a>
+              <a href="author.html#361">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+&gt;<i> System calls will have to finish with 'retf' I believe. Again, I've
+</I>&gt;<i> only briefly looked into unreal mode so I'm not completely sure that
+</I>&gt;<i> this is all correct, but I guess we'll find out soon!
+</I>
+I have looked at unreal mode few weeks ago and I think it works pretty the same as a protected mode. We will have to set up elements in GDT (global descrition table). And that all. Then we will be able to use for example:
+
+    mov dx, word [ds:eax]
+
+So i guess we will need define 3 descriptors cs, ds, es.
+
+Using that we'l be able to write a simple memory manager. Actually I am working on it. 
+We can use linux alghoritm called &quot;Buddy&quot;
+
+<A HREF="http://www.linuxhq.com/guides/TLK/mm/memory.html">http://www.linuxhq.com/guides/TLK/mm/memory.html</A>
+
+It looks easy to code I guess :)
+
+I have written already a few procedures _mm_alloc, _mm_free, _mm_realloc to manage these 8kB we can use in mikeos (0xE000 - 0xFFFF). It seem working. Then when we will be sure to jump into unreal mode i can rewrite it to manage pages.
+
+When I write enough code I will send a patch.
+
+That's all folks!
+
+Cheers
+
+Tomasz Gorol
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000383.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+	<LI>Next message: <A HREF="000362.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#361">[ date ]</a>
+              <a href="thread.html#361">[ thread ]</a>
+              <a href="subject.html#361">[ subject ]</a>
+              <a href="author.html#361">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

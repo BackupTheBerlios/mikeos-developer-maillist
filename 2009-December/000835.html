@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] [ANN] MikeOS 4.0 converted to 32	bitprotected mode
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20%5BANN%5D%20MikeOS%204.0%20converted%20to%2032%0A%09bitprotected%20mode&In-Reply-To=%3C4DC21950D5814F04BE170DBAAB04EAEF%40userfe6b65a555%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000832.html">
+   <LINK REL="Next"  HREF="000836.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] [ANN] MikeOS 4.0 converted to 32	bitprotected mode</H1>
+    <B>mikegonta at gmail.com</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20%5BANN%5D%20MikeOS%204.0%20converted%20to%2032%0A%09bitprotected%20mode&In-Reply-To=%3C4DC21950D5814F04BE170DBAAB04EAEF%40userfe6b65a555%3E"
+       TITLE="[mikeos-developer] [ANN] MikeOS 4.0 converted to 32	bitprotected mode">mikegonta at gmail.com
+       </A><BR>
+    <I>Wed Dec  9 22:51:48 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000832.html">[mikeos-developer] [ANN] MikeOS 4.0 converted to 32 bit	protected mode
+</A></li>
+        <LI>Next message: <A HREF="000836.html">[mikeos-developer] [ANN] MikeOS 4.0 converted to 32	bitprotected mode
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#835">[ date ]</a>
+              <a href="thread.html#835">[ thread ]</a>
+              <a href="subject.html#835">[ subject ]</a>
+              <a href="author.html#835">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>----- Original Message ----- 
+From: &quot;M Saunders&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+To: &quot;MikeOS (and similar OS) developers&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+Sent: Wednesday, December 09, 2009 10:48 AM
+Subject: Re: [mikeos-developer] [ANN] MikeOS 4.0 converted to 32 
+bitprotected mode
+
+
+&gt;<i> On Wed, Dec 9, 2009 at 11:39 AM,  &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikegonta at gmail.com</A>&gt; wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Full BIOS access is available without the restrictions of real mode.
+</I>
+&gt;<i> This sounds great, but I'm still a bit puzzled (especially as I can't
+</I>&gt;<i> see any kind of download link on your site now!).
+</I>
+That was an old version, I'm in the process of updating the site.
+
+&gt;<i> How do you provide this? Is it an image that needs to be flashed over
+</I>&gt;<i> a regular BIOS, or is it a loader that then intercepts BIOS calls?
+</I>
+aeBIOS is a 32 bit protected mode interface to the native motherboard BIOS.
+aeBIOS does not change the BIOS or any files on the PC.
+Everything needed is on the mikeos.flp image in the disk_images folder.
+
+The boot sector on the image is my aeBOOT. This is a hybrid RM/PM boot
+sector. The first part loads the next 17 sectors from the IPL device
+to 0:600h. This is the aeBIOS code which is currently a little over 4K.
+aeBOOT then calls aeBIOS to do it's stuff. aeBIOS returns to the boot
+sector in PM32. Now in PM32 the aeBOOT searches the root directory of
+the fat12 for a file named KERNEL.BIN which is loaded to 10000h.
+aeBOOT then jumps to 10000h and voila - MikeOS.
+
+aeBOOT guarantees that the in memory copy of the Bios Parameter Block
+located at 7C00h is correct. aeBOOT checks the drive number returned by
+the BIOS. If this is 80h, it indicates that the IPL device is either
+a hard drive or a USB flash drive with hard drive emulation. A BIOS
+call is made to determine the device geometry. The in memory BPB is
+then updated. This is what permits aeBOOT and the loaded program to
+boot and run from a USB flash drive with either floppy disk or hard
+disk emulation.
+
+Real mode MikeOS is hard coded for floppy disk format which will prevent
+it from running under USB flash drive hard disk emulation.
+I made some small changes to the MikeOS code to calculate the necessary
+values and store them in global variables which the code accesses
+instead of the hard coded values.
+
+<A HREF="http://aeBIOS.com/mikeos">http://aeBIOS.com/mikeos</A>
+
+
+Mike Gonta
+look and see - many look but few see
+
+<A HREF="http://aeBIOS.com">http://aeBIOS.com</A>
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000832.html">[mikeos-developer] [ANN] MikeOS 4.0 converted to 32 bit	protected mode
+</A></li>
+	<LI>Next message: <A HREF="000836.html">[mikeos-developer] [ANN] MikeOS 4.0 converted to 32	bitprotected mode
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#835">[ date ]</a>
+              <a href="thread.html#835">[ thread ]</a>
+              <a href="subject.html#835">[ subject ]</a>
+              <a href="author.html#835">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

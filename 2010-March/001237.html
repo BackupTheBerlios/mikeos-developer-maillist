@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] New register dump function
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-March/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20register%20dump%20function&In-Reply-To=%3C4f03362c1003260904s40701e0aw7f89499963f070bc%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001236.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] New register dump function</H1>
+    <B>Ian Seyler</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20register%20dump%20function&In-Reply-To=%3C4f03362c1003260904s40701e0aw7f89499963f070bc%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] New register dump function">iseyler at gmail.com
+       </A><BR>
+    <I>Fri Mar 26 17:04:55 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001236.html">[mikeos-developer] Looking for a Dos Build File
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1237">[ date ]</a>
+              <a href="thread.html#1237">[ thread ]</a>
+              <a href="subject.html#1237">[ subject ]</a>
+              <a href="author.html#1237">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I thought this might be of interest as it uses register bit rolling
+and &quot;fall through&quot; coding. It's 64-bit but the first 10 lines can be
+removed for 32-bit mode (change all RAX to EAX too!).
+
+; -----------------------------------------------------------------------------
+; os_debug_dump_(rax|eax|ax|al) -- Dump content of RAX, EAX, AX, or AL
+to the screen in hex format
+;  IN:	RAX = content to dump
+; OUT:	Nothing, all registers preserved
+os_debug_dump_rax:
+	ror rax, 56
+	call os_print_char_hex
+	rol rax, 8
+	call os_print_char_hex
+	rol rax, 8
+	call os_print_char_hex
+	rol rax, 8
+	call os_print_char_hex
+	rol rax, 32
+os_debug_dump_eax:
+	ror rax, 24
+	call os_print_char_hex
+	rol rax, 8
+	call os_print_char_hex
+	rol rax, 16
+os_debug_dump_ax:
+	ror rax, 8
+	call os_print_char_hex
+	rol rax, 8
+os_debug_dump_al:
+	call os_print_char_hex
+	ret
+; -----------------------------------------------------------------------------
+
+mov rax, 0x0123456789ABCDEF
+call os_debug_dump_rax ; displays 0123456789ABCDEF
+call os_debug_dump_eax ; displays 89ABCDEF
+call os_debug_dump_ax ; displays CDEF
+call os_debug_dump_al ; displays EF
+
+
+-Ian
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001236.html">[mikeos-developer] Looking for a Dos Build File
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1237">[ date ]</a>
+              <a href="thread.html#1237">[ thread ]</a>
+              <a href="subject.html#1237">[ subject ]</a>
+              <a href="author.html#1237">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

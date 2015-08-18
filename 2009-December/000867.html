@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Linux utility to send data to serial ports
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Linux%20utility%20to%20send%20data%20to%20serial%20ports&In-Reply-To=%3C889562.43338.qm%40web113108.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000865.html">
+   <LINK REL="Next"  HREF="000871.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Linux utility to send data to serial ports</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Linux%20utility%20to%20send%20data%20to%20serial%20ports&In-Reply-To=%3C889562.43338.qm%40web113108.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] Linux utility to send data to serial ports">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Sat Dec 19 07:57:43 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000865.html">[mikeos-developer] Linux utility to send data to serial ports
+</A></li>
+        <LI>Next message: <A HREF="000871.html">[mikeos-developer] Xmodem based uploader for MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#867">[ date ]</a>
+              <a href="thread.html#867">[ thread ]</a>
+              <a href="subject.html#867">[ subject ]</a>
+              <a href="author.html#867">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Mike,
+
+An update on the bin uploader:
+
+It turns out that the xmodem checksum  is quite easy to implement so that is what I've done.
+There will be 2 versions available soon:
+
+1) The DOS version which is a mini  HyperTerminal equivalent for computers running without Windows.
+2) The MikeOS version.
+
+Both versions are comaptible with  Windows HyperTerminal or any other app that can send files via the serial port
+using the Xmodem protocol. 
+
+Below is an example of the xmodem protocol  transferring a bin file of 384 bytes (3 packets):
+
+
+[RX PC].........................................................[TX PC]
+|<i> 
+</I>|<i>---------------------\NAK\----------------------------------------&gt;|
+</I>|<i>         
+</I>|<i>&lt;------/SOH/Blk #1/Blk #1/Good Data/CkSum/------|
+</I>|<i>    
+</I>|<i>---------------------\ACK\----------------------------------------&gt;|
+</I>|<i>     
+</I>|<i>&lt;------/SOH/Blk #2/Blk #2/Good Data/CkSum/------|
+</I>|<i>  
+</I>|<i>---------------------\ACK\----------------------------------------&gt;|
+</I>|<i> 
+</I>|<i>&lt;------/SOH/Blk #3/Blk #3/Garbled Data/CkSum/---|
+</I>|<i>  
+</I>|<i>---------------------\NAK\----------------------------------------&gt;|
+</I>|<i>    
+</I>|<i>&lt;------/SOH/Blk #3/Blk #3/Good Data/CkSum/------|
+</I>|<i>    
+</I>|<i>---------------------\ACK\----------------------------------------&gt;|
+</I>|<i>      
+</I>|<i>&lt;--------------------/EOT/------------------------------------------|
+</I>|<i>      
+</I>|<i>---------------------\ACK\-----------------------------------------&gt;|
+</I>|<i>                                           
+</I>END
+
+All this will be in the help file which I will release at the same time as the uploader source code.
+Regards,
+
+Paulo.
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000865.html">[mikeos-developer] Linux utility to send data to serial ports
+</A></li>
+	<LI>Next message: <A HREF="000871.html">[mikeos-developer] Xmodem based uploader for MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#867">[ date ]</a>
+              <a href="thread.html#867">[ thread ]</a>
+              <a href="subject.html#867">[ subject ]</a>
+              <a href="author.html#867">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

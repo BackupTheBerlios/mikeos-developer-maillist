@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Command Line arguments?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Command%20Line%20arguments%3F&In-Reply-To=%3CAANLkTikkUD4Tyu0OK7nXjcdaNiDf0RJfaVpwOOQ1uSjc%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001655.html">
+   <LINK REL="Next"  HREF="001659.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Command Line arguments?</H1>
+    <B>Matthew Caswell</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Command%20Line%20arguments%3F&In-Reply-To=%3CAANLkTikkUD4Tyu0OK7nXjcdaNiDf0RJfaVpwOOQ1uSjc%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Command Line arguments?">caswellrienzo at gmail.com
+       </A><BR>
+    <I>Sat Dec 18 00:35:11 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001655.html">[mikeos-developer] Command Line arguments?
+</A></li>
+        <LI>Next message: <A HREF="001659.html">[mikeos-developer] Command Line arguments?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1658">[ date ]</a>
+              <a href="thread.html#1658">[ thread ]</a>
+              <a href="subject.html#1658">[ subject ]</a>
+              <a href="author.html#1658">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Yeah, no.  That last one wasn't about command line args, but just the
+method to pass args to a program, be it from a command line or not.
+And I realize MikeOS doesn't support command line arguments, which
+I've been thinking about how to implement.
+
+On Fri, Dec 17, 2010 at 11:19 AM, M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt; wrote:
+&gt;<i> What's the purpose of that Matt? Why the &quot;argument passed in reg ax&quot; bits? MikeOS doesn't support sending command line arguments to programs. Those registers are simply cleared so that programs can expect the system to be in a fairly clean state on launch.
+</I>&gt;<i>
+</I>&gt;<i> Unless you have added command line argument support, in which case, you haven't posted any of the implementation.
+</I>&gt;<i>
+</I>&gt;<i> M
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On 17 Dec 2010, at 14:42, Matthew Caswell &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">caswellrienzo at gmail.com</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> Just puttin' this out there for anybody else who might be new to OS
+</I>&gt;&gt;<i> dev in assembly:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> mov &#160; ax, filename
+</I>&gt;&gt;<i> mov &#160; bx, 0
+</I>&gt;&gt;<i> mov &#160; cx, 32768
+</I>&gt;&gt;<i> call &#160; &#160;os_load_file
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> mov &#160; ax, 0 &#160; &#160;; argument passed in reg ax
+</I>&gt;&gt;<i> mov &#160; bx, 0 &#160; &#160;; arg in bx
+</I>&gt;&gt;<i> mov &#160; cx, 0 &#160; &#160;; cx
+</I>&gt;&gt;<i> mov &#160; dx, 0 &#160; ; dx
+</I>&gt;&gt;<i> mov &#160; si, 0 &#160; &#160;; si
+</I>&gt;&gt;<i> mov &#160; di, 0 &#160; &#160;; di
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> call &#160; &#160;32768 &#160; ; start program
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> filename &#160; db 'TESTAPP.BIN',0
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> On Tue, Dec 7, 2010 at 3:59 PM, &#160;&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">wisecracker at tesco.net</A>&gt; wrote:
+</I>&gt;&gt;&gt;<i> Hi Matej...
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i> That's not entirely true. I basically learned x86 assembly from scratch by studying
+</I>&gt;&gt;&gt;&gt;<i> the MikeOS code.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> I agree, I learnt Assembly by banging the metal and finding out how things work
+</I>&gt;&gt;&gt;<i> on an AMIGA A500(+) with this little baby:-
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> <A HREF="http://www.amiga-hardware.com/showhardware.cgi?HARDID=333">http://www.amiga-hardware.com/showhardware.cgi?HARDID=333</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> I had the pleasure of both 68x00 and V30 coding at the flick of a switch. :)
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> As Mike pointed out though OS design is another ball game.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> I view:-
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> <A HREF="http://www.osdev.org/">http://www.osdev.org/</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> At a distance as these guys, seriously, take no prisoners.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> --
+</I>&gt;&gt;&gt;<i> 73...
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Bazza, G0LCU...
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Team AMIGA...
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> <A HREF="http://homepages.tesco.net/wisecracker/">http://homepages.tesco.net/wisecracker/</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> <A HREF="http://main.aminet.net/search?readme=wisecracker">http://main.aminet.net/search?readme=wisecracker</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;&gt;<i> mikeos-developer mailing list
+</I>&gt;&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> mikeos-developer mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001655.html">[mikeos-developer] Command Line arguments?
+</A></li>
+	<LI>Next message: <A HREF="001659.html">[mikeos-developer] Command Line arguments?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1658">[ date ]</a>
+              <a href="thread.html#1658">[ thread ]</a>
+              <a href="subject.html#1658">[ subject ]</a>
+              <a href="author.html#1658">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

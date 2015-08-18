@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] To optimize or not to optimize.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-July/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20To%20optimize%20or%20not%20to%20optimize.&In-Reply-To=%3CC237ACD8B00445FFB0421C9AE986EA89%40userfe6b65a555%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001965.html">
+   <LINK REL="Next"  HREF="001959.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] To optimize or not to optimize.</H1>
+    <B>Mike Gonta</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20To%20optimize%20or%20not%20to%20optimize.&In-Reply-To=%3CC237ACD8B00445FFB0421C9AE986EA89%40userfe6b65a555%3E"
+       TITLE="[mikeos-developer] To optimize or not to optimize.">mikegonta at gmail.com
+       </A><BR>
+    <I>Sat Jul 16 16:11:03 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001965.html">[mikeos-developer] To optimize or not to optimize.
+</A></li>
+        <LI>Next message: <A HREF="001959.html">[mikeos-developer] Developing an application
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1968">[ date ]</a>
+              <a href="thread.html#1968">[ thread ]</a>
+              <a href="subject.html#1968">[ subject ]</a>
+              <a href="author.html#1968">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>----- Original Message ----- 
+From: &quot;M Saunders&quot;
+To: &quot;MikeOS (and similar OS) developers&quot;
+Sent: Saturday, July 16, 2011 7:28 AM
+Subject: Re: [mikeos-developer] To optimize or not to optimize.
+
+&gt;<i> On Sat, Jul 16, 2011 at 12:40 AM, Mike Gonta wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I assembled the latest MikeOS 4.1.1-rc2 KERNEL.ASM with
+</I>&gt;&gt;<i> NASM-2.09.10-win32.
+</I>&gt;&gt;<i> Even with maximum optimization it works just fine on WINXP with qemu.
+</I>&gt;<i>
+</I>&gt;<i> Oh yes, MikeOS still appears to run fine with optimisations on -- at
+</I>&gt;<i> least, everything except the BASIC interpreter with MEMVIEW.BAS.
+</I>
+I ran the MEMVIEW.BAS in the BASIC interpreter which is part of KERNEL.ASM
+with maximum optimization and it works fine on WINXP with qemu.
+
+One interesting thing I noticed is that the 9 byte difference between the
+FASM assembled code and the NASM assembled with maximum optimization is
+that NASM assembles the unnecessary DS override (unnecessatry since DS is
+the default), while FASM does not.
+
+Of course it also works as advertised on a real PC floppy disk and a
+real PC USB flash drive (two different PC's).
+
+On a side note, MikeOS will only boot and run with a USB flash drive on
+older computers which support USB floppy disk emulation, as well as on
+some older computers which support USB floppy disk emulation with a small
+capacity flash drive under 1Gb.
+Newer computers boot all USB flash drives with hard drive emulation.
+MikeOS is hard coded for floppy disk parameters only.
+A USB flash drive with a floppy disk image can boot and run with hard
+drive emulation just fine without the hard coding. The PM32 port of
+MikeOS is a good example.
+<A HREF="http://board.flatassembler.net/topic.php?t=12381">http://board.flatassembler.net/topic.php?t=12381</A>
+
+
+Mike Gonta
+look and see - many look but few see
+
+<A HREF="http://aeBIOS.com">http://aeBIOS.com</A>
+
+
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001965.html">[mikeos-developer] To optimize or not to optimize.
+</A></li>
+	<LI>Next message: <A HREF="001959.html">[mikeos-developer] Developing an application
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1968">[ date ]</a>
+              <a href="thread.html#1968">[ thread ]</a>
+              <a href="subject.html#1968">[ subject ]</a>
+              <a href="author.html#1968">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

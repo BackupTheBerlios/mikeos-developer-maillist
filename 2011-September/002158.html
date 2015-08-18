@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] [test required] libmikeos-4.2 beta 1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20%5Btest%20required%5D%20libmikeos-4.2%20beta%201&In-Reply-To=%3C87r53f6zvf.wl%25uaa%40mx5.nisiq.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002157.html">
+   <LINK REL="Next"  HREF="002159.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] [test required] libmikeos-4.2 beta 1</H1>
+    <B>SASANO Takayoshi</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20%5Btest%20required%5D%20libmikeos-4.2%20beta%201&In-Reply-To=%3C87r53f6zvf.wl%25uaa%40mx5.nisiq.net%3E"
+       TITLE="[mikeos-developer] [test required] libmikeos-4.2 beta 1">uaa at mx5.nisiq.net
+       </A><BR>
+    <I>Sat Sep 17 15:51:32 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002157.html">[mikeos-developer] MikeOS 4.2 beta 1 released for testing
+</A></li>
+        <LI>Next message: <A HREF="002159.html">[mikeos-developer] MikeOS 4.2 beta 1 released for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2158">[ date ]</a>
+              <a href="thread.html#2158">[ thread ]</a>
+              <a href="subject.html#2158">[ subject ]</a>
+              <a href="author.html#2158">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello, 
+
+Here is libmikeos for MikeOS-4.2 beta 1.
+
+<A HREF="http://www.bi.a.u-tokyo.ac.jp/~uaa/gomitext/2011/20110917/libmikeos-4.2b1.tar.gz">http://www.bi.a.u-tokyo.ac.jp/~uaa/gomitext/2011/20110917/libmikeos-4.2b1.tar.gz</A>
+
+- MikeMain() will be changed.
+	old: int MikeMain(void *argument)
+	new: int MikeMain(int argc, char *argv[])
+
+  -&gt; see sample/test0d/test0d.c, src.os/__cstartup.asm
+
+- add new API, os_string_compare_casei, os_string_tokenize
+- To avoid nasm's optimization, add -O0 to NASMFLAGS.
+
+If there is any problems, please tell me.
+-- 
+SASANO Takayoshi &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">uaa at mx5.nisiq.net</A>&gt;
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002157.html">[mikeos-developer] MikeOS 4.2 beta 1 released for testing
+</A></li>
+	<LI>Next message: <A HREF="002159.html">[mikeos-developer] MikeOS 4.2 beta 1 released for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2158">[ date ]</a>
+              <a href="thread.html#2158">[ thread ]</a>
+              <a href="subject.html#2158">[ subject ]</a>
+              <a href="author.html#2158">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

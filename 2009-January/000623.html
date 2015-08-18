@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] On the the use of int xx
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20On%20the%20the%20use%20of%20int%20xx&In-Reply-To=%3Cb5aca8070901121415j197813a2o119169ccb3bf2b98%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000619.html">
+   <LINK REL="Next"  HREF="000624.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] On the the use of int xx</H1>
+    <B>Hiato</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20On%20the%20the%20use%20of%20int%20xx&In-Reply-To=%3Cb5aca8070901121415j197813a2o119169ccb3bf2b98%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] On the the use of int xx">hiato1 at gmail.com
+       </A><BR>
+    <I>Mon Jan 12 23:15:16 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000619.html">[mikeos-developer] On the cho(m)p functions
+</A></li>
+        <LI>Next message: <A HREF="000624.html">[mikeos-developer] On the the use of int xx
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#623">[ date ]</a>
+              <a href="thread.html#623">[ thread ]</a>
+              <a href="subject.html#623">[ subject ]</a>
+              <a href="author.html#623">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Evening,
+
+
+Last email for tonight. I'm sorry to possibly start an offtopic
+conversation here (let me know and I will leave this), but I was
+wondering if what made sense in my head actually works. That is,
+
+Instead of using fixed kernel memory locations (I have no idea how to
+extract them and use them) I decided I would write a great big file,
+with a bunch of jumps to all the procedures depending on the value of
+BH. I called the containing function &quot;k_intvector_FE&quot;. Then, when my
+kernel is loaded, it does the following:
+
+	mov si,k_intvector_FE
+	mov bl,0xFE
+	call k_mem_modivt	;Procedure from MikeOS v2, er os_modify_interrupt IIRC
+
+If I understood this correctly, then this should allow me to do the
+following, *anywhere*
+
+mov si,str  ;Set up the string in si
+mov bh,01 ;Print string has a call of 01h
+int 0xFE   ;Call (apparently)  k_intvector_FE and print a string - the
+advantage is that *any* code in *any* app should be able to do this
+
+However, I have no way to test this for three reasons:
+
+-I do not have a functioning bootloader
+-I cannot compile this as a testapp for MikeOS
+-I have no way of tracing/mapping what this does
+
+Is this right in theory and will it work in practice, or should I just
+bite the bullet and learn ASM and how to code properly?
+
+Once more, apologies if this is not the right place.
+
+Tslil
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000619.html">[mikeos-developer] On the cho(m)p functions
+</A></li>
+	<LI>Next message: <A HREF="000624.html">[mikeos-developer] On the the use of int xx
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#623">[ date ]</a>
+              <a href="thread.html#623">[ thread ]</a>
+              <a href="subject.html#623">[ subject ]</a>
+              <a href="author.html#623">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

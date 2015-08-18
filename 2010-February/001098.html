@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Regarding clearing interrupts while changing	stack.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Regarding%20clearing%20interrupts%20while%20changing%0A%09stack.&In-Reply-To=%3Cec219fa91002041242r5ebb0037n3a61d7f772e104ee%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001097.html">
+   <LINK REL="Next"  HREF="001100.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Regarding clearing interrupts while changing	stack.</H1>
+    <B>nascent mind</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Regarding%20clearing%20interrupts%20while%20changing%0A%09stack.&In-Reply-To=%3Cec219fa91002041242r5ebb0037n3a61d7f772e104ee%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Regarding clearing interrupts while changing	stack.">nascent.mind at gmail.com
+       </A><BR>
+    <I>Thu Feb  4 21:42:08 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001097.html">[mikeos-developer] Regarding clearing interrupts while changing stack.
+</A></li>
+        <LI>Next message: <A HREF="001100.html">[mikeos-developer] Regarding clearing interrupts while changing stack.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1098">[ date ]</a>
+              <a href="thread.html#1098">[ thread ]</a>
+              <a href="subject.html#1098">[ subject ]</a>
+              <a href="author.html#1098">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Awesome. This is exactly what I wanted. I want to see the code though. Is it
+a good idea to disassemble the bios? I am not sure how I can proceed to do
+that. Or is it fine to just see coreboot's code? Also is it by any chance
+documented somewhere?
+
+
+On Fri, Feb 5, 2010 at 1:12 AM, &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">wisecracker at tesco.net</A>&gt; wrote:
+
+&gt;<i> Hi nascent mind
+</I>&gt;<i>
+</I>&gt;<i> &gt;    In the following bootloader code.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     cli
+</I>&gt;<i> &gt;     mov ss,ax
+</I>&gt;<i> &gt;     mov sp,4096
+</I>&gt;<i> &gt;     sti
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;    there is clearing and setting of interrupts to prevent an interrupt
+</I>&gt;<i> from
+</I>&gt;<i> &gt; taking place between the 2 mov instructions. Now when a machine boots
+</I>&gt;<i> where
+</I>&gt;<i> &gt; does SS and SP point to? Does the BIOS set some stack space? If it
+</I>&gt;<i> doesn't
+</I>&gt;<i> &gt; shouldn't it clear the interrupt at the start of the code and set the
+</I>&gt;<i> &gt; interrupt only after the stack is set.
+</I>&gt;<i>
+</I>&gt;<i> If  you debug the BIOS this starts at 16 bytes in from the END of the last
+</I>&gt;<i> REAL
+</I>&gt;<i> MODE segment this is at FFFF:0, (F000:FFF0).
+</I>&gt;<i>
+</I>&gt;<i> The instruction WILL ALWAYS be JMP F000:E05B... This will probably point to
+</I>&gt;<i> another jump instruction INSIDE segment/offset F000:0000
+</I>&gt;<i> Keep going to the start of the BIOS routines and these start with CLI
+</I>&gt;<i> anyhow...
+</I>&gt;<i>
+</I>&gt;<i> Before ANY BOOT can occur there MUST be 64KB of RAM at segment:offest
+</I>&gt;<i> 0000:0000...
+</I>&gt;<i>
+</I>&gt;<i> In MikeOSs case CS: and SS: sit at this point.
+</I>&gt;<i> You can ignore FS: and GS: as in the &quot;real world&quot; these do not exist... ;o)
+</I>&gt;<i>
+</I>&gt;<i> Is that what you wanted?
+</I>&gt;<i>
+</I>&gt;<i> &gt; Thanks.
+</I>&gt;<i>
+</I>&gt;<i> No prob...
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> 73...
+</I>&gt;<i>
+</I>&gt;<i> Bazza, G0LCU...
+</I>&gt;<i>
+</I>&gt;<i> Team AMIGA...
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100205/e87f65c8/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100205/e87f65c8/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001097.html">[mikeos-developer] Regarding clearing interrupts while changing stack.
+</A></li>
+	<LI>Next message: <A HREF="001100.html">[mikeos-developer] Regarding clearing interrupts while changing stack.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1098">[ date ]</a>
+              <a href="thread.html#1098">[ thread ]</a>
+              <a href="subject.html#1098">[ subject ]</a>
+              <a href="author.html#1098">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

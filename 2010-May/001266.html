@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Booting from USB flash drive
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Booting%20from%20USB%20flash%20drive&In-Reply-To=%3C329887.73462.qm%40web113102.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001289.html">
+   <LINK REL="Next"  HREF="001269.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Booting from USB flash drive</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Booting%20from%20USB%20flash%20drive&In-Reply-To=%3C329887.73462.qm%40web113102.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] Booting from USB flash drive">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Wed May 12 11:55:36 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001289.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+        <LI>Next message: <A HREF="001269.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1266">[ date ]</a>
+              <a href="thread.html#1266">[ thread ]</a>
+              <a href="subject.html#1266">[ subject ]</a>
+              <a href="author.html#1266">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;<i> When using dd to write to a flash drive first copy dd.exe and rename it dd-removable.exe.
+</I>
+I did that and dd complained about it.
+
+&gt;<i> Do not write to a partition indicated by a drive letter, as this depends on the MBR on the flash drive.
+</I>&gt;<i> First determine which physical drive the flash drive is....
+</I>
+ OK will try it.
+
+&gt;<i> HxD is a free windows disk and file editor which will allow you to copy an image and paste it to the the physical drive.
+</I>
+I use WinHex which does the same.
+
+&gt;<i> Unfortunately MikeOS is hard coded (in many places) to assume floppy disk geometry.
+</I>&gt;<i> This prevents it from being run from a flash drive which boots on a BIOS which uses
+</I>&gt;<i> hard drive emulation. See the code in pdBIOS32, specifically boot.asm which allows
+</I>&gt;<i> it to boot and run under either setup.
+</I>
+Interesting point.
+With all machines I have tried the flash drive on, the BIOS must be set to boot off USB-HDD
+and not USB-FDD otherwise not even the boatloader runs.
+Mike, can you remember what your BIOS was set to boot off when you had sucess with your flash drive?
+
+Paulo.
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001289.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+	<LI>Next message: <A HREF="001269.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1266">[ date ]</a>
+              <a href="thread.html#1266">[ thread ]</a>
+              <a href="subject.html#1266">[ subject ]</a>
+              <a href="author.html#1266">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] New BFM
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20BFM&In-Reply-To=%3CCAEz6_zhCcDww_1TsPfNyX3-nWz-dwquM4jo2yDGkxKFzsSiJkA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003057.html">
+   <LINK REL="Next"  HREF="003062.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] New BFM</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20BFM&In-Reply-To=%3CCAEz6_zhCcDww_1TsPfNyX3-nWz-dwquM4jo2yDGkxKFzsSiJkA%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] New BFM">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Thu May 10 15:48:07 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003057.html">[mikeos-developer] New BFM
+</A></li>
+        <LI>Next message: <A HREF="003062.html">[mikeos-developer] New BFM
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3061">[ date ]</a>
+              <a href="thread.html#3061">[ thread ]</a>
+              <a href="subject.html#3061">[ subject ]</a>
+              <a href="author.html#3061">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>What about function like this:
+</I>&gt;<i>(I know, that it isn't in asm ... it is just preview...)
+</I>&gt;<i>
+</I>&gt;<i>function os_run_program(prg, param, returnprg, returnparam: string):
+</I>&gt;<i>boolean;
+</I>&gt;<i>{
+</I>&gt;<i>     os_load_file(prg, 32768); // load file
+</I>&gt;<i>     si = param; // save parameters
+</I>&gt;<i>
+</I>&gt;<i>     if (StringEndWith(prg, '.bin'))
+</I>&gt;<i>         call 32768;  // run program
+</I>&gt;<i>     else // it is basic script
+</I>&gt;<i>         os_run_basic(32768, sizeoffile(prg)); // run it!
+</I>&gt;<i>
+</I>&gt;<i>     if (returnprg = '') // if return program is not set
+</I>&gt;<i>         jump 0; // jump back to mikeos
+</I>&gt;<i>     else
+</I>&gt;<i>     {
+</I>&gt;<i>         os_load_file(returnprg, 32768) // reload return app to memory
+</I>&gt;<i>         si = returnparam; // set parameters
+</I>&gt;<i>         jump 32768; // run it!
+</I>&gt;<i>     }
+</I>&gt;<i>}
+</I>
+That's an interesting idea, I wrote some code for that.
+
+os_execute_program:
+	; in: ax=program to run; si=parameters; di=return program
+	pusha
+	
+	push ax						; find the file extention
+	call os_string_length
+	mov bx, ax
+	pop ax
+	
+	push si
+	push di
+	sub bx, 3
+	add bx, ax
+	mov si, bx
+	mov di, .file_extention
+	mov cx, 3
+	rep movsb
+	
+	mov si, .file_extention	
+	
+	mov di, .bin_extention				; is it 'BIN', if so it's a binary program
+	call os_string_compare
+	je .is_binary_program
+	
+	mov di, .bas_extention				; is it 'BAS', if so it's a BASIC program
+	call os_string_compare
+	je .is_basic_program
+	
+	jmp .invalid_program				; otherwise it's invalid
+	
+.is_binary_program:
+	mov cx, 32768
+	call os_load_file
+	jc .invalid_program
+	
+	pop di						; store the return program
+	mov si, di
+	mov di, .return_program
+	call os_string_copy
+	
+	mov ax, 0					; blank the registers (except SI)
+	mov bx, 0
+	mov cx, 0
+	mov dx, 0
+	pop si
+	mov di, 0
+	mov bp, 0
+	
+	call 32768					; now run the program
+	
+	jmp .return_program				; when the program finishes call the 'return program'
+	
+.is_basic_program:
+	mov cx, 32768
+	call os_load_file
+	jc .invalid_program
+	
+	pop di
+	mov si, di
+	mov di, .return_program
+	call os_string_copy
+	
+	mov ax, 32768
+	pop si
+	call os_run_basic
+	
+	jmp .return_program
+	
+.return_program:
+	mov ax, .return_program				; load return program (assume it's a binary)
+	mov cx, 32768
+	call os_load_file
+	jc .invalid_return				; it not this is a fatal error
+	
+	mov word [.tmp_si], si				; restore orginal values but keep SI
+	popa
+	mov word si, [.tmp_si]
+
+	clc
+	ret						; resume original program
+	
+.invalid_program:
+	pop di
+	pop si
+	popa
+	stc						; set carry for failure
+	ret
+	
+.invalid_return:
+	mov ax, invalid_return_msg
+	call os_fatal_error
+	
+	.file_extention					db '...', 0
+	.bin_extention					db 'BIN', 0
+	.bas_extention					db 'BAS', 0
+	.return_program			times 13 	db 0
+	.invalid_return_msg				db &quot;The program was unable to resume because
+it's return name is invalid&quot;, 0
+	.tmp_si						dw 0
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003057.html">[mikeos-developer] New BFM
+</A></li>
+	<LI>Next message: <A HREF="003062.html">[mikeos-developer] New BFM
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3061">[ date ]</a>
+              <a href="thread.html#3061">[ thread ]</a>
+              <a href="subject.html#3061">[ subject ]</a>
+              <a href="author.html#3061">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

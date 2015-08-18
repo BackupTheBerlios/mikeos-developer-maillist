@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] basic.asm - fixme
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-March/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20basic.asm%20-%20fixme&In-Reply-To=%3CE1899ED4A1084EAB8DF67A1C95326F12%40userfe6b65a555%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002940.html">
+   <LINK REL="Next"  HREF="002942.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] basic.asm - fixme</H1>
+    <B>Mike Gonta</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20basic.asm%20-%20fixme&In-Reply-To=%3CE1899ED4A1084EAB8DF67A1C95326F12%40userfe6b65a555%3E"
+       TITLE="[mikeos-developer] basic.asm - fixme">mikegonta at gmail.com
+       </A><BR>
+    <I>Tue Mar  6 11:01:00 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002940.html">[mikeos-developer] Directories for 4.4?
+</A></li>
+        <LI>Next message: <A HREF="002942.html">[mikeos-developer] basic.asm - fixme
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2941">[ date ]</a>
+              <a href="thread.html#2941">[ thread ]</a>
+              <a href="subject.html#2941">[ subject ]</a>
+              <a href="author.html#2941">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'm converting 4.3 to MikeOS32 and noticed a couple of things in basic.asm:
+
+line 980
+ inc word [loop_in]
+ inc word [loop_in]
+line 1890
+ dec word [loop_in]
+ dec word [loop_in]
+- loop_in is a BYTE variable. Since it's used in the code as a WORD index
+  it probably should be a WORD variable. This would necessitate the changing
+  of all loop_in references to WORD.
+
+line 277
+ mov di, do_loop_store
+ mov cx, 10
+ rep stosb
+- do_loop_store is 10 WORD variables so CX should be 20. It's only 
+programming
+  style, but in the clear_ram function at line 261 a CX equal to the number 
+of
+  WORD variables and a REP STOSW (with AX equal 0) would be a simpler 
+presentation.
+
+
+Mike Gonta
+look and see - many look but few see
+
+<A HREF="http://mikegonta.com">http://mikegonta.com</A>
+
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002940.html">[mikeos-developer] Directories for 4.4?
+</A></li>
+	<LI>Next message: <A HREF="002942.html">[mikeos-developer] basic.asm - fixme
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2941">[ date ]</a>
+              <a href="thread.html#2941">[ thread ]</a>
+              <a href="subject.html#2941">[ subject ]</a>
+              <a href="author.html#2941">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

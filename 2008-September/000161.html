@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Testing libmikeos for Bruce Evans' bcc(dev86)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Testing%20libmikeos%20for%20Bruce%20Evans%27%20bcc%28dev86%29&In-Reply-To=%3CAE3B9CE39AD846C3B8E186E6D2CD91D8%40VistaLaptop%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000160.html">
+   <LINK REL="Next"  HREF="000162.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Testing libmikeos for Bruce Evans' bcc(dev86)</H1>
+    <B>Troy Martin</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Testing%20libmikeos%20for%20Bruce%20Evans%27%20bcc%28dev86%29&In-Reply-To=%3CAE3B9CE39AD846C3B8E186E6D2CD91D8%40VistaLaptop%3E"
+       TITLE="[mikeos-developer] Testing libmikeos for Bruce Evans' bcc(dev86)">blasterman95 at gmail.com
+       </A><BR>
+    <I>Sat Sep 27 19:45:28 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000160.html">[mikeos-developer] Testing libmikeos for Bruce Evans' bcc(dev86)
+</A></li>
+        <LI>Next message: <A HREF="000162.html">[mikeos-developer] Testing libmikeos for Bruce Evans' bcc(dev86)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#161">[ date ]</a>
+              <a href="thread.html#161">[ thread ]</a>
+              <a href="subject.html#161">[ subject ]</a>
+              <a href="author.html#161">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> - Serial networking interface
+</I>&gt;<i> - Multitasking
+</I>&gt;<i> - TCP/IP support
+</I>&gt;<i> - New filesystem
+</I>&gt;<i> - FAT12 write support
+</I>&gt;<i> - Text editor
+</I>&gt;<i> - C compiler
+</I>&gt;<i> - BASIC interpreter
+</I>
+Is the list really that long?
+Ouch. It is. Mind if we wipe this slate clean?
+
+I've gotten far enough to understand assembly and write some basic
+stuff of my own, I'm not giving up now. I'm probably going to restart
+one of those projects up there on that list and focus on writing more
+over the next few months.
+
+Here's my updated version of that list:
+
+- Serial networking interface - Fail.
+- Multitasking - Epic fail.
+- TCP/IP support - Multi-year-bump-post-sized fail.
+- New filesystem - Seemed OK at the time, now it's another epic fail.
+- FAT12 write support - Mike, you did that already.
+- Text editor - Will think about when multi-sector FAT writing is done.
+- C cross-compiler - Most likely to do, libmikeos might replace this.
+- BASIC interpreter - Will think about if I do either of the two above.
+
+So I'm narrowing it down to two things to do: a text editor or my old
+cross-compiler. Cross-compiler is in the lead.
+
+; ------------------------------------------------------------------------------
+
+I'm also going back to bug reports. Here we go:
+
+- new mouse code doesn't work with my old Toshiba Satellite laptop.
+- using FILE.BIN after writing something to the floppy under Windows
+  Vista or XP fails. Might just be me, but I've tried it on two computers.
+
+Troy Martin
+www.blasterman.co.nr 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000160.html">[mikeos-developer] Testing libmikeos for Bruce Evans' bcc(dev86)
+</A></li>
+	<LI>Next message: <A HREF="000162.html">[mikeos-developer] Testing libmikeos for Bruce Evans' bcc(dev86)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#161">[ date ]</a>
+              <a href="thread.html#161">[ thread ]</a>
+              <a href="subject.html#161">[ subject ]</a>
+              <a href="author.html#161">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

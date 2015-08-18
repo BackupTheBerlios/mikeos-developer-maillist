@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.2b2 Bugs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.2b2%20Bugs&In-Reply-To=%3CCAPRjAGg5sNvTq4EJtw%2B%3Dy5%2B%2BV3WtaB1TtduJiF%2BXv2FQSJAUhA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002291.html">
+   <LINK REL="Next"  HREF="002295.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.2b2 Bugs</H1>
+    <B>Paulo V</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.2b2%20Bugs&In-Reply-To=%3CCAPRjAGg5sNvTq4EJtw%2B%3Dy5%2B%2BV3WtaB1TtduJiF%2BXv2FQSJAUhA%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 4.2b2 Bugs">paulomobilemail at gmail.com
+       </A><BR>
+    <I>Sat Sep 24 12:24:39 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002291.html">[mikeos-developer] MikeOS 4.2b2 Bugs
+</A></li>
+        <LI>Next message: <A HREF="002295.html">[mikeos-developer] MikeOS 4.2b2 Bugs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2293">[ date ]</a>
+              <a href="thread.html#2293">[ thread ]</a>
+              <a href="subject.html#2293">[ subject ]</a>
+              <a href="author.html#2293">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Joshua,
+
+&gt;<i>I don't understand, are you suggesting I poke an assembly routine?
+</I>
+Yes.
+
+&gt;<i>How would I print the answer? You can only print 16-bit variables,
+</I>&gt;<i>unless you have another method.
+</I>
+Once you have the answer in the memory offset (4 bytes),
+you parse each of the 4 bytes, convert and show it as ASCII
+using the &quot;NUMBOX&quot; function.
+
+For the memory offset you could use 4 variables, $1 to $4
+as the 4 bytes.
+I know that each variable ($1 to $4) is 16 bits, but it may make
+it easier if you use each one as a byte, representing each
+of the 4 bytes you get as the answer.
+
+What is the current limit (number of chars) of &quot;NUMBOX&quot; ?
+It would require it to handle 10 characters max as
+2 to the power 32 is 4294967296.
+
+Paulo.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110924/29a99cb5/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110924/29a99cb5/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002291.html">[mikeos-developer] MikeOS 4.2b2 Bugs
+</A></li>
+	<LI>Next message: <A HREF="002295.html">[mikeos-developer] MikeOS 4.2b2 Bugs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2293">[ date ]</a>
+              <a href="thread.html#2293">[ thread ]</a>
+              <a href="subject.html#2293">[ subject ]</a>
+              <a href="author.html#2293">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

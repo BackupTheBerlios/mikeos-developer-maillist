@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] GUI
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20GUI&In-Reply-To=%3CAANLkTi%3DmMWWh3NBwH%2BjTx8omvJOJ78Dy1C42Wy2igKaB%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001573.html">
+   <LINK REL="Next"  HREF="001575.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] GUI</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20GUI&In-Reply-To=%3CAANLkTi%3DmMWWh3NBwH%2BjTx8omvJOJ78Dy1C42Wy2igKaB%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] GUI">okachi at gmail.com
+       </A><BR>
+    <I>Mon Nov 29 21:59:35 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001573.html">[mikeos-developer] GUI
+</A></li>
+        <LI>Next message: <A HREF="001575.html">[mikeos-developer] GUI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1574">[ date ]</a>
+              <a href="thread.html#1574">[ thread ]</a>
+              <a href="subject.html#1574">[ subject ]</a>
+              <a href="author.html#1574">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, Nov 29, 2010 at 8:44 PM, Paulo Valongo
+&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">paulovalongo at rocketmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Is UEFI that much of a problem?
+</I>&gt;<i> I know it would require a total rewrite but I reckon it's do-able.
+</I>&gt;<i> Perhaps in the future MikeOS will go this way once traditional BIOS disappears?
+</I>
+The problem is, UEFI doesn't provide drivers for common hardware (or
+at least, doesn't guarantee that drivers are available). With the
+BIOS, we're guaranteed that we can do disk operations, draw characters
+on the screen, get keyboard input etc. easily via BIOS routines. Then
+there's the BIOS handling USB keyboards for us too.
+
+Take those away, and we'd have to start writing drivers for all of
+these things. Ugly, messy, fiddly PC drivers. Maybe a whole USB stack
+to just get keyboards on modern machines working. The code size would
+double or triple with really complicated stuff.
+
+Right now, I think the key selling point of MikeOS is that you can
+really study how a simple OS works without having to get too bogged
+down in the hardware. MikeOS puts OS stuff at the core -- system
+calls, loading and executing programs etc. Throw a huge amount of
+complicated driver code all over it, and suddenly it loses its
+attractiveness.
+
+I don't know a huge amount about EFI, so perhaps things will change,
+but it doesn't look promising for this type of OS project :-/
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001573.html">[mikeos-developer] GUI
+</A></li>
+	<LI>Next message: <A HREF="001575.html">[mikeos-developer] GUI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1574">[ date ]</a>
+              <a href="thread.html#1574">[ thread ]</a>
+              <a href="subject.html#1574">[ subject ]</a>
+              <a href="author.html#1574">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

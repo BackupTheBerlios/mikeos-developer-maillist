@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Windows build script updated
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Windows%20build%20script%20updated&In-Reply-To=%3C945833.10892.qm%40web113108.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000980.html">
+   <LINK REL="Next"  HREF="000982.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Windows build script updated</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Windows%20build%20script%20updated&In-Reply-To=%3C945833.10892.qm%40web113108.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] Windows build script updated">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Tue Jan 26 10:13:18 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000980.html">[mikeos-developer] Windows build script updated
+</A></li>
+        <LI>Next message: <A HREF="000982.html">[mikeos-developer] Windows build script updated
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#981">[ date ]</a>
+              <a href="thread.html#981">[ thread ]</a>
+              <a href="subject.html#981">[ subject ]</a>
+              <a href="author.html#981">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Mike,
+
+OK, I think I'm starting to understand M$ thinking here.
+There seems to be 3 versions (at least) of cmd.exe
+
+The first type is used in XP home.
+Do a file properties check on it and look under version, it should be something like 5.1.xxxx.xxxx
+
+Then there is the version used with XP PRO and no sevice packs:
+5.1.xxxx.0 xpclient xxxxxx-xxxx
+
+Then the one in XP PRO SP2 and XP MEDIA CENTER EDITION SP2:
+5.1.xxxxxx.xxxx xpsp_sp2.rtm.xxxxxx-xxxx
+
+(in all cases the x's represent numbers which seem to vary from pc to pc)
+
+The only version that does not seem to support nul is the one used in XP home.
+
+What cmd.exe version is on your XP box?
+
+If I'm correct then you have two options:
+
+1) go with your idea of redirecting to a text file
+2) Since M$ gives SP2 away for free,  I don't see a legal problem with &quot;getting&quot; only the cmd.exe from SP2.
+  Of course I'm assuming that SP2 is the same for all versions of XP, but then again it is M$ were are talking about.
+
+Paulo.
+
+
+
+
+
+----- Original Message ----
+From: M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+To: MikeOS (and similar OS) developers &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+Sent: Tue, January 26, 2010 2:45:42 AM
+Subject: Re: [mikeos-developer] Windows build script updated
+
+&gt;<i> I'm running XP PRO with SP2.
+</I>
+Intersting! Check this out:
+
+<A HREF="http://support.microsoft.com/kb/110930">http://support.microsoft.com/kb/110930</A>
+
+This shows how to redirect output to nul. Notice how only XP
+Professional is listed as &quot;applies to&quot; -- not any other versions! I'm
+not running Pro, so perhaps that explains it. Pretty crazy antics from
+Microsoft though...
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+_______________________________________________
+mikeos-developer mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000980.html">[mikeos-developer] Windows build script updated
+</A></li>
+	<LI>Next message: <A HREF="000982.html">[mikeos-developer] Windows build script updated
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#981">[ date ]</a>
+              <a href="thread.html#981">[ thread ]</a>
+              <a href="subject.html#981">[ subject ]</a>
+              <a href="author.html#981">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

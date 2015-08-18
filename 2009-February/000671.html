@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 3.3 released!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%203.3%20released%21&In-Reply-To=%3C19d8b3b00902201432y2ec3e7d1u50f10b1c03de23f6%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000670.html">
+   <LINK REL="Next"  HREF="000672.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 3.3 released!</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%203.3%20released%21&In-Reply-To=%3C19d8b3b00902201432y2ec3e7d1u50f10b1c03de23f6%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 3.3 released!">okachi at gmail.com
+       </A><BR>
+    <I>Fri Feb 20 23:32:22 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000670.html">[mikeos-developer] TomOS-0.3 released
+</A></li>
+        <LI>Next message: <A HREF="000672.html">[mikeos-developer] MikeOS 3.3 released!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#671">[ date ]</a>
+              <a href="thread.html#671">[ thread ]</a>
+              <a href="subject.html#671">[ subject ]</a>
+              <a href="author.html#671">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+MikeOS 3.3 is here. The biggest new feature in this release is
+EDIT.BIN, a full-screen text editor. It's not quite Emacs -- think
+more along the lines of Notepad :-) But you can open, edit and save
+text files on MikeOS, which could open the door to more programs.
+
+Screenshot: <A HREF="http://mikeos.berlios.de/images/shot-4.png">http://mikeos.berlios.de/images/shot-4.png</A>
+
+Note that it currently uses with Unix-style text files; run 'dos2unix'
+on a Linux box to convert DOS-style files.
+
+Also in this release: the command line interface can now display text
+files using 'cat filename', while the music keyboard (KEYBOARD.BIN)
+has a new interface: an ASCII representation of a real keyboard.
+
+There are also some other changes, as detailed in the ChangeLog below.
+
+As always, it's available from <A HREF="http://mikeos.berlios.de">http://mikeos.berlios.de</A>
+
+Tomasz: I'll update the site with news of your 0.3 release.
+Takayoshi: If you fancy updating the C library, it just needs a hook
+for the os_string_parse system call.
+
+Cheers!
+Mike
+
+
+# New program: EDIT.BIN -- a full-screen text editor (currently
+limited to Unix-formatted text files)
+
+# README.TXT is no longer copied to the disk images; instead,
+programs/sample.txt is added for use in EDIT.BIN
+
+# CLI now includes CAT command to display a file: 'CAT FOO.TXT'
+
+# Music keyboard (KEYBOARD.BIN) given new interface to show a visual
+representation of a music keyboard
+
+# os_write_file now removes an older version of the specified file, if
+it exists, before performing the write operation
+
+# CLI code (source/features/cli.asm) cleaned up -- split into sections
+with fewer local labels
+
+# os_string_parse call is now accessible to external programs
+
+# Disk calls now convert a filename to uppercase automatically, so
+there's no need for the calling code to do it
+
+# API version bumped to 11
+
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000670.html">[mikeos-developer] TomOS-0.3 released
+</A></li>
+	<LI>Next message: <A HREF="000672.html">[mikeos-developer] MikeOS 3.3 released!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#671">[ date ]</a>
+              <a href="thread.html#671">[ thread ]</a>
+              <a href="subject.html#671">[ subject ]</a>
+              <a href="author.html#671">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.3 beta 8 released for testing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.3%20beta%208%20released%20for%20testing&In-Reply-To=%3CCAEz6_zj%3D-G40kdQr6v2RFO3dQaHhfwSCEDHAWUP7PpgEh_Ha5g%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002806.html">
+   <LINK REL="Next"  HREF="002807.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.3 beta 8 released for testing</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.3%20beta%208%20released%20for%20testing&In-Reply-To=%3CCAEz6_zj%3D-G40kdQr6v2RFO3dQaHhfwSCEDHAWUP7PpgEh_Ha5g%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 4.3 beta 8 released for testing">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Fri Dec  2 12:02:00 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002806.html">[mikeos-developer] MikeOS 4.3 beta 8 released for testing
+</A></li>
+        <LI>Next message: <A HREF="002807.html">[mikeos-developer] MikeOS 4.3 beta 8 released for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2805">[ date ]</a>
+              <a href="thread.html#2805">[ thread ]</a>
+              <a href="subject.html#2805">[ subject ]</a>
+              <a href="author.html#2805">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>CALC.BAS - Selecting Advanced_Maths&gt;Back - Nothing happens.
+</I>Fixed a bug in the menu system of Calculator.
+<A HREF="http://code.google.com/p/mikebasic-applications/downloads/detail?name=calc.bas&amp;can=2&amp;q=">http://code.google.com/p/mikebasic-applications/downloads/detail?name=calc.bas&amp;can=2&amp;q=</A>
+
+
+&gt;&gt;<i>EDIT.BIN - Doesn't allow for the user to make a new file on the menu (F3).
+</I>&gt;<i>I'll make it so that
+</I>&gt;<i>it doesn't show those keybindings until you're in the editing stage.
+</I>I think a better solution would be to start with a blank file and use
+F3 to load instead.
+
+&gt;<i>ANIMATE.BAS - Changing the speeds from low to high - I found on that ther was a massive
+</I>&gt;<i>difference in animation speed from the setup speed (extremely fast) and the slower speed
+</I>&gt;<i>below that.
+</I>Not a bug. There is no &quot;fast&quot; and &quot;slow&quot;, simple different delays
+between drawing,
+i.e. 0s 0.1s 0.2s 0.4s 0.8s 1.6s. When you press the 'Q' key the delay
+(if any) halfs,
+when you press 'E' it doubles. You can do this as much as you want.
+The default is no time at all, when the drawing effect is most apparent.
+This means it will draw it as fast as it can, which can seem extreamly
+fast if you have
+a decent machine. At the time I wrote it we could not measure any
+smaller intervals
+than 0.1 seconds. Actually, we can now measure 0.05 seconds (with
+&quot;TIMER&quot; keyword), but
+I'm not sure if it's really worth implementing.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002806.html">[mikeos-developer] MikeOS 4.3 beta 8 released for testing
+</A></li>
+	<LI>Next message: <A HREF="002807.html">[mikeos-developer] MikeOS 4.3 beta 8 released for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2805">[ date ]</a>
+              <a href="thread.html#2805">[ thread ]</a>
+              <a href="subject.html#2805">[ subject ]</a>
+              <a href="author.html#2805">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

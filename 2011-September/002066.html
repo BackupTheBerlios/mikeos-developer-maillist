@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] APPDEV version 2.1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20APPDEV%20version%202.1&In-Reply-To=%3CCAEz6_zjn_kEOiszzhmQnOsf8bAPj50B9j1V%3DfkGJx5hGtLhy-g%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002064.html">
+   <LINK REL="Next"  HREF="002074.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] APPDEV version 2.1</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20APPDEV%20version%202.1&In-Reply-To=%3CCAEz6_zjn_kEOiszzhmQnOsf8bAPj50B9j1V%3DfkGJx5hGtLhy-g%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] APPDEV version 2.1">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Sun Sep  4 13:32:14 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002064.html">[mikeos-developer] MikeTron for BlueJay
+</A></li>
+        <LI>Next message: <A HREF="002074.html">[mikeos-developer] APPDEV version 2.1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2066">[ date ]</a>
+              <a href="thread.html#2066">[ thread ]</a>
+              <a href="subject.html#2066">[ subject ]</a>
+              <a href="author.html#2066">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>APPDEV version 2.1 is ready to use.
+I fixed up everything in that buggy 2.0 release (except LOADBOX).
+This time I tested my final version.
+Once again read the manual and examples before using.
+
+The changes are:
+---ANIMATIONS--- (ANIOPEN, ANICLOSE, ANISTART, ANISTOP, BLOCKBOX,
+BLOCKBOR, BLOCKSCR)
+When every you open a box, close a box, start the program or end the
+program it shows window animations.
+It's no compiz but they make boxes look good with no extra effort on your part.
+At the start of a program you can either set $y to &quot;ENABLE&quot; or
+&quot;DISABLE&quot;. If nothing it will be assumed enabled (so older programs
+will automatically have animations.
+They consist of several drawing phases 1/10 of a second apart. Note
+these may be too slow on older machines (anything less than a Pentium
+I wold recommend disabling it).
+---BOX REDRAW--- (BOXSAVE, BOXREST)
+A new method of saving the stuff below the box and restoring it after
+is now in use rather than having to refresh the whole screen. CONTENT
+is now only called by STARTPRG on 'FULLINT'.
+This is important because the screen stuff is likely to be
+irreplaceable. Once again this is integrated into box functions and
+will automatically work once you replace the framework in you program
+with the new. It require no further coding from you.
+
+If you have written an application in a previous version just copy and
+paste everything from &quot;rem appdev content&quot; over the older version of
+it in your application using your second favorite text editor ;-) .
+Remember to backup and custom functions or changes you have made.
+
+Good luck in writing applications!
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: APPDEV-2.1.0-MikeOS.tar.gz
+Type: application/x-gzip
+Size: 8568 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110904/4ba1a9dd/attachment.bin">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110904/4ba1a9dd/attachment.bin</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002064.html">[mikeos-developer] MikeTron for BlueJay
+</A></li>
+	<LI>Next message: <A HREF="002074.html">[mikeos-developer] APPDEV version 2.1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2066">[ date ]</a>
+              <a href="thread.html#2066">[ thread ]</a>
+              <a href="subject.html#2066">[ subject ]</a>
+              <a href="author.html#2066">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

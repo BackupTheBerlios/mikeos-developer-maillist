@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] A memory allocator for MikeOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20memory%20allocator%20for%20MikeOS&In-Reply-To=%3CCACtjVkEutUKvC-vnePLrg4WeAhyyt70K-tXVvK3YWJLPj4yfdw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003116.html">
+   <LINK REL="Next"  HREF="003118.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] A memory allocator for MikeOS</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20memory%20allocator%20for%20MikeOS&In-Reply-To=%3CCACtjVkEutUKvC-vnePLrg4WeAhyyt70K-tXVvK3YWJLPj4yfdw%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] A memory allocator for MikeOS">okachi at gmail.com
+       </A><BR>
+    <I>Sun Aug 19 08:34:12 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003116.html">[mikeos-developer] A memory allocator for MikeOS
+</A></li>
+        <LI>Next message: <A HREF="003118.html">[mikeos-developer] A memory allocator for MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3117">[ date ]</a>
+              <a href="thread.html#3117">[ thread ]</a>
+              <a href="subject.html#3117">[ subject ]</a>
+              <a href="author.html#3117">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 8/18/12, Matej Horvat &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">redjazz_slo at yahoo.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;&gt;<i> I've been thinking about moving the text editor inside the kernel
+</I>&gt;<i>
+</I>&gt;<i> That would break compatibility horribly.
+</I>
+How so? The in-kernel editor would load and execute BASIC programs at
+327678. Right now, every BASIC program is already capable of running
+from that point (ie when they're launched from the main menu), and
+indeed should be able to run anywhere (given enough free space at the
+end). No programs should stop working from this change.
+
+&gt;<i> * We can (and IMO should have already) start using resb/resw in place of
+</I>&gt;<i> defb/defw.
+</I>
+But like you say, that only affects the on-disk size, which isn't an
+issue at this stage (we're wallowing in free space on the disk).
+However, you're right that perhaps we could do more to share buffers
+between routines, being careful to avoid problems if one routine calls
+another.
+
+The idea of a memory manager for the kernel itself is intriguing.
+There are certainly times when buffers could be &quot;freed&quot; for other uses
+(eg string_vars in BASIC when BASIC isn't running), but we'd still
+have to be extra careful that there's enough space for when one
+memory-requesting routine calls another.
+
+How doable would be a two-segment model, do you think? One segment for
+the kernel, and one for user programs? How could the &quot;user&quot; segment
+call routines in the kernel -- via interrupts? I've always wanted to
+avoid the segmentation mess, but if there's a way to implement this
+fairly cleanly and simply, it'd be tempting. Sure, it'd break
+compatibility, but it'd give us so much more free room for new
+features in future.
+
+Mike
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003116.html">[mikeos-developer] A memory allocator for MikeOS
+</A></li>
+	<LI>Next message: <A HREF="003118.html">[mikeos-developer] A memory allocator for MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3117">[ date ]</a>
+              <a href="thread.html#3117">[ thread ]</a>
+              <a href="subject.html#3117">[ subject ]</a>
+              <a href="author.html#3117">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

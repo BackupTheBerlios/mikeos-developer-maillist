@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Computer running MikeOS on the web?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Computer%20running%20MikeOS%20on%20the%20web%3F&In-Reply-To=%3CCAPRjAGirB6bO%3DtXwfeBO-8oWVBW2QaRhdOFSrE8BFdNO61q70Q%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002326.html">
+   <LINK REL="Next"  HREF="002328.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Computer running MikeOS on the web?</H1>
+    <B>Paulo V</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Computer%20running%20MikeOS%20on%20the%20web%3F&In-Reply-To=%3CCAPRjAGirB6bO%3DtXwfeBO-8oWVBW2QaRhdOFSrE8BFdNO61q70Q%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Computer running MikeOS on the web?">paulomobilemail at gmail.com
+       </A><BR>
+    <I>Wed Sep 28 13:27:55 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002326.html">[mikeos-developer] single line-if's
+</A></li>
+        <LI>Next message: <A HREF="002328.html">[mikeos-developer] Computer running MikeOS on the web?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2327">[ date ]</a>
+              <a href="thread.html#2327">[ thread ]</a>
+              <a href="subject.html#2327">[ subject ]</a>
+              <a href="author.html#2327">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+Yesterday I was messing about with ser2net and netcat
+on my Linux box, to &quot;bind&quot; a TCP/IP port to the
+serial port for data logging devices a customer has
+installed at several sites.
+
+Then I had an idea, since the Linux box takes care
+of all the &quot;nasty&quot; low level TCP/IP stuff and MikeOS
+already has support for serial ports, why not connect
+a MikeOS machine with a serial port thru a nix box
+and out onto the web.
+Should be rather interesting.
+
+I'm not for a minute suggesting a web browser for
+MikeOS but it would be fun and educational to make
+a sort of 'wget' app for MikeOS.
+
+The HTTP protocol (on top of TCP/IP) is quite easy to
+implement, for example the MikeOS box could send
+out the following text:
+
+GET /pipermail/mikeos-developer/ HTTP/1.0
+Accept: image/gif, image/jpeg, image/png, */*
+Accept-Language: en-us
+User-Agent: Put anything you want here :-)
+Host: lists.berlios.de
+Connection: Close
+&lt;new line&gt;
+
+This request would go out as plain text via
+the serial port to the nix box which in turn
+would send it out to the web.
+Once the remote server responds, it's also
+in text which would be fed back to the MikeOS box:
+
+HTTP/1.0 200 OK
+Date: Fri, 28 Sep 2011 23:59:59 GMT
+Content-Type: text/html
+Content-Length: 886
+&lt;new line&gt;
+
+Followed by the html content which
+could be displayed on the screen or
+even saved to disk.
+Obviously the normal 64KB restriction
+still applies but it would be fun to see
+exactly what is achievable.
+
+Paulo.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110928/cd53bea8/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110928/cd53bea8/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002326.html">[mikeos-developer] single line-if's
+</A></li>
+	<LI>Next message: <A HREF="002328.html">[mikeos-developer] Computer running MikeOS on the web?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2327">[ date ]</a>
+              <a href="thread.html#2327">[ thread ]</a>
+              <a href="subject.html#2327">[ subject ]</a>
+              <a href="author.html#2327">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

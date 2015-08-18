@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.2 beta 4 released -- lots of changes	again!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.2%20beta%204%20released%20--%20lots%20of%20changes%0A%09again%21&In-Reply-To=%3CCACtjVkGaz4QdmvdWnr7B1OQeH5pptYc-oSjZZWVbKAV_dMJ%3DEA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002634.html">
+   <LINK REL="Next"  HREF="002644.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.2 beta 4 released -- lots of changes	again!</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.2%20beta%204%20released%20--%20lots%20of%20changes%0A%09again%21&In-Reply-To=%3CCACtjVkGaz4QdmvdWnr7B1OQeH5pptYc-oSjZZWVbKAV_dMJ%3DEA%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 4.2 beta 4 released -- lots of changes	again!">okachi at gmail.com
+       </A><BR>
+    <I>Thu Oct 13 14:22:52 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002634.html">[mikeos-developer] MikeOS 4.3 beta 4 planning
+</A></li>
+        <LI>Next message: <A HREF="002644.html">[mikeos-developer] MikeOS 4.2 beta 4 released -- lots of	changes again!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2643">[ date ]</a>
+              <a href="thread.html#2643">[ thread ]</a>
+              <a href="subject.html#2643">[ subject ]</a>
+              <a href="author.html#2643">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi folks!
+
+It's here: <A HREF="http://prdownload.berlios.de/mikeos/mikeos-4.3b4.zip">http://prdownload.berlios.de/mikeos/mikeos-4.3b4.zip</A>
+
+Please read the following text carefully, as there's lots of stuff going on.
+
+
+1) GENERAL UPDATES
+
+I've added BASIC LEN and DELETE from Justin, with the changes
+described earlier on the list, along with his SAVE change (returns 2
+in R if file exists). I've also added ADVNTURE and MUNCHER to the disk
+image, along with the very latest versions of CALC, DRAW and MEMEDIT.
+Lastly here, I've done the HANGMAN fix too.
+
+
+2) NEW &quot;INCLUDE&quot; BASIC COMMAND
+
+You can now include another .BAS file into your own, with the
+interpreter updating itself accordingly. This means you could put your
+most commonly used routines into a separate file, like a library.
+Joshua has been looking at this with MB++. In beta 4, on the disk
+you'll find &quot;LIB.BAS&quot;. If you run it, you'll see that it just spits
+out an error message. However, look at the file and you'll see it has
+a subroutine inside called &quot;extfunc&quot;. You could call this from your
+program thusly:
+
+--- CODE ---
+include &quot;lib.bas&quot;
+print &quot;Calling routine in the library...&quot;
+gosub extfunc
+end
+--- CODE ---
+
+Essentially, INCLUDE just tacks the specified .BAS file onto the end
+of the current one, and tells the interpreter that the BASIC code
+section is now larger (this will change the location of RAMSTART as a
+result).
+
+
+3) NEW &quot;LISTBOX&quot; BASIC COMMAND
+
+Here's a way of using the rather nice os_list_dialog call (as used by
+the program launcher, for instance) in your BASIC apps. Provide a
+string variable containing comma-separated options, then two help
+strings, and finally a variable to store the result:
+
+--- CODE ---
+$1 = &quot;Eat,Sleep,Go for a walk&quot;
+$2 = &quot;Choose an option&quot;
+$3 = &quot;Or press Esc to cancel&quot;
+
+listbox $1 $2 $3 a
+
+cls
+print &quot;You chose: &quot; ;
+print a
+end
+--- CODE ---
+
+If the user chooses the first option (eat) then a = 1, and so forth.
+If the user presses Esc, a will contain 0. Dead simple.
+
+
+4) GRAPHICS CODE GONE
+
+I've taken out MODE, PLOT and BOX. You couldn't really do much with
+them, and nobody seemed to be excited about exploring further. I might
+revisit this for 4.4/5.0 and do it much more seriously (arbitrary
+lines, circles, etc.) but here it was just an experiment.
+
+
+So, enjoy folks! Full changelog from 4.2 pasted below. Have fun trying
+out the new games and apps, and let me know if you have any problems
+incorporating the BASIC changes into your own programs.
+
+Cheers,
+Mike
+
+
+# New game: ADVNTURE.BAS, a text adventure
+
+# New game: MUNCHER.BAS, an apple-eating action game
+
+# Updated to latest versions of MEMEDIT, CALC and DRAW
+
+# BASIC: LISTBOX added -- shows list dialog box where first string
+  is &quot;Foo,Bar,Baz&quot; and second and third are help
+
+# BASIC: INCLUDE added, to append another BAS file onto the end of the
+  current one and call routines in it
+
+# BASIC: LEN added to get length of string
+
+# BASIC: DELETE added to delete files
+
+# BASIC: READ added to read data from label
+
+# BASIC: INK command added for printing strings
+
+# BASIC: AND added to IF
+
+# BASIC: SAVE returns 2 in R variable if file exists
+
+# USB drive floppy disk emulation updates from Mike Gonta
+
+# SERIAL now clears screen after initial dialog box
+
+# HANGMAN now limits input to &quot;a&quot; to &quot;z&quot; keys (and Esc)
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002634.html">[mikeos-developer] MikeOS 4.3 beta 4 planning
+</A></li>
+	<LI>Next message: <A HREF="002644.html">[mikeos-developer] MikeOS 4.2 beta 4 released -- lots of	changes again!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2643">[ date ]</a>
+              <a href="thread.html#2643">[ thread ]</a>
+              <a href="subject.html#2643">[ subject ]</a>
+              <a href="author.html#2643">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

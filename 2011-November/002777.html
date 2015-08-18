@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.3 - Praise and Faults
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.3%20-%20Praise%20and%20Faults&In-Reply-To=%3CCAEz6_zjpNwiM%2BMqRa_APRt0m1EqUk%2By_q8-QK5OV7j%3DV-cVL6g%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002788.html">
+   <LINK REL="Next"  HREF="002780.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.3 - Praise and Faults</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.3%20-%20Praise%20and%20Faults&In-Reply-To=%3CCAEz6_zjpNwiM%2BMqRa_APRt0m1EqUk%2By_q8-QK5OV7j%3DV-cVL6g%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 4.3 - Praise and Faults">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Thu Nov 24 12:25:06 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002788.html">[mikeos-developer] MikeOS 4.3 beta 7 for testing -- this is feature freeze!
+</A></li>
+        <LI>Next message: <A HREF="002780.html">[mikeos-developer] MikeOS 4.3 - Praise and Faults
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2777">[ date ]</a>
+              <a href="thread.html#2777">[ thread ]</a>
+              <a href="subject.html#2777">[ subject ]</a>
+              <a href="author.html#2777">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>Great progress to say the very least.
+</I>
+Thanks!
+
+
+&gt;<i>I ran the Calculator&gt; went onto advanced mathematics&gt; pressed down a few times, I could select a blank space in the menu.
+</I>
+This is a problem with the MB++ library, I uploaded a fix before
+reading this, how quick is that?
+Menus were really messy in the old MB++ library, but in the new
+version (3.0) they are much cleaner, because you cannot select
+blank items and we only redraw a single item and not all the spaces,
+using a quick method of drawing to.
+
+
+&gt;<i>I imagine some sort of limit on how far down it goes would be good, and merely bring up the back option so that it is just
+</I>&gt;<i>under the other options would do the trick.
+</I>
+Not a problem with the OS BASIC, a problem with my library, fixed now.
+
+
+&gt;<i>Animation on all of the programs I have tested seemed 'laggy', but very cool for the the limitations you have set yourselves.
+</I>
+Sigh, MB++ again. If a string is set to a certain value then animation
+are enabled.
+They are to make popup boxes look &quot;cooler&quot;, however on anything less
+then a Pentium they appear very slow.
+I've done all I can to speed them up but, still too slow. The
+calculator does have an option to disable it.
+This shouldn't be a problem on a computer (not netbook) made in the
+last 10 year or so.
+
+
+&gt;<i>It seemed that in the applications it may not have been worth putting in as it slowed progress down (for example moving
+</I>&gt;<i>in between menus [backwards and forwards] to a long time).
+</I>
+ASCII Artist (DRAW.BAS) and Calculator (CALC.BAS) both use this
+library, ASCII Artist is still using the inferior version however.
+By default animations are disabled but the first thing they both do is
+enable them, because I like animations.
+Would you prefer I disable them?
+
+&gt;<i>Sorry for all of the comments about the Calculator program for whoever wrote that
+</I>
+Yea, that's alright. I like people reporting issues (although
+sometimes I'd like some praise :-P   ).
+
+Joshua
+<A HREF="http://code.google.com/p/mikebasic-applications/">http://code.google.com/p/mikebasic-applications/</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002788.html">[mikeos-developer] MikeOS 4.3 beta 7 for testing -- this is feature freeze!
+</A></li>
+	<LI>Next message: <A HREF="002780.html">[mikeos-developer] MikeOS 4.3 - Praise and Faults
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2777">[ date ]</a>
+              <a href="thread.html#2777">[ thread ]</a>
+              <a href="subject.html#2777">[ subject ]</a>
+              <a href="author.html#2777">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

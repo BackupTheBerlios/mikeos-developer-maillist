@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Updated DIR - lightning fast and removes the need for SIZE
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Updated%20DIR%20-%20lightning%20fast%20and%20removes%20the%0A%20need%20for%20SIZE&In-Reply-To=%3CCACtjVkHHAhDBHzq%2BmDq8bdhNnwjAT3n3t-TK-FG_HQ-XZOVuNg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002253.html">
+   <LINK REL="Next"  HREF="002275.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Updated DIR - lightning fast and removes the need for SIZE</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Updated%20DIR%20-%20lightning%20fast%20and%20removes%20the%0A%20need%20for%20SIZE&In-Reply-To=%3CCACtjVkHHAhDBHzq%2BmDq8bdhNnwjAT3n3t-TK-FG_HQ-XZOVuNg%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Updated DIR - lightning fast and removes the need for SIZE">okachi at gmail.com
+       </A><BR>
+    <I>Fri Sep 23 11:13:18 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002253.html">[mikeos-developer] Updated DIR - lightning fast and removes the	need for SIZE
+</A></li>
+        <LI>Next message: <A HREF="002275.html">[mikeos-developer]  MikeOS 4.2b2 Bugs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2254">[ date ]</a>
+              <a href="thread.html#2254">[ thread ]</a>
+              <a href="subject.html#2254">[ subject ]</a>
+              <a href="author.html#2254">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Lo,
+
+On Fri, Sep 23, 2011 at 4:07 AM, Troy Martin &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">blacklight at cordilon.net</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Hopefully it'll be included in MikeOS 4.2 final
+</I>
+We're in code freeze now, so I'm not going to make any non-bugfix
+changes to existing code. What we need for a successful 4.2 release is
+testing.
+
+&gt;<i> uses. It simply reads directly from disk_buffer after calling
+</I>&gt;<i> disk_read_root_dir.
+</I>
+And therein lies the fundamental problem. You're mixing FAT12
+manipulation into the CLI, which is a total no-no. There's a reason
+the functionality is split up into different files in source/features/
+-- the idea is, as much as possible, people can read one file without
+having to understand everything in another.
+
+So cli.asm should be all about parsing commands, running programs,
+performing file management using system calls etc. The actual FAT12
+work is abstracted out with system calls. This makes the CLI
+reasonably filesystem agnostic; we could update disk.asm one day to
+handle FAT16 and the CLI wouldn't have to change.
+
+So that's why it's fundamentally wrong to put direct FAT12
+manipulation in the CLI, and I can't include that. It's not a bad
+solution per se Troy, and kudos for trying, but it violates a basic
+principle of the code.
+
+Oh, and regarding the comments: you don't &quot;break&quot; the stack by using
+it for its intended purpose :-)
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002253.html">[mikeos-developer] Updated DIR - lightning fast and removes the	need for SIZE
+</A></li>
+	<LI>Next message: <A HREF="002275.html">[mikeos-developer]  MikeOS 4.2b2 Bugs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2254">[ date ]</a>
+              <a href="thread.html#2254">[ thread ]</a>
+              <a href="subject.html#2254">[ subject ]</a>
+              <a href="author.html#2254">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] FAT12 write support development
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT12%20write%20support%20development&In-Reply-To=%3C8d87c8a30808281509h1e0f7a0bmc4a38c51ff722b6f%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000076.html">
+   <LINK REL="Next"  HREF="000078.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] FAT12 write support development</H1>
+    <B>Bob Moss</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT12%20write%20support%20development&In-Reply-To=%3C8d87c8a30808281509h1e0f7a0bmc4a38c51ff722b6f%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] FAT12 write support development">bobbyjmoss at googlemail.com
+       </A><BR>
+    <I>Fri Aug 29 00:09:57 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000076.html">[mikeos-developer] FAT12 write support development
+</A></li>
+        <LI>Next message: <A HREF="000078.html">[mikeos-developer] FAT12 write support development
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#77">[ date ]</a>
+              <a href="thread.html#77">[ thread ]</a>
+              <a href="subject.html#77">[ subject ]</a>
+              <a href="author.html#77">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Damn! Overtaken on that one! I need to write quicker replies!!! Having a
+'starter project' for new users seperated from the main MikeOS would be an
+excellent idea, as you still encourage kernel development while everyone is
+free to mould MikeOS as they wish.
+
+Hmm... I'm taking a look at license agreements at the moment. It's amazing
+how little research I did before settling on GPLv3. Lesson learnt - Must pay
+more attention
+
+
+
+2008/8/28 Bob Moss &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">bobbyjmoss at googlemail.com</A>&gt;
+
+&gt;<i> Yep - well getting grub to boot MikeOS isn't overly difficult - but it
+</I>&gt;<i> would mean altering your build routine and bundling some grub modules (I'm
+</I>&gt;<i> sure you've seen the tutorial on osdever.net!). You would still need an
+</I>&gt;<i> assembly loader however!
+</I>&gt;<i>
+</I>&gt;<i> It's interesting that MikeOS is BSD and I was rather banking on using
+</I>&gt;<i> GPLv3... We'll see how that one pans out! :(
+</I>&gt;<i>
+</I>&gt;<i> 2008/8/28 M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+</I>&gt;<i>
+</I>&gt;&gt;<i> On 8/28/08, Bob Moss &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">bobbyjmoss at googlemail.com</A>&gt; wrote:
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt; Hmm... When you are in floppy emulation mode, your OS boots and loads
+</I>&gt;&gt;<i> itself
+</I>&gt;&gt;<i> &gt; into memory. You could therefore remove the ISO image/CD with no ill
+</I>&gt;&gt;<i> effects
+</I>&gt;&gt;<i> &gt; (as it's running like a Live system). Therefore, MikeOS knows it's in
+</I>&gt;&gt;<i> &gt; memory. Now, suppose we insert a floppy disk/image. That still sends an
+</I>&gt;&gt;<i> &gt; interrupt as a result (as it would if you removed it). If we wrote in
+</I>&gt;&gt;<i> some
+</I>&gt;&gt;<i> &gt; simple hardware detection to deal with those interrupts, it could be
+</I>&gt;&gt;<i> &gt; possible to do it without an ISO9660 driver.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> That's an interesting point, and one which I don't know much about :-)
+</I>&gt;&gt;<i> If you could convince the BIOS that yep, we're loaded in RAM now and
+</I>&gt;&gt;<i> it doesn't matter how we got here, perhaps then you could activate the
+</I>&gt;&gt;<i> real floppy drive. That would be excellent. I guess it all depends on
+</I>&gt;&gt;<i> how stubborn the BIOS is in letting us make changes :-)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> &gt; (Before I get berated, I know it wouldn't be easy - I think I'd need
+</I>&gt;&gt;<i> more
+</I>&gt;&gt;<i> &gt; research however!)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I don't think anything's really difficult - it's just all about time.
+</I>&gt;&gt;<i> I wanted to avoid the FAT12 writing stuff as it's really laborious in
+</I>&gt;&gt;<i> terms of testing, when I'd rather be coding cooler stuff :-) But that
+</I>&gt;&gt;<i> had to be done.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Certainly any of us, with enough time and patience, could implement a
+</I>&gt;&gt;<i> TCP/IP stack for MikeOS (and, making it black-box-ish enough, it'd
+</I>&gt;&gt;<i> work on our other projects). But the vast amount of research, hacking
+</I>&gt;&gt;<i> and testing involved would turn it into a one-year project, and as
+</I>&gt;&gt;<i> mere humans we all like to see instant results :-)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> &gt; Also, booting off a FAT16 partition would be interesting. You would
+</I>&gt;&gt;<i> however
+</I>&gt;&gt;<i> &gt; have to consider the MBR (to allow a boot) - so would that mean we would
+</I>&gt;&gt;<i> &gt; need support for existing bootloaders  (to add 'MikeOS' as an option) or
+</I>&gt;&gt;<i> to
+</I>&gt;&gt;<i> &gt; allow other OS's to use the same bootloader?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> This is also an interesting point. GRUB can boot nigh-on any OS,
+</I>&gt;&gt;<i> providing that the kernel has an appropriate header (ie string of
+</I>&gt;&gt;<i> bytes identifying itself). However, GRUB automatically sets up
+</I>&gt;&gt;<i> protected mode as I understand it, which'd be a nightmare to resolve
+</I>&gt;&gt;<i> if we can't switch back easily.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> However, with Ian's plans of hard drive booting, I'd love to chuck
+</I>&gt;&gt;<i> away the current bootload.asm and have MikeOS booting by GRUB, as it'd
+</I>&gt;&gt;<i> unify booting whether from the hard drive or floppy drive. That would
+</I>&gt;&gt;<i> rock the Earth to its core.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> M
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i> Mike Saunders
+</I>&gt;&gt;<i> <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> mikeos-developer mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> This email is not intended to offend, annoy or inconvenience anyone. If it
+</I>&gt;<i> has, email me and state that it has, and we'll sort out the problem in an
+</I>&gt;<i> amicable way. Thank you for reading this message, I hope for a reply from
+</I>&gt;<i> you soon!
+</I>&gt;<i>
+</I>&gt;<i> Why not visit my tech site?: <A HREF="http://bjm1904.741.com/">http://bjm1904.741.com/</A>
+</I>&gt;<i> or Apollo OS?:
+</I>&gt;<i> <A HREF="http://apolloopsys.sourceforge.net/">http://apolloopsys.sourceforge.net/</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+This email is not intended to offend, annoy or inconvenience anyone. If it
+has, email me and state that it has, and we'll sort out the problem in an
+amicable way. Thank you for reading this message, I hope for a reply from
+you soon!
+
+Why not visit my tech site?: <A HREF="http://bjm1904.741.com/">http://bjm1904.741.com/</A>
+or Apollo OS?:
+<A HREF="http://apolloopsys.sourceforge.net/">http://apolloopsys.sourceforge.net/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080828/2cd77aa3/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080828/2cd77aa3/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000076.html">[mikeos-developer] FAT12 write support development
+</A></li>
+	<LI>Next message: <A HREF="000078.html">[mikeos-developer] FAT12 write support development
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#77">[ date ]</a>
+              <a href="thread.html#77">[ thread ]</a>
+              <a href="subject.html#77">[ subject ]</a>
+              <a href="author.html#77">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

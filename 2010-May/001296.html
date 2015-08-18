@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] The KB I/O idea...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20The%20KB%20I/O%20idea...&In-Reply-To=%3C20100512220553.RJOEN.340860.root%40web11-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001291.html">
+   <LINK REL="Next"  HREF="001299.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] The KB I/O idea...</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20The%20KB%20I/O%20idea...&In-Reply-To=%3C20100512220553.RJOEN.340860.root%40web11-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] The KB I/O idea...">wisecracker at tesco.net
+       </A><BR>
+    <I>Wed May 12 23:05:53 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001291.html">[mikeos-developer] The KB I/O idea...
+</A></li>
+        <LI>Next message: <A HREF="001299.html">[mikeos-developer] The KB I/O idea...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1296">[ date ]</a>
+              <a href="thread.html#1296">[ thread ]</a>
+              <a href="subject.html#1296">[ subject ]</a>
+              <a href="author.html#1296">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Paulo...
+
+&gt;<i> Why not use the CAPSLOCK, NUMLOCK and SCROLL LOCK LED signals
+</I>&gt;<i> as CLOCK,DATA, and STROBE signals feeding one or more shift registers.
+</I>&gt;<i> In this way you can have as many TTL/CMOS outputs as you like.
+</I>
+Simplicity. I always build as though I am an 8 to 10 year old who would not
+be very good a building on a kitchen table AND have a very short attention
+span...
+
+&gt;<i> For inputs, you could use transistors connected to the F1 to F12 keys as these
+</I>&gt;<i> are hardly ever used in MikeOS.
+</I>
+What addresses do they sit on for DMA?
+
+Address 0040:0017 is directly accessible for:-
+
+Left Caps Shift
+Right Caps Shift
+Alt
+Ctrl
+
+For real time read only, (in my case both Caps Shifts)...
+
+Caps Lock
+Scroll Lock, (sometimes not usable!)
+Num Lock
+Insert, (not usable!)
+
+For toggled I/O but I am using it for O only, (on Caps Lock and Num Lock)...
+
+These are more than enough for I/O so that`s where I stopped.
+
+Plus I wanted the KB intact for development use so the wiring for your method
+would make the KB unusable.
+
+Lastly all the components were raided from old equipment, (the junk box :)
+and I don`t want to use any ICs at all, just bipolar transistors and diodes...
+
+BTW have you finished the IrDA I/O yet?
+
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001291.html">[mikeos-developer] The KB I/O idea...
+</A></li>
+	<LI>Next message: <A HREF="001299.html">[mikeos-developer] The KB I/O idea...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1296">[ date ]</a>
+              <a href="thread.html#1296">[ thread ]</a>
+              <a href="subject.html#1296">[ subject ]</a>
+              <a href="author.html#1296">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

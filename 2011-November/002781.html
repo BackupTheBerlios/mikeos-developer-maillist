@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Mouse problems
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Mouse%20problems&In-Reply-To=%3CBAY151-W565CC7F322A6262707768683CF0%40phx.gbl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002780.html">
+   <LINK REL="Next"  HREF="002778.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Mouse problems</H1>
+    <B>Dan Barry</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Mouse%20problems&In-Reply-To=%3CBAY151-W565CC7F322A6262707768683CF0%40phx.gbl%3E"
+       TITLE="[mikeos-developer] Mouse problems">danbarry at hotmail.co.uk
+       </A><BR>
+    <I>Fri Nov 25 23:03:50 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002780.html">[mikeos-developer] MikeOS 4.3 - Praise and Faults
+</A></li>
+        <LI>Next message: <A HREF="002778.html">[mikeos-developer] MikeOS 4.3 beta 7 for testing -- this is	feature freeze!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2781">[ date ]</a>
+              <a href="thread.html#2781">[ thread ]</a>
+              <a href="subject.html#2781">[ subject ]</a>
+              <a href="author.html#2781">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hello again,
+ 
+I have scoured the internet over and over and have not found any decent tutorial for initialising a mouse, and anything related to NASM is scarce. We are literally talking ours upon hours. It has really slowed my little project down massively.
+ 
+I have a copy of the old MikeOS 0.49.3 which had mouse support I believe. When I run it in the virtual box it hangs on the menu :S I've looked at TomOS which has mouse support, but not only is it FASM but gives littel indication as to what is going on.
+ 
+I looked at the code anyway - even if it was broken I hoped I could salvage something...
+ 
+I got this (I made adjustments)... :-
+ 
+-------------------------------
+mouse_start:
+  pusha
+  call mouse_check_byte
+  xor ax, ax
+  mov al, 0xA8 ; Bit 5 = enable mouse port
+  out 0x64, al ; Write to keyboard controller
+  call mouse_check_byte
+  mov al, 0xF0 ; Remote mode
+  out 0x60, al ; Activate mouse
+  call mouse_get_byte ; Pull ACK from buffer
+  call mouse_check_port
+  in al, 0x60
+  or al, 2
+  xor cx, cx
+  mov cl, al
+  mov al, 0x60
+  out 0x64, al
+  mov al, cl
+  out 0x60, al
+  popa
+  ret
+ 
+ 
+mouse_get_byte:
+  call mouse_check_byte
+  cmp bl, 1
+  je .waskeyboard
+  mov al, 0xAD ; Disable Keyboard
+  out 0x64, al
+  call mouse_check_port
+  xor ax, ax ; Get data
+  in al, 0x60
+  mov dl, al
+  mov al, 0xAE ; Enable Keyboard
+  out 0x64, al
+  call mouse_check_port
+  mov al, dl
+ 
+.waskeyboard:
+  ret
+ 
+ 
+mouse_check_byte:
+  in al, 0x64 ; Read from keyboard controller
+  ;test al, 1
+  ;jz mouse_check_byte
+  test al, 0x20
+  jz .iskeyboard ; Is it keyboard data?
+  ret
+ 
+.iskeyboard:
+  mov bl, 1 ; Tells calling routine no mouse stuff
+  in al, 60h
+  ret
+ 
+ 
+mouse_check_port:
+  in al, 0x64 ; Read from keyboard controller
+  test al, 2 ; Processing data?
+  jnz mouse_check_port
+  ret
+ 
+ 
+mouse_request:
+  call mouse_check_port
+  mov al, 0xEB ; Request Data packet
+  out 0x60, al ; Activate mouse
+  call mouse_get_byte ; Get acknowledge byte
+  call mouse_get_byte ; Get first byte
+  mov byte [mouse_byte1], al
+  call mouse_get_byte ; Get second byte
+  mov byte [mouse_byte2], al
+  call mouse_get_byte ; Get third byte
+  mov byte [mouse_byte3], al
+ret
+ 
+
+mouse_byte1 db 0
+mouse_byte2 db 0
+mouse_byte3 db 0
+-------------------------------
+ 
+I have a rough idea of what is going on... I found the part that was causing it to hang and commented it out.
+ 
+I want to set the mouse up in remote mode and have the mouse told when I want to recieve data from it (no interupts if possible for now).
+ 
+If anyone can point me in the right direction with this I would be forever grateful :)
+ 
+Thanks in advance,
+ 
+Dan 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111125/622f480d/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111125/622f480d/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002780.html">[mikeos-developer] MikeOS 4.3 - Praise and Faults
+</A></li>
+	<LI>Next message: <A HREF="002778.html">[mikeos-developer] MikeOS 4.3 beta 7 for testing -- this is	feature freeze!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2781">[ date ]</a>
+              <a href="thread.html#2781">[ thread ]</a>
+              <a href="subject.html#2781">[ subject ]</a>
+              <a href="author.html#2781">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

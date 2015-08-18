@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] EXTFloppy : External Floppy Device Feature for	MikeOS and it's clones
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2013-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20EXTFloppy%20%3A%20External%20Floppy%20Device%20Feature%20for%0A%09MikeOS%20and%20it%27s%20clones&In-Reply-To=%3CCAJq3fObeo0Zf8R-mw9MFqA2KMc%3D%3DjdO%3D3PjzJFScrb%3D0jC%2BTbQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="003182.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] EXTFloppy : External Floppy Device Feature for	MikeOS and it's clones</H1>
+    <B>ALLDESP Coder</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20EXTFloppy%20%3A%20External%20Floppy%20Device%20Feature%20for%0A%09MikeOS%20and%20it%27s%20clones&In-Reply-To=%3CCAJq3fObeo0Zf8R-mw9MFqA2KMc%3D%3DjdO%3D3PjzJFScrb%3D0jC%2BTbQ%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] EXTFloppy : External Floppy Device Feature for	MikeOS and it's clones">sidgautam999 at gmail.com
+       </A><BR>
+    <I>Sun Oct 20 07:16:32 CEST 2013</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="003182.html">[mikeos-developer] Query : Segmentation Code in MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3181">[ date ]</a>
+              <a href="thread.html#3181">[ thread ]</a>
+              <a href="subject.html#3181">[ subject ]</a>
+              <a href="author.html#3181">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Well I made a External Floppy Feature for MikeOS by modifying some stuff
+Please see the attached rar and Screen Shot
+As we all know MikeOS and it's clones are limited to a single floppy device
+which is of 1.44MB only. So I thought to make a modified version of
+os_load_file
+and os_get_file_list which would search the external floppy device for
+stuff.
+Functions :
+ext_reset : Reset the External Floppy Device
+ext_load_file : Load a program in RAM from the External Device
+read_ext_drive : Same as os_get_file_list, but lists files on the external
+Floppy
+devices.
+disk_read_l2hts_2 : Same as disk_read_l2hts only changes the drive number.
+How does it work?
+Well it's very simple :
+In a conventional BIOS System there are 2 Floppy Drives, 2 Hard Disk Drives
+identified as 0x00,0x01,0x80,0x81 respectively. Now MikeOS Disk Driver
+executes
+the INT 0x13 with the DL parameter as 0x00 i.e the first floppy device,
+whereas the new calls use DL = 0x01 i.e the external floppy drive.
+Now these functions are there but how do we know when to list which files,
+files
+at floppy one or at floppy 2?
+Now we declare a label let's call it disk_location and set it's value to FDA
+(FDA means Floppy Drive A which is the MikeOS Floppy) like :
+disk_location db 'FDA',0
+Now we are going to change this label at runtime by a special command
+Let that command be &quot;B:\&quot;,
+Now when we type B:\ in the Command Line it should execute :
+mov dword [disk_location],'FDB' ; Switch to Floppy Drive B:\
+Alright we got some &quot;sort of&quot; VFS there.
+Now if we type &quot;DIR&quot;, We should first check where the User is on FDA or FDB
+So :
+cmp dword [disk_location],'FDA' ; Are we in FDA?
+je print_dir_in_FDA ; Then AX = Files in FDA
+cmp dword [disk_location],'FDB' ; Are we in FDB
+je print_dir_in_FDB ; Then AX = files in FDB
+print_status:
+    mov si,ax
+    call os_print_string
+print_dir_in_FDA:
+     mov ax,dirlist
+     call os_get_file_list
+print_dir_in_FDB:
+     mov ax,dirlist
+     call read_ext_drive ; The External Drive Function
+jmp print_status ; Print the Files now
+Same for Load File functions...
+Note : There is a much cleaner way to do this, we could straight away modify
+the os_load_file and os_get_file_list to compare the disk_location label
+and execute the correct reset and l2hts functions.
+Testing :
+First you should have Virtual Box
+Goto Virtual Box and add two floppy drives,
+Floppy Device 1 : MikeOS Floppy
+Floppy Device 2 : Put some stuff in it.
+Note : Before switching floppy drives you need to reset the MikeOS Floppy
+and then switch to your 2nd floppy.
+Boot the VM
+Reset your MikeOS Floppy through the Floppy Reset Program in the Attachment
+In the CLI, type your switch drive code like &quot;B:\&quot;
+Type DIR
+You should see the Files in the External Floppy.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131020/a40d6aaa/attachment-0001.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131020/a40d6aaa/attachment-0001.html</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: EXTFloppy.rar
+Type: application/rar
+Size: 3984 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131020/a40d6aaa/attachment-0001.rar">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131020/a40d6aaa/attachment-0001.rar</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: VqJd6UZ.png
+Type: image/png
+Size: 51297 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131020/a40d6aaa/attachment-0001.png">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131020/a40d6aaa/attachment-0001.png</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="003182.html">[mikeos-developer] Query : Segmentation Code in MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3181">[ date ]</a>
+              <a href="thread.html#3181">[ thread ]</a>
+              <a href="subject.html#3181">[ subject ]</a>
+              <a href="author.html#3181">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

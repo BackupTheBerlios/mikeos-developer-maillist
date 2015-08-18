@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] How are you doing it?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20How%20are%20you%20doing%20it%3F&In-Reply-To=%3C20091127220228.KOMY6.1338025.root%40web10-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000781.html">
+   <LINK REL="Next"  HREF="000783.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] How are you doing it?</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20How%20are%20you%20doing%20it%3F&In-Reply-To=%3C20091127220228.KOMY6.1338025.root%40web10-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] How are you doing it?">wisecracker at tesco.net
+       </A><BR>
+    <I>Fri Nov 27 23:02:28 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000781.html">[mikeos-developer] MikeOS related ASM question (sort of)
+</A></li>
+        <LI>Next message: <A HREF="000783.html">[mikeos-developer] How are you doing it?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#782">[ date ]</a>
+              <a href="thread.html#782">[ thread ]</a>
+              <a href="subject.html#782">[ subject ]</a>
+              <a href="author.html#782">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Mike...
+
+First of all the parallel port analogue to digital converter is almost working,
+will be carrying on tomorrow. :)
+
+However in the meantime I`m experimenting with video mode changing using
+the BASIC interpreter... OUCH!
+
+By the looks of it you have toggled the blink bit in &quot;CGA&quot; mode to give high
+brightness background.
+
+Which method did you use?
+
+Changing the CGA control port directly at 03d8h...
+
+OR
+
+...using this method:-
+
+;***
+mov ax,1303h
+int 10h
+(ret)
+
+OR
+
+...another method alien to me... :)
+
+I can get the standard CGA to VGA modes that are available but some are
+mangled and a couple lose cursor position, the cursor is not a problem though.
+
+If I use...
+
+mov ax,0003h
+int 10h
+(ret)
+
+...the standard recognised methd to obtain CGA text mode 3, then it sets the
+screen to blinking along with normal brightness background...
+
+Using the assembly code from ;*** above does not return back to none
+blinking mode.
+
+A clue please...
+
+--
+73...
+
+Bazza...
+
+TA...
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000781.html">[mikeos-developer] MikeOS related ASM question (sort of)
+</A></li>
+	<LI>Next message: <A HREF="000783.html">[mikeos-developer] How are you doing it?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#782">[ date ]</a>
+              <a href="thread.html#782">[ thread ]</a>
+              <a href="subject.html#782">[ subject ]</a>
+              <a href="author.html#782">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

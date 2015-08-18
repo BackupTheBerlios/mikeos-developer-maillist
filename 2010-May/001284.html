@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Booting from USB flash drive
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Booting%20from%20USB%20flash%20drive&In-Reply-To=%3C310564.59465.qm%40web113111.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001283.html">
+   <LINK REL="Next"  HREF="001285.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Booting from USB flash drive</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Booting%20from%20USB%20flash%20drive&In-Reply-To=%3C310564.59465.qm%40web113111.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] Booting from USB flash drive">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Wed May 12 15:15:14 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001283.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+        <LI>Next message: <A HREF="001285.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1284">[ date ]</a>
+              <a href="thread.html#1284">[ thread ]</a>
+              <a href="subject.html#1284">[ subject ]</a>
+              <a href="author.html#1284">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+Thanks for all your ideas and suggestions.
+The usb flash drive is now booting with MikeOS on it.
+
+This is what I did:
+
+1) Set all sectors to zero using winhex.
+I don't know how important this step is but I did it anyway.
+I believe dd also has a setting to do this.
+
+2) As per MikeGonta's suggestion I then renamed dd.exe to dd-removeable.exe
+
+3) Then typed in dd-removable.exe --list to get all the drives info.
+
+4) Again as per MikeGonta's suggestion I used the following parameters with dd-removable.exe:
+
+dd-removable if=c:\mikeos\mikeos41.ima of=\\?\Harddrive1\Partition0
+
+(obviously change the of=\\?\....... to suit your flash drive).
+
+5) Rebooted the pc and all was fine.
+
+Please note that depending on your BIOS, you might have to play around with the settings of the first boot device.
+The settings are:
+
+USB-HDD, USB-FDD and USB-ZIP.
+
+Mine wanted USB-FDD
+
+There you go.
+By the way the USB flash drive I used is the INTEGRAL 2GB (usb 2.0)
+
+Paulo.
+
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001283.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+	<LI>Next message: <A HREF="001285.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1284">[ date ]</a>
+              <a href="thread.html#1284">[ thread ]</a>
+              <a href="subject.html#1284">[ subject ]</a>
+              <a href="author.html#1284">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

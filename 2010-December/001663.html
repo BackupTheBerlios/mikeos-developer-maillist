@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] An idea...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20An%20idea...&In-Reply-To=%3C20101218083440.1MJP8.148048.root%40web10-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001673.html">
+   <LINK REL="Next"  HREF="001664.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] An idea...</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20An%20idea...&In-Reply-To=%3C20101218083440.1MJP8.148048.root%40web10-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] An idea...">wisecracker at tesco.net
+       </A><BR>
+    <I>Sat Dec 18 09:34:40 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001673.html">[mikeos-developer] An idea...
+</A></li>
+        <LI>Next message: <A HREF="001664.html">[mikeos-developer] An idea...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1663">[ date ]</a>
+              <a href="thread.html#1663">[ thread ]</a>
+              <a href="subject.html#1663">[ subject ]</a>
+              <a href="author.html#1663">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>The MikeBASIC code to test the os_key_flags function. 
+I called it INT16-02.BAS 
+ 
+ 
+ 
+CLS 
+ 
+REM Call the kernel offset vector, 0x00CF, 
+REM 207 decimal, for the &quot;os_key_flags&quot; subroutine 
+REM added to kernel.asm and recompiled. 
+loopit: 
+CALL 207 
+ 
+REM Read the known address for the KB Flags. 
+PEEK a 65528 
+ 
+PRINT a ; 
+PRINT &quot; &quot; ; 
+ 
+REM A getout clause if Scroll Lock is ON only. 
+IF a = 16 THEN GOTO getout 
+PAUSE 1 
+GOTO loopit: 
+ 
+REM Clean exit. 
+getout: 
+CLS 
+END 
+
+
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+<A HREF="http://homepages.tesco.net/wisecracker/">http://homepages.tesco.net/wisecracker/</A>
+
+<A HREF="http://main.aminet.net/search?readme=wisecracker">http://main.aminet.net/search?readme=wisecracker</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001673.html">[mikeos-developer] An idea...
+</A></li>
+	<LI>Next message: <A HREF="001664.html">[mikeos-developer] An idea...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1663">[ date ]</a>
+              <a href="thread.html#1663">[ thread ]</a>
+              <a href="subject.html#1663">[ subject ]</a>
+              <a href="author.html#1663">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

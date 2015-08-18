@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Log in program, needed?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Log%20in%20program%2C%20needed%3F&In-Reply-To=%3CAANLkTikfZanAb6YPHV0X1k_p0Wi%3D9teZ9%3DQwBWTHYe5D%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001529.html">
+   <LINK REL="Next"  HREF="001525.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Log in program, needed?</H1>
+    <B>Matthew Caswell</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Log%20in%20program%2C%20needed%3F&In-Reply-To=%3CAANLkTikfZanAb6YPHV0X1k_p0Wi%3D9teZ9%3DQwBWTHYe5D%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Log in program, needed?">caswellrienzo at gmail.com
+       </A><BR>
+    <I>Sat Nov 20 22:05:52 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001529.html">[mikeos-developer] Log in program, needed?
+</A></li>
+        <LI>Next message: <A HREF="001525.html">[mikeos-developer] About license...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1530">[ date ]</a>
+              <a href="thread.html#1530">[ thread ]</a>
+              <a href="subject.html#1530">[ subject ]</a>
+              <a href="author.html#1530">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>The only portability issue is when building MikeOS, so you could build
+it, mount the image, copy the file, or edit the build script.
+
+On Sat, Nov 20, 2010 at 3:05 PM, Matthew Caswell
+&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">caswellrienzo at gmail.com</A>&gt; wrote:
+&gt;<i> Well, yeah, that's in the code. &#160;When there is a 'autorun.bas' or
+</I>&gt;<i> 'autorun.bin' it runs, then goes to the app menu. &#160;I've been
+</I>&gt;<i> constantly looking over the code of MikeOS and Casnix OS. &#160;All you
+</I>&gt;<i> have to do is press [ESC] to return to the initial menu for CLI. &#160;And
+</I>&gt;<i> I wrote the autorun.bas on Casnix, so there might be a simple
+</I>&gt;<i> portability issue.
+</I>&gt;<i>
+</I>&gt;<i> However, if you're rebuilding MikeOS with the autorun.bas, you might
+</I>&gt;<i> have to edit build script.
+</I>&gt;<i>
+</I>&gt;<i> On Sat, Nov 20, 2010 at 8:20 AM, Raghav Sood &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">raghavsood at gmail.com</A>&gt; wrote:
+</I>&gt;&gt;<i> I have saved the file as AUTORUN.BAS but no matter where i put it it doesn't
+</I>&gt;&gt;<i> work.
+</I>&gt;&gt;<i> Also when put into the /programs or /source folders it make the os skip the
+</I>&gt;&gt;<i> selection screen.
+</I>&gt;&gt;<i> Any ideas?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> On Sat, Nov 20, 2010 at 7:01 AM, Matthew Caswell &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">caswellrienzo at gmail.com</A>&gt;
+</I>&gt;&gt;<i> wrote:
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Hello, I've created a log in program for my OS based off MikeOS,
+</I>&gt;&gt;&gt;<i> Casnix OS (<A HREF="http://casnix.sourceforge.net">http://casnix.sourceforge.net</A>), it's a basic program in
+</I>&gt;&gt;&gt;<i> 'autorun.bas'. &#160;I thought some people using/developing MikeOS might
+</I>&gt;&gt;&gt;<i> like it, too. &#160;Here's the source:
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> &#160; rem *** AUTORUN.BAS ***
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> &#160; gosub begin
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> &#160; gosub login
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> &#160; begin:
+</I>&gt;&gt;&gt;<i> &#160; &#160; &#160; &#160;print &quot;Startup message&quot;
+</I>&gt;&gt;&gt;<i> &#160; return
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> &#160; login:
+</I>&gt;&gt;&gt;<i> &#160; &#160; &#160; &#160;goto _msg
+</I>&gt;&gt;&gt;<i> &#160; &#160; &#160; &#160;goto _prompt
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> &#160; _msg:
+</I>&gt;&gt;&gt;<i> &#160; &#160; &#160; &#160;print &quot;This PC is protected&quot;.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> &#160; _prompt:
+</I>&gt;&gt;&gt;<i> &#160; &#160; &#160; &#160;IF C = 1 then CLS
+</I>&gt;&gt;&gt;<i> &#160; &#160; &#160; &#160;print &quot;Username: &quot;;
+</I>&gt;&gt;&gt;<i> &#160; &#160; &#160; &#160;input $1
+</I>&gt;&gt;&gt;<i> &#160; &#160; &#160; &#160;if $1 = &quot;root&quot; then goto .pswd
+</I>&gt;&gt;&gt;<i> &#160; &#160; &#160; &#160;E = 1
+</I>&gt;&gt;&gt;<i> &#160; &#160; &#160; &#160;goto .error
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> &#160; .pswd:
+</I>&gt;&gt;&gt;<i> &#160; &#160; &#160; &#160;print &quot;Password: &quot;;
+</I>&gt;&gt;&gt;<i> &#160; &#160; &#160; &#160;input $2
+</I>&gt;&gt;&gt;<i> &#160; &#160; &#160; &#160;if $2 = &quot;root&quot; then goto _start
+</I>&gt;&gt;&gt;<i> &#160; &#160; &#160; &#160;E = 2
+</I>&gt;&gt;&gt;<i> &#160; &#160; &#160; &#160;goto .error
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> &#160; .error:
+</I>&gt;&gt;&gt;<i> &#160; &#160; &#160; &#160;IF E = 1 then alert &quot;Incorrect username!&quot; goto @re
+</I>&gt;&gt;&gt;<i> &#160; &#160; &#160; &#160;IF E = 2 then alert &quot;Incorrect password!&quot; goto @re
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> &#160; @re:
+</I>&gt;&gt;&gt;<i> &#160; &#160; &#160; &#160;C = 1
+</I>&gt;&gt;&gt;<i> &#160; &#160; &#160; &#160;goto _prompt
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> &#160; _start:
+</I>&gt;&gt;&gt;<i> &#160; &#160; &#160; &#160;end
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> &#160; return
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> - Matthew Caswell
+</I>&gt;&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;&gt;<i> mikeos-developer mailing list
+</I>&gt;&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i> Raghav Sood
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> mikeos-developer mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001529.html">[mikeos-developer] Log in program, needed?
+</A></li>
+	<LI>Next message: <A HREF="001525.html">[mikeos-developer] About license...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1530">[ date ]</a>
+              <a href="thread.html#1530">[ thread ]</a>
+              <a href="subject.html#1530">[ subject ]</a>
+              <a href="author.html#1530">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

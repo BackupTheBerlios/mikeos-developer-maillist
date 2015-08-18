@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Windows build script updated
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Windows%20build%20script%20updated&In-Reply-To=%3C8d87c8a31001251625r50349517lc11ef94239771522%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000972.html">
+   <LINK REL="Next"  HREF="000959.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Windows build script updated</H1>
+    <B>Bob Moss</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Windows%20build%20script%20updated&In-Reply-To=%3C8d87c8a31001251625r50349517lc11ef94239771522%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Windows build script updated">bobbyjmoss at googlemail.com
+       </A><BR>
+    <I>Tue Jan 26 01:25:58 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000972.html">[mikeos-developer] Windows build script updated
+</A></li>
+        <LI>Next message: <A HREF="000959.html">[mikeos-developer] New MikeOS project: TESTCARD
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#973">[ date ]</a>
+              <a href="thread.html#973">[ thread ]</a>
+              <a href="subject.html#973">[ subject ]</a>
+              <a href="author.html#973">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>...or you could just go with Mike's solution! lol :D
+-- 
+Why not visit my tech site?: <A HREF="http://bjm1904.com/">http://bjm1904.com/</A>
+
+LinkedIn Profile: <A HREF="http://www.linkedin.com/in/bjm1904">http://www.linkedin.com/in/bjm1904</A>
+
+
+2010/1/26 M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+
+&gt;<i> Lo Paulo,
+</I>&gt;<i>
+</I>&gt;<i> Thanks, I appreciate your efforts! We're both here battling the
+</I>&gt;<i> Windows command line late at night (whereabouts are you on the globe
+</I>&gt;<i> BTW?). Burning the midnight oil :-)
+</I>&gt;<i>
+</I>&gt;<i> I think I've figured it out now. &quot;nul&quot; doesn't exist on Windows XP. If
+</I>&gt;<i> you change the tests to:
+</I>&gt;<i>
+</I>&gt;<i>  nasm &gt; wut.txt 2&gt; wut2.txt
+</I>&gt;<i>  if eERRORLEVEL 9009 SET MIKEOS_NONASM=1
+</I>&gt;<i>
+</I>&gt;<i> Then it works on XP. Of course, you have to remove those .txt files at
+</I>&gt;<i> the end. (You can't redirect both stdout and stderr to the same file
+</I>&gt;<i> -- Windows complains.)
+</I>&gt;<i>
+</I>&gt;<i> Fingers crossed, that's the solution!
+</I>&gt;<i>
+</I>&gt;<i> M
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Mike Saunders
+</I>&gt;<i> <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100126/ba9509c9/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100126/ba9509c9/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000972.html">[mikeos-developer] Windows build script updated
+</A></li>
+	<LI>Next message: <A HREF="000959.html">[mikeos-developer] New MikeOS project: TESTCARD
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#973">[ date ]</a>
+              <a href="thread.html#973">[ thread ]</a>
+              <a href="subject.html#973">[ subject ]</a>
+              <a href="author.html#973">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

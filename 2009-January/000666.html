@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Bits 'n bobs for 3.2.1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Bits%20%27n%20bobs%20for%203.2.1&In-Reply-To=%3Cb5aca8070901280855t523bcea8hf7547c32c50d866e%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000665.html">
+   <LINK REL="Next"  HREF="000667.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Bits 'n bobs for 3.2.1</H1>
+    <B>Hiato</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Bits%20%27n%20bobs%20for%203.2.1&In-Reply-To=%3Cb5aca8070901280855t523bcea8hf7547c32c50d866e%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Bits 'n bobs for 3.2.1">hiato1 at gmail.com
+       </A><BR>
+    <I>Wed Jan 28 17:55:57 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000665.html">[mikeos-developer] Bits 'n bobs for 3.2.1
+</A></li>
+        <LI>Next message: <A HREF="000667.html">[mikeos-developer] libmikeos-3.2 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#666">[ date ]</a>
+              <a href="thread.html#666">[ thread ]</a>
+              <a href="subject.html#666">[ subject ]</a>
+              <a href="author.html#666">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Yup, caught that before -- one of the typos I've fixed in the cleanup :-)
+</I>
+OK, phew, I felt kind of bad there
+
+&gt;<i> Ta. I'm a bit stumped by this though:
+</I>...
+&gt;<i> Is this routine meant to split, for example, 'FOOBAR', 0 into 'FOO', 0
+</I>&gt;<i> and 'BAR', 0? The zero-termination will overwrite one of the
+</I>&gt;<i> characters in this case.
+</I>
+Nope, I designed it so that it would split a string a kill a
+character, basically I had the following in mind:
+'FOO BAR',0 -&gt; 'FOO',0 and 'BAR',0 (also, might I add, it was rather
+fortunate that that was my design spec because, when I returned to it
+later, I realised that the non-destructive case is far more intricate)
+
+&gt;<i> Also, I guess the comment at the start is wrong because it appears
+</I>&gt;<i> that the string location is passed in SI and not AX (otherwise SI is
+</I>&gt;<i> undefined)
+</I>
+* Embarrassed* Yes, yes it is. Those are obviously from before my
+interrupt system, where you could use whatever register you wanted.
+Sorry about that.
+
+&gt;<i>.You could make that shorter:
+</I>&gt;<i> ;IN SI=String CX=Index
+</I>&gt;<i> ;OUT AX=String BX=String
+</I>&gt;<i> k_str_split:
+</I>&gt;<i>        mov ax, si
+</I>&gt;<i>        add si,cx
+</I>&gt;<i>        mov byte [si],0
+</I>&gt;<i>        inc si
+</I>&gt;<i>        mov bx,si
+</I>&gt;<i>        ret
+</I>&gt;<i>
+</I>&gt;<i> That still doesn't solve the problem of the zero-termination
+</I>&gt;<i> overwriting a character though. You'd need to shift the second
+</I>&gt;<i> substring onwards one char for that.
+</I>
+Now that is what I call clever stuff. Didn't even occur to me (guess
+that's how one learns). However, I'm still going to sort that out
+(eventually, it's at the bottom of an every growing list of to-do's)
+
+&gt;<i> Meanwhile, nice work on the automatic interrupt table system! That's
+</I>&gt;<i> definitely way beyond the keep-everything-simple scope of MikeOS but
+</I>&gt;<i> I'm sure it'll make your life a lot easier.
+</I>
+Oh, heh, I see. I guess it does make sense though, it's not exactly
+what I call a trivial task understanding the interrupt system for the
+API :) But thanks either way
+
+Tslil
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000665.html">[mikeos-developer] Bits 'n bobs for 3.2.1
+</A></li>
+	<LI>Next message: <A HREF="000667.html">[mikeos-developer] libmikeos-3.2 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#666">[ date ]</a>
+              <a href="thread.html#666">[ thread ]</a>
+              <a href="subject.html#666">[ subject ]</a>
+              <a href="author.html#666">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

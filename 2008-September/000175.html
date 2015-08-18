@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Text Editor 0.1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Text%20Editor%200.1&In-Reply-To=%3C19d8b3b00809280157h71327a68xe522915d14e70d99%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000173.html">
+   <LINK REL="Next"  HREF="000176.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Text Editor 0.1</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Text%20Editor%200.1&In-Reply-To=%3C19d8b3b00809280157h71327a68xe522915d14e70d99%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Text Editor 0.1">okachi at gmail.com
+       </A><BR>
+    <I>Sun Sep 28 10:57:26 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000173.html">[mikeos-developer] Text Editor 0.1
+</A></li>
+        <LI>Next message: <A HREF="000176.html">[mikeos-developer] Text Editor 0.1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#175">[ date ]</a>
+              <a href="thread.html#175">[ thread ]</a>
+              <a href="subject.html#175">[ subject ]</a>
+              <a href="author.html#175">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 9/28/08, Troy Martin &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">blasterman95 at gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> It's edlin-like (with even less features, yuck) but it's still a text
+</I>&gt;<i> editor!
+</I>
+Well, you can't edit your text yet -- it's more like 'echo blah &gt;
+foo.txt'. But I'm just being pedantic :-)
+
+Seriously, this is a good start. I'm going to release 1.9.2 with the
+FAT12 write bits folded into syscalls.asm, so can strip them out of
+your program and keep the code neat. What's your plan next? Being able
+to edit the lines in RAM would be great, and you've got the various
+MikeOS screen manipulation routines to help out (moving the cursor,
+clearing the screen etc.)
+
+Or you could take an easier approach for now and work on it as a
+command-driven editor -- eg you enter 'EDIT 1' and then you're
+prompted for text, 'DELETE 15' to delete a line, 'LIST' to show the
+current text, 'SAVE' and so forth. I'd forget about the 512-byte limit
+for now -- dedicate the upper half of your 32K app space to the file
+data, then work with managing that memory (deleting lines, inserting
+lines etc.). That's the trickiest part -- saving is simple and can
+come later when I've finished the FAT12 write bits.
+
+So, a very simple but good start. Keep at it! Oh, and thanks for the
+label stuff. I should enable warnings in NASM on Linux...
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000173.html">[mikeos-developer] Text Editor 0.1
+</A></li>
+	<LI>Next message: <A HREF="000176.html">[mikeos-developer] Text Editor 0.1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#175">[ date ]</a>
+              <a href="thread.html#175">[ thread ]</a>
+              <a href="subject.html#175">[ subject ]</a>
+              <a href="author.html#175">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Booting from USB flash drive
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Booting%20from%20USB%20flash%20drive&In-Reply-To=%3CAANLkTikbO8L8qXIajFszgJzv1KLbcmfzkFHW6V0r2ZR7%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001258.html">
+   <LINK REL="Next"  HREF="001259.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Booting from USB flash drive</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Booting%20from%20USB%20flash%20drive&In-Reply-To=%3CAANLkTikbO8L8qXIajFszgJzv1KLbcmfzkFHW6V0r2ZR7%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Booting from USB flash drive">okachi at gmail.com
+       </A><BR>
+    <I>Wed May 12 10:50:23 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001258.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+        <LI>Next message: <A HREF="001259.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1256">[ date ]</a>
+              <a href="thread.html#1256">[ thread ]</a>
+              <a href="subject.html#1256">[ subject ]</a>
+              <a href="author.html#1256">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Paulo,
+
+I think this is due to Windows interfering with the drive after you've
+'dd'ed the image to it. I noticed this a while ago. I made a USB drive
+boot MikeOS by 'dd'ing the image in Linux, and booted it up -- it
+worked perfectly.
+
+However, I wanted to retrieve a .BAS file from the USB key, so I
+plugged it into a Windows box and sure enough, it mounted. However,
+when I went to boot the key again, it failed (I think with the 'kernel
+not found' error).
+
+So it works under Linux because you umount the drive first and then
+'dd' it. Windows, however, can sometimes interfere, change something
+on the drive and stop it from booting. I don't know if there's a
+workaround other than to suggest booting Linux (at least in live
+mode).
+
+Dan: this is nothing to do with USB drivers in MikeOS. The BIOS reads
+the USB key as if it were a floppy image.
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001258.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+	<LI>Next message: <A HREF="001259.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1256">[ date ]</a>
+              <a href="thread.html#1256">[ thread ]</a>
+              <a href="subject.html#1256">[ subject ]</a>
+              <a href="author.html#1256">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.2 beta 2 released for testing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.2%20beta%202%20released%20for%20testing&In-Reply-To=%3CCACtjVkEOCisvHe%3DmRm2um6_p8abNC5%3D_FOfOQ_hzwcZ%3Dz__Chw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002172.html">
+   <LINK REL="Next"  HREF="002233.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.2 beta 2 released for testing</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.2%20beta%202%20released%20for%20testing&In-Reply-To=%3CCACtjVkEOCisvHe%3DmRm2um6_p8abNC5%3D_FOfOQ_hzwcZ%3Dz__Chw%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 4.2 beta 2 released for testing">okachi at gmail.com
+       </A><BR>
+    <I>Tue Sep 20 11:20:56 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002172.html">[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 28
+</A></li>
+        <LI>Next message: <A HREF="002233.html">[mikeos-developer] I'm not dead and I haven't given up!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2173">[ date ]</a>
+              <a href="thread.html#2173">[ thread ]</a>
+              <a href="subject.html#2173">[ subject ]</a>
+              <a href="author.html#2173">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi everyone,
+
+Here is is: <A HREF="http://prdownload.berlios.de/mikeos/mikeos-4.2b2.zip">http://prdownload.berlios.de/mikeos/mikeos-4.2b2.zip</A>
+
+Full changelog from 4.1.2 below. This is not based on the previous
+beta -- due to problems with it, I went back to 4.1.2 and implemented
+many of the new features again, simpler and less problem-prone. To
+deal with the speed issue when displaying file sizes in DIR, I've
+implemented a separate SIZE command in the CLI.
+
+&gt;<i>From here starts a two-week testing period, and if there are no major
+</I>problems plan to make the release on the 4th of October. There's lots
+of new stuff in here, so please do test it and provide feedback on the
+list! I'd appreciate real hardware testing too.
+
+Thanks everyone, and here's to a successful 4.2 release!
+
+Mike
+
+
+# New program: Memory Manipulator (MEMEDIT.BAS) from Joshua Beck: a
+colourful program for editing bytes in memory, written in BASIC
+
+# New program: ASCII Artist (DRAW.BAS) from Joshua Beck: lets you
+draw, load and save images created with ASCII characters
+
+# New program: MikeTron Reloaded (MIKETRON.BAS) from Joshua Beck: new
+features, bonuses and explosion effects
+
+# New program: Calculator (CALC.BAS) from Joshua Beck
+
+# CLI has new file management operations to complement FILEMAN
+program: COPY, REN, DEL and SIZE
+
+# EDIT now supports the facility to make a new file with the F3 key
+
+# EDIT can take an existing file as a parameter at the command line:
+eg &quot;edit myfile.txt&quot;
+
+# EDIT will no longer let you run BASIC on an empty file
+
+# CLI supports argument passing: program receives the string of
+parameters in SI, or SI = 0 if no parameters are specified
+
+# os_run_basic now takes a parameter string in SI and copies it into
+the first BASIC string ($1), unless SI = 0
+
+# New system call: os_string_tokenize from Matej Horvat -- reads
+tokens separated by a specified character from a string
+
+# os_file_remove now restores all registers to previous state after use
+
+# SERIAL program offers to quit out before activating serial ports
+
+# TEST.PCX updated and renamed to SAMPLE.PCX
+
+# Bugfix: os_get_time_string vector is 0054h, not 0055h
+
+# Reordered code inclusion: source/features/basic.asm is now last in kernel
+
+# Bump API to version 14
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002172.html">[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 28
+</A></li>
+	<LI>Next message: <A HREF="002233.html">[mikeos-developer] I'm not dead and I haven't given up!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2173">[ date ]</a>
+              <a href="thread.html#2173">[ thread ]</a>
+              <a href="subject.html#2173">[ subject ]</a>
+              <a href="author.html#2173">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

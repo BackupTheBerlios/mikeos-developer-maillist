@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Nano for MikeOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Nano%20for%20MikeOS&In-Reply-To=%3CCAEz6_zhVd6EmvtZODCrSFM3rzHdBsfcwYDPuMS%3DBupWLAa3KVw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003106.html">
+   <LINK REL="Next"  HREF="003108.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Nano for MikeOS</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Nano%20for%20MikeOS&In-Reply-To=%3CCAEz6_zhVd6EmvtZODCrSFM3rzHdBsfcwYDPuMS%3DBupWLAa3KVw%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Nano for MikeOS">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Sun Aug 12 12:05:59 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003106.html">[mikeos-developer] Nano for MikeOS
+</A></li>
+        <LI>Next message: <A HREF="003108.html">[mikeos-developer] MikeOS 4.4b3 for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3107">[ date ]</a>
+              <a href="thread.html#3107">[ thread ]</a>
+              <a href="subject.html#3107">[ subject ]</a>
+              <a href="author.html#3107">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>Are there any BASIC commands we could implement that'd make your life
+</I>&gt;<i>easier here?
+</I>
+Yes, if you could implement the ability to create complex strings/
+I want to be able to create a string with many variable parts,
+this normally takes many lines to create.
+For example:
+$3 = W+&quot; Text &quot;+$4
+would be:
+34 Text Strings
+
+This would create the string $3 with the string value of W followed by &quot; Text &quot;
+followed by the $4 string.This could be accomplished by checking for a '+' at
+the end of the line and continuing. I hope this would not be too difficult.
+
+I've attached my progress so far as a binary.
+Some of the shortcuts may be different for the unix version.
+The binary requires the latest version of MikeOS (4.4b2).
+
+What works currently:
+ - Opening a text file via command line (nano foo.txt)
+ - Moving cursor around the document, line snapping, scrolling, etc
+ - Help function
+ - End of line and start of line, cursor position and exit functions
+
+What doesn't work yet:
+ - EDITING TEXT!
+ - Loading/Saving files inside program.
+ - Running BASIC code
+ - Selecting/moving text
+ - Everything else
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: nano.bin
+Type: application/octet-stream
+Size: 6863 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120812/eb367abf/attachment.bin">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120812/eb367abf/attachment.bin</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003106.html">[mikeos-developer] Nano for MikeOS
+</A></li>
+	<LI>Next message: <A HREF="003108.html">[mikeos-developer] MikeOS 4.4b3 for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3107">[ date ]</a>
+              <a href="thread.html#3107">[ thread ]</a>
+              <a href="subject.html#3107">[ subject ]</a>
+              <a href="author.html#3107">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Dump file
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Dump%20file&In-Reply-To=%3C20101214204946.GWBCW.98038.root%40web10-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001632.html">
+   <LINK REL="Next"  HREF="001634.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Dump file</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Dump%20file&In-Reply-To=%3C20101214204946.GWBCW.98038.root%40web10-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] Dump file">wisecracker at tesco.net
+       </A><BR>
+    <I>Tue Dec 14 21:49:46 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001632.html">[mikeos-developer] Dump file
+</A></li>
+        <LI>Next message: <A HREF="001634.html">[mikeos-developer] Dump file
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1633">[ date ]</a>
+              <a href="thread.html#1633">[ thread ]</a>
+              <a href="subject.html#1633">[ subject ]</a>
+              <a href="author.html#1633">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Matthew...
+
+Before diving into MikeOS try out some very simple coding so that you can see
+what is going on inside a known OS, Windows...
+
+For example learn what the different registers do by writing something like:-
+(Set the ORG to 100h or 256 decimal.)
+
+start:
+mov ax,10
+mov ax,0x10
+xor ax,ax
+cmp ax,0
+jnz start
+ret
+
+Call the code as test.asm
+
+Compile it using say NASM in the NSAM drawer as &quot;test&quot;.
+
+We will use DEBUG.EXE and trace each instruction.
+
+Lets say your NASM.EXE is in C:\SOME\PATH\NASM\
+
+So from C:\SOME\PATH\NASM\ do the following:-
+
+C:\SOME\PATH\NASM\DEBUG.EXE test&lt;RETURN&gt;
+
+You will be confronted with flashing cursor on the next line to the far left hand side.
+
+Do the following...
+
+_u&lt;RETURN&gt;
+
+(A listing will now appear of your code.)
+
+_t&lt;RETURN&gt;
+
+You will now see AX with a hex value 000Ah corresponding to DECIMAL 10.
+TAKE NOTE of all of the other registers AND the flags and compare with the previous
+readings if any.
+
+_t&lt;RETURN&gt;
+
+Again you will see AX with a new value of 0010h.
+TAKE NOTE of all of the other registers AND the flags and compare with the previous
+readings if any.
+
+_t&lt;RETURN&gt;
+
+Again you will see AX with a new value 0000h.
+TAKE NOTE of all of the other registers AND the flags and compare with the previous
+readings if any.
+
+_t&lt;RETURN&gt;
+
+TAKE NOTE of all of the other registers AND the flags and compare with the previous
+readings if any. NOTE the flags...
+
+_t&lt;RETURN&gt;
+
+TAKE NOTE of all of the other registers AND the flags and compare with the previous
+readings if any. NOTE the flags...
+
+_t&lt;RETURN&gt;
+
+As AX == 0000h then the &quot;jnz&quot;, (jump not zero), is ignored.
+
+_t&lt;RETURN&gt;
+
+You will now &quot;ret&quot;urn from this &quot;test&quot; routine.
+
+_q&lt;RETURN&gt;
+
+To quit the DEBUG.EXE back to the MS-DOS window.
+
+This may seem a silly bit of coding but if you now take my &quot;Hello World.&quot; and
+correct it for NASM, (it is written for AD86), and set the ORG to 100h or 256 decimal
+and do the same you will see many things going on. The &quot;es:&quot; part of the code
+will be a tester if you don`t know what you are doing with NASM...
+
+Don`t run before you can walk.
+
+Some people pick up assembly code easily others have to work at it like me.
+If I am not sure about a routine I write something similar that will do no damage
+to the system whilst testing the idea(s).
+
+So for the time being ignore MikeOS and use an MS-DOS in a window where
+SIMPLE known tools are easily obtainable from the OS itself rather than as add-ons.
+
+I`m sure Mike and the rest of us will be pretty helpful as you start to progress.
+
+
+
+
+
+And lastly for MIKE.
+
+JOG my memory to compile the kernel with the new os_pause added for this WE
+and test with the BASIC code by slapping me, or maybe emailing me IF YOU
+remember. :)
+
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+<A HREF="http://homepages.tesco.net/wisecracker/">http://homepages.tesco.net/wisecracker/</A>
+
+<A HREF="http://main.aminet.net/search?readme=wisecracker">http://main.aminet.net/search?readme=wisecracker</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001632.html">[mikeos-developer] Dump file
+</A></li>
+	<LI>Next message: <A HREF="001634.html">[mikeos-developer] Dump file
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1633">[ date ]</a>
+              <a href="thread.html#1633">[ thread ]</a>
+              <a href="subject.html#1633">[ subject ]</a>
+              <a href="author.html#1633">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

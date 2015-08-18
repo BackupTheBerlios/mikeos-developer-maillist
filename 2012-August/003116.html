@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] A memory allocator for MikeOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20memory%20allocator%20for%20MikeOS&In-Reply-To=%3C1345332320.81427.YahooMailClassic%40web65906.mail.ac4.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003114.html">
+   <LINK REL="Next"  HREF="003117.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] A memory allocator for MikeOS</H1>
+    <B>Matej Horvat</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20memory%20allocator%20for%20MikeOS&In-Reply-To=%3C1345332320.81427.YahooMailClassic%40web65906.mail.ac4.yahoo.com%3E"
+       TITLE="[mikeos-developer] A memory allocator for MikeOS">redjazz_slo at yahoo.com
+       </A><BR>
+    <I>Sun Aug 19 01:25:20 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003114.html">[mikeos-developer] A memory allocator for MikeOS
+</A></li>
+        <LI>Next message: <A HREF="003117.html">[mikeos-developer] A memory allocator for MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3116">[ date ]</a>
+              <a href="thread.html#3116">[ thread ]</a>
+              <a href="subject.html#3116">[ subject ]</a>
+              <a href="author.html#3116">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> I've been thinking about moving the text editor inside the
+</I>&gt;<i> kernel so
+</I>&gt;<i> that the bottom 32K of the segment is always available to
+</I>&gt;<i> programs
+</I>&gt;<i> (instead of the current system, whereby programs can run at
+</I>&gt;<i> 32K or at
+</I>&gt;<i> 32K+(size of EDIT.BIN), which is a bit messy).
+</I>
+That would break compatibility horribly.
+
+&gt;<i> On the other hand, the kernel is already around 20K and we
+</I>&gt;<i> don't have
+</I>&gt;<i> much space left (with the current disk_buffer
+</I>&gt;<i> implementation, the
+</I>&gt;<i> kernel can only be 24K max). If only there were a solution
+</I>&gt;<i> to all
+</I>&gt;<i> this...
+</I>
+I've thought about this in the past. There are a number of things we can do, but unfortunately none goes well with the simplicity of MikeOS:
+
+* We can start optimizing code, shaving a few bytes from each routine (&quot;XOR reg, reg&quot; instead of &quot;MOV reg, 0&quot;, &quot;OR reg, reg&quot; instead of &quot;CMP reg, 0&quot;, etc. for a start).
+
+* We can (and IMO should have already) start using resb/resw in place of defb/defw. For example, basic.asm (in version 4.2, because that's the version I have a local copy of right now) alone has
+	- string_vars (1024 bytes)
+	- variables/for_variables/for_code_points (156),
+	- error messages that all begin with &quot;Error: &quot; (70)
+	- token (255)
+	- do_gosub.tmp_token (30)
+	- do_goto.tmp_token (30)
+	- do_input.tmpstring (128)
+	- do_save.tmp_filename (15)
+	- gosub_points (20)
+which is 1728 bytes right there. Another example is cli.asm
+	- input (255)
+	- dirlist (255)
+	- tmp_string (15)
+for a total of 525. That's 2253 bytes so far. You can fit a lot of code into that. Of course, resb and resw only reduce the on-disk size, so the kernel would need some restructuring to share buffers between routines, making sure that a routine that uses a buffer doesn't call another routine that uses the same buffer.
+
+* The memory allocator could help with the buffer space problem, but the main issue is that a program needs to initialize the heap and the kernel can't initialize it itself, because it can't reliably know where it should begin; for example, edit.bin uses all space starting with 36864 for the file being edited, but the executable is less than 2K long. Forcing all programs to initialize the heap or inventing a new executable format that includes a pointer to the start of the heap would again break compatibility.
+
+* We can implement a system that loads OS routines from disk on demand. The memory allocator can be easily modified to support multiple heaps, in this case an OS heap and an application heap. However, this would require a lot of ugly glue code and would be also very slow.
+
+Matej Horvat
+<A HREF="http://matejhorvat.si/">http://matejhorvat.si/</A>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003114.html">[mikeos-developer] A memory allocator for MikeOS
+</A></li>
+	<LI>Next message: <A HREF="003117.html">[mikeos-developer] A memory allocator for MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3116">[ date ]</a>
+              <a href="thread.html#3116">[ thread ]</a>
+              <a href="subject.html#3116">[ subject ]</a>
+              <a href="author.html#3116">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

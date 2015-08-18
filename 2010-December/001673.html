@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] An idea...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20An%20idea...&In-Reply-To=%3CAANLkTi%3DrQ8ME%2Ba-NkkaxWTFPHXqLqNCUpHKwA7DFjtrA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001657.html">
+   <LINK REL="Next"  HREF="001663.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] An idea...</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20An%20idea...&In-Reply-To=%3CAANLkTi%3DrQ8ME%2Ba-NkkaxWTFPHXqLqNCUpHKwA7DFjtrA%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] An idea...">okachi at gmail.com
+       </A><BR>
+    <I>Mon Dec 20 10:33:22 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001657.html">[mikeos-developer] An idea...
+</A></li>
+        <LI>Next message: <A HREF="001663.html">[mikeos-developer] An idea...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1673">[ date ]</a>
+              <a href="thread.html#1673">[ thread ]</a>
+              <a href="subject.html#1673">[ subject ]</a>
+              <a href="author.html#1673">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Bazza,
+
+Interesting thoughts. My take:
+
+&gt;<i> A need a FIXED set of addresses to use as I/O store, so I have decided on locations
+</I>&gt;<i> 65528 to 65535 inclusive.
+</I>
+I think we need to be really careful about changing the memory layout.
+Right now it's really simple: programs can assume they have entire
+control over the top 32K of the segment. If we start stealing a few
+bytes here and there, it's no longer clean.
+
+We don't have to go crazy about compatibility, but there may be some
+MikeOS hackers out there with programs using that 32K in various ways,
+and we could break their work by changing the function of certain
+bytes.
+
+&gt;<i> It looks as though you are using SS: at 0x0000: an sp at 0xFFFF...
+</I>
+Correct!
+
+&gt;<i> SO I have decided to steal the top 8 bytes for BIOS variable storage.
+</I>
+There is a precedent for this. If you look in kernel.asm, there's a
+'SYSTEM VARIABLES' section that was created by the guy who wrote the
+time and date routines. It provides a system-wide way to change
+settings.
+
+However, wouldn't the cleanest solution to all this be: just implement
+it as part of the API? You're doing MikeOS work, you need to do
+something that's not easily achievable through the normal methods, so
+therefore it's a missing feature I reckon.
+
+Couldn't we just add your os_key_flags to the API (and a BASIC hook),
+with it returning the value in AL rather than poking it into RAM
+somewhere? What do you reckon?
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001657.html">[mikeos-developer] An idea...
+</A></li>
+	<LI>Next message: <A HREF="001663.html">[mikeos-developer] An idea...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1673">[ date ]</a>
+              <a href="thread.html#1673">[ thread ]</a>
+              <a href="subject.html#1673">[ subject ]</a>
+              <a href="author.html#1673">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

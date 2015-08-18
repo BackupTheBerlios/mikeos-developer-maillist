@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] New mouse support for testing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20mouse%20support%20for%20testing&In-Reply-To=%3C273BA78A683141F2AD5D740F94D93210%40VistaLaptop%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000042.html">
+   <LINK REL="Next"  HREF="000046.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] New mouse support for testing</H1>
+    <B>Troy Martin</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20mouse%20support%20for%20testing&In-Reply-To=%3C273BA78A683141F2AD5D740F94D93210%40VistaLaptop%3E"
+       TITLE="[mikeos-developer] New mouse support for testing">blasterman95 at gmail.com
+       </A><BR>
+    <I>Thu Aug 28 17:12:50 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000042.html">[mikeos-developer] New mouse support for testing
+</A></li>
+        <LI>Next message: <A HREF="000046.html">[mikeos-developer] New mouse support for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#45">[ date ]</a>
+              <a href="thread.html#45">[ thread ]</a>
+              <a href="subject.html#45">[ subject ]</a>
+              <a href="author.html#45">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hey again,
+
+Tried my Toshiba a second time around. Just unexpectedly quits every time I go into mouse.bin. Worked better when I actually plugged in a USB mouse transferred to PS/2. Still quit, but it saw the mouse. GFXTEST is lovely at a 266 MHz clock speed though!
+
+I'm going to test some ol' DOS games on MikeOS. If there are any that have source code and are in the public domain (two best words ever), I'll send them to you.
+
+[offtopic]Hmm, we seem to have four people here that participate in discussion [/offtopic]
+
+Troy Martin
+www.blasterman.co.nr
+
+
+From: Bob Moss 
+Sent: Thursday, August 28, 2008 3:48 AM
+To: MikeOS (and similar OS) developers 
+Subject: Re: [mikeos-developer] New mouse support for testing
+
+
+Hmm... I've tried it on a few physical devices.
+
+On an Eee PC 900 (USB floppy drive) - Most of the OS works but you can get sluggish performance. The 'mouse.bin' module loads but then terminates straight away (you don't get the chance to see if the touchpad works) - perhaps this is a debugging measure, as it wasn't designed for trackpad mice!
+
+Likewise a similar thing happens on an old Toshiba satellite (You know the old grey ones with the green sponge in the middle of the keyboard as a mouse?). The mouse.bin module mostly works, but I do sometimes get some bizarre co-ordinate addresses in the bottom-left.
+
+It seems to work perfectly with my desktop machine though (with a PS/2 mouse). though USB  mouse performance tends to be a bit more erratic...!
+
+
+2008/8/28 M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+
+  Lo all,
+
+  Tomasz Gorol has contributed a complete mouse driver for MikeOS.
+  Here's the patch against 1.4.2 (it's a whopper!):
+
+  <A HREF="http://mikeos.berlios.de/mouse/mouse.txt">http://mikeos.berlios.de/mouse/mouse.txt</A>
+
+  This implements native system calls, some DOS compatibility, and an
+  example program. I've uploaded disk images (floppy and CD-ROM) here,
+  with the build name 1.4.2M:
+
+  <A HREF="http://mikeos.berlios.de/mouse/disk_images.zip">http://mikeos.berlios.de/mouse/disk_images.zip</A>
+
+  So far we've tested it in QEMU and VirtualBox -- I'm going to try some
+  real hardware tonight. Any other testing muchly appreciated!
+
+  M
+
+  --
+  Mike Saunders
+  <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+  _______________________________________________
+  mikeos-developer mailing list
+  <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+  <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+
+
+
+
+-- 
+This email is not intended to offend, annoy or inconvenience anyone. If it has, email me and state that it has, and we'll sort out the problem in an amicable way. Thank you for reading this message, I hope for a reply from you soon!
+
+Why not visit my tech site?: <A HREF="http://bjm1904.741.com/">http://bjm1904.741.com/</A>
+or Apollo OS?:
+<A HREF="http://apolloopsys.sourceforge.net/">http://apolloopsys.sourceforge.net/</A>
+
+
+
+--------------------------------------------------------------------------------
+
+
+_______________________________________________
+mikeos-developer mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080828/77db6186/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080828/77db6186/attachment.html</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: Emoticon1.gif
+Type: image/gif
+Size: 257 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080828/77db6186/attachment.gif">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080828/77db6186/attachment.gif</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000042.html">[mikeos-developer] New mouse support for testing
+</A></li>
+	<LI>Next message: <A HREF="000046.html">[mikeos-developer] New mouse support for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#45">[ date ]</a>
+              <a href="thread.html#45">[ thread ]</a>
+              <a href="subject.html#45">[ subject ]</a>
+              <a href="author.html#45">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

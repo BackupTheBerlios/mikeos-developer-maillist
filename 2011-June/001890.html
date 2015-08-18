@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Running MikeOS on an 8086 emulator
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-June/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Running%20MikeOS%20on%20an%208086%20emulator&In-Reply-To=%3CBANLkTi%3DPF9L8wmbr9xQ%3DRF5oMHQ1POrXNA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001886.html">
+   <LINK REL="Next"  HREF="001891.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Running MikeOS on an 8086 emulator</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Running%20MikeOS%20on%20an%208086%20emulator&In-Reply-To=%3CBANLkTi%3DPF9L8wmbr9xQ%3DRF5oMHQ1POrXNA%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Running MikeOS on an 8086 emulator">okachi at gmail.com
+       </A><BR>
+    <I>Sat Jun 18 11:49:54 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001886.html">[mikeos-developer] Running MikeOS on an 8086 emulator
+</A></li>
+        <LI>Next message: <A HREF="001891.html">[mikeos-developer] Running MikeOS on an 8086 emulator
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1890">[ date ]</a>
+              <a href="thread.html#1890">[ thread ]</a>
+              <a href="subject.html#1890">[ subject ]</a>
+              <a href="author.html#1890">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, Jun 17, 2011 at 5:18 PM, M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Yes, that got further. Thanks Mario. It now gets to the app selector
+</I>&gt;<i> dialog box -- random flickering then and no interaction
+</I>
+Looks like this has been solved too. Mike Gonta talked to Mike
+Chambers who makes the emulator, and apparently its BIOS doesn't
+support the &quot;get enhanced keystroke&quot; interrupt (function 10h on int
+16h) which MikeOS uses.
+
+Mike Chambers has added a quick hack fix for now, which appears to
+show the menu properly. He says his emulator is actually 80186
+compatible too.
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001886.html">[mikeos-developer] Running MikeOS on an 8086 emulator
+</A></li>
+	<LI>Next message: <A HREF="001891.html">[mikeos-developer] Running MikeOS on an 8086 emulator
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1890">[ date ]</a>
+              <a href="thread.html#1890">[ thread ]</a>
+              <a href="subject.html#1890">[ subject ]</a>
+              <a href="author.html#1890">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

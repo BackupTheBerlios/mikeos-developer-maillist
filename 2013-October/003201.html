@@ -1,0 +1,590 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] thanks for the boot code
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2013-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20thanks%20for%20the%20boot%20code&In-Reply-To=%3C20131025223358.GB20373%40myrrdin%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003193.html">
+   <LINK REL="Next"  HREF="003202.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] thanks for the boot code</H1>
+    <B>Jagged O'Neill</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20thanks%20for%20the%20boot%20code&In-Reply-To=%3C20131025223358.GB20373%40myrrdin%3E"
+       TITLE="[mikeos-developer] thanks for the boot code">jagged_4mos at jagged.tk
+       </A><BR>
+    <I>Sat Oct 26 00:33:58 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003193.html">[mikeos-developer] mikeos-developer Digest, Vol 56, Issue 4
+</A></li>
+        <LI>Next message: <A HREF="003202.html">[mikeos-developer] thanks for the boot code
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3201">[ date ]</a>
+              <a href="thread.html#3201">[ thread ]</a>
+              <a href="subject.html#3201">[ subject ]</a>
+              <a href="author.html#3201">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>High all,
+
+I just wanna say thanks to those who gave me some hints and &quot;template&quot;
+code from which I... Since I learned from you I thought I could also
+contribute my modifications (boot_1n.s).
+
+First, I don't use NASM but GAS; readers tend to miss the '%' prefix
+on registers; why and how to in the header comment.
+
+The method of building the code is a bit... awkward; I think I could
+involve setting the segment registers, but I want them all zero. But
+then, when not .org'ing to 0x7c00, the code runs, but when I attach
+to the session via gdb, it is not able to properly disassemble the
+code. When .org'ing, however, gas bloats up the object file, and ld
+doesn't change a thing about it, so I'm resorting to extracting the
+desired portions via dd.
+
+The same applies to the demo &quot;kernel&quot; (kern_1n.s), which is just a
+stub with two strings and two calls to the print function of the
+loader.
+
+As further attachments you'll find the scripts
+  mk   --- this builds the actual binaries
+  mkd  --- which takes the binaries to build a floppy disk image
+  run  --- which opens a disassembly of boot_1n.o in the current
+           terminal, and starts qemu, and optionally also starts
+           gdb in a separate xterm (after creating a a .gdbinit
+           file that makes sure the emulator stops at the boot
+           code entry)
+
+(Actually none of them is tidy enough to be published, but... (just
+quick hacks).)
+
+All scripts take one argument, the &quot;version&quot; (1n in this case, which
+is also the default).
+
+run takes a few more options:
+  -m  --- call the mk script before starting the emulator
+          (implies -i)
+  -i  --- make the diskimage (doesn't check if the binaries
+          do already exist; rather use -m for a fresh make)
+  -o  --- starts the &quot;old&quot; emulator, i.e. qemu 0.11.0 on my
+          box; the newer version 1.4.0 (probably not current)
+          here doesn't have such a generically name binary;
+          basically, -o starts qemu, while the default is to
+          run qemu-system-i386
+  -d  --- additionally setup and start gdb
+
+I guess that's it... thanks again,
+
+Jagged
+
+
+-- 
+  I need a new signature... :-/
+-------------- next part --------------
+###
+###  starting point
+###
+#
+# NASM x86 Floppy Bootblock &quot;Hello, world!&quot;
+# written 2007-03-17 by Dirk Jagdmann &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">doj at cubic.org</A>&gt;
+# <A HREF="http://cubic.org/source/bootblock.asm">http://cubic.org/source/bootblock.asm</A>
+#
+###
+### first rewritten to use gas, then experimented a bit with
+### VGA and INT 15h/AX=e820, later removed that stuff and
+### instead added real loader code, &quot;inspired&quot; by the loader
+### of MikeOS
+###
+#
+#; ==================================================================
+#; The Mike Operating System bootloader
+#; Copyright (C) 2006 - 2013 MikeOS Developers -- see doc/LICENSE.TXT
+#;
+#; Based on a free boot loader by E Dehling. It scans the FAT12
+#; floppy for KERNEL.BIN (the MikeOS kernel), loads it and executes it.
+#; This must grow no larger than 512 bytes (one sector), with the final
+#; two bytes being the boot signature (AA55h). Note that in FAT12,
+#; a cluster is the same as a sector: 512 bytes.
+#; ==================================================================
+#
+###
+### while quite nothing remains from the hello-world bootblock,
+### I find it worth mentioning,
+###
+### the original loader code is mostly recognizable by the
+### comments that I've left intact
+### it's heavily modified, shortened and speeded (by far not to
+### the max!)
+###
+### anyway, as a newbie to all this BIOS stuff and also to FAT,
+### I couldn't have made it in less than a day
+###
+### thanks to all contributors (and my guys on freenode##asm)
+### <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">jagged at jagged.tk</A>
+### -------------------------------------------------------------
+### syntax notice: this is indeed AT&amp;T syntax; I'm just using the
+### relatively new -mnaked-reg option of gas to get rid of the '%'
+### prefix for registers --- not because I generally don't like
+### them, but because they must be quoted when passing a register
+### to a macro *sigh*
+###
+### BUGS: you gotta be kidding...
+###       no, seriously: I think I left some bytes on the stack
+###       when calling the &quot;kernel&quot;... but a kernel is anyway
+###       supposed to do a fresh setup, isn't it?
+###
+
+kern_addr=0x2000
+buffer=0xe00
+
+bootdev=0x7e00	# byte
+cluster=0x7e02	# word
+
+# port to gas (trying)
+
+	.code16
+
+	.org	0x7c00
+
+	.global _start
+
+	jmp	_start
+
+	.ascii	&quot;FEEDBACC&quot;
+blksz:	.word	512
+	.byte	1
+	.word	1
+	.byte	2
+rtent:	.word	224		# root dir entries
+	.word	2880
+	.byte	0x0f
+secpfat:.word	9
+secptrk:.word	18
+sides:	.word	2
+	.long	0,0
+	.word	0
+	.byte	41
+	.long	0
+	.ascii	&quot;0xFEEDBACCx0&quot;
+	.ascii	&quot;FAT12   &quot;
+
+_start:
+	#cli
+	mov	cs,ax
+	mov	ax,ds
+	mov	ax,es
+	mov	ax,ss
+	mov	$0x8000,sp	# stack... does it work without further setup?
+	sti
+
+	cmp	$0,dl
+	je	no_change
+	mov	dl,bootdev	# Save boot device number
+	mov	$8,ah		# Get drive parameters
+	int	$0x13
+	jnc	0f
+	mov	$bdisk,bp
+	mov	$10,cx
+	jmp	printe
+0:	and	$0x3f,cx	# Maximum sector number
+	mov	cx,secptrk	# Sector numbers start at 1
+	movzx	dh,dx		# Maximum head number
+	inc	dx		# Head numbers start at 0 - add 1 for total
+	mov	dx,sides
+
+no_change:
+	xor	eax,eax		# Needed for some older BIOSes
+
+	call	read_root	# does not return on error
+	call	search_kernel	# does not return if not found
+
+	# di is at offset 11 of dir entry, first file sector is at
+	# offset 26
+
+	mov	15(di),ax
+	or	ax,ax
+	jz	nokernel	# empty kernel
+	mov	ax,cluster
+
+	#mov	$1,ax
+	#call	l2hts		# could also change this for sec. 19 in \
+	xor	dx,dx		# head (h), drive (l)         [ read_root
+	mov	$2,cx		# track (h), sector (l)
+	mov	$9,al
+
+				# no more need for the directory
+	mov	$buffer,bx	# reuse buffer for FAT 0xe00 .. 0x2000
+	call	read_blocks	# does not return on error
+
+	mov	$kern_addr,bx
+	mov	cluster,ax
+	add	$31,ax
+	call	l2hts
+0:	mov	$1,al
+	call	read_blocks
+
+	# compute next cluster
+	# (i don't really get it... thanks, Mike Saunders ;-)
+	# (that is, i don't understand FAT... thanks anyway)
+	# (update: i started to understand :-)
+	mov	cluster,ax
+	mov	ax,dx
+	shr	$1,ax		# ax=2*ax
+	add	dx,ax		# ax=3*ax
+	#mov	ax,dx		# 3*ax only odd if ax odd
+	#and	$1,dx		# remainder of /2 (moved down for the flag (*))
+	shr	$1,ax		# result of /2
+	mov	$buffer,si
+	add	ax,si
+	mov	(si),ax
+	#or	dx,dx
+	#and	$1,dx		# (*) can only be 1 or 0, so shr saves a byte
+	shr	dl
+	jnc	even		# jz does not work with this method
+
+odd:	shr	$4,ax
+	jmp	continue
+
+even:	and	$0xfff,ax
+
+continue:
+	mov	ax,cluster
+	cmp	$0xff8,ax
+	jae	run_it
+	add	$512,bx
+	jmp	0b
+
+run_it:	mov	bootdev,dl
+	jmp	kern_addr
+
+wait:	hlt
+	# wait for key
+	xor	ax,ax
+	int	$0x16
+	cmp	$27,al
+	je	reset
+
+	jmp	wait
+
+reset:	jmp	$0xffff,$0x0
+
+nokernel:
+	mov	$bkrn,bp
+	mov	$11,cx
+
+printe:	push	$wait		# print will &quot;ret&quot; to reset
+
+print:	xor	ax,ax
+	xor	bx,bx
+	mov	$0x3,ah
+	push	cx
+	int	$0x10		# get cursor pos
+	pop	cx
+	mov	$0x1301,ax	# ah=function, al=write mode
+	mov	$0xf,bl		# bh=page, bl=attribute
+	int	$0x10
+	ret
+
+reset_floppy:		# IN: [bootdev] = boot device; OUT: carry set on error
+	push	ax
+	push	dx
+	xor	ax,ax
+	mov	bootdev,dl
+	stc
+	int	$0x13
+	pop	dx
+	pop	ax
+
+	ret
+
+read_root:
+	mov	$19,ax
+	call	l2hts
+	mov	$buffer,bx
+	mov	$14,al		# 14 blocks
+
+read_blocks:
+	xor	si,si		# count attempts
+
+	mov	$2,ah
+0:	push	ax
+	stc
+	int	$0x13		# read blocks, may trash ax on error
+	jnc	done
+
+	pop	ax
+	inc	si
+	call	reset_floppy
+	jc	error		# could not reset
+	inc	si
+	cmp	$3,si
+	jnc	0b		# retry
+
+error:	mov	$bdrv,bp
+	mov	$11,cx
+	jmp	printe
+
+	# ah contains status, al (maybe) no of sectors read, so
+done:	pop	si		# adjust the stack pointer by a dummy pop
+	ret			# if it returns, buffers are filled
+
+
+search_kernel:
+	mov	$kernel,si
+
+search_dir:
+	mov	$buffer,di
+
+	mov	rtent,cx	# Search all (224) entries
+	xor	ax,ax		# Searching at offset 0
+
+	mov	cx,dx
+next_entry:
+	#xchg	cx,dx		# We use CX in the inner loop...
+
+	mov	$11,cx		# word-wise compare
+	rep	cmpsb
+	je	found		# di increased by 11 on success
+	add	cx,di		# else remainder in cx
+	add	$(32-11),di	# (32-11) bytes per entry
+	sub	$11,cx		# no of bytes we did already (negative)
+	add	cx,si		# restore file name to search for
+
+	mov	dx,cx		# Get the original CX back
+	loop	next_entry
+
+	jmp	nokernel	# kernel not found
+
+found:	ret
+
+l2hts:	# Calculate head, track and sector settings for int 13h
+	# IN: logical sector in AX, OUT: correct registers for int 13h
+
+	push	bx
+	push	ax
+
+	mov	ax,bx		# Save logical sector			19
+
+	xor	dx,dx		# First the sector
+	divw	secptrk		#				18 --&gt;   1, rem 1
+	inc	dl		# Physical sectors start at 1		        2
+	mov	dl,cl		# Sectors belong in CL for int 13h
+	
+	mov	bx,ax		#					19
+	xor	dx,dx		# Now calculate the head
+	divw	secptrk		#				18 --&gt;   1, rem 1
+	xor	dx,dx
+	divw	sides		#				 2 --&gt;   0, rem 1
+	mov	dl,dh		# Head/side
+	mov	al,ch		# Track
+
+	pop	ax
+	pop	bx
+
+	mov	bootdev,dl	# Set correct device
+
+	ret
+
+
+eobc:	# end of boot code
+
+strl=eobb-strings
+	.org	0x7c00+510-strl
+
+strings:
+bdisk:	.ascii	&quot;Bad Disk&quot;
+	.byte	0xa,0xd
+ebdisk:
+bdrv:	.ascii	&quot;Bad Drive&quot;
+	.byte	0xa,0xd
+ebdrv:
+bkrn:	.ascii	&quot;No Kernel&quot;
+	.byte	0xa,0xd
+ebkrn:
+kernel:	.ascii	&quot;KERNEL  BIN&quot;
+eobb:	# end of boot &quot;buffers&quot; (aka static strings)
+#	.org	510
+	.byte	0x55,0xaa
+
+
+
+-------------- next part --------------
+	.code16
+
+	.org	0x2000
+
+	.global _start
+
+	### being lazy... but it shows that the loader works
+
+_start:	lea	wcm,bp
+	lea	ewcm,cx
+	sub	bp,cx
+	calll	0x7cef		# loader's print
+
+	lea	pkr,bp
+	lea	epkr,cx
+	sub	bp,cx
+	call	0x7cec		# loader's printe
+
+
+wcm:	.ascii	&quot;Welcome to YaOS&quot;
+	.byte	0xa,0xd
+ewcm:
+pkr:	.ascii	&quot;Press ESC to reboot&quot;
+	.byte	0xa,0xd
+epkr:
+_end:
+-------------- next part --------------
+#!/bin/zsh
+
+[[ -z $* ]] &amp;&amp;
+  arg=&quot;1n&quot; \
+||<i>
+</I>  arg=$1
+
+as -mtune i8086 -mnaked-reg -g -o boot_$arg.o boot_$arg.s &amp;&amp;
+  ld --oformat=binary -Ttext=0x0 boot_$arg.o -o boot_$arg &amp;&amp;
+  {
+    dd if=boot_$arg of=boot_$arg.bs bs=512 count=1 skip=62 2&gt;/dev/null
+    x=( $(objdump -t boot_$arg.o) )
+    l1=$((x[(i)eobc]-4))
+    a1=$x[l1]
+    d1=$((16#$a1))
+    l2=$((x[(i)strings]-4))
+    a2=$x[l2]
+    d2=$((16#$a2))
+    s=$((d1-0x7c00))
+    print &quot;size:$((s)), left: $((d2-d1))&quot;
+  }
+
+as -mtune i8086 -mnaked-reg -g -o kern_$arg.o kern_$arg.s &amp;&amp;
+  ld --oformat=binary -Ttext=0x0 kern_$arg.o -o kern_$arg &amp;&amp;
+  {
+    x=( $(objdump -t kern_$arg.o) )
+    l1=$((x[(i)_start]-4))
+    a1=$x[l1]
+    d1=$((16#$a1))
+    l2=$((x[(i)_end]-4))
+    a2=$x[l2]
+    d2=$((16#$a2))
+    s=$((d2-d1))
+    f=$((s/512))
+    ((s%512)) &amp;&amp; ((f++))
+    dd if=kern_$arg of=kernel.bin bs=512 count=$f skip=16 2&gt;/dev/null
+  }
+
+-------------- next part --------------
+#!/bin/zsh
+
+[[ -z $* ]] &amp;&amp;
+  arg=&quot;1n&quot; \
+||<i>
+</I>  arg=$1
+
+mformat -C -i disk_$arg.img -f 1440 ::
+
+files=( kernel.bin )
+
+[[ -n $files ]] &amp;&amp;
+  mcopy -i disk_$arg.img $files ::
+
+dd if=boot_$arg.bs of=disk_$arg.img bs=512 count=1 conv=notrunc 2&gt;/dev/null
+-------------- next part --------------
+#!/bin/zsh
+
+GDBINIT=(
+  &quot;file boot_$.o&quot;
+  &quot;target remote localhost:1234&quot;
+  &quot;set arch i8086&quot;
+  &quot;b *0x7c00&quot;
+  &quot;c&quot;
+)
+
+{
+  DEBUG=0
+  MAKE=0
+  MAKEIMG=0
+  IMAGE=1n
+  QEMU=qemu-system-i386
+}
+
+[[ -n $* ]] &amp;&amp;
+{
+  for arg in $*
+  {
+    [[ $arg[1] == &quot;-&quot; ]] &amp;&amp;
+    {
+      case $arg[2] in
+        'd') DEBUG=1;;
+        'm') MAKE=1;MAKEIMG=1;;
+        'i') MAKEIMG=1;;
+        'o') QEMU=qemu;;
+        *) print 'unknown option `$arg`';;
+      esac
+    } \
+    ||
+      IMAGE=$arg
+  }
+}
+
+((MAKE)) &amp;&amp; mk $IMAGE
+
+((MAKEIMG)) &amp;&amp; mkd $IMAGE
+
+objdump -M i8086 -d boot_$IMAGE.o | less &amp; listpid=$!
+
+((DEBUG)) &amp;&amp;
+{
+  typeset -a g
+  for x in $GDBINIT
+  {
+    #((!$x[(I)*])) &amp;&amp;
+    y=${x:s/$/$IMAGE}
+    g=( $g $y )
+    #print $y
+  }
+  print -l $g &gt; .gdbinit
+  $QEMU -S -s -m 12 -fda disk_$IMAGE.img -boot order=a &amp; emupid=$!
+  xterm -e gdb7 -command=/home/jagged/etc/gdb/gdbrc
+  ((emupid)) &amp;&amp; kill -term $emupid
+  :
+} \
+||<i>
+</I>  $QEMU -m 12 -fda disk_$IMAGE.img -boot order=a
+
+((listpid)) &amp;&amp; kill -term $listpid
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003193.html">[mikeos-developer] mikeos-developer Digest, Vol 56, Issue 4
+</A></li>
+	<LI>Next message: <A HREF="003202.html">[mikeos-developer] thanks for the boot code
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3201">[ date ]</a>
+              <a href="thread.html#3201">[ thread ]</a>
+              <a href="subject.html#3201">[ subject ]</a>
+              <a href="author.html#3201">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

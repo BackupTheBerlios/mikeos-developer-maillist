@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] mikeos in unreal mode
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20mikeos%20in%20unreal%20mode&In-Reply-To=%3C20081024193749.13ff183f%40tlen.pl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000396.html">
+   <LINK REL="Next"  HREF="000398.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] mikeos in unreal mode</H1>
+    <B>Tomasz Gorol</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20mikeos%20in%20unreal%20mode&In-Reply-To=%3C20081024193749.13ff183f%40tlen.pl%3E"
+       TITLE="[mikeos-developer] mikeos in unreal mode">gavian at tlen.pl
+       </A><BR>
+    <I>Fri Oct 24 20:37:49 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000396.html">[mikeos-developer] mikeos in unreal mode
+</A></li>
+        <LI>Next message: <A HREF="000398.html">[mikeos-developer] mikeos in unreal mode
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#397">[ date ]</a>
+              <a href="thread.html#397">[ thread ]</a>
+              <a href="subject.html#397">[ subject ]</a>
+              <a href="author.html#397">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Righto, this is excellent, thanks. I'm going to use this as a base
+</I>&gt;<i> tonight and rearrange the MikeOS memory map as per the previous
+</I>&gt;<i> emails. Then I'll implement int 47h (or similar) for MikeOS kernel
+</I>&gt;<i> calls.
+</I>&gt;<i> 
+</I>&gt;<i> M
+</I>
+Good luck. I hope it will work perfect and soon we will have
+new sparlking mikeos.
+ 
+By the way we will have to turn on a Gate A20. I think one way (not
+only one) of doing it is through the keyboard controler.
+
+        write64 0xd1
+        write60 0xdf
+
+macros write64 and write60 are defined in os_mouse.asm
+
+I took a book from the library about PC, roughly about 1500 pages :) I
+will look into it soon.
+
+Now I work on the debuger.
+
+cheers.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000396.html">[mikeos-developer] mikeos in unreal mode
+</A></li>
+	<LI>Next message: <A HREF="000398.html">[mikeos-developer] mikeos in unreal mode
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#397">[ date ]</a>
+              <a href="thread.html#397">[ thread ]</a>
+              <a href="subject.html#397">[ subject ]</a>
+              <a href="author.html#397">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

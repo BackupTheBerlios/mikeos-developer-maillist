@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Suggestion for next version of MikeOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Suggestion%20for%20next%20version%20of%20MikeOS&In-Reply-To=%3C19d8b3b00811291551o31115833oc95eebca1ea5b7d2%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000519.html">
+   <LINK REL="Next"  HREF="000521.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Suggestion for next version of MikeOS</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Suggestion%20for%20next%20version%20of%20MikeOS&In-Reply-To=%3C19d8b3b00811291551o31115833oc95eebca1ea5b7d2%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Suggestion for next version of MikeOS">okachi at gmail.com
+       </A><BR>
+    <I>Sun Nov 30 00:51:45 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000519.html">[mikeos-developer] Suggestion for next version of MikeOS
+</A></li>
+        <LI>Next message: <A HREF="000521.html">[mikeos-developer] Suggestion for next version of MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#520">[ date ]</a>
+              <a href="thread.html#520">[ thread ]</a>
+              <a href="subject.html#520">[ subject ]</a>
+              <a href="author.html#520">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Paul,
+
+&gt;<i> Nope ain't the same Paul Sommers.
+</I>
+I think Bob's brain had context switched for a second -- there wasn't
+a Paul at the meeting he mentioned. There was another guy from SA
+though so I think that's where the mixup came from :-)
+
+&gt;<i> I quite like the idea of introducing &quot;how to&quot; guides for developers
+</I>&gt;<i> wishing to put back some of the features taken out of MikeOS.
+</I>
+I really like this idea. Ultimately the biggest strength in MikeOS
+will (hopefully!) be in the documentation and code structure: the
+source layout, the comments, and the accompanying Handbooks. We need
+to maintain a balance between keeping the core simple, yet providing
+enough features that it's a good start for extending.
+
+I'd love to have a set of tutorials on the website for 3.0, showing
+how to add more functionality like the basic DOS compatibility that
+was removed in 2.9. Anyone is welcome to write docs!
+
+But having DOS compatibility as a permanent feature of the OS is
+tricky. It worked OK for some tiny .COM games in 2.0, but the MikeOS
+memory map (everything in one 64K segment) means that the vast
+majority of programs would never be able to run, even if we
+implemented more int 21h routines. Most .COM apps assume they have
+full control of the 64K segment.
+
+So the only real choice was to cut out the rudimentary DOS support and
+simplify the OS, or extend it and have to deal with segments. For
+those who've dealt with segments before, it's not the most complex
+thing in the world, but it's pretty painful for new OS developers and
+adds a lot to the code. So IMHO we're best off with the simplicity
+approach even though it does lose us a feature.
+
+That said, DOS compatibility will no doubt continue with TomOS, the
+feature-laden spin-off of MikeOS. I've heard from Tom and he hopes to
+get a release out in the new year, and he's working on some cool
+stuff.
+
+&gt;<i> What I would really like to see is FAT16 support for MikeOS, although I
+</I>&gt;<i> understand the extra complexity it would add.
+</I>
+That'd be fantastic. I think it's an enhancement that could be
+introduced into the current FAT12 code without any drastic changes to
+the OS design, so if anyone wants to write it that'd be great.
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000519.html">[mikeos-developer] Suggestion for next version of MikeOS
+</A></li>
+	<LI>Next message: <A HREF="000521.html">[mikeos-developer] Suggestion for next version of MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#520">[ date ]</a>
+              <a href="thread.html#520">[ thread ]</a>
+              <a href="subject.html#520">[ subject ]</a>
+              <a href="author.html#520">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

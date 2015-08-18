@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] parallel port os calls for MikeOS 4.1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20parallel%20port%20os%20calls%20for%20MikeOS%204.1&In-Reply-To=%3C20091207135802.0JP2B.463948.root%40web09-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000810.html">
+   <LINK REL="Next"  HREF="000812.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] parallel port os calls for MikeOS 4.1</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20parallel%20port%20os%20calls%20for%20MikeOS%204.1&In-Reply-To=%3C20091207135802.0JP2B.463948.root%40web09-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] parallel port os calls for MikeOS 4.1">wisecracker at tesco.net
+       </A><BR>
+    <I>Mon Dec  7 14:58:02 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000810.html">[mikeos-developer] parallel port os calls for MikeOS 4.1
+</A></li>
+        <LI>Next message: <A HREF="000812.html">[mikeos-developer] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#811">[ date ]</a>
+              <a href="thread.html#811">[ thread ]</a>
+              <a href="subject.html#811">[ subject ]</a>
+              <a href="author.html#811">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Paulo...
+
+&gt;<i> ;----------------------------------------------------------
+</I>&gt;<i> os_port_byte_in:
+</I>&gt;<i> ;----------------------------------------------------------
+</I>&gt;<i> ;Read byte from port
+</I>&gt;<i> ;IN: dx = port address
+</I>&gt;<i> ;OUT: ax, al = data from port 
+</I>&gt;<i> 
+</I>&gt;<i> pusha
+</I>&gt;<i> in al,dx
+</I>&gt;<i> mov .tmp, ax
+</I>&gt;<i> popa
+</I>&gt;<i> mov ax, .tmp
+</I>&gt;<i> ret
+</I>&gt;<i> 
+</I>&gt;<i> .tmp dw 0
+</I>
+Is this pertaining to the status address or the data adrress?
+
+Beware!
+
+IF the latter then you are assuming ECP or EPP mode and deviates
+from the SPP mode for all PCs...
+
+You can`t make that assumption, IBM XTs for example do not have
+bi-directional parallel port ability...
+
+Just commenting...
+
+
+--
+73...
+
+Bazza...
+
+TA...
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000810.html">[mikeos-developer] parallel port os calls for MikeOS 4.1
+</A></li>
+	<LI>Next message: <A HREF="000812.html">[mikeos-developer] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#811">[ date ]</a>
+              <a href="thread.html#811">[ thread ]</a>
+              <a href="subject.html#811">[ subject ]</a>
+              <a href="author.html#811">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

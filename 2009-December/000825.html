@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] screen mode confusion
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20screen%20mode%20confusion&In-Reply-To=%3C20091208183631.3OO7J.491553.root%40web09-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000824.html">
+   <LINK REL="Next"  HREF="000827.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] screen mode confusion</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20screen%20mode%20confusion&In-Reply-To=%3C20091208183631.3OO7J.491553.root%40web09-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] screen mode confusion">wisecracker at tesco.net
+       </A><BR>
+    <I>Tue Dec  8 19:36:31 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000824.html">[mikeos-developer] screen mode confusion
+</A></li>
+        <LI>Next message: <A HREF="000827.html">[mikeos-developer] screen mode confusion
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#825">[ date ]</a>
+              <a href="thread.html#825">[ thread ]</a>
+              <a href="subject.html#825">[ subject ]</a>
+              <a href="author.html#825">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Paulo...
+
+Apologies for any typos...
+
+&gt;<i> Perhaps someone could shed the light on the following:
+</I>
+&gt;<i> In MikeOS when text mode is called (screen 03h) it's has
+</I>&gt;<i> 80x25 characters with 16 colours.
+</I>
+That is for genuine CGA only, and is technically 640 x 200 giving 8 x 8
+characters. This can be character dithered to give more pseudo-colours.
+
+VGA emulates the mode as 720 x 400 and each character is 9 pixels wide
+and 16 pixels high.
+It is NOT a true representation of CGA as it will NOT dither to give more
+pseudo-colours due to the odd pixel width per character.
+My old IBM XT had genuine CGA and stuff I wrote for that broke immediately
+on my later machines.
+
+This is ancient stuff and is very well documented.
+
+&gt;<i> When graphics mode is used (mode 13h) the screen resolution
+</I>&gt;<i> is 320x200 with 256 colours.
+</I>
+This can be 320 x 400 and was used extensively by Windows in the early
+days of VGA(/MCGA) using VESA extensions and using the VGA memory
+range, absolute addresses A0000 to BFFFF.
+
+&gt;<i> Yet on my LCD screen, it reports the resolution as 720X400 at 70Hz
+</I>&gt;<i> It makes no difference whether the mode is set to text or graphics mode.
+</I>&gt;<i> Thinking maybe it was the LCD screen doing some up-scalling or something
+</I>&gt;<i> stupid, I connected a CRT monitor, pressed the OSD button and sure enough
+</I>&gt;<i> 720X400 at 70Hz.
+</I>
+It is correct as you are emulating CGA at VGA or greater level.
+
+&gt;<i> Which brings me to my questions:
+</I>
+&gt;<i> 1) What resolution is mode 03h equivalent to ?
+</I>
+640 x 200 in text mode but only on genuine CGA cards.
+(NOTE:- IBM had an extra mode for its genuine CGA card that could oly be
+accessed via special SW that was graphics mode 160 x 200 in 16 colours and
+WAS used by some games writers in the early 80s.)
+720 x 400 on VGA and above.
+
+This has been consistent for many, many years now.
+
+&gt;<i> 2) Why 720x400, when mode 13h is 320X200 ?
+</I>
+It is probably emulating the mode internally but you are viewing it as 320 x 200.
+
+&gt;<i> The only thing I can think of is that mode 13h (320x200) was for EGA graphics
+</I>&gt;<i> and because I'm using a VGA card, the card automatically does some kind of
+</I>&gt;<i> line doubling when this mode is detected.
+</I>
+True EGA only has the capability of a maximum of 64 FIXED colours as it is digital
+much like true CGA however MCGA is analogue much like VGA and above.
+(EGA is generally considered 640 x 350 in 16 colours with exactly the same
+colours as CGA.)
+EGA 640 x 200 16 colours was used extensively by games writers because of
+its speed for pixellated DMA.
+Tandy graphics mode are similar to EGA low-res modes but with a different set
+of video mode values.
+
+Yup, but it is MCGA and cannot be obtained from EGA as that is digital colour only
+and MCGA can have a
+
+&gt;<i> Any help would be greatly appreciated.
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000824.html">[mikeos-developer] screen mode confusion
+</A></li>
+	<LI>Next message: <A HREF="000827.html">[mikeos-developer] screen mode confusion
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#825">[ date ]</a>
+              <a href="thread.html#825">[ thread ]</a>
+              <a href="subject.html#825">[ subject ]</a>
+              <a href="author.html#825">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

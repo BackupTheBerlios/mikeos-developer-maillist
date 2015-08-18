@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.1 released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.1%20released&In-Reply-To=%3C20100122053845.7A02A3D0.uaa%40mx5.nisiq.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000923.html">
+   <LINK REL="Next"  HREF="000925.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.1 released</H1>
+    <B>SASANO Takayoshi</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.1%20released&In-Reply-To=%3C20100122053845.7A02A3D0.uaa%40mx5.nisiq.net%3E"
+       TITLE="[mikeos-developer] MikeOS 4.1 released">uaa at mx5.nisiq.net
+       </A><BR>
+    <I>Thu Jan 21 21:38:45 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000923.html">[mikeos-developer] MikeOS 4.1 released
+</A></li>
+        <LI>Next message: <A HREF="000925.html">[mikeos-developer] MikeOS 4.1 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#924">[ date ]</a>
+              <a href="thread.html#924">[ thread ]</a>
+              <a href="subject.html#924">[ subject ]</a>
+              <a href="author.html#924">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Good morning, I am in the train to go to my job.
+
+&gt;<i>Since a keyboard is part of the HID class, I suspect that BIOS has support for it and should work
+</I>&gt;<i>straight &quot;out the box&quot;.
+</I>&gt;<i>If this is so
+</I>
+Yes, modern PC(after Windows XP era)'s BIOS
+has &quot;legacy emulation&quot;. It enables :
+
+1. act USB keyboards/mice as PS/2 keyboard,
+like they are connetcted via PS/2 keyboard
+controller.
+2. user can access USB storage/floppy discs 
+via BIOS (no hardware emulation).
+
+So, I think BIOS wraps difficulties of
+handling USB device problem.
+
+And we have to afraid that :
+
+a. Old PC (Windows 98/2000 era) has poor/
+unreliable legacy emulation. But they also
+have &quot;real&quot; PS/2 and floppy hardware.
+No problem.
+b. Make a way to boot another device, when
+floppy has died.
+
+----
+SASANO Takayoshi &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">uaa at uaa.org.uk</A>&gt;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000923.html">[mikeos-developer] MikeOS 4.1 released
+</A></li>
+	<LI>Next message: <A HREF="000925.html">[mikeos-developer] MikeOS 4.1 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#924">[ date ]</a>
+              <a href="thread.html#924">[ thread ]</a>
+              <a href="subject.html#924">[ subject ]</a>
+              <a href="author.html#924">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

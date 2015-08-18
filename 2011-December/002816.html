@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Problem with code...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Problem%20with%20code...&In-Reply-To=%3CBAY151-W36DA9DF6E6D50E73509D6F83A40%40phx.gbl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002815.html">
+   <LINK REL="Next"  HREF="002817.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Problem with code...</H1>
+    <B>Dan Barry</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Problem%20with%20code...&In-Reply-To=%3CBAY151-W36DA9DF6E6D50E73509D6F83A40%40phx.gbl%3E"
+       TITLE="[mikeos-developer] Problem with code...">danbarry at hotmail.co.uk
+       </A><BR>
+    <I>Tue Dec 20 10:52:49 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002815.html">[mikeos-developer] Problem with code...
+</A></li>
+        <LI>Next message: <A HREF="002817.html">[mikeos-developer] Problem with code...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2816">[ date ]</a>
+              <a href="thread.html#2816">[ thread ]</a>
+              <a href="subject.html#2816">[ subject ]</a>
+              <a href="author.html#2816">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+&gt;<i> Did you remember to change to mode 13h before hand? It might help if
+</I>&gt;<i> you tell me what output you see.
+</I> 
+Yeah. It was another peice of code many many many lines up. I don't get an output in a normal scenario. If I invert the output (when .bit_up = 0) then I just get a completely coloured square (5x7 pixels).
+
+&gt;<i> I think it would be a lot simpler to write/understand if you didn't
+</I>&gt;<i> pack the data, it would only be 35 bytes anyway.
+</I>
+Well, I was going to use the peice of code to write letters to the screen aswell. If each character takes up 35 bytes instead of 5 bytes, 256 characters later we are looking at 8960 bytes against 1280 bytes. It would save in the long run.
+ 
+&gt;<i> &gt; mov ax, dx
+</I>&gt;<i> In line 43 you transfer DX into AX then add then you add the video
+</I>&gt;<i> segment (A000h) to it.
+</I>&gt;<i> The only thing DX could be is the high byte from the multiplication,
+</I>&gt;<i> which will be zero unless
+</I>&gt;<i> there are at least 518 rows. I'm unsure what your trying to do here,
+</I>&gt;<i> can't you just do &quot;mov ax, 0xA000&quot; ?
+</I> 
+I did at one point but it wouldn't work. It was only when I changed it did it work. It was a solution to a problem a long way back - I can't remember what I was solving by doing it now. All I know is that it was needed at the time of writing.
+
+&gt;<i> It is unnecessary to set the video segment each time you want to set one pixel.
+</I>
+I know - it was literally to see if I could get the code going first - then worry about optmizing it.
+ 
+&gt;<i> Sorry about all the questions, but you didn't have very much detail or
+</I>&gt;<i> code comments.
+</I>
+Don't worry about it - questions are good. I am sorry about the lack of commenting. It was literally just a case of trying to get it churning out what I wanted.
+ 
+&gt;<i> PS Get Gmail
+</I>
+Already have. Just use hotmail for the mikeos developer mailing list :)
+ 
+Incase you are woundering - the project I am working on is - <A HREF="http://www.heluxresearch.info">http://www.heluxresearch.info</A> - which will explain the major optimization of code...
+ 
+Dan 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111220/f0f09626/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111220/f0f09626/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002815.html">[mikeos-developer] Problem with code...
+</A></li>
+	<LI>Next message: <A HREF="002817.html">[mikeos-developer] Problem with code...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2816">[ date ]</a>
+              <a href="thread.html#2816">[ thread ]</a>
+              <a href="subject.html#2816">[ subject ]</a>
+              <a href="author.html#2816">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

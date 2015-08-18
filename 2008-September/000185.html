@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Text Editor 0.1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Text%20Editor%200.1&In-Reply-To=%3C19d8b3b00809281146u7320d52fyfd82ebc2cb3220ee%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000182.html">
+   <LINK REL="Next"  HREF="000192.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Text Editor 0.1</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Text%20Editor%200.1&In-Reply-To=%3C19d8b3b00809281146u7320d52fyfd82ebc2cb3220ee%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Text Editor 0.1">okachi at gmail.com
+       </A><BR>
+    <I>Sun Sep 28 20:46:18 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000182.html">[mikeos-developer] Text Editor 0.1
+</A></li>
+        <LI>Next message: <A HREF="000192.html">[mikeos-developer] Text Editor 0.1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#185">[ date ]</a>
+              <a href="thread.html#185">[ thread ]</a>
+              <a href="subject.html#185">[ subject ]</a>
+              <a href="author.html#185">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 9/28/08, Troy Martin &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">blasterman95 at gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> I think I meant to have it not accept any characters but F8 or backspace,
+</I>&gt;<i> so in this next release the check is put after the F8 and backspace checks.
+</I>
+Ah right. All looks kosher now. Good work -- this is exactly the way
+to progress. Trying new things, taking it step-by-step, not setting
+unattainable goals. If you can get a workable multi-line editing
+system going, either using the cursor keys or via the aforementioned
+'EDIT 15' etc. method, and it's robust, I'll add it to the next
+release.
+
+&gt;<i> Everyone, what're your favourite features of text editors?
+</I>
+I do like the F8 approach for saving -- I wrote a text editor for
+Linux/ncurses ages ago which used Fx keys for operations. Much quicker
+than pressing Ctrl+Foo or :wq! etc. Of course, this didn't work so
+well with certain X window managers, but in the case of MikeOS, it
+doesn't matter :-) So F8 for save, Fx for quit, Fx for other features
+you may implement (eg replace) is good in my book.
+
+In your code, there's some needless duplication that you can trim
+down. Take this bit:
+
+	mov si,filedata		; Set SI to the buffer address.
+	add si,cx			; Add byte offset to SI.
+	mov byte [si],0x0D	; Add character to buffer.
+
+	inc cx				; Increment counter.
+
+	mov si,filedata		; Set SI to the buffer address.
+	add si,cx			; Add byte offset to SI.
+	mov byte [si],0x0A	; Add character to buffer.
+
+You're essentially doing the same thing twice, only with a change to
+CX. Here's a quicker way:
+
+	mov si,filedata		; Set SI to the buffer address.
+	add si,cx			; Add byte offset to SI.
+	mov byte [si],0x0D	; Add character to buffer.
+	mov byte [si+1], 0x0A
+
+And regarding this bit:
+
+	mov si,CRLF				; Prepare a newline.
+	call os_print_string	; Print it out.
+
+You could just use 'call os_print_newline' and save a few bytes.
+
+Keep at it!
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000182.html">[mikeos-developer] Text Editor 0.1
+</A></li>
+	<LI>Next message: <A HREF="000192.html">[mikeos-developer] Text Editor 0.1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#185">[ date ]</a>
+              <a href="thread.html#185">[ thread ]</a>
+              <a href="subject.html#185">[ subject ]</a>
+              <a href="author.html#185">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

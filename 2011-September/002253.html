@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Updated DIR - lightning fast and removes the	need for SIZE
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Updated%20DIR%20-%20lightning%20fast%20and%20removes%20the%0A%09need%20for%20SIZE&In-Reply-To=%3Cd392811675c20709dd60c96653327801%40cordilon.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002274.html">
+   <LINK REL="Next"  HREF="002254.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Updated DIR - lightning fast and removes the	need for SIZE</H1>
+    <B>Troy Martin</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Updated%20DIR%20-%20lightning%20fast%20and%20removes%20the%0A%09need%20for%20SIZE&In-Reply-To=%3Cd392811675c20709dd60c96653327801%40cordilon.net%3E"
+       TITLE="[mikeos-developer] Updated DIR - lightning fast and removes the	need for SIZE">blacklight at cordilon.net
+       </A><BR>
+    <I>Fri Sep 23 05:07:15 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002274.html">[mikeos-developer] MikeOS 4.2b2 Bugs
+</A></li>
+        <LI>Next message: <A HREF="002254.html">[mikeos-developer] Updated DIR - lightning fast and removes the need for SIZE
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2253">[ date ]</a>
+              <a href="thread.html#2253">[ thread ]</a>
+              <a href="subject.html#2253">[ subject ]</a>
+              <a href="author.html#2253">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I've rewritten the DIR command (list_directory) to display filesizes. 
+It takes no longer than the standard DIR command and even reduces the 
+filesize of the kernel by no longer requiring the 1KB buffer that the 
+standard DIR uses. It simply reads directly from disk_buffer after 
+calling disk_read_root_dir.
+
+The code uses a couple chunks from os_get_file_list because, you know, 
+no point in reinventing the wheel.
+
+The new list_directory code (you can just plop it right in place of the 
+old one without any breakages): <A HREF="http://pastebin.com/nfXVmhLU">http://pastebin.com/nfXVmhLU</A>
+
+A screenshot of it in action: <A HREF="http://i.imgur.com/zWgtd.jpg">http://i.imgur.com/zWgtd.jpg</A>
+
+Hopefully it'll be included in MikeOS 4.2 final. I don't see any issues 
+with it, and a couple parts could probably be simplified by someone with 
+more assembly experience than myself, but it works and it doesn't run 
+the risk of damaging the floppy and/or the drive like my last attempt 
+could have.
+
+-- 
+Troy
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002274.html">[mikeos-developer] MikeOS 4.2b2 Bugs
+</A></li>
+	<LI>Next message: <A HREF="002254.html">[mikeos-developer] Updated DIR - lightning fast and removes the need for SIZE
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2253">[ date ]</a>
+              <a href="thread.html#2253">[ thread ]</a>
+              <a href="subject.html#2253">[ subject ]</a>
+              <a href="author.html#2253">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

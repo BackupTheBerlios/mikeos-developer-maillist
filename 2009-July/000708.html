@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 3.4 beta 1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-July/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%203.4%20beta%201&In-Reply-To=%3C4f03362c0907091115r2312b0e3w369e231d113a1338%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000707.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 3.4 beta 1</H1>
+    <B>Ian Seyler</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%203.4%20beta%201&In-Reply-To=%3C4f03362c0907091115r2312b0e3w369e231d113a1338%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 3.4 beta 1">iseyler at gmail.com
+       </A><BR>
+    <I>Thu Jul  9 20:15:31 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000707.html">[mikeos-developer] MikeOS 3.4 beta 1
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#708">[ date ]</a>
+              <a href="thread.html#708">[ thread ]</a>
+              <a href="subject.html#708">[ subject ]</a>
+              <a href="author.html#708">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Mike,
+
+Thanks.. let me know if you have any questions.
+
+Another quick thing in the CLI source code:
+
+This code and the code around it:
+------------------------------------------------------------------
+    mov si, input            ; 'EXIT' entered?
+    mov di, exit_string
+    call os_string_compare
+    jc near exit
+
+    mov si, input            ; 'HELP' entered?
+    mov di, help_string
+    call os_string_compare
+    jc near print_help
+
+    mov si, input            ; 'CLS' entered?
+    mov di, cls_string
+    call os_string_compare
+    jc near clear_screen
+
+    etc, etc...
+------------------------------------------------------------------
+
+Can be changed to:
+------------------------------------------------------------------
+    mov si, input
+
+    mov di, exit_string    ; 'EXIT' entered?
+    call os_string_compare
+    jc near exit
+
+    mov di, help_string    ; 'HELP' entered?
+    call os_string_compare
+    jc near print_help
+
+    mov di, cls_string     ; 'CLS' entered?
+    call os_string_compare
+    jc near clear_screen
+
+    etc, etc...
+------------------------------------------------------------------
+
+Since os_string_compare preserves si we don't need to reload it every time.
+
+Found this while doing code optimization for the BareMetal CLI (Which was
+based from the MikeOS CLI). The old way hurts more in 64-bit land since each
+memory reference is 8 bytes!
+
+-Ian
+
+
+On Thu, Jul 9, 2009 at 4:16 AM, M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt; wrote:
+
+&gt;<i> Hi Ian,
+</I>&gt;<i>
+</I>&gt;<i> Looks good! I'll see what I can integrate when I get back (on holiday
+</I>&gt;<i> at the moment).
+</I>&gt;<i>
+</I>&gt;<i> M
+</I>&gt;<i>
+</I>&gt;<i> On Wednesday, July 8, 2009, Ian Seyler &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">iseyler at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; Further to my last message here is an updated os_string_strip function
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; This version doesn't need a temporary string location (Saves 256 bytes).
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ;
+</I>&gt;<i> -----------------------------------------------------------------------------
+</I>&gt;<i> &gt; ; os_string_strip -- Removes specified character from a string
+</I>&gt;<i> &gt; ;  IN:    RSI = string location
+</I>&gt;<i> &gt; ;        AL = character to remove
+</I>&gt;<i> &gt; ; OUT:    Nothing. All registers preserved
+</I>&gt;<i> &gt; os_string_strip:
+</I>&gt;<i> &gt;     push rsi
+</I>&gt;<i> &gt;     push rdi
+</I>&gt;<i> &gt;     push rbx
+</I>&gt;<i> &gt;     push rax
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     mov rdi, rsi
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     mov bl, al        ; copy the char into BL since LODSB and STOSB use
+</I>&gt;<i> AL
+</I>&gt;<i> &gt; nextchar:
+</I>&gt;<i> &gt;     lodsb
+</I>&gt;<i> &gt;     stosb
+</I>&gt;<i> &gt;     cmp al, 0x00    ; check if we reached the end of the string
+</I>&gt;<i> &gt;     je finish        ; if so bail out
+</I>&gt;<i> &gt;     cmp al, bl        ; check to see if the character we read is the
+</I>&gt;<i> interesting char
+</I>&gt;<i> &gt;     jne nextchar    ; if not skip to the next character
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; skip:                ; if so the fall through to here
+</I>&gt;<i> &gt;     dec rdi            ; decrement RDI so we overwrite on the next pass
+</I>&gt;<i> &gt;     jmp nextchar
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; finish:
+</I>&gt;<i> &gt;     pop rax
+</I>&gt;<i> &gt;     pop rbx
+</I>&gt;<i> &gt;     pop rdi
+</I>&gt;<i> &gt;     pop rsi
+</I>&gt;<i> &gt;     ret
+</I>&gt;<i> &gt; ;
+</I>&gt;<i> -----------------------------------------------------------------------------
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Also a jump can be saved in my os_string_chomp function by changing:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;        jne os_string_chomp_foundend
+</I>&gt;<i> &gt;         jmp os_string_chomp_findend
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; to this:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;        je os_string_chomp_findend
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; -Ian
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; On Mon, Jun 29, 2009 at 3:50 PM, M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; Hi all,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; <A HREF="http://prdownload.berlios.de/mikeos/mikeos-3.4b1.zip">http://prdownload.berlios.de/mikeos/mikeos-3.4b1.zip</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; It's not particularly exciting, but in this release, the BASIC
+</I>&gt;<i> &gt; interpreter is now rolled into the kernel. So in the app launcher or
+</I>&gt;<i> &gt; at the command line, you can run .BAS programs just as you would .BIN.
+</I>&gt;<i> &gt; I've renamed TEST.BAS to EXAMPLE.BAS, so you can run it just by
+</I>&gt;<i> &gt; entering 'EXAMPLE' at the command line.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I've also made sure that EXAMPLE.BAS is copied to the disk (as per
+</I>&gt;<i> &gt; Takayoshi's fix) on OpenBSD, OS X and Windows.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Next step is to add more commands to BASIC, so that people can write
+</I>&gt;<i> &gt; simple games! MOVE and GETKEY are coming up...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; M
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Mike Saunders
+</I>&gt;<i> &gt; <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; mikeos-developer mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Mike Saunders
+</I>&gt;<i> <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20090709/3e5e84cc/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20090709/3e5e84cc/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000707.html">[mikeos-developer] MikeOS 3.4 beta 1
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#708">[ date ]</a>
+              <a href="thread.html#708">[ thread ]</a>
+              <a href="subject.html#708">[ subject ]</a>
+              <a href="author.html#708">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

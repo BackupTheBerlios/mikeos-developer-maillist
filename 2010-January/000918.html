@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] libmikeos-4.1 released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20libmikeos-4.1%20released&In-Reply-To=%3C20100121181927.482OJ.648635.root%40web11-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000952.html">
+   <LINK REL="Next"  HREF="000887.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] libmikeos-4.1 released</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20libmikeos-4.1%20released&In-Reply-To=%3C20100121181927.482OJ.648635.root%40web11-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] libmikeos-4.1 released">wisecracker at tesco.net
+       </A><BR>
+    <I>Thu Jan 21 19:19:27 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000952.html">[mikeos-developer] A Test Card Generator engineering tool...
+</A></li>
+        <LI>Next message: <A HREF="000887.html">[mikeos-developer] major upgrade for mikeos?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#918">[ date ]</a>
+              <a href="thread.html#918">[ thread ]</a>
+              <a href="subject.html#918">[ subject ]</a>
+              <a href="author.html#918">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Ian...
+
+Stupid typo...
+
+---- <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">wisecracker at tesco.net</A> wrote: 
+&gt;<i> Hi Ian...
+</I>&gt;<i> 
+</I>&gt;<i> How about not allowing zero at all for dx......
+</I>&gt;<i> 
+</I>&gt;<i> &gt; os_get_random:
+</I>&gt;<i> &gt; 	push dx
+</I>&gt;<i> &gt; 	push bx
+</I>&gt;<i> &gt; 	push ax
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 	sub bx, ax			; We want a number between 0 and (high-low)
+</I>&gt;<i> &gt; 	call .generate_random		; Return a random number in AX
+</I>&gt;<i> &gt; 	mov dx, bx
+</I>&gt;<i> &gt; 	add dx, 1       ; &lt;- If DX is 65535 (0xFFFF) then adding 1 will
+</I>&gt;<i> &gt; overflow DX to 0 (0x0000)
+</I>&gt;<i> 
+</I>&gt;<i> &lt;HERE&gt;
+</I>&gt;<i> 
+</I>&gt;<i>                 cmp dx, 0
+</I>&gt;<i>                 jnz, exit       ; typo error &lt;- here... :/
+</I>&gt;<i>                 add dx, 1
+</I>&gt;<i> exit:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; 	mul dx           ; And multiplying anything by 0 will give you 0
+</I>&gt;<i> &gt; 	mov cx, dx
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 	pop ax
+</I>&gt;<i> &gt; 	pop bx
+</I>&gt;<i> &gt; 	pop dx
+</I>&gt;<i> &gt; 	add cx, ax			; Add the low offset back
+</I>&gt;<i> &gt; 	ret
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I'll try to figure it out.
+</I>
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000952.html">[mikeos-developer] A Test Card Generator engineering tool...
+</A></li>
+	<LI>Next message: <A HREF="000887.html">[mikeos-developer] major upgrade for mikeos?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#918">[ date ]</a>
+              <a href="thread.html#918">[ thread ]</a>
+              <a href="subject.html#918">[ subject ]</a>
+              <a href="author.html#918">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

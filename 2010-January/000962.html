@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Windows build script updated
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Windows%20build%20script%20updated&In-Reply-To=%3C128584.31338.qm%40web113107.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000946.html">
+   <LINK REL="Next"  HREF="000963.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Windows build script updated</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Windows%20build%20script%20updated&In-Reply-To=%3C128584.31338.qm%40web113107.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] Windows build script updated">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Mon Jan 25 23:51:19 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000946.html">[mikeos-developer] Windows build script updated
+</A></li>
+        <LI>Next message: <A HREF="000963.html">[mikeos-developer] Windows build script updated
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#962">[ date ]</a>
+              <a href="thread.html#962">[ thread ]</a>
+              <a href="subject.html#962">[ subject ]</a>
+              <a href="author.html#962">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Mike,
+
+Had some free time so I've revisited the windows build script problem.
+By including the following command in the bat file:  nasm 2&gt; nul, it definitely invokes the pgm.
+I suspect that this behavior is not unique to XP, but also applies to Vista and 7.
+You were just lucky that nasm simply &quot;spits&quot; out the following message when no data is specified on the command line:
+
+nasm: error: no input file specified
+type `nasm -h' for help
+
+Normally you won't see it because of the &gt; nul.
+
+However, I've come across programs that won't close until an input file name or other data is specified.
+This would create a problem when called via a bat file as control would never be passed back to the bat file until 
+the called program terminates, so doing it this way can be risky.
+
+The only way I can think of to check for the existence of the required tools, is to get the user to enter new path statements
+for each of the exe's in autoexec.bat
+
+Then your build script could check like such:
+
+IF NOT EXIST nasm.exe GOTO NoNasm
+IF NOT EXIST imdisk.exe GOTO NoImdisk
+IF NOT EXIST partcopy.exe GOTO NoPartcopy
+
+etc, etc.
+
+By the way, the following will also work:
+
+dir nasm.exe &gt;nul
+if errorlevel 1 goto NoNasm
+
+dir partcopy.exe &gt;nul
+if errorlevel 1 goto Nopartcopy
+
+etc, etc
+
+If you want to search the whole drive for a specific file then:
+
+attrib /s \SomeFileYouLookingFor.exe  
+if not errorlevel 1 then .........
+
+Hope it helps,
+Paulo.
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000946.html">[mikeos-developer] Windows build script updated
+</A></li>
+	<LI>Next message: <A HREF="000963.html">[mikeos-developer] Windows build script updated
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#962">[ date ]</a>
+              <a href="thread.html#962">[ thread ]</a>
+              <a href="subject.html#962">[ subject ]</a>
+              <a href="author.html#962">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

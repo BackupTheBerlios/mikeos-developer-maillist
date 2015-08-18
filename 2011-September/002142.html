@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeShell%200.420%20and%20EDIT%200.420%20for%204.1.2%0A%09released&In-Reply-To=%3C1315834943.41688.YahooMailClassic%40web65903.mail.ac4.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002156.html">
+   <LINK REL="Next"  HREF="002143.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released</H1>
+    <B>Matej Horvat</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeShell%200.420%20and%20EDIT%200.420%20for%204.1.2%0A%09released&In-Reply-To=%3C1315834943.41688.YahooMailClassic%40web65903.mail.ac4.yahoo.com%3E"
+       TITLE="[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released">redjazz_slo at yahoo.com
+       </A><BR>
+    <I>Mon Sep 12 15:42:23 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002156.html">[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released
+</A></li>
+        <LI>Next message: <A HREF="002143.html">[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2142">[ date ]</a>
+              <a href="thread.html#2142">[ thread ]</a>
+              <a href="subject.html#2142">[ subject ]</a>
+              <a href="author.html#2142">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> ...
+</I>&gt;<i>   - string.txt, a pair of routines (os_string_tokenize from Matej and my
+</I>own os_string_comparecase) to be appended to string.asm for MikeShell to
+run.
+&gt;<i> ...
+</I>
+While I'm honored by your use of my routine, I think nobody fully understands what I wrote it for. My intention was that the CLI would pass a pointer to the parameter string to a program and leave it up to the program to interpret it however it wants to. This would make the user interface of the OS as a whole less consistent, because there wouldn't be a uniform way (from the user's point of view) to use parameters as each program would apply its own rules, but it would give programs more freedom. Imagine searching text in a file with complex expressions from the command line. For built-in commands it makes sense (and saves space) to only tokenize the command line once, but for other programs I think it would be better if you let them handle that yourself.
+
+Additionally, os_string_tokenize is not only a routine for processing command line parameters, but rather any string of text which may not necessarily use only one possible separator. For example, a program might read user preferences from an INI file; it would load the file, use os_string_tokenize with AL set to 10h, and get a line. Then, it would set AL to '=', and get the name of a preference and then its value.
+
+Then there's one more thing about os_string_tokenize I forgot to mention: it munges the input string - it replaces the separator characters with NUL characters, so each token is a separate string and can be processed with other string manipulation routines. This can have disastrous results; imagine a text editor having a word frequency count feature. All the spaces in the text would be replaced with NULs. To work around this, remember the string length before tokenizing and then replace each NUL with the separator, if your string uses only one different separator. If it uses multiple separators, change the byte [di-1] to the separator immediately after getting the next token.
+
+And, finally, I noticed this in your cli.asm:
+
+.tokenize:
+        push cx
+        mov al, ' '                        ; Split the input line into pieces
+        call os_string_tokenize            ; Grab a token
+        pop cx
+
+There's nothing wrong with it, but being the perfectionist/optimizer I am, may I ask you why you are saving CX? It's not destroyed by os_string_tokenize.
+
+-Matej Horvat
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002156.html">[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released
+</A></li>
+	<LI>Next message: <A HREF="002143.html">[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2142">[ date ]</a>
+              <a href="thread.html#2142">[ thread ]</a>
+              <a href="subject.html#2142">[ subject ]</a>
+              <a href="author.html#2142">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

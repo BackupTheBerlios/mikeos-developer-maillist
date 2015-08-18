@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] uploading and running programs on MikeOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20uploading%20and%20running%20programs%20on%20MikeOS&In-Reply-To=%3C12968.76807.qm%40web113107.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000844.html">
+   <LINK REL="Next"  HREF="000849.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] uploading and running programs on MikeOS</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20uploading%20and%20running%20programs%20on%20MikeOS&In-Reply-To=%3C12968.76807.qm%40web113107.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] uploading and running programs on MikeOS">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Sat Dec 12 00:06:15 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000844.html">[mikeos-developer] uploading and running programs on MikeOS
+</A></li>
+        <LI>Next message: <A HREF="000849.html">[mikeos-developer] uploading and running programs on MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#845">[ date ]</a>
+              <a href="thread.html#845">[ thread ]</a>
+              <a href="subject.html#845">[ subject ]</a>
+              <a href="author.html#845">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>All that is required for Windows is WinImage to modify the flp and make an iso
+and goold old Nero if burning to a CD is required.
+
+For a virtual machine, Microsoft's Virtual PC 2004 works well and it's given away free.
+Just don't try and use it with Vista.
+Vista is not even compatible with Windows!
+
+What I have been doing is slowly porting the MikeOS source code to run directly under Dos (well Dos under XP)
+It's rather handy for quick an dirty testing, although XP does not emulate all of the standard BIOS interupts correctly.
+For example, there is no support for blinking text and in os_draw_block, you use mov a, ' '.
+I had to change this to mov al, 219 as XP won't print spaces if we use colour as well (it just draws  a black block).
+
+For the compiler, I use both Nasm and A86.
+
+Paulo.
+
+
+
+
+
+----- Original Message ----
+From: M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+To: MikeOS (and similar OS) developers &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+Sent: Sat, December 12, 2009 12:41:57 AM
+Subject: Re: [mikeos-developer] uploading and running programs on MikeOS
+
+&gt;<i> Although not everyone that's downloaded MikeOS (aprox 1000) is working in Linux
+</I>
+True, but with the right tools it's just as quick to build, test,
+code, build, test etc. with a PC emulator / virtual machine on
+Windows. It's just a shame that Windows doesn't come with tools for
+disk image mounting and manipulation out-of-the-box like Linux/Unix!
+
+When doing stuff that requires real hardware, you're totally right
+though. Not much we can do there until someone writes an assembler for
+MikeOS though!
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+_______________________________________________
+mikeos-developer mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000844.html">[mikeos-developer] uploading and running programs on MikeOS
+</A></li>
+	<LI>Next message: <A HREF="000849.html">[mikeos-developer] uploading and running programs on MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#845">[ date ]</a>
+              <a href="thread.html#845">[ thread ]</a>
+              <a href="subject.html#845">[ subject ]</a>
+              <a href="author.html#845">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] GUI
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20GUI&In-Reply-To=%3CAANLkTi%3Dh%3DA6F2-NbtJNUUkaT56i6B%3DAOiVjorrMATczX%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001577.html">
+   <LINK REL="Next"  HREF="001583.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] GUI</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20GUI&In-Reply-To=%3CAANLkTi%3Dh%3DA6F2-NbtJNUUkaT56i6B%3DAOiVjorrMATczX%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] GUI">okachi at gmail.com
+       </A><BR>
+    <I>Mon Nov 29 23:10:01 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001577.html">[mikeos-developer] GUI
+</A></li>
+        <LI>Next message: <A HREF="001583.html">[mikeos-developer] GUI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1581">[ date ]</a>
+              <a href="thread.html#1581">[ thread ]</a>
+              <a href="subject.html#1581">[ subject ]</a>
+              <a href="author.html#1581">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, Nov 29, 2010 at 9:27 PM, Paulo Valongo
+&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">paulovalongo at rocketmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Are you saying that GRUB or similar has it's own drivers to read the keyboard
+</I>&gt;<i> input?
+</I>&gt;<i> and does not rely on BIOS at all?
+</I>
+GRUB at the moment uses BIOS calls. However, it appears that EFI
+bootloaders are expected to be written as EFI applications -- ie
+programs loaded inside EFI itself. So this further complicates
+matters. While EFI applications can seemingly request simple stuff
+such as having messages printed on screen, there's no clarity whether
+external OSes can use these calls. And there certainly appears to be
+no direct mapping for disk calls, like floppy drive sector access
+essential to MikeOS.
+
+Then there's this: &quot;UEFI runs in uniprocessor flat 64-bit long mode&quot;.
+So, it still looks like MikeOS would have to be mostly rewritten and
+redesigned, with many of its own drivers, to work on UEFI machines.
+Here's hoping the BIOS will stay around for a while...
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001577.html">[mikeos-developer] GUI
+</A></li>
+	<LI>Next message: <A HREF="001583.html">[mikeos-developer] GUI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1581">[ date ]</a>
+              <a href="thread.html#1581">[ thread ]</a>
+              <a href="subject.html#1581">[ subject ]</a>
+              <a href="author.html#1581">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

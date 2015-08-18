@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] mikeos-3.1: os_filename_convert
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20mikeos-3.1%3A%20os_filename_convert&In-Reply-To=%3C87mydyo3ja.wl%25uaa%40mx5.nisiq.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000602.html">
+   <LINK REL="Next"  HREF="000605.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] mikeos-3.1: os_filename_convert</H1>
+    <B>SASANO Takayoshi</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20mikeos-3.1%3A%20os_filename_convert&In-Reply-To=%3C87mydyo3ja.wl%25uaa%40mx5.nisiq.net%3E"
+       TITLE="[mikeos-developer] mikeos-3.1: os_filename_convert">uaa at mx5.nisiq.net
+       </A><BR>
+    <I>Sun Jan 11 05:44:09 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000602.html">[mikeos-developer] ApolloOS progress
+</A></li>
+        <LI>Next message: <A HREF="000605.html">[mikeos-developer] mikeos-3.1: os_filename_convert
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#603">[ date ]</a>
+              <a href="thread.html#603">[ thread ]</a>
+              <a href="subject.html#603">[ subject ]</a>
+              <a href="author.html#603">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+Now I am testing MikeOS-3.1 with new libmikeos and
+I found os_filename_convert worked something strange.
+
+I expect it converts &quot;HELLO.BIN&quot; to &quot;HELLO   BIN&quot;, but there is no result
+when I test os_filename_convert with following code.
+
+Well, which has problem? Test code? or MikeOS?
+
+----
+	bits	16
+	org	0x8000
+
+%define	os_print_string		0x0003
+%define	os_print_horiz_line	0x000c
+%define	os_print_newline	0x000f
+%define	os_filename_convert	0x00ae
+
+test:
+	mov	si, .src
+	call	os_print_string
+	call	os_print_newline
+
+	mov	di, .dst
+	call	os_filename_convert
+
+	mov	si, .dst
+	call	os_print_string
+	call	os_print_newline
+
+	mov	ax, 1
+	call	os_print_horiz_line
+	
+	ret
+
+.src	db	&quot;HELLO.BIN&quot;
+.dst	times 24 db 0
+----
+SASANO Takayoshi (JG1UAA/1) [<A HREF="http://www.uaa.org.uk/">http://www.uaa.org.uk/</A>] &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">uaa at uaa.org.uk</A>&gt;
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000602.html">[mikeos-developer] ApolloOS progress
+</A></li>
+	<LI>Next message: <A HREF="000605.html">[mikeos-developer] mikeos-3.1: os_filename_convert
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#603">[ date ]</a>
+              <a href="thread.html#603">[ thread ]</a>
+              <a href="subject.html#603">[ subject ]</a>
+              <a href="author.html#603">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

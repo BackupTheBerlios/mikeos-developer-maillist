@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] os_pause...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20os_pause...&In-Reply-To=%3C196574.9816.qm%40web113114.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001159.html">
+   <LINK REL="Next"  HREF="001139.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] os_pause...</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20os_pause...&In-Reply-To=%3C196574.9816.qm%40web113114.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] os_pause...">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Mon Feb  8 00:47:44 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001159.html">[mikeos-developer] os_pause...
+</A></li>
+        <LI>Next message: <A HREF="001139.html">[mikeos-developer] Regarding clearing interrupts while changing	stack.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1160">[ date ]</a>
+              <a href="thread.html#1160">[ thread ]</a>
+              <a href="subject.html#1160">[ subject ]</a>
+              <a href="author.html#1160">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hi all,
+
+Applications for microsecond resolution delays.
+
+Consider the following code:
+
+; cx populated with a value between 1 and 65535
+
+mov dx, 80h         ; 2 clocks on 386   1 on pentium
+push ax              ; 2 clocks on 386   1 on pentium
+
+time_loop:
+in al,dx               ; 13 clocks on 386   7 on pentium  (+ 1uS)
+loop time_loop    ; 11 clocks on 386   6 on pentium   total for loop is 24 clocks on 386  and  13 on pentium
+
+pop ax         ; 4 clocks on 386    1 on pentium
+ret                ; 10 clocks on 386   3 on pentium
+
+; total clocks are 42 for the 386 and 19 for the Pentium
+
+Worked examples:
+
+Assuming a 386 running at 33MHz  clock = 30nS
+therefore for a required delay of 10uS (cx=10), the actual delay would be:
+
+2 + 2 + 10(24) + 4 +10 = 258 X 30nS = 7.8uS + 10uS = 17.8uS  (error = +78%)
+
+and for a required delay of 65535uS (cx=FFFFh), the actual delay would be:
+
+2 + 2 + 65535(24) + 4 +10 = 1572858 X 30nS = 47700uS + 65535uS = 113235uS (error = +72.8%)
+
+Now assume a Pentium running at 1GHZ  clock = 1nS
+therefore for a required delay of 10uS, the actual delay would be:
+
+1 + 1 + 10(13) + 1 + 3 = 136 X 1nS = 136nS + 10uS = 10.136uS  (error = +1.36%)
+
+and for 65535uS,
+
+1 + 1 + 65535(13) + 1 + 3 = 851961 X 1nS = 851.9uS + 65535uS = 66386.9uS  (error = +1.29%)
+
+It can be seen that the error decreases as the processor speed (and type) increases and/or the value in CX increases.
+Although the errors look dreadful for the 386 example, when applying this to delay output to say an external circuit,
+there are very few applications were it would actually make much difference.
+For example if one was &quot;driving&quot; an Analog to Digital converter chip which needed say a 500uS delay between each access,
+an error of tens of a percent would hardly make a difference as the sample has already been taken by the chip.
+However if one wanted to play out digitised audio, then the large errors would result in an awful output.
+In this case it would be much better to use the horizontal scan rate of the VGA card which on screen 13h equates to 32uS per line
+which in turn would allow one to accurately play out audio with a sample rate of 31.250 KHz.
+
+Another example where precise timing would be required is to get the LPT port to generate a simple black and white test pattern on 
+a standard PAL TV. See fig 1for the pattern and for the circuit diagram see fig 2.
+In this case the timing delays would be made up using (out 378h, SomeData) which take roughly 1uS.
+We could use the D0 line for the &quot;video&quot; and D1 for the syncs.
+
+mov dx, 378h     ; LPT port address
+
+do_horz_line:
+
+mov al, 2    
+out dx, al    ; start the horizontal sync
+out dx, al
+out dx, al
+out dx, al
+mov al, 0
+out dx, al    ; end the sync (PAL syncs are 4.7uS but 5uS is good enough)
+
+out dx, al    ; &quot;waste&quot; another 5uS on the porch.
+out dx, al
+out dx, al
+out dx, al
+out dx, al
+
+; we are now left with aprox. 52uS for the video
+
+; now do 10 X out dx, al for the first black section
+
+mov al, 1
+
+; now do 10 X out dx, al for the first white section
+
+mov al, 0
+
+; now do another 10 X out dx, al for the middle black section
+
+mov al, 1
+
+; again 10 X out dx, al for the next white section
+
+mov al, 0
+
+; now finish the line with 12 X out dx, al
+
+jmp do_horz_line
+
+
+That's it.
+Once you've done 575 loops, do the horizontal sync and retrace
+which I will leave to you. ;-)
+
+For greater accuracy I have not used any loops when creating the actual video.
+Bet you never thought that the LPT port could generate video.
+
+Paulo.
+
+
+
+      
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: fig2.jpg
+Type: image/jpeg
+Size: 27543 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100207/7cbefcfd/attachment.jpg">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100207/7cbefcfd/attachment.jpg</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: fig1.jpg
+Type: image/jpeg
+Size: 9026 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100207/7cbefcfd/attachment-0001.jpg">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100207/7cbefcfd/attachment-0001.jpg</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001159.html">[mikeos-developer] os_pause...
+</A></li>
+	<LI>Next message: <A HREF="001139.html">[mikeos-developer] Regarding clearing interrupts while changing	stack.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1160">[ date ]</a>
+              <a href="thread.html#1160">[ thread ]</a>
+              <a href="subject.html#1160">[ subject ]</a>
+              <a href="author.html#1160">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

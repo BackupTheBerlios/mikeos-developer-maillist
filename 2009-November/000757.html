@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.0 released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.0%20released&In-Reply-To=%3C19d8b3b00911201333q1b88f88bm733c57926967c518%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000756.html">
+   <LINK REL="Next"  HREF="000758.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.0 released</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.0%20released&In-Reply-To=%3C19d8b3b00911201333q1b88f88bm733c57926967c518%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 4.0 released">okachi at gmail.com
+       </A><BR>
+    <I>Fri Nov 20 22:33:16 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000756.html">[mikeos-developer] Great Stuff!
+</A></li>
+        <LI>Next message: <A HREF="000758.html">[mikeos-developer] MikeOS 4.0 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#757">[ date ]</a>
+              <a href="thread.html#757">[ thread ]</a>
+              <a href="subject.html#757">[ subject ]</a>
+              <a href="author.html#757">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+Yes, it's here: <A HREF="http://prdownload.berlios.de/mikeos/mikeos-4.0.zip">http://prdownload.berlios.de/mikeos/mikeos-4.0.zip</A>
+
+* Now includes a BASIC interpreter with 24 instructions
+* EDIT.BIN text editor can use Backspace, along with F5 to delete
+lines and F8 to run BASIC code
+* If there's a file called AUTORUN.BIN or AUTORUN.BAS on the disk, the
+kernel will execute it at the start
+
+Plus various other changes and fixes since 3.3 -- see the full
+changelog at the end of this mail. Thanks to Ian Seyler for the
+updated os_string_strip routine, and Glen Henexson for the USB key
+information that's now in the User Handbook.
+
+(Only changes from RC2 are a disk.asm bugfix and various 'je/jc/jnc
+foo' to 'je/jc/jnc near foo' alterations so that old versions of NASM
+(like those supplied with OS X Xcode) don't complain. They're ancient
+versions though. Get with it Apple!)
+
+
+Full changelog:
+
+# MikeOS BASIC included in the kernel; run EXAMPLE.BAS to try it out,
+and see doc/handbook-appdev-basic.html for a guide
+
+# os_run_basic call accessible to use programs: takes AX as start of
+code location, and BX as size of the code (in bytes)
+
+# App menu and CLI can now run .BAS programs as well as .BIN
+
+# EDIT.BIN can edit .BAS files; press F8 to run the
+currently-being-edited code in the BASIC intepreter
+
+# EDIT.BIN: F5 deletes whole lines; Backspace key now functions,
+although newlines still need to be removed with Delete; Esc quits
+without saving -- press F2 to save (as per bottom bar)
+
+# If AUTORUN.BIN or AUTORUN.BAS exists on the disk, it will be
+executed immediately after the kernel has loaded, before showing the
+normal program launcher menu
+
+# EDIT.BIN now pops up an error dialog if it can't save a file
+
+# source/features/string.asm: os_string_strip rewritten -- shorter and
+saves 256 bytes (thanks to Ian Seyler)
+
+# source/features/misc.asm: rewrote os_pause routine -- it now takes
+AX = tenths of a second to wait (so eg AX = 300 = 3 seconds)
+
+# programs/hello.asm and programs/gfxdemo.asm removed (and their
+binaries on the floppy) -- old and not useful now
+
+# os_dialog_box no longer raises a fatal error if strings are too long
+to fit in the box
+
+# source/features/disk.asm: os_write_file no longer overwrites a file
+if it already exists; instead it bails out (carry flag set)
+
+# API version bumped to 12
+
+# source/features/disk.asm: filename checking and file writing bugfixes
+
+# doc/handbook-appdev.html renamed doc/handbook-appdev-asm.html
+
+
+Cheers,
+Mike
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000756.html">[mikeos-developer] Great Stuff!
+</A></li>
+	<LI>Next message: <A HREF="000758.html">[mikeos-developer] MikeOS 4.0 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#757">[ date ]</a>
+              <a href="thread.html#757">[ thread ]</a>
+              <a href="subject.html#757">[ subject ]</a>
+              <a href="author.html#757">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

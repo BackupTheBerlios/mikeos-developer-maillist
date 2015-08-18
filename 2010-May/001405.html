@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] PAUSE...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20PAUSE...&In-Reply-To=%3C221889.99700.qm%40web113106.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001404.html">
+   <LINK REL="Next"  HREF="001411.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] PAUSE...</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20PAUSE...&In-Reply-To=%3C221889.99700.qm%40web113106.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] PAUSE...">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Thu May 27 22:21:17 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001404.html">[mikeos-developer] PAUSE...
+</A></li>
+        <LI>Next message: <A HREF="001411.html">[mikeos-developer] PAUSE...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1405">[ date ]</a>
+              <a href="thread.html#1405">[ thread ]</a>
+              <a href="subject.html#1405">[ subject ]</a>
+              <a href="author.html#1405">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bazza,
+
+It is strange, 'cause as you say SOUND 1000 1 also uses the same delay routine.
+
+Are you sure that it's not happening closer to 60 minutes?
+There are 18 ticks per second and the DX register can hold a value of up to 65535.
+Therefore 65536/18 = 3640.83 seconds or aprox. 60 minutes.
+
+If this is the case, then the code I posted last night will fix it.
+Alternatively why not try this:
+
+beepit:
+
+sound 1000 1
+sound 400 2
+goto beepit
+
+Theoretically you should now have 1KHz for 1 second followed by 400Hz for 2 seconds, ad nauseam.
+Now if both frequencies have no glitches then the problem is elsewhere.
+
+Paulo.
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001404.html">[mikeos-developer] PAUSE...
+</A></li>
+	<LI>Next message: <A HREF="001411.html">[mikeos-developer] PAUSE...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1405">[ date ]</a>
+              <a href="thread.html#1405">[ thread ]</a>
+              <a href="subject.html#1405">[ subject ]</a>
+              <a href="author.html#1405">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

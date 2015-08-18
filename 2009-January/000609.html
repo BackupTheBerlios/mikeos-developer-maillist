@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] mikeos-3.1: os_filename_convert
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20mikeos-3.1%3A%20os_filename_convert&In-Reply-To=%3C871vv9jqzd.wl%25uaa%40mx5.nisiq.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000605.html">
+   <LINK REL="Next"  HREF="000613.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] mikeos-3.1: os_filename_convert</H1>
+    <B>SASANO Takayoshi</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20mikeos-3.1%3A%20os_filename_convert&In-Reply-To=%3C871vv9jqzd.wl%25uaa%40mx5.nisiq.net%3E"
+       TITLE="[mikeos-developer] mikeos-3.1: os_filename_convert">uaa at mx5.nisiq.net
+       </A><BR>
+    <I>Mon Jan 12 01:41:10 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000605.html">[mikeos-developer] mikeos-3.1: os_filename_convert
+</A></li>
+        <LI>Next message: <A HREF="000613.html">[mikeos-developer] mikeos-3.1: os_filename_convert
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#609">[ date ]</a>
+              <a href="thread.html#609">[ thread ]</a>
+              <a href="subject.html#609">[ subject ]</a>
+              <a href="author.html#609">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi, Mike.
+
+&gt;<i> os_filename_convert has its own internal buffer for the modified
+</I>&gt;<i> filename, to which DI points after you've called it.
+</I>
+Ok, I will put &quot;call os_string_copy&quot; into mikeos_string_copy()
+to get converted string from internal buffer.
+
+&gt;<i> Consequently os_load_file, os_write_file etc. wouldn't need
+</I>&gt;<i> FAT12-style filenames -- you could just pass 'HELLO.TXT' and the disk
+</I>&gt;<i> calls will run an internal version of os_filename_convert.
+</I>
+I think just passing filename (not FAT12 style) is easy for use.
+--
+SASANO Takayoshi (JG1UAA/1) [<A HREF="http://www.uaa.org.uk/">http://www.uaa.org.uk/</A>] &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">uaa at uaa.org.uk</A>&gt;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000605.html">[mikeos-developer] mikeos-3.1: os_filename_convert
+</A></li>
+	<LI>Next message: <A HREF="000613.html">[mikeos-developer] mikeos-3.1: os_filename_convert
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#609">[ date ]</a>
+              <a href="thread.html#609">[ thread ]</a>
+              <a href="subject.html#609">[ subject ]</a>
+              <a href="author.html#609">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

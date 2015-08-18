@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Getting more memory for MikeOS usage.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Getting%20more%20memory%20for%20MikeOS%20usage.&In-Reply-To=%3C20110111180756.MN6KW.444501.root%40web11-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001737.html">
+   <LINK REL="Next"  HREF="001743.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Getting more memory for MikeOS usage.</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Getting%20more%20memory%20for%20MikeOS%20usage.&In-Reply-To=%3C20110111180756.MN6KW.444501.root%40web11-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] Getting more memory for MikeOS usage.">wisecracker at tesco.net
+       </A><BR>
+    <I>Tue Jan 11 19:07:56 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001737.html">[mikeos-developer] ORG
+</A></li>
+        <LI>Next message: <A HREF="001743.html">[mikeos-developer] GUI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1742">[ date ]</a>
+              <a href="thread.html#1742">[ thread ]</a>
+              <a href="subject.html#1742">[ subject ]</a>
+              <a href="author.html#1742">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi guys...
+
+An idea for MikeOS &quot;app`&quot; developers.
+
+You lot are gonna hate me for this... :o) 
+ 
+MikeOS and its availbale memory... 
+---------------------------------- 
+ 
+Although MikeOS is centred around a 64 KiB Segment does not mean that it 
+doesn`t have access to more memory than this one segment. 
+ 
+There is another 96 KiB to play with in either read only mode or read/write 
+mode. These are NOT the two standard ROMs that also total 96KiB, the Video ROM 
+and BIOS ROM, but the Video RAM and Segment 0 too. It can be assumed no other 
+memory is available when using MikeOS in Video Mode 3, CGA, CODE PAGE 437 the 
+default Video ROM character set. 
+ 
+Note:- That any other memory is assumed NOT to be available by definition 
+because MOS does not SEE it. Although easily accessible via assembly. 
+ 
+So the MAP now consists of:- 
+ 
+Segment 0x0000. 
+ 
+MikeOS Segment 0x2000 - see MikeOS documentation. 
+ 
+Segment 0xB800 - the CGA text mode memory area. 
+ 
+Let`s take the CGA memory area, 0xB800 first. 
+ 
+This cotains 4 active Pages, 0 - 3. MikeOS uses only Page 0 and allowing Page 1 
+as a 4KB buffer then there is 24 KiB of active memory to use as anything from 
+executable code to data storage. 
+ 
+The first 4000 Bytes, Page 0 of this area can also be &quot;poked/drawn&quot; onto 
+directly and &quot;peeked/read&quot; from at any time. If you know what you are doing 
+then careful manipulation of Page 1 is another available 4KB of memory making 
+28 KiB of free usable memory. 
+ 
+So the whole 32 KiB of CGA Video RAM is fully DMA read/write under careful 
+coding. 
+ 
+Now let`s take a look at Segment 0x0000. 
+ 
+Allow 4 KiB for BIOS Interrupts and DATA needed by the system. 
+ 
+This segment is allocated by MikeOS as the SS, (Stack Segment) and the SP, 
+(stack Pointer), initialised at 0xFFFF. Once the machine has booted into MOS 
+then this segment becomes redundant. Why NOT use it? 
+ 
+Q: How? 
+ 
+A: Firstly allow 4 KiB from location 0x0000:0x0000 for BIOS usage and from 
+0x0000:0x1000 
+load your programs or data into here right up to 0x0000:0xFFFF. 
+ 
+Q: But that will corrupt the stack. 
+ 
+A: Right! Here is a method for your MikeOS *.BIN proggies to stop that:- 
+ 
+your_program_start: 
+	cli				; Doing some jiggery pokery so shut off interrupts. 
+	mov ax, b800h			; MikeOS standard CGA active page. 
+	mov ss, ax			; Make SS at start of this address. 
+	mov sp, 7fffh			; Set SP to top of CGA video RAM. 
+	sti				; Enable interrupts again with new Stack memory. 
+						; Now have 24 to 28 KiB of SP memory FOR FREE. 
+	&lt;your proggy here&gt;		; 32KB worth of assembly code. 
+; 
+; This includes transferring any additional code/data to segment 0x0000:1000 
+minimum. 
+; A total of 60KiB to play with here PLUS the BIOS I/O addresses at your command 
+too! 
+; At finish of your MOS proggy... 
+; 
+	call 0h				; Restart MikeOS kernel 
+; 
+; The Stack Segment and Stack Pointer are reset on kernel restart. 
+your_program_finish: 
+ 
+Just starter ideas... :) 
+ 
+I await your kicking... 
+
+I`m thinking of crude multitasking using active page switching in text mode too.
+
+I`ll get back to you all when I have cracked it in my head.
+
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+<A HREF="http://homepages.tesco.net/wisecracker/">http://homepages.tesco.net/wisecracker/</A>
+
+<A HREF="http://main.aminet.net/search?readme=wisecracker">http://main.aminet.net/search?readme=wisecracker</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001737.html">[mikeos-developer] ORG
+</A></li>
+	<LI>Next message: <A HREF="001743.html">[mikeos-developer] GUI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1742">[ date ]</a>
+              <a href="thread.html#1742">[ thread ]</a>
+              <a href="subject.html#1742">[ subject ]</a>
+              <a href="author.html#1742">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

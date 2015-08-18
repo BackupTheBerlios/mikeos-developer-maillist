@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Planning for MikeOS 2.1 and 3.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Planning%20for%20MikeOS%202.1%20and%203.0&In-Reply-To=%3C8d87c8a30810200729g2bbc56f6o23d15bd2eb9988b8%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000354.html">
+   <LINK REL="Next"  HREF="000356.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Planning for MikeOS 2.1 and 3.0</H1>
+    <B>Bob Moss</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Planning%20for%20MikeOS%202.1%20and%203.0&In-Reply-To=%3C8d87c8a30810200729g2bbc56f6o23d15bd2eb9988b8%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Planning for MikeOS 2.1 and 3.0">bobbyjmoss at googlemail.com
+       </A><BR>
+    <I>Mon Oct 20 16:29:39 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000354.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+        <LI>Next message: <A HREF="000356.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#355">[ date ]</a>
+              <a href="thread.html#355">[ thread ]</a>
+              <a href="subject.html#355">[ subject ]</a>
+              <a href="author.html#355">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Yeppers. They'll still be pulled into the main kernel file, but in
+</I>&gt;<i> organising the code more cleanly, it should make it easy for others to
+</I>&gt;<i> benefit. For instance, if someone wants to use a FAT12 driver or
+</I>&gt;<i> string handling routines in their OS, they can look at or re-use the
+</I>&gt;<i> appropriate code without poring through syscalls.asm.
+</I>&gt;<i>
+</I>
+That *would *be very useful. I would also stop trying to port it all to C
+(though that would make up a major constituent). The main reason I chose C
+was my minimal knowledge of ASM, but I finally have some enthusiasm for
+it...! :D
+
+
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; Why do you need 64K and a 512K external program segments - or is this for
+</I>&gt;<i> &gt; binaries to go in one and operations to go in the other? (hmmm...)
+</I>&gt;<i>
+</I>&gt;<i> Well, as mentioned, unreal mode doesn't provide flat memory benefits
+</I>&gt;<i> for CS:IP so we still need to work with 64K segments for executable
+</I>&gt;<i> code. Hence why I'm thinking of one segment for the kernel, and one
+</I>&gt;<i> segment for applications. We're still wallowing in free RAM, however,
+</I>&gt;<i> so I think marking 512K of space for programs to use (ie file data,
+</I>&gt;<i> image data etc.) would be useful.
+</I>&gt;<i>
+</I>&gt;<i> I've only briefly looked over the workings of unreal mode so I may be
+</I>&gt;<i> missing something, but this looks feasible. Then programs will have
+</I>&gt;<i> plenty of space to do more interesting stuff.
+</I>
+
+True. It would not be unthinkable to get a Visicalc  clone or something like
+that on MikeOS with that sort of memory involved!
+
+
+
+&gt;<i>
+</I>&gt;<i> Currently, the 'Making an OS' guide
+</I>&gt;<i> in the Handbook serves as an introduction to the skills required for
+</I>&gt;<i> working on the MikeOS internals, but as things change for 3.0, it
+</I>&gt;<i> might need to be rewritten. So we can talk about new guides closer to
+</I>&gt;<i> the time -- and it'd be great to get input from someone who's not too
+</I>&gt;<i> wrapped up in the code like me!
+</I>&gt;<i>
+</I>
+That's not uncommon. I tried to read the man page for gcc - not fun! ;)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20081020/7cecd4b0/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20081020/7cecd4b0/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000354.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+	<LI>Next message: <A HREF="000356.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#355">[ date ]</a>
+              <a href="thread.html#355">[ thread ]</a>
+              <a href="subject.html#355">[ subject ]</a>
+              <a href="author.html#355">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

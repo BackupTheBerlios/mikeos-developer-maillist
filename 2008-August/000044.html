@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MITOSP implementation design sheet
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MITOSP%20implementation%20design%20sheet&In-Reply-To=%3CEBE0B3526E64436997E04CC1A0E0E730%40VistaLaptop%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000040.html">
+   <LINK REL="Next"  HREF="000035.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MITOSP implementation design sheet</H1>
+    <B>Troy Martin</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MITOSP%20implementation%20design%20sheet&In-Reply-To=%3CEBE0B3526E64436997E04CC1A0E0E730%40VistaLaptop%3E"
+       TITLE="[mikeos-developer] MITOSP implementation design sheet">blasterman95 at gmail.com
+       </A><BR>
+    <I>Thu Aug 28 16:45:47 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000040.html">[mikeos-developer] MITOSP implementation design sheet
+</A></li>
+        <LI>Next message: <A HREF="000035.html">[mikeos-developer] MikeOS booting from HD test log
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#44">[ date ]</a>
+              <a href="thread.html#44">[ thread ]</a>
+              <a href="subject.html#44">[ subject ]</a>
+              <a href="author.html#44">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>OK, I'll change that in 1.1. IRQ 4, COM1, is mapped to interrupt 0C.Troy 
+Martin
+www.blasterman.co.nr
+
+--------------------------------------------------
+From: &quot;M Saunders&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+Sent: Thursday, August 28, 2008 1:28 AM
+To: &quot;MikeOS (and similar OS) developers&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+Subject: Re: [mikeos-developer] MITOSP implementation design sheet
+
+&gt;<i> On 8/27/08, Troy Martin (Gmail) &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">blasterman95 at gmail.com</A>&gt; wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> We're going to need some type of COM polling interrupt
+</I>&gt;<i>
+</I>&gt;<i> That doesn't make sense -- it's one or the other, not both. Right now,
+</I>&gt;<i> in serial.asm, we repeatedly poll the COM port and keyboard controller
+</I>&gt;<i> in a loop, which maxes out the CPU. I need to change this so that the
+</I>&gt;<i> loop waits on an interrupt triggered by the keyboard controller or on
+</I>&gt;<i> receipt of data from the COM port.
+</I>&gt;<i>
+</I>&gt;<i> M
+</I>&gt;<i>
+</I>&gt;<i> -- 
+</I>&gt;<i> Mike Saunders
+</I>&gt;<i> <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A> 
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000040.html">[mikeos-developer] MITOSP implementation design sheet
+</A></li>
+	<LI>Next message: <A HREF="000035.html">[mikeos-developer] MikeOS booting from HD test log
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#44">[ date ]</a>
+              <a href="thread.html#44">[ thread ]</a>
+              <a href="subject.html#44">[ subject ]</a>
+              <a href="author.html#44">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

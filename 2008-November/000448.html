@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Quick Question!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Quick%20Question%21&In-Reply-To=%3C8d87c8a30811110523r7fdf53aav5b86c7e83be585c6%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000462.html">
+   <LINK REL="Next"  HREF="000449.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Quick Question!</H1>
+    <B>Bob Moss</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Quick%20Question%21&In-Reply-To=%3C8d87c8a30811110523r7fdf53aav5b86c7e83be585c6%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Quick Question!">bobbyjmoss at googlemail.com
+       </A><BR>
+    <I>Tue Nov 11 14:23:43 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000462.html">[mikeos-developer] libmikeos-0.1.2 released
+</A></li>
+        <LI>Next message: <A HREF="000449.html">[mikeos-developer] Quick Question!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#448">[ date ]</a>
+              <a href="thread.html#448">[ thread ]</a>
+              <a href="subject.html#448">[ subject ]</a>
+              <a href="author.html#448">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Wow - it's been a while...!
+
+I'm getting into a bit of trouble with a virtual terminal I'm writing in C
+(here we go..!). I'm trying to parse a character array to find spaces. Once
+I've found the first space I grab all the previous characters and place it
+in an array called '*command' and all the rest in '*cmdParameters'. However,
+I keep getting an 'lvalue required as left operand of assignment' when
+comparing the array to spaces. Here's some code...
+
+void vterm_send()    //this is where all the magic happens. The string is
+parsed for spaces (to allow parentheses) then the appropriate function is
+run (or an error message if unrecognised)
+{
+    int i=0, j=0;    //initialize the loop handlers...
+    int status=0;    //this defines whether this is the command or a set of
+parameters...
+    unsigned char *command;        //this array will hold the command
+    unsigned char *cmdParams;    //this will hold the parameters - there
+will be a local parameter handler in vterm.c
+    unsigned char letter;        //temporary character handler used in
+loop
+    strHandle--;    //we have to do this or we'll be an array element ahead
+of ourselves - we can use strHandle as our maximum value
+    for(i=0;i&lt;strHandle;i++)
+    {
+        letter = cmdString[i];
+        if(letter == ' ' &amp;&amp; status=0)    //if we've found our first space...
+        {
+            for(j=0;j&lt;(i-1);j++)        //...up until that space...
+            {
+                command[j] = cmdString[j];    //...we add things to the
+command[] string!
+            }
+            status++;            //now as we've done the first one, update
+the status
+        }
+        else if(status&gt;1)    //we throw everything else into our parameter
+string once we have the command!
+        {
+            for(j=i+1;j&lt;strHandle;j++)
+            {
+                cmdParams[j] = cmdString[j];
+            }
+        }
+    }
+}
+
+I've highlighted in red the parts the compiler claims to be moaning about.
+As you can see I've tried swapping the array element out to a variable to
+see if that will work! (If it's something as obvious as last time...!!!).
+There are no other errors flagged up about the syntax.
+
+Also, something that's slightly overwhelming - ApolloOS has had in excess of
+130 downloads from Google Code alone, 2 emails of praise and one new
+contributor. I'm not entirely sure what to make of it...! :-)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20081111/db48569c/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20081111/db48569c/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000462.html">[mikeos-developer] libmikeos-0.1.2 released
+</A></li>
+	<LI>Next message: <A HREF="000449.html">[mikeos-developer] Quick Question!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#448">[ date ]</a>
+              <a href="thread.html#448">[ thread ]</a>
+              <a href="subject.html#448">[ subject ]</a>
+              <a href="author.html#448">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

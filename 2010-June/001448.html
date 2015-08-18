@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] OS_PAUSE
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-June/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20OS_PAUSE&In-Reply-To=%3C0DCCF695DD3046B78F464FC0B47D7A1B%40userfe6b65a555%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001463.html">
+   <LINK REL="Next"  HREF="001449.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] OS_PAUSE</H1>
+    <B>mikegonta at gmail.com</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20OS_PAUSE&In-Reply-To=%3C0DCCF695DD3046B78F464FC0B47D7A1B%40userfe6b65a555%3E"
+       TITLE="[mikeos-developer] OS_PAUSE">mikegonta at gmail.com
+       </A><BR>
+    <I>Sat Jun 19 00:28:40 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001463.html">[mikeos-developer] A new system call: os_exponentation
+</A></li>
+        <LI>Next message: <A HREF="001449.html">[mikeos-developer] OS_PAUSE
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1448">[ date ]</a>
+              <a href="thread.html#1448">[ thread ]</a>
+              <a href="subject.html#1448">[ subject ]</a>
+              <a href="author.html#1448">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>----- Original Message ----- 
+From: &quot;Paulo Valongo&quot;
+To: &quot;MikeOS (and similar OS) developers&quot;
+Sent: Tuesday, May 18, 2010 1:26 PM
+Subject: Re: [mikeos-developer] OS_PAUSE
+
+
+&gt;<i> I too have some very recent machines that support INT 15h sub-function 86h
+</I>&gt;<i> but as is evident from the D410PT this is not universally true.
+</I>&gt;<i> Perhaps this is an Intel &quot;thing&quot; not supporting INT 15h?
+</I>
+&gt;<i> By the way, the D410PT with an Atom CPU @ 1.6GHz
+</I>
+Hi Paulo,
+
+Try this simple boot sector code on your Atom to test
+int 15h function 86h. If the function is supported it should
+display an ascii character in the upper left corner
+which will change to the next one every second. I've tested
+this code successfully on an Intel D945GCLF board with
+an Atom 230 (BIOS DATE 07/29/09).
+
+
+use16
+org 7C00h
+
+  jmp start
+  nop
+  db '        '
+  dw 512                        ; bytes per sector
+  db 1                          ; sectors per cluster
+  dw 1                          ; reserved sector count
+  db 2                          ; number of FATs
+  dw 16*14                      ; root directory entries
+  dw 18*2*80                    ; sector count
+  db 0F0h                       ; media byte
+  dw 9                          ; sectors per fat
+sectors_per_track:                dw 18
+number_of_heads:                  dw 2
+  dd 0                          ; hidden sectors
+  dd 0                          ; number of sectors huge
+drive_number:                     db 0
+  db 0                          ; reserved
+  db 29h                        ; signature
+  dd 0                          ; volume ID
+  db '           '              ; volume label
+  db 'FAT12   '                 ; file system type
+
+start:
+  mov dx, 4240h
+  mov cx, 0Fh
+  push 0B800h
+  pop es
+  mov bl, 0
+.1:
+  mov BYTE [es:0], bl
+  mov ah, 86h
+  int 15h
+  jc error
+  inc bl
+  jmp .1
+error:
+  mov BYTE [es:2], 'X'
+  jmp $
+  times 510-($-$$) db 0
+  dw 0AA55h
+
+
+Mike Gonta
+look and see - many look but few see
+
+<A HREF="http://mikegonta.com/pdBIOS32">http://mikegonta.com/pdBIOS32</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001463.html">[mikeos-developer] A new system call: os_exponentation
+</A></li>
+	<LI>Next message: <A HREF="001449.html">[mikeos-developer] OS_PAUSE
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1448">[ date ]</a>
+              <a href="thread.html#1448">[ thread ]</a>
+              <a href="subject.html#1448">[ subject ]</a>
+              <a href="author.html#1448">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

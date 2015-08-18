@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] A memory allocator for MikeOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20memory%20allocator%20for%20MikeOS&In-Reply-To=%3CCAEz6_zh%2BuNicKj9u8zknGFLao148RmW8QOD3YHOUo4ygw1xkgg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003119.html">
+   <LINK REL="Next"  HREF="003124.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] A memory allocator for MikeOS</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20memory%20allocator%20for%20MikeOS&In-Reply-To=%3CCAEz6_zh%2BuNicKj9u8zknGFLao148RmW8QOD3YHOUo4ygw1xkgg%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] A memory allocator for MikeOS">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Sun Aug 19 14:55:48 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003119.html">[mikeos-developer] Nano for MikeOS
+</A></li>
+        <LI>Next message: <A HREF="003124.html">[mikeos-developer] Nano Clone
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3120">[ date ]</a>
+              <a href="thread.html#3120">[ thread ]</a>
+              <a href="subject.html#3120">[ subject ]</a>
+              <a href="author.html#3120">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>I've written a memory allocator for use by MikeOS programs
+</I>Wow! That's cool.
+Can't say I've ever written a MikeOS program that would
+need memory management, BASIC or assembly but I
+have always been very short of memory, maybe this
+could have identify chunks of unused memory for me.
+
+I think load/poke function should check to see if the memory
+area is okay first, if not give an allocation error, so it doesn't
+overwrite the kernel or a program, I have done this many times.
+
+If we are to multisegment, I suggest keeping a small area at
+the start of the user segment available for call vectors,
+and change the jumps into far jumps, then add a 'call' to
+the start and end of each API call to change the segment,
+preserving the original value.
+
+I would be in favour of this, since there are several
+half-done applications of mine that could be completed with
+more memory.
+
+&gt;<i>Of course, then we'd need a multi-segment memory manager,
+</I>&gt;<i>like the one in DOS. And we could have task switching!
+</I>You might be interested to know I achieved successful
+task switching with version 0.6 of UltraTasker a while back.
+Unfortunately it wouldn't switch back. Never figured out why.
+</PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003119.html">[mikeos-developer] Nano for MikeOS
+</A></li>
+	<LI>Next message: <A HREF="003124.html">[mikeos-developer] Nano Clone
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3120">[ date ]</a>
+              <a href="thread.html#3120">[ thread ]</a>
+              <a href="subject.html#3120">[ subject ]</a>
+              <a href="author.html#3120">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Printing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Printing&In-Reply-To=%3CSNT123-W52122440B0EC93EB1E879EAFE10%40phx.gbl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001787.html">
+   <LINK REL="Next"  HREF="001789.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Printing</H1>
+    <B>Muzaffar Auhammud</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Printing&In-Reply-To=%3CSNT123-W52122440B0EC93EB1E879EAFE10%40phx.gbl%3E"
+       TITLE="[mikeos-developer] Printing">muzhacker at scalux.tk
+       </A><BR>
+    <I>Fri Jan 28 19:59:13 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001787.html">[mikeos-developer] libmikeos help
+</A></li>
+        <LI>Next message: <A HREF="001789.html">[mikeos-developer] Printing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1788">[ date ]</a>
+              <a href="thread.html#1788">[ thread ]</a>
+              <a href="subject.html#1788">[ subject ]</a>
+              <a href="author.html#1788">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hi! I've tried to print (using a printer, not to the screen) a single character using the 17h interrupt. This is my code. However it does not work. Do have have an idea why?
+
+1. Contents of  System.IO.Printer.asm (Part of kernel):
+
+System.IO.Printer.Print:
+
+;IN:
+;BL = Character to print
+
+;OUT:
+;Nothing 
+
+pusha
+
+.tmp_print dw 0
+
+;Function 0
+mov AH, 0
+
+;Save character to print
+mov byte [.tmp_print], BL
+
+;Move character to print to AL
+mov byte AL, [.tmp_print]
+
+;Printer number 0 (which number does it have to be? I have one printer)
+mov  DX, 0
+
+;Printer Interrupt
+int 17h
+
+popa
+
+ret
+
+2. Contents of printer.asm (A program):
+
+%INCLUDE 'Scalux OS API.inc'    
+
+Main:
+
+mov BL, 'A'
+call System.IO.Printer.print
+
+ret
+
+
+I have initialized the system call at the top of the kernel. All the other system calls work fine. Are there any errors in the above codes?
+
+
+ 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110128/d6065400/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110128/d6065400/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001787.html">[mikeos-developer] libmikeos help
+</A></li>
+	<LI>Next message: <A HREF="001789.html">[mikeos-developer] Printing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1788">[ date ]</a>
+              <a href="thread.html#1788">[ thread ]</a>
+              <a href="subject.html#1788">[ subject ]</a>
+              <a href="author.html#1788">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

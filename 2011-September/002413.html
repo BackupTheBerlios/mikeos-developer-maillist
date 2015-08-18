@@ -1,0 +1,443 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] A challenge: make MikeOS hard drive bootable
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20challenge%3A%20make%20MikeOS%20hard%20drive%20bootable&In-Reply-To=%3CCAPRjAGj_pFD7%3DFZeHiTGna-2hhPxF%2B1S-d%2B_VfFw9dfN3bROtg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002410.html">
+   <LINK REL="Next"  HREF="002414.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] A challenge: make MikeOS hard drive bootable</H1>
+    <B>Paulo V</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20challenge%3A%20make%20MikeOS%20hard%20drive%20bootable&In-Reply-To=%3CCAPRjAGj_pFD7%3DFZeHiTGna-2hhPxF%2B1S-d%2B_VfFw9dfN3bROtg%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] A challenge: make MikeOS hard drive bootable">paulomobilemail at gmail.com
+       </A><BR>
+    <I>Fri Sep 30 22:18:54 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002410.html">[mikeos-developer] A challenge: make MikeOS hard drive bootable
+</A></li>
+        <LI>Next message: <A HREF="002414.html">[mikeos-developer] A challenge: make MikeOS hard drive bootable
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2413">[ date ]</a>
+              <a href="thread.html#2413">[ thread ]</a>
+              <a href="subject.html#2413">[ subject ]</a>
+              <a href="author.html#2413">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Mike,
+
+I have attached the bin and dis-assembly of the
+bootloader I'm experimenting with.
+
+The reason I use a real USB stick is as follows:
+
+- I format the USB stick with FAT16
+- I leave byte offsets 0x00 to 0x3D intact.
+- I then play around only with offsets 0x3E to 0x1FC
+  which is the executable code.
+
+This way by not messing with the first 3Dh bytes which
+describe the details of the FAT16 drive format and are
+dependent on the size of the drive, I can concentrate
+on the bootloader alone and not worry about the FAT16 details.
+
+Paulo.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110930/7fe24751/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110930/7fe24751/attachment.html</A>&gt;
+-------------- next part --------------
+This is the disassembly of the FreeDOS (I think) FAT 16 bootloader.
+
+All numbers in HEX unless otherwise specified.
+
+Paulo 30/09/2011
+
+===========================================
+jmp+nop   3 bytes
+===========================================
+00000000  EB56              jmp short 0x58
+00000002  90                nop
+
+============================================
+OEM_NAME  8 bytes (MIKEOS  )
+============================================
+00000003  4D	M
+00000004  49	I
+00000005  4B	K
+00000006  45	E
+00000007  4F	O
+00000008  53	S
+00000009  2020	space space
+
+============================================
+Bytes per sector   2 bytes
+============================================
+0000000B  0002
+
+============================================
+sectors per cluster  1 byte
+============================================
+0000000D  40
+
+============================================
+reserved sectors   2 bytes
+============================================
+0000000E  0800
+
+============================================
+number of copies of FAT 1 byte
+============================================
+00000010  02
+
+============================================
+Maximum Root Directory Entries   2 bytes
+============================================
+00000011  00
+00000012  02
+
+============================================
+Number of Sectors in Partition Smaller than 32MB  2 bytes
+============================================
+00000013  00
+00000014  00
+
+============================================
+Media Descriptor (F8h for Hard Disks)  1 byte
+============================================
+00000015  F8
+
+============================================
+Sectors Per FAT  2 bytes
+============================================
+00000016  F000
+
+============================================
+Sectors Per Track   2 bytes
+============================================
+00000018  3F
+00000019  00
+
+============================================
+Number of Heads    2 bytes
+============================================
+0000001A  FF
+0000001B  00
+
+============================================
+Number of Hidden Sectors in Partition  4 bytes
+============================================
+0000001C  3F 
+0000001D  0000
+0000001F  00
+
+============================================
+Number of Sectors in Partition    4 bytes
+============================================
+00000020  C1
+00000021  C7
+00000022  3B00
+
+============================================
+Logical Drive Number of Partition   2 bytes
+============================================
+00000024  8000
+
+============================================
+Extended Signature (29h)   1 byte
+============================================
+00000026  29
+
+============================================
+Serial Number of Partition   4 bytes
+============================================
+00000027  41
+00000028  12DB
+0000002A  18
+
+============================================
+Volume Name of Partition  (NO NAME    ) 11 bytes
+============================================
+0000002B  4E4F
+0000002D  204E41
+00000030  4D
+00000031  45
+00000032  2020
+00000034  2020
+
+============================================
+FAT Name (FAT16   )     8 bytes
+============================================
+00000036  46
+00000037  41
+00000038  54
+00000039  31362020
+0000003D  20
+
+============================================
+Executable Code Area     448 Bytes
+The actual code only starts at offset 0x58
+offset 0x46 to 0x50 contain the ascii name
+of the kernel file to load.
+============================================
+0000003E  00
+0000003F  0000
+00000041  007000
+00000044  FF
+00000045  FF4B45
+00000048  52
+00000049  4E
+0000004A  45
+0000004B  4C
+0000004C  2020
+0000004E  42
+0000004F  49
+00000050  4E
+00000051  005000
+00000054  0008
+00000056  0018
+
+The jmp at the begining of the bootloader jumps here to 0x58 &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+
+00000058  FC                cld
+00000059  33C0              xor ax,ax
+0000005B  8EC0              mov es,ax
+0000005D  FA                cli
+0000005E  8ED0              mov ss,ax
+00000060  BC007C            mov sp,0x7c00
+00000063  FB                sti
+00000064  CD13              int 0x13   &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; reset drive ? &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+
+00000066  BD7800            mov bp,0x78
+00000069  8BFC              mov di,sp
+0000006B  C57600            lds si,[bp+0x0]
+0000006E  897E00            mov [bp+0x0],di
+00000071  8C4602            mov [bp+0x2],es
+00000074  B90B00            mov cx,0xb
+00000077  F3A4              rep movsb
+00000079  91                xchg ax,cx
+0000007A  8ED8              mov ds,ax
+0000007C  8BEC              mov bp,sp
+0000007E  885624            mov [bp+0x24],dl
+00000081  C6460424          mov byte [bp+0x4],0x24
+00000085  8A460D            mov al,[bp+0xd]
+00000088  89463E            mov [bp+0x3e],ax
+0000008B  8A4610            mov al,[bp+0x10]
+0000008E  F76616            mul word [bp+0x16]
+00000091  03460E            add ax,[bp+0xe]
+00000094  83D200            adc dx,byte +0x0
+00000097  8B4E0B            mov cx,[bp+0xb]
+0000009A  81F90002          cmp cx,0x200
+0000009E  7411              jz 0xb1
+000000A0  7254              jc 0xf6
+000000A2  D1E9              shr cx,1
+000000A4  03C0              add ax,ax
+000000A6  83D200            adc dx,byte +0x0
+000000A9  D1663E            shl word [bp+0x3e],1
+000000AC  D16616            shl word [bp+0x16],1
+000000AF  EBE9              jmp short 0x9a
+000000B1  837E160C          cmp word [bp+0x16],byte +0xc
+000000B5  7705              ja 0xbc
+000000B7  C74644FF0F        mov word [bp+0x44],0xfff
+000000BC  03461C            add ax,[bp+0x1c]
+000000BF  13561E            adc dx,[bp+0x1e]
+000000C2  50                push ax
+000000C3  52                push dx
+000000C4  8B5E11            mov bx,[bp+0x11]
+000000C7  53                push bx
+000000C8  83C30F            add bx,byte +0xf
+000000CB  B104              mov cl,0x4
+000000CD  D3EB              shr bx,cl
+000000CF  885E2B            mov [bp+0x2b],bl
+000000D2  8E4654            mov es,[bp+0x54]
+000000D5  06                push es
+000000D6  E8AB00            call word 0x184
+000000D9  07                pop es
+000000DA  89462C            mov [bp+0x2c],ax
+000000DD  89562E            mov [bp+0x2e],dx
+000000E0  59                pop cx
+000000E1  2BFF              sub di,di
+000000E3  51                push cx
+000000E4  57                push di
+000000E5  8D7646            lea si,[bp+0x46]
+000000E8  B90B00            mov cx,0xb
+000000EB  F3A6              repe cmpsb
+000000ED  5F                pop di
+000000EE  59                pop cx
+000000EF  7413              jz 0x104
+000000F1  83C720            add di,byte +0x20
+000000F4  E2ED              loop 0xe3
+000000F6  BED67D            mov si,0x7dd6
+000000F9  E8D400            call word 0x1d0
+000000FC  98                cbw
+000000FD  CD16              int 0x16 &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; wait for key press ? &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+
+000000FF  EA0000FFFF        jmp word 0xffff:0x0   &lt;&lt;&lt;&lt;&lt; reboot  &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+
+00000104  268B4D1A          mov cx,[es:di+0x1a]
+00000108  268B451C          mov ax,[es:di+0x1c]
+0000010C  05FF01            add ax,0x1ff
+0000010F  D1E8              shr ax,1
+00000111  886625            mov [bp+0x25],ah
+00000114  5A                pop dx
+00000115  58                pop ax
+00000116  51                push cx
+00000117  8B4E16            mov cx,[bp+0x16]
+0000011A  2BC1              sub ax,cx
+0000011C  83DA00            sbb dx,byte +0x0
+0000011F  8E4654            mov es,[bp+0x54]
+00000122  51                push cx
+00000123  C6462B01          mov byte [bp+0x2b],0x1
+00000127  E85A00            call word 0x184
+0000012A  59                pop cx
+0000012B  E2F5              loop 0x122
+0000012D  5B                pop bx
+0000012E  8E4642            mov es,[bp+0x42]
+00000131  8B463E            mov ax,[bp+0x3e]
+00000134  88462B            mov [bp+0x2b],al
+00000137  284625            sub [bp+0x25],al
+0000013A  9C                pushfw
+0000013B  7306              jnc 0x143
+0000013D  8A5625            mov dl,[bp+0x25]
+00000140  00562B            add [bp+0x2b],dl
+00000143  53                push bx
+00000144  4B                dec bx
+00000145  4B                dec bx
+00000146  F7E3              mul bx
+00000148  03462C            add ax,[bp+0x2c]
+0000014B  13562E            adc dx,[bp+0x2e]
+0000014E  E83300            call word 0x184
+00000151  5B                pop bx
+00000152  06                push es
+00000153  8BC3              mov ax,bx
+00000155  D1E3              shl bx,1
+00000157  C47E54            les di,[bp+0x54]
+0000015A  7202              jc 0x15e
+0000015C  8EC7              mov es,di
+0000015E  817E44FF0F        cmp word [bp+0x44],0xfff
+00000163  7512              jnz 0x177
+00000165  03D8              add bx,ax
+00000167  D1EB              shr bx,1
+00000169  268B1F            mov bx,[es:bx]
+0000016C  7304              jnc 0x172
+0000016E  B104              mov cl,0x4
+00000170  D3EB              shr bx,cl
+00000172  80E70F            and bh,0xf
+00000175  EB03              jmp short 0x17a
+00000177  268B1F            mov bx,[es:bx]
+0000017A  07                pop es
+0000017B  9D                popfw
+0000017C  77B3              ja 0x131
+0000017E  8A5624            mov dl,[bp+0x24]
+00000181  FF6E40            jmp word far [bp+0x40]
+00000184  33DB              xor bx,bx
+00000186  50                push ax
+00000187  52                push dx
+00000188  E81500            call word 0x1a0
+0000018B  8CC0              mov ax,es
+0000018D  052000            add ax,0x20
+00000190  8EC0              mov es,ax
+00000192  5A                pop dx
+00000193  58                pop ax
+00000194  050100            add ax,0x1
+00000197  83D200            adc dx,byte +0x0
+0000019A  FE4E2B            dec byte [bp+0x2b]
+0000019D  75E5              jnz 0x184
+0000019F  C3                ret
+
+000001A0  F77618            div word [bp+0x18]
+000001A3  42                inc dx
+000001A4  8ACA              mov cl,dl
+000001A6  33D2              xor dx,dx
+000001A8  F7761A            div word [bp+0x1a]
+000001AB  8AF2              mov dh,dl
+000001AD  D0CC              ror ah,1
+000001AF  D0CC              ror ah,1
+000001B1  80E4C0            and ah,0xc0
+000001B4  0ACC              or cl,ah
+000001B6  8AE8              mov ch,al
+000001B8  8A5624            mov dl,[bp+0x24]
+000001BB  B80102            mov ax,0x201
+000001BE  CD13              int 0x13  &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; read 1 sector from drive ? &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+
+000001C0  73DD              jnc 0x19f  &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; if carry is set then error &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+000001C2  FE4E26            dec byte [bp+0x26]
+000001C5  75F4              jnz 0x1bb
+000001C7  E92CFF            jmp word 0xf6
+000001CA  B40E              mov ah,0xe
+000001CC  2BDB              sub bx,bx
+000001CE  CD10              int 0x10  &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; display error message below &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+
+000001D0  AC                lodsb
+000001D1  84C0              test al,al
+000001D3  75F5              jnz 0x1ca
+000001D5  C3                ret
+
+This is the error text if kernel not found &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+&quot;Cannot load kernel press any key&quot;
+
+000001D6  0D0A43
+000001D9  61
+000001DA  6E
+000001DB  6E
+000001DC  6F
+000001DD  7420
+000001DF  6C
+000001E0  6F
+000001E1  61
+000001E2  64206B65
+000001E6  726E
+000001E8  656C
+000001EA  207072
+000001ED  657373
+000001F0  20616E
+000001F3  7920
+000001F5  6B657920
+000001F9  0D0A00
+000001FC  0000
+
+============================================
+Executable Marker (55h AAh)  2 bytes
+============================================
+000001FE  55                push bp
+000001FF  AA                stosb
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: fat16bl1.bin
+Type: application/octet-stream
+Size: 512 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110930/7fe24751/attachment.bin">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110930/7fe24751/attachment.bin</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002410.html">[mikeos-developer] A challenge: make MikeOS hard drive bootable
+</A></li>
+	<LI>Next message: <A HREF="002414.html">[mikeos-developer] A challenge: make MikeOS hard drive bootable
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2413">[ date ]</a>
+              <a href="thread.html#2413">[ thread ]</a>
+              <a href="subject.html#2413">[ subject ]</a>
+              <a href="author.html#2413">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

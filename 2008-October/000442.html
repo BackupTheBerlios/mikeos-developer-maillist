@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] New memory layout: offset problems / triple	faulting
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20memory%20layout%3A%20offset%20problems%20/%20triple%0A%09faulting&In-Reply-To=%3C19d8b3b00810290959n220c1f41t364f90705129f1ee%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000441.html">
+   <LINK REL="Next"  HREF="000443.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] New memory layout: offset problems / triple	faulting</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20memory%20layout%3A%20offset%20problems%20/%20triple%0A%09faulting&In-Reply-To=%3C19d8b3b00810290959n220c1f41t364f90705129f1ee%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] New memory layout: offset problems / triple	faulting">okachi at gmail.com
+       </A><BR>
+    <I>Wed Oct 29 17:59:15 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000441.html">[mikeos-developer] New memory layout: offset problems / triple	faulting
+</A></li>
+        <LI>Next message: <A HREF="000443.html">[mikeos-developer] New memory layout: offset problems / triple	faulting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#442">[ date ]</a>
+              <a href="thread.html#442">[ thread ]</a>
+              <a href="subject.html#442">[ subject ]</a>
+              <a href="author.html#442">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/29/08, Bob Moss &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">bobbyjmoss at googlemail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Ok - so a program can be 64KB in size and use 495K for doing interesting
+</I>&gt;<i> stuff (that's a lot more flexible than the old model).
+</I>
+Correct! Will make stuff like image viewers and text editors more doable.
+
+&gt;<i> To get it working in
+</I>&gt;<i> C you just need to set the memory addresses as constants and work from there
+</I>&gt;<i> (though I'm braving ASM at the moment to see how it goes!)
+</I>
+Yeah, without malloc you'll just have to set a pointer to RAM_START
+(148992) and go from there.
+
+Interesting take on multitasking, but waaaay too complicated for
+MikeOS. Plus, many of the system calls would have to be rewritten due
+to the way they use memory :-)
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000441.html">[mikeos-developer] New memory layout: offset problems / triple	faulting
+</A></li>
+	<LI>Next message: <A HREF="000443.html">[mikeos-developer] New memory layout: offset problems / triple	faulting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#442">[ date ]</a>
+              <a href="thread.html#442">[ thread ]</a>
+              <a href="subject.html#442">[ subject ]</a>
+              <a href="author.html#442">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Blue Jay OS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-July/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Blue%20Jay%20OS&In-Reply-To=%3CCADY6QC%3Do1NgMcDzwFCLBrAktZOJ0HAjcaE0QE-VzHBCUQJKvUw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002026.html">
+   <LINK REL="Next"  HREF="002028.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Blue Jay OS</H1>
+    <B>Robert Looney</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Blue%20Jay%20OS&In-Reply-To=%3CCADY6QC%3Do1NgMcDzwFCLBrAktZOJ0HAjcaE0QE-VzHBCUQJKvUw%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Blue Jay OS">rli1223 at gmail.com
+       </A><BR>
+    <I>Sun Jul 24 17:56:17 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002026.html">[mikeos-developer] stuff
+</A></li>
+        <LI>Next message: <A HREF="002028.html">[mikeos-developer] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2027">[ date ]</a>
+              <a href="thread.html#2027">[ thread ]</a>
+              <a href="subject.html#2027">[ subject ]</a>
+              <a href="author.html#2027">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>*&gt;Be careful with that one, Microsoft used press any key in DOS and got
+loads of complaints from people saying they couldn't find the any key.
+*
+Ha ha , but I can see that happening in the real world. I will make it last
+for about 5 seconds then continue onto the CLI.
+One of the reasons I think your memory editor isn't working is because Blue
+Jay uses a different memory mapping than MikeOS does.
+ MikeOS Memory Map:
+
+        0000:8000 +----------------------+
+                  | Stack area   (SS)    |
+        0000:F000 +----------------------+
+
+        2000:0000 +----------------------+
+                  | Kernel code          |
+        2000:8000 +----------------------+
+                  | User (program) code  |
+        2000:FFFF +----------------------
+
+Blue Jay Memory Map:
+
+*        0000:8000 +----------------------+**                  | Stack
+area   (SS)    |**        0000:F000 +----------------------+****
+ 2000:0000 +----------------------+**                  | User code
+(CS,DS) |**        2000:8000 +----------------------+**
+  | Kernel code  (CS)    |**        2000:FFFF
++----------------------+*
+
+*
+*
+
+-- 
+Robert Looney
+<A HREF="http://code.google.com/p/blue-jay-project/">http://code.google.com/p/blue-jay-project/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110724/bd10f07f/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110724/bd10f07f/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002026.html">[mikeos-developer] stuff
+</A></li>
+	<LI>Next message: <A HREF="002028.html">[mikeos-developer] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2027">[ date ]</a>
+              <a href="thread.html#2027">[ thread ]</a>
+              <a href="subject.html#2027">[ subject ]</a>
+              <a href="author.html#2027">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

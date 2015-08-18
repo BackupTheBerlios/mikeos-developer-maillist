@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] int 33h? ps/2 mouse?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20int%2033h%3F%20ps/2%20mouse%3F&In-Reply-To=%3CCAM2gqEvSTCJEXi87gNoGXLMVVRdR63SmWL7CvhKx4FAqayf4Ag%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002534.html">
+   <LINK REL="Next"  HREF="002536.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] int 33h? ps/2 mouse?</H1>
+    <B>Justin Tokarchuk</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20int%2033h%3F%20ps/2%20mouse%3F&In-Reply-To=%3CCAM2gqEvSTCJEXi87gNoGXLMVVRdR63SmWL7CvhKx4FAqayf4Ag%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] int 33h? ps/2 mouse?">jtokarchukalerts at gmail.com
+       </A><BR>
+    <I>Tue Oct  4 05:56:42 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002534.html">[mikeos-developer] int 33h? ps/2 mouse?
+</A></li>
+        <LI>Next message: <A HREF="002536.html">[mikeos-developer] int 33h? ps/2 mouse?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2535">[ date ]</a>
+              <a href="thread.html#2535">[ thread ]</a>
+              <a href="subject.html#2535">[ subject ]</a>
+              <a href="author.html#2535">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is over my head, although I am improving at my asm. I have done some
+research and found this driver:
+
+(warning, it can be hacked to be ran on mikeos, but when the program quits,
+the keyboard buffer is full. and keyboard ceases to work)
+
+It does seem to parse the mouse packets, though.
+
+
+it involves disabling the keyboard while the mouse is active, so unsure if
+this is practical at all, I'm going to say definately not ground-shattering
+important. I am going to focus elsewhere.
+On Mon, Oct 3, 2011 at 10:01 PM, Troy Martin &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">blacklight at cordilon.net</A>&gt;wrote:
+
+&gt;<i> On Mon, 3 Oct 2011 20:42:38 -0500, Justin Tokarchuk wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> is 33h reserved for DOS? Do I have to write my own driver?
+</I>&gt;&gt;<i>
+</I>&gt;<i> Yup, int 33h is a DOS mouse driver interrupt. All you have available is the
+</I>&gt;<i> keyboard controller and/or int 15h AX=C200h through C209h. These interrupt
+</I>&gt;<i> functions allow you to initialize the PS/2 mouse port, configure it, and do
+</I>&gt;<i> read/write operations on it.
+</I>&gt;<i>
+</I>&gt;<i> A good-looking resource for the PS/2 mouse protocol can be found here:
+</I>&gt;<i> <A HREF="http://www.computer-**engineering.org/ps2mouse/&lt;http://www.computer-engineering.org/ps2mouse/">http://www.computer-**engineering.org/ps2mouse/&lt;http://www.computer-engineering.org/ps2mouse/</A>&gt;
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Troy
+</I>&gt;<i> ______________________________**_________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.</A>**berlios.de &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+</I>&gt;<i> <A HREF="https://lists.berlios.de/**mailman/listinfo/mikeos-**developer&lt;https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/**mailman/listinfo/mikeos-**developer&lt;https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>&gt;
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111003/5bd685d1/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111003/5bd685d1/attachment.html</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: psmouse.asm
+Type: application/octet-stream
+Size: 15031 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111003/5bd685d1/attachment.obj">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111003/5bd685d1/attachment.obj</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002534.html">[mikeos-developer] int 33h? ps/2 mouse?
+</A></li>
+	<LI>Next message: <A HREF="002536.html">[mikeos-developer] int 33h? ps/2 mouse?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2535">[ date ]</a>
+              <a href="thread.html#2535">[ thread ]</a>
+              <a href="subject.html#2535">[ subject ]</a>
+              <a href="author.html#2535">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

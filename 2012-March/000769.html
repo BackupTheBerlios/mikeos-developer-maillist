@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> No subject
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-March/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20No%20subject&In-Reply-To=%3Cmailman.2.1331735266.5899.mikeos-developer%40lists.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000751.html">
+   <LINK REL="Next"  HREF="000786.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>No subject</H1>
+    <B></B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20No%20subject&In-Reply-To=%3Cmailman.2.1331735266.5899.mikeos-developer%40lists.berlios.de%3E"
+       TITLE="No subject">
+       </A><BR>
+    <I>Wed Mar 14 15:27:39 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000751.html">No subject
+</A></li>
+        <LI>Next message: <A HREF="000786.html">No subject
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#769">[ date ]</a>
+              <a href="thread.html#769">[ thread ]</a>
+              <a href="subject.html#769">[ subject ]</a>
+              <a href="author.html#769">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>MY ERROR NOT THE INTERPRETER SO IGNORE THIS I HAVE FOUND IT.
+
+Sorry to inconvenience anyone...
+
+BTW I`m new to the list guys... :)
+
+---- <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">wisecracker at tesco.net</A> wrote: 
+&gt;<i> Hi Mike... 
+</I>&gt;<i> 
+</I>&gt;<i> (Humbly apologise I think I sent a previous email to the wrong addy.)
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Well I`m hammering MikeOS and started the ADC project but I have one 
+</I>&gt;<i> problem with the interpreter. 
+</I>&gt;<i>  
+</I>&gt;<i> My machine, HP dv2036ea dual core notebook, booting from USB FDD... 
+</I>&gt;<i>  
+</I>&gt;<i> I can`t destroy the OS so far but the interpreter is a little dodgy... 
+</I>&gt;<i>  
+</I>&gt;<i> Apologies for any wordwrapping, indenting errors in the post, etc... 
+</I>&gt;<i>  
+</I>&gt;<i> Here is my BASIC code, note the binary is NOT poked in yet... 
+</I>&gt;<i>  
+</I>&gt;<i> The problem is the END statement; on exitting the code the interpreter 
+</I>&gt;<i> gives a syntax error and does not `cleanexit:`. It even does it after a coldboot 
+</I>&gt;<i> to restart. 
+</I>&gt;<i>  
+</I>&gt;<i> REM Analogue voltmeter for MikeOS issued as PD, 25-11-2009. 
+</I>&gt;<i> REM Original copyright (C)2009, B.Walker, G0LCU. 
+</I>&gt;<i>  
+</I>&gt;<i> REM Poke the hardware access binary from here. 
+</I>&gt;<i>  
+</I>&gt;<i> REM Master variables here... 
+</I>&gt;<i> REM a = analogue value to print. 
+</I>&gt;<i> REM b = ADC byte grabbed from the parallel port. 
+</I>&gt;<i> REM k = ASCII key code set to the &lt;Esc&gt; key. 
+</I>&gt;<i> REM n = can be anything and is a counter here. 
+</I>&gt;<i> b = 255 
+</I>&gt;<i> a = b / 5 
+</I>&gt;<i> k = 27 
+</I>&gt;<i> n = 0 
+</I>&gt;<i>  
+</I>&gt;<i> REM This is the mainloop... 
+</I>&gt;<i> mainloop: 
+</I>&gt;<i> REM The pause statement simulates the port access. 
+</I>&gt;<i> PAUSE 10 
+</I>&gt;<i> REM This rewrites the screen for after each parallel port access. 
+</I>&gt;<i> CLS 
+</I>&gt;<i> PRINT &quot;&quot; 
+</I>&gt;<i> PRINT &quot;          Simple analogue voltmeter for MikeOS using the parallel port.&quot; 
+</I>&gt;<i> PRINT &quot;          (C)2009, B.Walker, G0LCU. Now issued as PD for use on MikeOS.&quot; 
+</I>&gt;<i> PRINT &quot;&quot; 
+</I>&gt;<i> PRINT &quot;              0   2.0  4.0  6.0  8.0 10.0 12.0 14.0 16.0 18.0 20.0&quot; 
+</I>&gt;<i> PRINT &quot;    Scale.    0   1.0  2.0  3.0  4.0  5.0  6.0  7.0  8.0  9.0 10.0&quot; 
+</I>&gt;<i> PRINT &quot;              0   0.5  1.0  1.5  2.0  2.5  3.0  3.5  4.0  4.5  5.0&quot; 
+</I>&gt;<i> PRINT &quot;              ++++++++++++++++++++++++++++++++++++++++++++++++++++&quot; 
+</I>&gt;<i> PRINT &quot;              &quot; ; 
+</I>&gt;<i> REM This creates the simple animation... 
+</I>&gt;<i> n = 0 
+</I>&gt;<i> readoutloop: 
+</I>&gt;<i> PRINT &quot;|&quot; ; 
+</I>&gt;<i> n = n + 1 
+</I>&gt;<i> IF n &gt; a THEN GOTO readoutloopout 
+</I>&gt;<i> GOTO readoutloop 
+</I>&gt;<i> REM Once the analogue display has been updated finish off the display. 
+</I>&gt;<i> readoutloopout: 
+</I>&gt;<i> PRINT &quot;&quot; 
+</I>&gt;<i> PRINT &quot;              +----+----+----+----+----+----+----+----+----+----+-&quot; 
+</I>&gt;<i> PRINT &quot;&quot; 
+</I>&gt;<i> PRINT &quot;                              Press &lt;Esc&gt; to Quit.&quot; 
+</I>&gt;<i> REM We need to get our of the loop, use &lt;Esc&gt; to do so. 
+</I>&gt;<i> GETKEY k 
+</I>&gt;<i> IF k = 27 GOTO cleanexit 
+</I>&gt;<i> GOTO mainloop 
+</I>&gt;<i> REM There is a syntax error here, dunno why yet! 
+</I>&gt;<i> cleanexit: 
+</I>&gt;<i> END 
+</I>&gt;<i>  
+</I>&gt;<i>  
+</I>&gt;<i>  
+</I>&gt;<i> Any ideas?... 
+</I>&gt;<i>  
+</I>&gt;<i> TIA... 
+</I>&gt;<i>  
+</I>&gt;<i>  
+</I>&gt;<i> -- 
+</I>&gt;<i> 73... 
+</I>&gt;<i>  
+</I>&gt;<i> Bazza... 
+</I>&gt;<i>  
+</I>&gt;<i> TA... 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>
+
+</PRE>
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000751.html">No subject
+</A></li>
+	<LI>Next message: <A HREF="000786.html">No subject
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#769">[ date ]</a>
+              <a href="thread.html#769">[ thread ]</a>
+              <a href="subject.html#769">[ subject ]</a>
+              <a href="author.html#769">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

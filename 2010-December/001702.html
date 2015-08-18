@@ -1,0 +1,313 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] OS-PAR.ASM
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20OS-PAR.ASM&In-Reply-To=%3C20101228183035.U4KA2.239033.root%40web11-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001701.html">
+   <LINK REL="Next"  HREF="001704.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] OS-PAR.ASM</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20OS-PAR.ASM&In-Reply-To=%3C20101228183035.U4KA2.239033.root%40web11-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] OS-PAR.ASM">wisecracker at tesco.net
+       </A><BR>
+    <I>Tue Dec 28 19:30:35 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001701.html">[mikeos-developer] [BUG] os_check_for_key
+</A></li>
+        <LI>Next message: <A HREF="001704.html">[mikeos-developer] Implementing System Calls (API)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1702">[ date ]</a>
+              <a href="thread.html#1702">[ thread ]</a>
+              <a href="subject.html#1702">[ subject ]</a>
+              <a href="author.html#1702">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi guys...
+
+Working on three parallel port OS calls.
+
+os_par_data
+os_par_status
+os_par_control
+
+Here is the code so far and not finalised yet:-
+(Below that, the write up about it so far.)
+
+======================================================
+
+; Assume SPP only and NONE bi-directional capability, i.e. IBM XT compatibilty.
+; Assume at this point SPP base sits on 0378h output address.
+; Note the pushes and pops will be changed to pusha and popa.
+; The port needs no setting up as it is ready to program from coldboot.
+
+; os_par_data... IN al, 0 to 255, OUT nothing, sent to pins 2-9 of SPP socket.
+; Compiled as a COM file FTTB.
+
+	org 256
+
+os_par_data:
+	push ax
+	push dx
+
+	call get_par_base_address
+	mov word dx, [par_base_address]		; Get base DATA address of SPP.
+	out dx, al				; Any byte value to the SPP data pins.
+
+	pop dx
+	pop ax
+	ret
+
+; os_par_status... IN nothing, OUT al, SPP status pins in use on SPP socket.
+
+os_par_status:
+	push ax
+	push dx
+
+	call get_par_base_address
+	mov word dx, [par_base_address]		; Get base DATA address of SPP
+	add dx, 01h				; Point to the STATUS address of the SPP.
+	in al, dx
+	and al, 11111000b			; Ensure SPP HW status pins only are read.
+	mov byte [par_status_byte], al		; Store the value.
+	pop dx
+	pop ax
+	mov al, [par_status_byte]		; AL now contains IBM compatible SPP mode status.
+	ret
+
+; os_par_control... IN al, OUT nothing, sent to control pins on SPP socket.
+
+os_par_control:
+	push ax
+	push dx
+
+	call get_par_base_address
+	mov word dx, [par_base_address]		; Get base DATA address of SPP
+	add dx, 02h				; Point ot the CONTROL address of the SPP.
+	and al, 00001111b			; Ensure ONLY the SPP HW pins are changed.
+	out dx, al				; Write what is contained in AL to the SPP.
+	pop dx
+	pop ax
+	ret
+
+par_status_byte:
+	nop					; Status byte HW pins only!
+	nop					; Spare byte slot for future use, I like NOPs, SOOOO useful...
+par_base_address:
+	nop					; Base address stored here.
+	nop
+
+get_par_base_address:
+	push ax
+	push dx
+	push si
+	push di
+	push ds
+
+	push ds					; Store DATA Segment.
+	mov dx, 40h				; Set up new DS:
+	mov ds, dx				; Do it.
+	mov si, 08h				; Point to base address of SPP.
+	mov ax, [si]				; Move contents into AX, SPP base address.
+	cmp ax, 0000h				; Check SPP at this address, if not move to next possible address.
+	jnz par_address_found			; If exists then place this into par_base_address
+	add si, 02h				; Point to next possible SPP base address.
+	mov ax, [si]
+	cmp ax, 0000h
+	jnz par_address_found			; If exists then place this into par_base_address
+	add si, 02h				; Point to next possible SPP base address.
+	mov ax, [si]
+	cmp ax, 0000h
+	jnz par_address_found
+	mov ax, 0378h				; Place 0378h into par_base_address - does nothing!
+
+par_address_found:
+	pop ds					; Restore DATA Segment.
+
+	mov di, par_base_address		; Point to a memory location to store
+	mov word [di], ax			; Store get_par_base_address into memory location
+
+	pop ds
+	pop di
+	pop si
+	pop dx
+	pop ax
+	ret
+
+======================================================
+
+                   The PC SPP, (Standard Parallel Port).
+                   -------------------------------------
+
+Ramblings...
+------------
+
+There are many different Parallel Ports on computers; probably the most
+versatile one of all belonged to the AMIGA range of computers in the 1980s
+to 1990s.
+
+The AMIGA parellel port could be used as a:-
+Volume:- PAR: as a volume.
+Device:- parallel.device as a device.
+DMA:- Fully programmable I/O, (Input and Output).
+PRT:- PRT: as a volume, (in parallel mode), for EPSON printer compatibility.
+
+Nowadays PCs that do have parallel ports have one that can be used in modes:-
+SPP:- Standard Parallel Port, IBM XT compatibility mode.
+(Parallel Port PS/2:- Bi-directional.)
+EPP:- Enhanced Parallel Port.
+ECP:- Extended(/Enhanced) Capabilities Port.
+
+MikeOS will ONLY be using the parallel port in IBM XT compatibility mode.
+It will have OS calls to be able to:-
+1) WRITE to the DATA lines only.
+2) READ from the STATUS lines only.
+3) WRITE to the CONTROL lines only.
+
+There is a plethora of information about all parallel port types so just go
+and search for it to get to grips with all of the port`s subtleties.
+
+It is assumed that if you are reading this that you have some knowledge of
+hexadecimal, decimal and binary &quot;numbers&quot;.
+
+=============================================================================
+
+The Standard Parallel Port, SPP.
+--------------------------------
+
+MikeOS will ONLY be using the first SPP found from the BIOS.
+
+This SPP has 3 addresses that can be written to or read from.
+
+-----------------------------------------------------------------------------
+
+1) The MikeOS BASE address, assume (0x)0378H for this text - WRITE ONLY.
+------------------------------------------------------------------------
+
+This is the address to access the DATA lines of the SPP socket. (You do not
+need to know any addresses as MikeOS takes care of all of that with each
+MikeOS SPP call.)
+
+Any BYTE value from 0 to 255 decimal, ((0x)00H to (0x)FFH heaxadecimal or
+00000000B to 11111111B binary), can be written to the DATA pins and will stay
+in that written state until another BYTE is written to it. The socket`s data
+lines are pins 2, (bit 0), to 9, (bit 7) inclusive.
+
+The default value from coldboot is 255 decimal, all pins set to 5 Volts.
+
+The MikeOS call is &quot;os_par_data&quot; and the register to use is AL.
+
+Example simple assembly code...
+
+&lt;some_of_your_code&gt;
+	push ax				; Push any registers.
+	mov	al, 0aah		; Set byte value for the DATA lines.
+	call os_par_data		; Write to the socket`s DATA lines.
+	pop ax				; Pop any registers back.
+	; ret				; Return or jump IF needed.
+&lt;some_other_of_your_code&gt;
+
+This will set pins 2 to 9 of the parallel port to (0x)AAH OR......
+
+Socket pin 2, (bit 0) to 0, (0 Volts).
+Socket pin 3, (bit 1) to 1, (5 Volts).
+Socket pin 4, (bit 2) to 0, (0 Volts).
+Socket pin 5, (bit 3) to 1, (5 Volts).
+Socket pin 6, (bit 4) to 0, (0 Volts).
+Socket pin 7, (bit 5) to 1, (5 Volts).
+Socket pin 8, (bit 6) to 0, (0 Volts).
+Socket pin 9, (bit 7) to 1, (5 Volts).
+
+-----------------------------------------------------------------------------
+
+2) The STATUS address, (BASE + (0x)01H), READ ONLY.
+---------------------------------------------------
+
+This address gives access to 5 bits of a byte as digital INPUT to the
+computer, these are bits 3 to 7 inclusive. These are at TTL, (Transistor
+Transistor Logic), level and have 4 bits, bits 3 to 6 inclusive, as a nibble
+for semi parallel input and the top bit, bit 7, is INVERTED.
+
+As only 5 pins of the SPP socket are routed to the STATUS byte then bits
+0 to 2 inclusive are set to zero inside MikeOS. You cannot change these lower
+3 bits under the MikeOS &quot;PAR&quot; OS call(s).
+
+Socket pin 10 set at 1, bit 6 set to 1, (5 Volts).
+Socket pin 11 set at 1, bit 7 set to 0, (0 Volts).
+Socket pin 12 set at 1, bit 5 set to 1, (5 Volts).
+Socket pin 13 set at 1, bit 4 set to 1, (5 Volts).
+Socket pin 14 set at 1, bit 3 set to 1, (5 Volts).
+
+NOTE:- Bit 7 is INVERTED so if a low, 0, is on the socket pin 11 then a high,
+1, will be on the STATUS byte. Bits 0, 1 and 2 are deliberately set to 0.
+
+The MikeOS call is &quot;os_par_status&quot; and the register to read is AL.
+
+Example simple assembly code...
+
+&lt;some_of_your_code&gt;
+	push ax				; Push any registers.
+	call os_par_status		; Read the socket`s status lines.
+	mov [my_status_byte], al	; Store the STATUS byte HW lines.
+	pop ax				; Pop any registers back.
+	mov byte al, [my_status_byte]	; Restore the status byte into AL.
+	; ret				; Return or jump IF needed.
+my_status_byte:
+	nop				; I love NOPs for storage space. :)
+&lt;some_other_of_your_code&gt;
+
+======================================================
+
+To be continued...
+
+COMMENTS please...
+
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+<A HREF="http://homepages.tesco.net/wisecracker/">http://homepages.tesco.net/wisecracker/</A>
+
+<A HREF="http://main.aminet.net/search?readme=wisecracker">http://main.aminet.net/search?readme=wisecracker</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001701.html">[mikeos-developer] [BUG] os_check_for_key
+</A></li>
+	<LI>Next message: <A HREF="001704.html">[mikeos-developer] Implementing System Calls (API)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1702">[ date ]</a>
+              <a href="thread.html#1702">[ thread ]</a>
+              <a href="subject.html#1702">[ subject ]</a>
+              <a href="author.html#1702">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] CLI problems
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20CLI%20problems&In-Reply-To=%3C8d87c8a30810240511w3e574d91mdac3b0cd259e81b%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000404.html">
+   <LINK REL="Next"  HREF="000392.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] CLI problems</H1>
+    <B>Bob Moss</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20CLI%20problems&In-Reply-To=%3C8d87c8a30810240511w3e574d91mdac3b0cd259e81b%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] CLI problems">bobbyjmoss at googlemail.com
+       </A><BR>
+    <I>Fri Oct 24 14:11:25 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000404.html">[mikeos-developer] mikeos in unreal mode
+</A></li>
+        <LI>Next message: <A HREF="000392.html">[mikeos-developer] CLI problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#391">[ date ]</a>
+              <a href="thread.html#391">[ thread ]</a>
+              <a href="subject.html#391">[ subject ]</a>
+              <a href="author.html#391">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Well it does say 'similar OS' in the title... ;)
+
+I'm having some problems getting a CLI working in ApolloOS. It's based on
+bkerndev (I'm porting MikeOS's floppy driver for 0.1) and I've linked the
+cli.c file with system.h, and the relevant functions all work.
+
+The problem I have at the moment is with an IF() statement in the keyboard
+driver. My aim is to (when the user presses enter) to call a function to
+process their command (stored as a string). In all other cases, I just want
+to add the ASCII character to a string, which I can process later.
+
+Things seemed to be going well, but at the moment my driver doesn't
+differentiate between enter and the other keys on the keyboard! As a result
+you can press any key and it runs my CLI function (which at the moment just
+outputs 'You Pressed Enter!', as I need to get this working before I start
+processing commands).
+
+Does anyone know any good scancodes or ways of grabbing enter? I've probably
+missed something obvious... Here's some code:
+
+void keyboard_handler(struct regs *r)
+{
+    unsigned char scancode; /* this stores the scancode*/
+    char *commandString;   /* Holds command as string to be passed to
+function */
+    int cmd = 0; /* This is the handler variable for me to add characters to
+the string */
+
+
+    /* Read from the keyboard's data buffer */
+    scancode = inportb(0x60);
+
+    /* If the top bit of the byte we read from the keyboard is
+    *  set, that means that a key has just been released */
+    if (scancode &amp; 0x80)
+    {
+        /* You can use this one to see if the user released the
+        *  shift, alt, or control keys... */
+    }
+    else
+    {
+        /* Here, a key was just pressed. Please note that if you
+        *  hold a key down, you will get repeated key press
+        *  interrupts. */
+
+        /* Just to show you how this works, we simply translate
+        *  the keyboard scancode into an ASCII value, and then
+        *  display it to the screen. You can get creative and
+        *  use some flags to see if a shift is pressed and use a
+        *  different layout, or you can add another 128 entries
+        *  to the above layout to correspond to 'shift' being
+        *  held. If shift is held using the larger lookup table,
+        *  you would add 128 to the scancode when you look for it */
+    if (kbdus[scancode]='\n') /* This is one of my  attempts - I've also
+tried scancode = x, where x is a hex scancode */
+    {
+        cli_handle_string(commandString); /* if enter is pressed, send the
+command string to the CLI handler */
+    }
+    else
+    {
+            putch(kbdus[scancode]); /* else, business as usual... */
+        commandString[cmd] = kbdus[scancode]; /* add character to string -
+or array if you like! */
+        cmd++; /* increment my char array handler */
+    }
+    }
+}
+
+kbdus is the function which converts scancodes to ASCII characters.
+
+Thanks in advance ;)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20081024/5c4cf8c4/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20081024/5c4cf8c4/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000404.html">[mikeos-developer] mikeos in unreal mode
+</A></li>
+	<LI>Next message: <A HREF="000392.html">[mikeos-developer] CLI problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#391">[ date ]</a>
+              <a href="thread.html#391">[ thread ]</a>
+              <a href="subject.html#391">[ subject ]</a>
+              <a href="author.html#391">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

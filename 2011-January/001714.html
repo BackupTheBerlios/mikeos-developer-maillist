@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Implementing API Calls (SOLVED)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Implementing%20API%20Calls%20%28SOLVED%29&In-Reply-To=%3CSNT123-w329077F1CD8AC6721F5A64AF070%40phx.gbl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="001715.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Implementing API Calls (SOLVED)</H1>
+    <B>Muzaffar Auhammud</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Implementing%20API%20Calls%20%28SOLVED%29&In-Reply-To=%3CSNT123-w329077F1CD8AC6721F5A64AF070%40phx.gbl%3E"
+       TITLE="[mikeos-developer] Implementing API Calls (SOLVED)">muzhacker at scalux.tk
+       </A><BR>
+    <I>Mon Jan  3 09:11:34 CET 2011</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="001715.html">[mikeos-developer] Implementing API Calls (SOLVED)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1714">[ date ]</a>
+              <a href="thread.html#1714">[ thread ]</a>
+              <a href="subject.html#1714">[ subject ]</a>
+              <a href="author.html#1714">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+
+&gt;<i> org 0
+</I>&gt;<i>   jmp System.Initialize                                ;0000h
+</I>&gt;<i> align 3
+</I>&gt;<i>   jmp System.IO.Screen.DisplayString                   ;0003h
+</I>&gt;<i> align 3
+</I>
+When I use align 3, i get the following errors in nasm:
+
+segment alignment '3' is not power of two
+
+But if i remove the 'align 3' line, it assembles without any warnings. It also assembles successfull if I use align 2 instead of align 3.
+
+What does align means and why MikeOS don't use align and org 0?
+ 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110103/e9037e03/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110103/e9037e03/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="001715.html">[mikeos-developer] Implementing API Calls (SOLVED)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1714">[ date ]</a>
+              <a href="thread.html#1714">[ thread ]</a>
+              <a href="subject.html#1714">[ subject ]</a>
+              <a href="author.html#1714">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

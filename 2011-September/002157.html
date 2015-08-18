@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.2 beta 1 released for testing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.2%20beta%201%20released%20for%20testing&In-Reply-To=%3CCACtjVkHPwfjLDwyGWEmJAK1Z09s3W%2BZNL4Q2k6irZj%2BEkWsszw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002151.html">
+   <LINK REL="Next"  HREF="002158.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.2 beta 1 released for testing</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.2%20beta%201%20released%20for%20testing&In-Reply-To=%3CCACtjVkHPwfjLDwyGWEmJAK1Z09s3W%2BZNL4Q2k6irZj%2BEkWsszw%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 4.2 beta 1 released for testing">okachi at gmail.com
+       </A><BR>
+    <I>Fri Sep 16 18:37:42 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002151.html">[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 21
+</A></li>
+        <LI>Next message: <A HREF="002158.html">[mikeos-developer] [test required] libmikeos-4.2 beta 1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2157">[ date ]</a>
+              <a href="thread.html#2157">[ thread ]</a>
+              <a href="subject.html#2157">[ subject ]</a>
+              <a href="author.html#2157">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi folks,
+
+Here it is: <A HREF="http://prdownload.berlios.de/mikeos/mikeos-4.2b1.zip">http://prdownload.berlios.de/mikeos/mikeos-4.2b1.zip</A>
+
+Full changelog below. All testing would be muchly appreciated! NOTE:
+the original EDIT.BIN is on the disk, and Troy's modified version is
+TROYEDIT.BIN.
+
+This is because there appears to be something funny happening with
+Troy's version -- try opening MEMEDIT.BAS or CALC.BAS in it and
+hitting F8 to execute BASIC. Then quit the BASIC program, and the
+system locks up back in the editor. Troy: please look into this, as it
+works OK with the normal EDIT.BIN. I think I've traced the culprit to
+somewhere in the &quot;setup_screen&quot; routine and all the string joins it
+does -- does it need to do those every refresh?
+
+Anyway, thanks in advance for any testing reports folks!
+
+Mike
+
+
+# New program: Memory Manipulator (MEMEDIT.BAS) from Joshua Beck: a
+colourful program for editing bytes in memory, written in BASIC
+
+# New program: ASCII Artist (DRAW.BAS) from Joshua Beck: lets you
+draw, load and save images created with ASCII characters
+
+# New program: MikeTron Reloaded (MIKETRON.BAS) from Joshua Beck: new
+features, bonuses and explosion effects
+
+# New program: Calculator (CALC.BAS) from Joshua Beck
+
+# Updated CLI from Troy Martin: can now pass parameters to programs.
+The tokenised (elements separated by zeros) CLI string is passed in
+SI, and the number of arguments in DX. Plus: new file management
+routines to DEL, COPY and REN files
+
+# Updated EDIT program from Troy Martin: takes filename at CLI prompt,
+plus new keybindings to create a new file and save with different name
+
+# New system call: os_string_tokenize from Matej Horvat -- reads
+tokens separated by specific char from a string, returning pointer to
+next token
+
+# New system call: os_string_compare_casei from Troy Martin -- like
+os_string_compare, but case-insensitive
+
+# Bumped API to version 14
+
+# TEST.PCX file (in programs directory) renamed SAMPLE.PCX
+
+# Bugfix: os_get_time_string vector is 0054h, not 0055h
+
+# Bugfix: can no longer call BASIC in EDIT.BIN when file is empty
+
+# Handbook updates
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002151.html">[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 21
+</A></li>
+	<LI>Next message: <A HREF="002158.html">[mikeos-developer] [test required] libmikeos-4.2 beta 1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2157">[ date ]</a>
+              <a href="thread.html#2157">[ thread ]</a>
+              <a href="subject.html#2157">[ subject ]</a>
+              <a href="author.html#2157">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

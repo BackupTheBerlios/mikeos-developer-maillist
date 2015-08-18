@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Using a USB keyboard as a general purpose I/O	port.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Using%20a%20USB%20keyboard%20as%20a%20general%20purpose%20I/O%0A%09port.&In-Reply-To=%3C247245.98301.qm%40web113114.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000941.html">
+   <LINK REL="Next"  HREF="000944.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Using a USB keyboard as a general purpose I/O	port.</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Using%20a%20USB%20keyboard%20as%20a%20general%20purpose%20I/O%0A%09port.&In-Reply-To=%3C247245.98301.qm%40web113114.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] Using a USB keyboard as a general purpose I/O	port.">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Fri Jan 22 16:12:18 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000941.html">[mikeos-developer] MikeOS 4.1 released
+</A></li>
+        <LI>Next message: <A HREF="000944.html">[mikeos-developer] Using a USB keyboard as a general purpose I/O port.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#943">[ date ]</a>
+              <a href="thread.html#943">[ thread ]</a>
+              <a href="subject.html#943">[ subject ]</a>
+              <a href="author.html#943">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bazza,
+
+Attached is a possible circuit to interface your serial ADC to the keyboard.
+The circuit uses the CAPS LOCK and NUM LOCK to control it.
+
+The CAPS LOCK is used as a clock whilst the NUM LOCK forms a chip select
+for the ADC and also a gating control to only enable the data coming out of the ADC
+whilst you are taking a reading.
+If this was not done, you would soon have a lot of key presses in the KB buffer.
+The &quot;AND&quot; gates steer the data output from the ADC to either the &quot;1&quot; key when the ADC output is high
+or the &quot;0&quot; key when it's output is low.
+
+This would make your software easier to write as you would for example get back from the ADC a string like such:
+
+11000101
+
+I've kept the circuit as simple as possible and it only uses 1 extra cheap and easy to get IC, namely the 40106B.
+If you need separate controls for the ADC chip select and the &quot;gating&quot; signal, then keep NUM LOCK as the chip select
+and use SCROLL LOCK for the &quot;gating&quot; control.
+
+Have fun,
+Paulo.
+
+
+      
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: ADC_to_KB_interface.JPG
+Type: image/jpeg
+Size: 66556 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100122/1c81a8de/attachment.jpe">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100122/1c81a8de/attachment.jpe</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000941.html">[mikeos-developer] MikeOS 4.1 released
+</A></li>
+	<LI>Next message: <A HREF="000944.html">[mikeos-developer] Using a USB keyboard as a general purpose I/O port.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#943">[ date ]</a>
+              <a href="thread.html#943">[ thread ]</a>
+              <a href="subject.html#943">[ subject ]</a>
+              <a href="author.html#943">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

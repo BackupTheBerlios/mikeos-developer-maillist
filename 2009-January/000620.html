@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] On the cho(m)p functions
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20On%20the%20cho%28m%29p%20functions&In-Reply-To=%3C19d8b3b00901121322s1578deb2j431e2cbda27897fe%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000618.html">
+   <LINK REL="Next"  HREF="000621.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] On the cho(m)p functions</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20On%20the%20cho%28m%29p%20functions&In-Reply-To=%3C19d8b3b00901121322s1578deb2j431e2cbda27897fe%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] On the cho(m)p functions">okachi at gmail.com
+       </A><BR>
+    <I>Mon Jan 12 22:22:32 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000618.html">[mikeos-developer] On the cho(m)p functions
+</A></li>
+        <LI>Next message: <A HREF="000621.html">[mikeos-developer] On the cho(m)p functions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#620">[ date ]</a>
+              <a href="thread.html#620">[ thread ]</a>
+              <a href="subject.html#620">[ subject ]</a>
+              <a href="author.html#620">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 1/12/09, Hiato &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">hiato1 at gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> 16bit asm, and that's probably how it's going to stay. If I include
+</I>&gt;<i> some string handling to assemble, it refuses to run, even though it's
+</I>&gt;<i> not called. I'm struggling with my own take on setting up the IVT,
+</I>&gt;<i> but, with perseverance, it should all work out. I'm not sure whether
+</I>&gt;<i> you went through the same problem as I face now, but I lack an aim.
+</I>
+In MikeOS 2.0 I had a couple of system calls to modify the interrupt
+table -- os_get_int_handler and os_modify_int_handler IIRC. They were
+primarily used to implement DOS int 21h support -- but after I removed
+the DOS code for 3.0 I removed those too. You might be able to get
+something from them.
+
+&gt;<i> Currently I'm just coding, hoping it will mean something eventually :P
+</I>
+That's just how I started with this -- I was just coding for fun!
+After a bit I thought the code may be useful to others, and then
+people started getting involved, and here we are. So it's always worth
+cracking on, as it means you're always learning new stuff, providing
+you enjoy it!
+
+&gt;<i>  Finally, if it's OK with you, I think I'm going to have to start
+</I>&gt;<i>  copying code/concepts from MikeOS v2/3 as I can't seem to make some
+</I>&gt;<i>  things work anymore. All the necessary copyright will be kept.
+</I>
+Naturally, take as much as you want -- that's always been my goal,
+making MikeOS a source of code for new OS development. Any questions
+about it, you know where to ask :-)
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000618.html">[mikeos-developer] On the cho(m)p functions
+</A></li>
+	<LI>Next message: <A HREF="000621.html">[mikeos-developer] On the cho(m)p functions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#620">[ date ]</a>
+              <a href="thread.html#620">[ thread ]</a>
+              <a href="subject.html#620">[ subject ]</a>
+              <a href="author.html#620">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

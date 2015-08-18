@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.1.1-RC ready for testing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.1.1-RC%20ready%20for%20testing&In-Reply-To=%3C37617.95111.qm%40web113106.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001343.html">
+   <LINK REL="Next"  HREF="001347.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.1.1-RC ready for testing</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.1.1-RC%20ready%20for%20testing&In-Reply-To=%3C37617.95111.qm%40web113106.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] MikeOS 4.1.1-RC ready for testing">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Tue May 25 18:38:28 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001343.html">[mikeos-developer] MikeOS 4.1.1-RC ready for testing
+</A></li>
+        <LI>Next message: <A HREF="001347.html">[mikeos-developer] MikeOS 4.1.1-RC ready for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1346">[ date ]</a>
+              <a href="thread.html#1346">[ thread ]</a>
+              <a href="subject.html#1346">[ subject ]</a>
+              <a href="author.html#1346">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+As regards the INT 1Ah, I suspect that it's not necessary to actually check the hi order count in CX.
+My thinking as follows:
+
+We continuously compare tick counts so it stands to reason that each new tick count returned must be greater
+than the previous one other wise it means that an overflow of the lo order count in DX has occurred.
+
+Please check my code below and see if you can spot any mistakes/problems/down right stupid coding as it's been a verrrrrrry long day
+and the brain is working at 10%.
+
+It still needs some touching up, just thought I would post it here now to see if my thinking is correct.
+Comments and suggestions please.
+
+Paulo.
+
+;------------------------------------------------------------------------------------------------
+;os_pause -- waits for predetermined amount of time.
+;
+; IN: AL = number of 110millisecond chunks to wait   
+; OUT: AL =0 if timer has not overflowed past 24 hrs since reset
+;------------------------------------------------------------------------------------------------
+os_pause:
+
+pusha
+mov bl,al
+
+mov ah,0
+int 1ah                             ; get tick count
+
+mov al,2                          ; 
+mul bl                             ; mul required seconds by 18
+add dx,ax                       ; add to original tick count
+mov bx,dx                      ; and store it for later comparison
+mov [.orig_req_delay],bx
+
+checkloop:
+
+mov ah,0
+int 1ah                           ; get new tick count
+cmp dx,bx                     ; compare with original tick count 
+jle overflow                     ; if the new tick count is less than the original, DX has overflowed
+        
+jge time_up                    ; if greater or equal to BX means time's up so bail out
+jmp checkloop                ; wait some more
+
+time_up:
+
+popa
+mov al,[.midnite_overflow]
+ret
+
+overflow:
+
+; Compensate for time already elapsed
+; by subtracting the new tick count from the old one.
+; The formula is: 
+; time elapsed = (65535 - old_tick_count) + new_tick_count
+
+mov ax,0FFFFh                    ; 65535
+sub ax,bx                             ; subtract the old_tick_count
+add ax,dx                             ; add the new_tick_count since the overflow (AX now has elapsed time)
+
+sub [.orig_req_delay],ax         ; subtract the elapsed time from the original time delay the caller required.
+mov bx,[.orig_req_delay]         ; update it as the new_tick_count
+jmp checkloop
+
+
+.orig_req_delay        dw    0
+.midnite_overflow    db    0
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001343.html">[mikeos-developer] MikeOS 4.1.1-RC ready for testing
+</A></li>
+	<LI>Next message: <A HREF="001347.html">[mikeos-developer] MikeOS 4.1.1-RC ready for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1346">[ date ]</a>
+              <a href="thread.html#1346">[ thread ]</a>
+              <a href="subject.html#1346">[ subject ]</a>
+              <a href="author.html#1346">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

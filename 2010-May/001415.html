@@ -1,0 +1,298 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] New user here
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20user%20here&In-Reply-To=%3C771786.24041.qm%40web56107.mail.re3.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001414.html">
+   <LINK REL="Next"  HREF="001416.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] New user here</H1>
+    <B>M. Horvat</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20user%20here&In-Reply-To=%3C771786.24041.qm%40web56107.mail.re3.yahoo.com%3E"
+       TITLE="[mikeos-developer] New user here">redjazz_slo at yahoo.com
+       </A><BR>
+    <I>Sat May 29 13:36:12 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001414.html">[mikeos-developer] New user here
+</A></li>
+        <LI>Next message: <A HREF="001416.html">[mikeos-developer] New user here
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1415">[ date ]</a>
+              <a href="thread.html#1415">[ thread ]</a>
+              <a href="subject.html#1415">[ subject ]</a>
+              <a href="author.html#1415">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Great stuff. Feel free to post your .asm programs to the
+</I>&gt;<i> list too --
+</I>&gt;<i> the more code, the merrier!
+</I>
+OK. Here is the hello.asm program...
+
+-----------------------------------------------------------------------
+; Hello World
+; by Matej Horvat
+
+	BITS 16
+	%INCLUDE &quot;mikedev.inc&quot;
+	ORG 32768
+
+	call os_hide_cursor
+
+	mov si, hellostring		; Print &quot;Hello World!&quot;
+	call os_print_string
+	mov si, enterstring		; Print &quot;(Press Enter to quit)&quot;
+	call os_print_string
+
+loop:
+	call os_check_for_key
+	cmp al, KEY_ENTER		; Is the Enter key pressed?
+	jne loop			; If not, check again
+
+	call os_clear_screen
+	call os_show_cursor
+	ret				; Back to OS
+
+	hellostring	db 'Hello World!', 13, 10, 0
+	enterstring	db '(Press Enter to quit)', 0
+-----------------------------------------------------------------------
+
+... and here is the asmtron.asm program. Note that it uses os_pause, so if you plan on changing on removing it, take this into account.
+
+-----------------------------------------------------------------------
+; MikeTron, converted to assembly language by Matej Horvat
+; Based on the MikeTron source in BASIC
+
+; <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">matej.horvat at guest.arnes.si</A>
+
+; You may use this code as long as you give credit to me and the MikeOS staff.
+
+; Variables:
+; DL = X position
+; DH = Y position
+; BX = Score and character at cursor position (changes roles with push/pop)
+; CL = direction
+
+; ********** DIRECTIVES **********
+	BITS 16
+	%INCLUDE &quot;mikedev.inc&quot;
+	ORG 32768
+
+; ********** MAIN PROGRAM CODE **********
+
+	call os_clear_screen		; Clear screen
+	call os_hide_cursor		; Hide cursor
+
+	; Print help text (could this be done more efficiently?)
+	mov si, HelpString1
+	call os_print_string
+	mov si, EmptyString
+	call os_print_string
+	mov si, HelpString2
+	call os_print_string
+	mov si, HelpString3
+	call os_print_string
+	mov si, HelpString4
+	call os_print_string
+	mov si, HelpString5
+	call os_print_string
+	mov si, HelpString6
+	call os_print_string
+	mov si, EmptyString
+	call os_print_string
+	mov si, HelpString7
+	call os_print_string
+	mov si, EmptyString
+	call os_print_string
+	mov si, HelpString8
+	call os_print_string
+
+Start:
+	call os_wait_for_key		; Wait until a key is pressed
+	call os_clear_screen		; Clear the screen
+
+	; Start in the middle of the screen
+	mov dl, 40			; X position (column)
+	mov dh, 12			; Y position (row)
+
+	; Init score and direction
+	mov bx, 0			; Score
+	mov cl, 4			; Direction
+
+	call os_move_cursor		; Move cursor to X and Y position (DL and DH)
+
+	mov si, Block			; Set SI to Block so that we won't have to set it each time to print it
+
+MainLoop:
+	call os_print_string		; Print block
+	mov ax, 1
+	call os_pause			; Pause for 0.1 sec. (AX = length of pause in tenths of a second)
+
+	call os_check_for_key		; Get key and store it in AL
+
+; Now let's see what key is it
+IsQ:
+	cmp al, 'q'			; Is it Q?
+	jne IsA				; If not, check whether it's A
+	mov cl, 1			; If it _is_ Q, set direction to 1
+	jmp MovePlayer			; And proceed to move the player.
+
+IsA:
+	cmp al, 'a'			; (You should be able to understand this.)
+	jne IsO
+	mov cl, 2
+	jmp MovePlayer
+
+IsO:
+	cmp al, 'o'
+	jne IsP
+	mov cl, 3
+	jmp MovePlayer
+
+IsP:
+	cmp al, 'p'
+	jne MovePlayer			; It can't be any other key, so we'll just move the player again
+	mov cl, 4
+
+; Move player according to direction
+MovePlayer:
+.IsUp:
+	cmp cl, 1			; Is it &quot;up&quot;?
+	jne .IsDown			; If not, check whether it's &quot;down&quot;
+	dec dh				; If it _is_ &quot;up&quot;, decrease Y position
+	jmp CheckPos			; Check position.
+
+.IsDown:
+	cmp cl, 2			; (Self-explanatory.)
+	jne .IsLeft
+	inc dh
+	jmp CheckPos
+
+.IsLeft:
+	cmp cl, 3
+	jne .IsRight
+	dec dl
+	jmp CheckPos
+
+.IsRight:
+	inc dl				; It can't be any other direction, so just increase the X position
+
+CheckPos:
+	call os_move_cursor		; Move cursor to new position
+
+	; Get character at cursor
+	push bx				; Store the score (we'll pop it later)
+	mov ah, 08h
+	mov bx, 0
+	int 10h				; Get char at current cursor location
+	mov bx, 0			; We only want the lower byte (the char, not attribute)
+	mov bl, al
+
+	; Now do some tests
+	cmp bx, 219			; Is there a block at the cursor?
+	je Quit				; If yes, then end the game
+	cmp dl, 255			; Are we offscreen with the X position?
+	je Quit				; (The first column is numbered 0, and if we dec that, if rolls over to 255...
+	cmp dl, 80			; ... and the last column is numbered 79, so 80 doesn't exist.)
+	je Quit
+	cmp dh, 255			; Are we offscreen with the Y position? (Same trick here)
+	je Quit
+	cmp dh, 25
+	je Quit
+
+	; If none of these is true...
+	pop bx				; Retrieve the score
+	inc bx				; Increase it
+	jmp MainLoop			; And repeat it all over again
+
+Quit:
+	pop bx				; Retrieve the score
+	call os_clear_screen
+
+	mov si, EndingString1		; Set the string to display
+	mov ax, 0			; Set the cursor X _and_ Y position to 0
+	call os_print_string		; Print it
+
+	mov ax, bx			; Copy score to AX...
+	call os_int_to_string		; ... because we want to convert it to a string.
+	mov si, ax
+	call os_print_string		; Now print the score...
+	mov si, Period
+	call os_print_string		; ... and a period because we want a complete sentence.
+	mov si, EmptyString
+	call os_print_string		; Line break
+	mov si, EndingString2
+	call os_print_string		; And the string instructing the user what to do.
+
+.WaitForUserDecision:
+	call os_check_for_key		; Check for key...
+	cmp al, 32			; Is it Space?
+	je Start			; If it is, start the game again.
+	cmp al, KEY_ENTER		; Is it Enter?
+	jne .WaitForUserDecision	; If it's not either, check again.
+	call os_show_cursor		; If it is, show the cursor,
+	ret				; and give control back to the OS.
+
+; ********** STRINGS **********
+	EmptyString	db 13, 10, 0
+
+	HelpString1	db 'You control a vehicle leaving a trail behind it.', 13, 10, 0
+
+	HelpString2	db 'It is always moving, and if it crosses any part', 13, 10, 0
+	HelpString3	db 'of its trail or the edge of the screen, the game', 13, 10, 0
+	HelpString4	db 'is over. Use the Q and A keys to change the direction', 13, 10, 0
+	HelpString5	db 'to up and down, and O and P for left and right.', 13, 10, 0
+	HelpString6	db 'See how long you can survive! Score at the end.', 13, 10, 0
+
+	HelpString7	db 'NOTE: May perform at wrong speed in emulators!', 13, 10, 0
+
+	HelpString8	db 'Hit a key to begin...', 13, 10, 0
+
+	EndingString1	db 'Your score was ', 0
+	EndingString2	db 'Press Enter to quit, or Space to play again.', 0
+
+	Period		db '.', 0
+	Block		db 219, 0
+-----------------------------------------------------------------------
+
+-Matej Horvat
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001414.html">[mikeos-developer] New user here
+</A></li>
+	<LI>Next message: <A HREF="001416.html">[mikeos-developer] New user here
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1415">[ date ]</a>
+              <a href="thread.html#1415">[ thread ]</a>
+              <a href="subject.html#1415">[ subject ]</a>
+              <a href="author.html#1415">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

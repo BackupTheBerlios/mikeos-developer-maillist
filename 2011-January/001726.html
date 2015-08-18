@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] (no subject)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20%28no%20subject%29&In-Reply-To=%3CSNT123-W5543551A7E572D621DF95AAF090%40phx.gbl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001725.html">
+   <LINK REL="Next"  HREF="001727.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] (no subject)</H1>
+    <B>Muzaffar Auhammud</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20%28no%20subject%29&In-Reply-To=%3CSNT123-W5543551A7E572D621DF95AAF090%40phx.gbl%3E"
+       TITLE="[mikeos-developer] (no subject)">muzhacker at scalux.tk
+       </A><BR>
+    <I>Wed Jan  5 13:39:02 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001725.html">[mikeos-developer] Flashnul
+</A></li>
+        <LI>Next message: <A HREF="001727.html">[mikeos-developer] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1726">[ date ]</a>
+              <a href="thread.html#1726">[ thread ]</a>
+              <a href="subject.html#1726">[ subject ]</a>
+              <a href="author.html#1726">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+I'm using FAT12 for the OS. This is the header code of the bootloader:
+
+BITS 16
+
+    jmp short bootloader_start    
+    nop               
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;; Disk Description Table ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+OEMLabel        db &quot;SCALUXOS&quot;    ; Disk label
+BytesPerSector        dw 512        ; Bytes per sector
+SectorsPerCluster    db 1        ; Sectors per cluster
+ReservedForBoot        dw 1        ; Reserved sectors for boot record
+NumberOfFats        db 2        ; Number of copies of the FAT
+RootDirEntries        dw 224        ; Number of entries in root dir
+                    ; (224 * 32 = 7168 = 14 sectors to read)
+LogicalSectors        dw 2880        ; Number of logical sectors
+MediumByte        db 0F0h        ; Medium descriptor byte
+SectorsPerFat        dw 9        ; Sectors per FAT
+SectorsPerTrack        dw 18        ; Sectors per track (36/cylinder)
+Sides            dw 2        ; Number of sides/heads
+HiddenSectors        dd 0        ; Number of hidden sectors
+LargeSectors        dd 0        ; Number of LBA sectors
+DriveNo            dw 0        ; Drive No: 0
+Signature        db 41        ; Drive signature: 41 for floppy
+VolumeID        dd 00000000h    ; Volume ID: any number
+VolumeLabel        db &quot;SCALUXOS   &quot;; Volume Label: any 11 chars
+FileSystem        db &quot;FAT12   &quot;    ; File system type: don't change!
+
+
+The Disk Description table defines the filesytem. But this is for FAT12. Is there any way to convert this code into FAT32?
+
+ 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110105/78d761e0/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110105/78d761e0/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001725.html">[mikeos-developer] Flashnul
+</A></li>
+	<LI>Next message: <A HREF="001727.html">[mikeos-developer] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1726">[ date ]</a>
+              <a href="thread.html#1726">[ thread ]</a>
+              <a href="subject.html#1726">[ subject ]</a>
+              <a href="author.html#1726">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

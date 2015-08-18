@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] libmikeos-4.1 released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20libmikeos-4.1%20released&In-Reply-To=%3C2a3029a31001211016o6dbdf52ew58cf856add9b8f43%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000916.html">
+   <LINK REL="Next"  HREF="000920.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] libmikeos-4.1 released</H1>
+    <B>ranjan das gupta</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20libmikeos-4.1%20released&In-Reply-To=%3C2a3029a31001211016o6dbdf52ew58cf856add9b8f43%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] libmikeos-4.1 released">ranjan.nhce at gmail.com
+       </A><BR>
+    <I>Thu Jan 21 19:16:23 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000916.html">[mikeos-developer] libmikeos-4.1 released
+</A></li>
+        <LI>Next message: <A HREF="000920.html">[mikeos-developer] libmikeos-4.1 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#917">[ date ]</a>
+              <a href="thread.html#917">[ thread ]</a>
+              <a href="subject.html#917">[ subject ]</a>
+              <a href="author.html#917">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hey that keyboard game in maike os is not working on ubuntu 9.10.
+i am using a qemu 0.5 to emulate.rest all works fine.
+thanks
+ranjan
+On Thu, Jan 21, 2010 at 11:42 PM, &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">wisecracker at tesco.net</A>&gt; wrote:
+
+&gt;<i> Hi Ian...
+</I>&gt;<i>
+</I>&gt;<i> How about not allowing zero at all for dx......
+</I>&gt;<i>
+</I>&gt;<i> &gt; os_get_random:
+</I>&gt;<i> &gt;       push dx
+</I>&gt;<i> &gt;       push bx
+</I>&gt;<i> &gt;       push ax
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;       sub bx, ax                      ; We want a number between 0 and
+</I>&gt;<i> (high-low)
+</I>&gt;<i> &gt;       call .generate_random           ; Return a random number in AX
+</I>&gt;<i> &gt;       mov dx, bx
+</I>&gt;<i> &gt;       add dx, 1       ; &lt;- If DX is 65535 (0xFFFF) then adding 1 will
+</I>&gt;<i> &gt; overflow DX to 0 (0x0000)
+</I>&gt;<i>
+</I>&gt;<i> &lt;HERE&gt;
+</I>&gt;<i>
+</I>&gt;<i>                cmp dx, 0
+</I>&gt;<i>                jmp nz, exit
+</I>&gt;<i>                add dx, 1
+</I>&gt;<i> exit:
+</I>&gt;<i>
+</I>&gt;<i> &gt;       mul dx           ; And multiplying anything by 0 will give you 0
+</I>&gt;<i> &gt;       mov cx, dx
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;       pop ax
+</I>&gt;<i> &gt;       pop bx
+</I>&gt;<i> &gt;       pop dx
+</I>&gt;<i> &gt;       add cx, ax                      ; Add the low offset back
+</I>&gt;<i> &gt;       ret
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I'll try to figure it out.
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100121/ffbaea7f/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100121/ffbaea7f/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000916.html">[mikeos-developer] libmikeos-4.1 released
+</A></li>
+	<LI>Next message: <A HREF="000920.html">[mikeos-developer] libmikeos-4.1 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#917">[ date ]</a>
+              <a href="thread.html#917">[ thread ]</a>
+              <a href="subject.html#917">[ subject ]</a>
+              <a href="author.html#917">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

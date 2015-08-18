@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] The FINAL Assembly code for my KB access	routines...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-June/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20The%20FINAL%20Assembly%20code%20for%20my%20KB%20access%0A%09routines...&In-Reply-To=%3C627817.19414.qm%40web113116.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001442.html">
+   <LINK REL="Next"  HREF="001444.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] The FINAL Assembly code for my KB access	routines...</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20The%20FINAL%20Assembly%20code%20for%20my%20KB%20access%0A%09routines...&In-Reply-To=%3C627817.19414.qm%40web113116.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] The FINAL Assembly code for my KB access	routines...">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Mon Jun 14 23:25:52 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001442.html">[mikeos-developer] The FINAL Assembly code for my KB access	routines...
+</A></li>
+        <LI>Next message: <A HREF="001444.html">[mikeos-developer] binary to MikeBASIC POKE converter
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1443">[ date ]</a>
+              <a href="thread.html#1443">[ thread ]</a>
+              <a href="subject.html#1443">[ subject ]</a>
+              <a href="author.html#1443">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bazza,
+
+
+&gt;<i>I suggest you try it first on as many different machines as possible and you`ll
+</I>&gt;<i>then see why...
+</I>
+OK I think I know what you are referring to:
+
+If you run the code on a machine that uses the XT keyboard with the i8048 controller chip, then the INT 9h has to be called or the leds will not switch on.
+But these all belong in a museum and  if you have one you should rather contact the &quot;cash in the attic&quot; team.   :-)
+
+All keyboards (as far as I know) since about 1984/1985 are AT types based on the i8042 controller and don't need
+the INT 9h and as a bonus also allow the typematic rate to be set.
+
+Later (circa 1987) came the PS/2 standard also based on the same controller chip with enhanced commands from host(pc) to device(kb).
+
+Paulo.
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001442.html">[mikeos-developer] The FINAL Assembly code for my KB access	routines...
+</A></li>
+	<LI>Next message: <A HREF="001444.html">[mikeos-developer] binary to MikeBASIC POKE converter
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1443">[ date ]</a>
+              <a href="thread.html#1443">[ thread ]</a>
+              <a href="subject.html#1443">[ subject ]</a>
+              <a href="author.html#1443">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

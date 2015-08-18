@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] FW: Contents of mikeos-developer digest Issue 24, vol 26
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FW%3A%20Contents%20of%20mikeos-developer%20digest%0A%20Issue%2024%2C%20vol%2026&In-Reply-To=%3C20101115152846.IC2GR.112125.root%40web09-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001519.html">
+   <LINK REL="Next"  HREF="001521.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] FW: Contents of mikeos-developer digest Issue 24, vol 26</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FW%3A%20Contents%20of%20mikeos-developer%20digest%0A%20Issue%2024%2C%20vol%2026&In-Reply-To=%3C20101115152846.IC2GR.112125.root%40web09-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] FW: Contents of mikeos-developer digest Issue 24, vol 26">wisecracker at tesco.net
+       </A><BR>
+    <I>Mon Nov 15 16:28:46 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001519.html">[mikeos-developer] FW: Contents of mikeos-developer digest	Issue 24, vol 26
+</A></li>
+        <LI>Next message: <A HREF="001521.html">[mikeos-developer] FW: Contents of mikeos-developer digest Issue 24, vol 26
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1520">[ date ]</a>
+              <a href="thread.html#1520">[ thread ]</a>
+              <a href="subject.html#1520">[ subject ]</a>
+              <a href="author.html#1520">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi SASANO...
+
+&gt;<i> How about to replace int20h call (finish program of MS-DOS) to busy loop
+</I>&gt;<i> or anything else?
+</I>
+&gt;<i> For example:
+</I>
+&gt;<i> 	    mov ax,5307h
+</I>&gt;<i> 	    mov bx,1
+</I>&gt;<i> 	    mov cx,3
+</I>&gt;<i> 	    int 15h
+</I>
+IMHO, I don`t think it is required at all and could safely be removed completely.
+
+In theory the machine will be OFF through this final INT 15h call so your extra loop will
+never be reached.
+
+It is however a good idea though... :)
+
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+URL:- <A HREF="http://homepages.tesco.net/wisecracker/">http://homepages.tesco.net/wisecracker/</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001519.html">[mikeos-developer] FW: Contents of mikeos-developer digest	Issue 24, vol 26
+</A></li>
+	<LI>Next message: <A HREF="001521.html">[mikeos-developer] FW: Contents of mikeos-developer digest Issue 24, vol 26
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1520">[ date ]</a>
+              <a href="thread.html#1520">[ thread ]</a>
+              <a href="subject.html#1520">[ subject ]</a>
+              <a href="author.html#1520">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

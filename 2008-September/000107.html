@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] FAT12 support: more writing progress
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT12%20support%3A%20more%20writing%20progress&In-Reply-To=%3C19d8b3b00809020507n46e632coe481b2f075d1235e%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000113.html">
+   <LINK REL="Next"  HREF="000109.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] FAT12 support: more writing progress</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT12%20support%3A%20more%20writing%20progress&In-Reply-To=%3C19d8b3b00809020507n46e632coe481b2f075d1235e%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] FAT12 support: more writing progress">okachi at gmail.com
+       </A><BR>
+    <I>Tue Sep  2 14:07:07 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000113.html">[mikeos-developer] 40 kb of text!? wow.
+</A></li>
+        <LI>Next message: <A HREF="000109.html">[mikeos-developer] FAT12 driver 0.5
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#107">[ date ]</a>
+              <a href="thread.html#107">[ thread ]</a>
+              <a href="subject.html#107">[ subject ]</a>
+              <a href="author.html#107">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Lo all,
+
+I've been making more headway with FAT12 write support. The attached
+program lets you rename files, and the various bits for reading the
+root dir entries, writing out the FAT are separated into calls.
+Eventually these will become full-on system calls. (Oh, and this also
+introduces os_input_dialog, which will be rolled into syscalls.asm for
+the next release.)
+
+This is stage 1 done -- next is deletion (finding a root dir entry,
+then following and blanking out the chain of cluster entries in the
+FAT) and creation (finding a free FAT entry, associating it with a
+chain of clusters). So there's still lots to do, but the code is
+becoming more modular and straightforward, and hopefully useful to
+anyone who's exploring FAT12.
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: rename.txt
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080902/27c4e5aa/attachment.txt">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080902/27c4e5aa/attachment.txt</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000113.html">[mikeos-developer] 40 kb of text!? wow.
+</A></li>
+	<LI>Next message: <A HREF="000109.html">[mikeos-developer] FAT12 driver 0.5
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#107">[ date ]</a>
+              <a href="thread.html#107">[ thread ]</a>
+              <a href="subject.html#107">[ subject ]</a>
+              <a href="author.html#107">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

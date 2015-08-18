@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] FASM and MikeOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FASM%20and%20MikeOS&In-Reply-To=%3C19d8b3b00905211400r4ca7bb7bvea3944b32b6e478c%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000692.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] FASM and MikeOS</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FASM%20and%20MikeOS&In-Reply-To=%3C19d8b3b00905211400r4ca7bb7bvea3944b32b6e478c%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] FASM and MikeOS">okachi at gmail.com
+       </A><BR>
+    <I>Thu May 21 23:00:00 CEST 2009</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000692.html">[mikeos-developer] FASM and MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#691">[ date ]</a>
+              <a href="thread.html#691">[ thread ]</a>
+              <a href="subject.html#691">[ subject ]</a>
+              <a href="author.html#691">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Lo!
+
+Got a message today from a programmer looking to write MikeOS stuff in
+FASM. I did some rummaging around and converted the sample hello.asm
+and mikedev.inc to FASM format. Very simple stuff:
+
+1) 'BITS 16' in NASM becomes 'use16' in FASM
+2) '%INCLUDE' in NASM becomes 'include' in FASM
+3) '%DEFINE' in NASM becomes 'define' in FASM
+
+I've only tried the simple hello.asm program; there may be cases where
+more stuff needs to be changed. But I just thought I'd post this for
+the benefit of any FASM fans :-)
+
+After a few months gap I'm doing some stuff with MikeOS again -- not
+sure yet if it'll amount to anything but I'll post if so. Any lurkers
+on this list up to anything fun programming-wise?
+
+Cheers,
+Mike
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000692.html">[mikeos-developer] FASM and MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#691">[ date ]</a>
+              <a href="thread.html#691">[ thread ]</a>
+              <a href="subject.html#691">[ subject ]</a>
+              <a href="author.html#691">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

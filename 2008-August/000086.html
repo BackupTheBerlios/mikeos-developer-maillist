@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] FAT12 write support development
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT12%20write%20support%20development&In-Reply-To=%3C8d87c8a30808290055k54c24b4as81165f531894c3bd%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000084.html">
+   <LINK REL="Next"  HREF="000088.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] FAT12 write support development</H1>
+    <B>Bob Moss</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT12%20write%20support%20development&In-Reply-To=%3C8d87c8a30808290055k54c24b4as81165f531894c3bd%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] FAT12 write support development">bobbyjmoss at googlemail.com
+       </A><BR>
+    <I>Fri Aug 29 09:55:10 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000084.html">[mikeos-developer] FAT12 write support development
+</A></li>
+        <LI>Next message: <A HREF="000088.html">[mikeos-developer] FAT12 write support development
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#86">[ date ]</a>
+              <a href="thread.html#86">[ thread ]</a>
+              <a href="subject.html#86">[ subject ]</a>
+              <a href="author.html#86">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>ok, i'll get right on it!
+
+On 8/29/08, Troy Martin &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">blasterman95 at gmail.com</A>&gt; wrote:
+&gt;<i> Oh, for the sake of the internet, don't make it public domain.
+</I>&gt;<i>
+</I>&gt;<i> Think what would happen if all the script kiddies with nasm in the world had
+</I>&gt;<i> freedom to take MikeOS, change one string, and say they wrote it without
+</I>&gt;<i> mentioning you or I at all.
+</I>&gt;<i>
+</I>&gt;<i> Troy Martin
+</I>&gt;<i> www.blasterman.co.nr
+</I>&gt;<i>
+</I>&gt;<i> --------------------------------------------------
+</I>&gt;<i> From: &quot;M Saunders&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+</I>&gt;<i> Sent: Thursday, August 28, 2008 3:11 PM
+</I>&gt;<i> To: &quot;MikeOS (and similar OS) developers&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+</I>&gt;<i> Subject: Re: [mikeos-developer] FAT12 write support development
+</I>&gt;<i>
+</I>&gt;&gt;<i> On 8/28/08, Bob Moss &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">bobbyjmoss at googlemail.com</A>&gt; wrote:
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Yep - well getting grub to boot MikeOS isn't overly difficult - but it
+</I>&gt;&gt;&gt;<i> would
+</I>&gt;&gt;&gt;<i> mean altering your build routine and bundling some grub modules (I'm sure
+</I>&gt;&gt;&gt;<i> you've seen the tutorial on osdever.net!). You would still need an
+</I>&gt;&gt;&gt;<i> assembly
+</I>&gt;&gt;&gt;<i> loader however!
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Cool -- I saw the docs there ages ago but they've wriggled out of my
+</I>&gt;&gt;<i> memory :-) Providing GRUB can be convinced to boot an OS in real mode,
+</I>&gt;&gt;<i> it should be doable. If you do some work on this for Apollo, I'd love
+</I>&gt;&gt;<i> to see/borrow the results :-)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> It's interesting that MikeOS is BSD and I was rather banking on using
+</I>&gt;&gt;&gt;<i> GPLv3... We'll see how that one pans out! :(
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Well, I do like the GPL but I chose BSD for simplicity. As the head
+</I>&gt;&gt;<i> honcho of the source code, I'm sure I can give 'permission' to use the
+</I>&gt;&gt;<i> code in GPL projects. Come to think of it, perhaps I should make the
+</I>&gt;&gt;<i> whole shebang public domain -- I don't think any company is going to
+</I>&gt;&gt;<i> steal the code and make $squillions just yet :-)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> M
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i> Mike Saunders
+</I>&gt;&gt;<i> <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> mikeos-developer mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>
+-- 
+Sent from Google Mail for mobile | mobile.google.com
+
+This email is not intended to offend, annoy or inconvenience anyone.
+If it has, email me and state that it has, and we'll sort out the
+problem in an amicable way. Thank you for reading this message, I hope
+for a reply from you soon!
+
+Why not visit my tech site?: <A HREF="http://bjm1904.741.com/">http://bjm1904.741.com/</A>
+or Apollo OS?:
+<A HREF="http://apolloopsys.sourceforge.net/">http://apolloopsys.sourceforge.net/</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000084.html">[mikeos-developer] FAT12 write support development
+</A></li>
+	<LI>Next message: <A HREF="000088.html">[mikeos-developer] FAT12 write support development
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#86">[ date ]</a>
+              <a href="thread.html#86">[ thread ]</a>
+              <a href="subject.html#86">[ subject ]</a>
+              <a href="author.html#86">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Preparing for MikeOS 4.3.1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-April/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Preparing%20for%20MikeOS%204.3.1&In-Reply-To=%3CCAEz6_zhOuZ25P0W9fsrrmbg5%3DU89tNmvt0Jg-uVMxr4LPrcYvg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003050.html">
+   <LINK REL="Next"  HREF="003052.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Preparing for MikeOS 4.3.1</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Preparing%20for%20MikeOS%204.3.1&In-Reply-To=%3CCAEz6_zhOuZ25P0W9fsrrmbg5%3DU89tNmvt0Jg-uVMxr4LPrcYvg%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Preparing for MikeOS 4.3.1">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Mon Apr 23 14:08:01 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003050.html">[mikeos-developer] Preparing for MikeOS 4.3.1
+</A></li>
+        <LI>Next message: <A HREF="003052.html">[mikeos-developer] Preparing for MikeOS 4.3.1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3051">[ date ]</a>
+              <a href="thread.html#3051">[ thread ]</a>
+              <a href="subject.html#3051">[ subject ]</a>
+              <a href="author.html#3051">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Okay, here it is:
+<A HREF="http://code.google.com/p/mikebasic-applications/downloads/detail?name=mbpp.bas&amp;can=2&amp;q=">http://code.google.com/p/mikebasic-applications/downloads/detail?name=mbpp.bas&amp;can=2&amp;q=</A>
+
+I created an alternate version without the new features but with the bug fixes.
+This is a large clean up for the library, making the library more
+compact and efficient.
+
+ANCITEXT is now be potential hundreds of times faster because it uses
+a DO/LOOP which jumps
+instead of a GOTO loop that must search the program. Also the inner
+loop has been optimized.
+
+All the library's functions now preserve your variables. I patched up
+the few remaining that would
+destroy the user's variables. Except for 'STARTPRG' because of program
+flow issues.
+
+The 'box open' function no-longer replaces the users error message
+with it's own unless there is
+actual an error. If a string is too long it now identifies the problem
+string rather than a single
+message for all.
+
+I also cleaned out the rubbish by removing all the functions that were
+unused, broken, unfinished
+or obsolete. I made a decent space saving out of this update making
+this version 1.4 KB small
+than the previous version with all the same features, that must be a
+new personal best.
+
+
+
+&gt;<i>Sure, that'd be ideal. Let's get a really stable 4.3.1 out the door,
+</I>&gt;<i>and we can start exploring new features.
+</I>
+&gt;&gt;<i> How about I release a version with the bug fixes but no new features?
+</I></PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003050.html">[mikeos-developer] Preparing for MikeOS 4.3.1
+</A></li>
+	<LI>Next message: <A HREF="003052.html">[mikeos-developer] Preparing for MikeOS 4.3.1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3051">[ date ]</a>
+              <a href="thread.html#3051">[ thread ]</a>
+              <a href="subject.html#3051">[ subject ]</a>
+              <a href="author.html#3051">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

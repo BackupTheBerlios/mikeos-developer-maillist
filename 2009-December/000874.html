@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Better random number generator for 4.1 --	any takers?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Better%20random%20number%20generator%20for%204.1%20--%0A%09any%20takers%3F&In-Reply-To=%3C4f03362c0912301019o5deee33fn94ae8dc596eb8778%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000858.html">
+   <LINK REL="Next"  HREF="000875.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Better random number generator for 4.1 --	any takers?</H1>
+    <B>Ian Seyler</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Better%20random%20number%20generator%20for%204.1%20--%0A%09any%20takers%3F&In-Reply-To=%3C4f03362c0912301019o5deee33fn94ae8dc596eb8778%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Better random number generator for 4.1 --	any takers?">iseyler at gmail.com
+       </A><BR>
+    <I>Wed Dec 30 19:19:07 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000858.html">[mikeos-developer] Better random number generator for 4.1 --	any takers?
+</A></li>
+        <LI>Next message: <A HREF="000875.html">[mikeos-developer] Better random number generator for 4.1 --	any takers?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#874">[ date ]</a>
+              <a href="thread.html#874">[ thread ]</a>
+              <a href="subject.html#874">[ subject ]</a>
+              <a href="author.html#874">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Here is what I have come up with. The code below is adapted from
+64-bit registers to 16-bit.
+Original code is here:
+<A HREF="http://code.google.com/p/baremetal/source/browse/trunk/os/syscalls/misc.asm">http://code.google.com/p/baremetal/source/browse/trunk/os/syscalls/misc.asm</A>
+
+
+os_seed_random should be called during MikeOS startup.
+
+mov ax, 0
+mov bx, 10
+call os_get_random_integer
+cx will be set to a value between 0 and 10 inclusive
+
+; -----------------------------------------------------------------------------
+; os_seed_random -- Seed the RNG based on the current date and time
+; IN:	Nothing
+; OUT:	All registers preserved
+os_seed_random:
+	push bx
+	push ax
+
+	xor bx, bx
+	mov al, 0x02		; minute
+	out 0x70, al
+	in al, 0x71
+	mov bl, al
+	shl bx, 8
+	mov al, 0x00		; second
+	out 0x70, al
+	in al, 0x71
+	mov bl, al
+
+	mov [os_random_seed], bx	; Seed will be something like 0x4435 (if it
+were 44 minutes and 35 seconds after the hour)
+
+	pop ax
+	pop bx
+	ret
+; -----------------------------------------------------------------------------
+
+
+; -----------------------------------------------------------------------------
+; os_get_random -- Return a random integer
+; IN:	Nothing
+; OUT:	ax = Random number
+;	All other registers preserved
+os_get_random:
+	push dx
+	push bx
+
+	mov ax, [os_random_seed]
+	mov dx, 0x7383			; The magic number (random.org)
+	mul dx				; dx:ax = ax * dx
+	mov [os_random_seed], ax
+
+	pop bx
+	pop dx
+	ret
+; -----------------------------------------------------------------------------
+
+
+; -----------------------------------------------------------------------------
+; os_get_random_integer -- Return a random integer between Low and High (incl)
+; IN:	ax = Low integer
+;	bx = High integer
+; OUT:	cx = Random integer
+os_get_random_integer:
+	push dx
+	push bx
+	push ax
+
+	sub bx, ax		; We want to look for a number between 0 and (High-Low)
+	call os_get_random
+	mov dx, bx
+	add dx, 1
+	mul dx
+	mov cx, dx
+
+	pop ax
+	pop bx
+	pop dx
+	add cx, ax		; Add the low offset back
+	ret
+; -----------------------------------------------------------------------------
+
+-Ian
+
+
+On Tue, Dec 15, 2009 at 4:01 PM, Ian Seyler &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">iseyler at gmail.com</A>&gt; wrote:
+&gt;<i> I'm taking a look. I'll let you know what I come up with.
+</I>&gt;<i>
+</I>&gt;<i> -Ian
+</I>&gt;<i>
+</I>&gt;<i> On Sat, Nov 28, 2009 at 6:03 AM, M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt; wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Hi all,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I'm off to drink beer and look at cool old stuff in Europe for a few
+</I>&gt;&gt;<i> days, but while I'm gone someone might want to dig out (or write) a
+</I>&gt;&gt;<i> new random number generator. The one we have currently in MikeOS is
+</I>&gt;&gt;<i> pretty bad -- it'd be great to have a system call like this:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> os_generate_random -- Generates random positive integer between two
+</I>&gt;&gt;<i> specified values
+</I>&gt;&gt;<i> IN: AX = lower limit, BX = upper limit (inclusive)
+</I>&gt;&gt;<i> OUT: AX = random number
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> From a quick search, I've found a few random number generators in
+</I>&gt;&gt;<i> 16-bit x86 assembly, presumably some of which could be adapted to
+</I>&gt;&gt;<i> MikeOS pretty easily.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> A little project to take up if anyone fancies!
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Cheers,
+</I>&gt;&gt;<i> Mike
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i> Mike Saunders
+</I>&gt;&gt;<i> <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> mikeos-developer mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000858.html">[mikeos-developer] Better random number generator for 4.1 --	any takers?
+</A></li>
+	<LI>Next message: <A HREF="000875.html">[mikeos-developer] Better random number generator for 4.1 --	any takers?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#874">[ date ]</a>
+              <a href="thread.html#874">[ thread ]</a>
+              <a href="subject.html#874">[ subject ]</a>
+              <a href="author.html#874">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

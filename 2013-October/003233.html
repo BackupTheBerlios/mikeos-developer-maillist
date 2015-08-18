@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Memory Management Library
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2013-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Memory%20Management%20Library&In-Reply-To=%3CCAEz6_zgb366JkrTen-n%3DCzkpqXQGWq6O%3D1mbuFT4Vc%2BBFPoD1w%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003232.html">
+   <LINK REL="Next"  HREF="003234.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Memory Management Library</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Memory%20Management%20Library&In-Reply-To=%3CCAEz6_zgb366JkrTen-n%3DCzkpqXQGWq6O%3D1mbuFT4Vc%2BBFPoD1w%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Memory Management Library">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Wed Oct 30 10:54:39 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003232.html">[mikeos-developer] Two GUI's?
+</A></li>
+        <LI>Next message: <A HREF="003234.html">[mikeos-developer] Memory Management Library
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3233">[ date ]</a>
+              <a href="thread.html#3233">[ thread ]</a>
+              <a href="subject.html#3233">[ subject ]</a>
+              <a href="author.html#3233">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>G'day all,
+I've created a new memory management library to help with allocating
+objects in my upcoming toolkit.
+This library allows memory to be dynamically allocated and freed in
+memory blocks within a specific area.
+
+The memory manager uses a fairly simple linked list of block.
+Basically each memory block has a header with a one byte status (i.e.
+allocated/free/end etc.) and a two byte size. The next block
+immediately follows.
+
+While the working are quite simple there is some kind of intelligent
+to the memory management. When allocating memory it tries to maximize
+free space by splitting large blocks of free memory and only
+allocating what's needed. If the remaining space in the block doesn't
+justify a space it will just allocate slightly more for the requested
+block. When freeing it tries to avoid fragmentation by merging free
+blocks immediately before and after the freed block.
+
+It currently has three functions:
+
+memory_initialise --- Assigns an area to the memory manager.
+Input: SI = pointer to memory area; AX = size of memory area
+Output: CF = set on failure, otherwise clear
+
+memory_allocate --- Allocates a block of memory
+Input: AX = memory size
+Output: SI = pointer to memory block; CF = set on failure, otherwise clear.
+
+memory_free --- Releases a block of memory
+Input: SI = pointer to memory block (given by memory_allocate)
+Output: CF = set on failure, otherwise clear
+
+Anyway it's available right now on my Google Code.
+<A HREF="https://code.google.com/p/mikebasic-applications/downloads/detail?name=libmemory-1.0.0.zip&amp;can=2&amp;q=">https://code.google.com/p/mikebasic-applications/downloads/detail?name=libmemory-1.0.0.zip&amp;can=2&amp;q=</A>
+Enjoy!
+
+Joshua,
+<A HREF="https://code.google.com/p/tachyon-os/">https://code.google.com/p/tachyon-os/</A>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003232.html">[mikeos-developer] Two GUI's?
+</A></li>
+	<LI>Next message: <A HREF="003234.html">[mikeos-developer] Memory Management Library
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3233">[ date ]</a>
+              <a href="thread.html#3233">[ thread ]</a>
+              <a href="subject.html#3233">[ subject ]</a>
+              <a href="author.html#3233">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

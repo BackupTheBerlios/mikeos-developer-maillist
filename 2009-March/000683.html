@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] loading programs.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-March/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20loading%20programs.&In-Reply-To=%3C008801c9b193%2439fb9e30%24016a010a%40mail2world.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000682.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] loading programs.</H1>
+    <B>cloudless oc</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20loading%20programs.&In-Reply-To=%3C008801c9b193%2439fb9e30%24016a010a%40mail2world.com%3E"
+       TITLE="[mikeos-developer] loading programs.">abuashraf at mail2world.com
+       </A><BR>
+    <I>Tue Mar 31 01:57:04 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000682.html">[mikeos-developer] ScorchOS 0.0.7 Released
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#683">[ date ]</a>
+              <a href="thread.html#683">[ thread ]</a>
+              <a href="subject.html#683">[ subject ]</a>
+              <a href="author.html#683">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I'm working on a real mode os written fully in asm assembled with fasm
+,and now I'm stuck at this problem.
+my kernel is loaded at 0x2000:0x000 and I'm trying to load programs at
+different segment
+exactly I'm trying to load them at 0x3000,and I can do that ,but my
+problem is that I can't
+get out of the programs and return to my kernel successfuly,so I can
+execute a program
+but I can't get out of it in the right way.
+woudl you please help me.
+
+you'll find an image file,
+fat.inc which is fat12 driver,
+io.inc for inout operations,
+func.inc for getting commands from the user,
+syscall.inc for loading and executing programs,
+ints.inc to support some DOS ints,
+boot.asm which is the boot loader I used from Mikeos
+print.asm print.com simple &quot;hello world&quot; program
+tetris.com Dos game...
+and finally the kernel.asm you know ,the kernel...
+
+
+
+&lt;span id=m2wTl&gt;&lt;p&gt;&lt;font face=&quot;Arial, Helvetica, sans-serif&quot; size=&quot;2&quot; style=&quot;font-size:13.5px&quot;&gt;_______________________________________________________________&lt;BR&gt;Get the Free email that has everyone talking at &lt;a href=<A HREF="http://www.mail2world.com">http://www.mail2world.com</A> target=new&gt;<A HREF="http://www.mail2world.com&lt;/a">http://www.mail2world.com&lt;/a</A>&gt;&lt;br&gt;  &lt;font color=#999999&gt;Unlimited Email Storage &#150; POP3 &#150; Calendar &#150; SMS &#150; Translator &#150; Much More!&lt;/font&gt;&lt;/font&gt;&lt;/span&gt;
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20090330/3e564533/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20090330/3e564533/attachment.html</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: os.zip
+Type: application/x-zip-compressed
+Size: 35066 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20090330/3e564533/attachment.bin">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20090330/3e564533/attachment.bin</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000682.html">[mikeos-developer] ScorchOS 0.0.7 Released
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#683">[ date ]</a>
+              <a href="thread.html#683">[ thread ]</a>
+              <a href="subject.html#683">[ subject ]</a>
+              <a href="author.html#683">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

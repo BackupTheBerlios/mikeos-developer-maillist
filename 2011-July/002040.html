@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Trouble Executing Multiple Programs in a Row
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-July/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Trouble%20Executing%20Multiple%20Programs%20in%20a%20Row&In-Reply-To=%3C160570F3-5AD7-45CF-9CB2-9F0F4EB5DAFF%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002039.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Trouble Executing Multiple Programs in a Row</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Trouble%20Executing%20Multiple%20Programs%20in%20a%20Row&In-Reply-To=%3C160570F3-5AD7-45CF-9CB2-9F0F4EB5DAFF%40gmail.com%3E"
+       TITLE="[mikeos-developer] Trouble Executing Multiple Programs in a Row">okachi at gmail.com
+       </A><BR>
+    <I>Thu Jul 28 14:49:42 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002039.html">[mikeos-developer] Trouble Executing Multiple Programs in a Row
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2040">[ date ]</a>
+              <a href="thread.html#2040">[ thread ]</a>
+              <a href="subject.html#2040">[ subject ]</a>
+              <a href="author.html#2040">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Great, thanks for all the detail! I'll investigate more when I get  
+back. BTW, VirtualBox does handle floppy images -- I think you need to  
+rename it mikeos.img though. I did that recently in 4.0.8 on Linux  
+(had to add a floppy device in the storage manager).
+
+M
+
+
+
+On 28 Jul 2011, at 21:38, &quot;Wolfram W.&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">aVoX at arcticmail.com</A>&gt; wrote:
+
+&gt;<i> Hi.
+</I>&gt;<i>
+</I>&gt;&gt;<i> A bit more info please
+</I>&gt;<i> I'll try to give you as much details as possible now.
+</I>&gt;<i>
+</I>&gt;&gt;<i> Are you using the stock floppy image from MikeOS 4.1.2?
+</I>&gt;<i> I had to play around a little, since VBox can't handle .FLP images,  
+</I>&gt;<i> so I downloaded a bootable Windows 95 floppy image (.IMG format) and  
+</I>&gt;<i> formatted it, afterwards I wrote bootloader.bin into the floppy  
+</I>&gt;<i> image's first sector and copied all the other .bin, .bas and .pcx  
+</I>&gt;<i> files from \programs to the floppy's root directory.
+</I>&gt;<i> I know I did it very complicated but I don't think this was the cause.
+</I>&gt;<i>
+</I>&gt;&gt;<i> Which BASIC file -- presumably EXAMPLE.BAS?
+</I>&gt;<i> Yes. But i don't think it depends on which file I open in the Editor  
+</I>&gt;<i> - the examble.bas BASIC file was the only I had on my floppy image.
+</I>&gt;<i>
+</I>&gt;&gt;<i> What exact version of VirtualBox?
+</I>&gt;<i> Oracle VirtualBox 4.0.8 r71778 under Windows 7 HP x86, using an AMD  
+</I>&gt;<i> Turion X2 Mobile RM-72 @2x2.1 GHz, 4 GB of base memory (64 MB for  
+</I>&gt;<i> the virtual machine) and an ATI Mobility Radeon with 256 MB of video  
+</I>&gt;<i> mem (again 64 MB for MikeOS).
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> I have tried around a bit and I found out that the Editor works  
+</I>&gt;<i> normally if I press Escape another time, but all applications I  
+</I>&gt;<i> start after this seem to have problems, also, if I start the Viewer  
+</I>&gt;<i> (no matter if there were any programs started before) and open the  
+</I>&gt;<i> test.pcx file every application I run after has problems too.
+</I>&gt;<i> To get a view of how it looks like I made a video which shows my  
+</I>&gt;<i> VBox and MikeOS configuration and the actual problem: youtube.com/v/xaO5YUw6A1s
+</I>&gt;<i>
+</I>&gt;<i> Since it seems like the error occures only on at me, I can't get rid  
+</I>&gt;<i> of the feeling that it was my fault, I'd better say &quot;sorry&quot; -just  
+</I>&gt;<i> for the case :)
+</I>&gt;<i>
+</I>&gt;<i> Cheers,
+</I>&gt;<i> Wolfram.
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002039.html">[mikeos-developer] Trouble Executing Multiple Programs in a Row
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2040">[ date ]</a>
+              <a href="thread.html#2040">[ thread ]</a>
+              <a href="subject.html#2040">[ subject ]</a>
+              <a href="author.html#2040">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

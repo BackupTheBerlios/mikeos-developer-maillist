@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] os_write_file
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20os_write_file&In-Reply-To=%3CAANLkTi%3D%3DSzDQ43Cuxz3zhmZ9cEzgqMLVnxbRvfaWuMY6%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001612.html">
+   <LINK REL="Next"  HREF="001614.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] os_write_file</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20os_write_file&In-Reply-To=%3CAANLkTi%3D%3DSzDQ43Cuxz3zhmZ9cEzgqMLVnxbRvfaWuMY6%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] os_write_file">okachi at gmail.com
+       </A><BR>
+    <I>Sun Dec 12 00:51:16 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001612.html">[mikeos-developer] os_write_file
+</A></li>
+        <LI>Next message: <A HREF="001614.html">[mikeos-developer] os_write_file
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1613">[ date ]</a>
+              <a href="thread.html#1613">[ thread ]</a>
+              <a href="subject.html#1613">[ subject ]</a>
+              <a href="author.html#1613">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Read the comment at the beginning of the example:
+
+; For this example, there's some text stored in .data
+
+The examples are not standalone programs; they are code snippets. It
+says that .data has been populated with some text.
+
+os_write_file is very simple: you point AX to a zero-terminated
+filename string; BX to a location in the MikeOS 64K of RAM; CX for the
+amount of bytes you want to write (starting from the BX location) and
+then call the routine.
+
+&gt;<i> So where, if in an application, would you write the text to the file, or would
+</I>&gt;<i>
+</I>&gt;<i> &#160; &#160; &#160; &#160;.data &#160; &#160; &#160; &#160; &quot;Hello, World!&quot;,0
+</I>&gt;<i> work?
+</I>
+Yes, but you'd have to change CX for the appropriate number of bytes.
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001612.html">[mikeos-developer] os_write_file
+</A></li>
+	<LI>Next message: <A HREF="001614.html">[mikeos-developer] os_write_file
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1613">[ date ]</a>
+              <a href="thread.html#1613">[ thread ]</a>
+              <a href="subject.html#1613">[ subject ]</a>
+              <a href="author.html#1613">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

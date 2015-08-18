@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Sound Frequencies
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Sound%20Frequencies&In-Reply-To=%3C59cda5abf8f30ef09f10e9c6b56887a3%40cordilon.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002811.html">
+   <LINK REL="Next"  HREF="002813.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Sound Frequencies</H1>
+    <B>Troy Martin</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Sound%20Frequencies&In-Reply-To=%3C59cda5abf8f30ef09f10e9c6b56887a3%40cordilon.net%3E"
+       TITLE="[mikeos-developer] Sound Frequencies">blacklight at cordilon.net
+       </A><BR>
+    <I>Tue Dec  6 00:51:09 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002811.html">[mikeos-developer] Sound Frequencies
+</A></li>
+        <LI>Next message: <A HREF="002813.html">[mikeos-developer] Sound Frequencies
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2812">[ date ]</a>
+              <a href="thread.html#2812">[ thread ]</a>
+              <a href="subject.html#2812">[ subject ]</a>
+              <a href="author.html#2812">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 05.12.2011 13:29, Joshua Beck wrote:
+&gt;<i> Is there a formula I can use to find out the number to send to
+</I>&gt;<i> os_speaker_tone to get an exact sound frequency?
+</I>Presuming you just send a frequency in Hz through, say, AX to 
+os_speaker_tone, you can use the following table: 
+<A HREF="http://en.wikipedia.org/wiki/Scientific_pitch_notation#Table_of_note_frequencies">http://en.wikipedia.org/wiki/Scientific_pitch_notation#Table_of_note_frequencies</A>
+
+You could also use scientific pitch, where to shift up or down an 
+octave you just do a bitwise shift left or right respectively, but A 
+above middle C is 431 Hz in scientific pitch as opposed to 440 Hz in 
+concert (standard) pitch.
+
+A431 and A440 actually do sound quite different: 
+<A HREF="http://upload.wikimedia.org/wikipedia/commons/b/bb/Tone_430-54Hz.ogg">http://upload.wikimedia.org/wikipedia/commons/b/bb/Tone_430-54Hz.ogg</A> vs 
+<A HREF="http://upload.wikimedia.org/wikipedia/commons/5/50/Sine_wave_440.ogg">http://upload.wikimedia.org/wikipedia/commons/5/50/Sine_wave_440.ogg</A> 
+(both can be rather loud/startling if you're not prepared for them - 
+they're both sine waves) so you're best to use the usual A440 concert 
+pitch if you're going to do renditions of songs and such.
+
+
+Best way to do all of this in MikeOS would be a lookup table since we 
+can't properly do logarithms (if at all) without floating point. You 
+could implement a table with 128 notes in 256 bytes, and that would 
+encompass an entire 88-key piano keyboard and then some.
+
+Cheers,
+
+--
+Troy
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002811.html">[mikeos-developer] Sound Frequencies
+</A></li>
+	<LI>Next message: <A HREF="002813.html">[mikeos-developer] Sound Frequencies
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2812">[ date ]</a>
+              <a href="thread.html#2812">[ thread ]</a>
+              <a href="subject.html#2812">[ subject ]</a>
+              <a href="author.html#2812">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

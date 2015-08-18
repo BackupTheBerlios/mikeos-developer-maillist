@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Windows build script updated
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Windows%20build%20script%20updated&In-Reply-To=%3C19d8b3b01001220457m34998f26y5e75052896b04324%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000934.html">
+   <LINK REL="Next"  HREF="000939.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Windows build script updated</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Windows%20build%20script%20updated&In-Reply-To=%3C19d8b3b01001220457m34998f26y5e75052896b04324%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Windows build script updated">okachi at gmail.com
+       </A><BR>
+    <I>Fri Jan 22 13:57:39 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000934.html">[mikeos-developer] Windows build script updated
+</A></li>
+        <LI>Next message: <A HREF="000939.html">[mikeos-developer] Windows build script updated
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#936">[ date ]</a>
+              <a href="thread.html#936">[ thread ]</a>
+              <a href="subject.html#936">[ subject ]</a>
+              <a href="author.html#936">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Paulo,
+
+&gt;<i> The new build.bat for windows did not work for me.
+</I>
+Hrm, shame! How did it not work? Did it give any error messages?
+
+&gt;<i> IF NOT EXIST c:\mikeos\nasmdos\nasm.exe GOTO NoNasm
+</I>
+The problem with that, is that it requires a specific filesystem
+location for the binary. With the original script:
+
+&gt;<i> nasm 2&gt; nul
+</I>&gt;<i> if ERRORLEVEL 9009 set MIKEOS_NONASM=1
+</I>
+It runs NASM anywhere in the PATH, so it doesn't need a specific
+location. It redirects error messages to nul (ie doesn't display
+them), using 2&gt; like in Unix. If the previous command cannot be found,
+the ERRORLEVEL is set by the shell to be 9009.
+
+Now, this all works fine in Windows 7, but I gather than Win7's shell
+is much better and more Unix like than in previous releases. Still, I
+was hoping that XP had support for error message redirection and
+ERRORLEVELs!
+
+Thanks for testing.
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000934.html">[mikeos-developer] Windows build script updated
+</A></li>
+	<LI>Next message: <A HREF="000939.html">[mikeos-developer] Windows build script updated
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#936">[ date ]</a>
+              <a href="thread.html#936">[ thread ]</a>
+              <a href="subject.html#936">[ subject ]</a>
+              <a href="author.html#936">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

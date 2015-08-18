@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Possible%20addition%20to%20MikeOS%20and%20MikeOS%20BASIC&In-Reply-To=%3C20100209182043.XMFOM.37408.root%40web10-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001196.html">
+   <LINK REL="Next"  HREF="001199.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Possible%20addition%20to%20MikeOS%20and%20MikeOS%20BASIC&In-Reply-To=%3C20100209182043.XMFOM.37408.root%40web10-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC">wisecracker at tesco.net
+       </A><BR>
+    <I>Tue Feb  9 19:20:43 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001196.html">[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+</A></li>
+        <LI>Next message: <A HREF="001199.html">[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1198">[ date ]</a>
+              <a href="thread.html#1198">[ thread ]</a>
+              <a href="subject.html#1198">[ subject ]</a>
+              <a href="author.html#1198">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi All...
+
+&gt;<i> The x87 was only optional up to the 486.
+</I>&gt;<i> From there on it's part of the main CPU.
+</I>&gt;<i> But of course Intel had to make things complicated and the FPU 
+</I>&gt;<i> does not use normal registers like the x86.
+</I>&gt;<i> Instead it uses 8 x 80 bit linear &quot;addresses&quot;.
+</I>
+&gt;<i> You can still use the FPU on a 16 bit OS.
+</I>&gt;<i> The x87 will write a 32 or 64 bit number to memory and you could use
+</I>&gt;<i> the opcodes CWD (convert word to double word) and
+</I>&gt;<i> CWDE (convert word to extended double word) to simplify things.
+</I>
+All good stuff except...
+
+BEAWRE...
+
+1) We have only (pseudo-)64KB of memory to play with.
+2) There weren`t many - if any - 8088/8086 machines with an 8087.
+3) If loaded libraries are used then there are only two segments
+available - the &quot;user&quot; one at 2000:0 and the boot one at 0000:0
+This already makes 128KB of available memory so MikeOS is in
+danger of slipping into a serious OS tool instead of a learning tool.
+4) If we want as a group the full base memory of 640 (+ 384) KB
+then fine by me, but the OS is &quot;sold&quot; on the MikeOS site for its primary
+restriction of 64KB, which is what attracted me to it in the first place.
+5) As I have said before it already is not true 8088 16 bit code.
+6) If 4) is valid then why not generate dedicated MikeOS interrupt vectors
+like MS-DOSs INT 21 and on and have much more flexibility such as USB 1.1
+support as a minimum...
+
+Just my 5 pennoth...
+
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001196.html">[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+</A></li>
+	<LI>Next message: <A HREF="001199.html">[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1198">[ date ]</a>
+              <a href="thread.html#1198">[ thread ]</a>
+              <a href="subject.html#1198">[ subject ]</a>
+              <a href="author.html#1198">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

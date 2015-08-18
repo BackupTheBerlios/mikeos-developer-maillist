@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] FAT16 bootloader
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT16%20bootloader&In-Reply-To=%3CCAPRjAGjEyzKLmAVRu--CJZ6HYck33EMR78f3cStYDA9mO__TvA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002546.html">
+   <LINK REL="Next"  HREF="002552.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] FAT16 bootloader</H1>
+    <B>Paulo V</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT16%20bootloader&In-Reply-To=%3CCAPRjAGjEyzKLmAVRu--CJZ6HYck33EMR78f3cStYDA9mO__TvA%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] FAT16 bootloader">paulomobilemail at gmail.com
+       </A><BR>
+    <I>Tue Oct  4 18:23:02 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002546.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+        <LI>Next message: <A HREF="002552.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2551">[ date ]</a>
+              <a href="thread.html#2551">[ thread ]</a>
+              <a href="subject.html#2551">[ subject ]</a>
+              <a href="author.html#2551">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Mike,
+
+Another update:
+
+This is what I have found/done to try and make
+an image:
+
+I first got a 2GB USB key and formatted it to FAT16.
+I left the BPB to correspond to the format and loaded
+the bootloader and then copied the kernel across.
+Works perfectly as I mentioned previously.
+
+Then I put it in a DOS machine, deleted the single
+big partition and made another smaller partition of 16MB.
+The rest of the space I left as un-formatted.
+
+Now I transfer the FreeDOS bootloader into the MBR
+but keep the original BPB.
+I set the partition as DOS &lt;32MB and bootable.
+
+Guess what? It don't work.
+
+I think I have found why (and Mike Gonta please correct
+me if I'm wrong).
+
+There seems to be two &quot;standards&quot; as far as the MBR goes.
+The one has a partition table located at 1BEh.
+It can support up to 4 partitions and each entry is 16 bytes.
+The other &quot;standard&quot; does not have the partition tables
+and in fact has bootloader code at these offsets.
+
+The bootloader I am using has code at these locations
+and hence I cannot have partition tables there hence the
+reason why making another smaller partition does not work.
+
+It stands to reason that if partitions exist, there must be a table
+somewhere &quot;describing&quot; them.
+
+The strange thing is that Windows can see the partition and
+the files in both situations.
+PartitionTable Inspector from Norton also sees everything.
+
+This I suspect is the last hurdle to overcome in making a
+small image that works.
+
+Googling around, I just found several sites with conflicting
+and at times, plain incorrect information.
+
+Any pointers anyone?
+
+As a side note, there have been two good things to come
+out of my experiments thus far:
+
+1) You can run DRDOS completely off a USB stick.
+
+2) I now have USB key &quot;support&quot; for DOS by changing
+   the MBR of the formatted USB key to make it a &quot;HDD&quot;
+   and set it as the second hard-drive.
+   Makes transferring files to and from a DOS only box
+   and Win/Linux a breeze.
+
+Of course BIOS has to be compatible, but these days,
+are large majority are.
+
+
+Paulo.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111004/5e9cbd51/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111004/5e9cbd51/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002546.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+	<LI>Next message: <A HREF="002552.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2551">[ date ]</a>
+              <a href="thread.html#2551">[ thread ]</a>
+              <a href="subject.html#2551">[ subject ]</a>
+              <a href="author.html#2551">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

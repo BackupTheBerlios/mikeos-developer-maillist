@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] How to convert all OS files into one ISO/FLP?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2013-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20How%20to%20convert%20all%20OS%20files%20into%20one%20ISO/FLP%3F&In-Reply-To=%3CDUB113-W53FE01514B8276377EA46A83E50%40phx.gbl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003252.html">
+   <LINK REL="Next"  HREF="003254.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] How to convert all OS files into one ISO/FLP?</H1>
+    <B>Dan Barry</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20How%20to%20convert%20all%20OS%20files%20into%20one%20ISO/FLP%3F&In-Reply-To=%3CDUB113-W53FE01514B8276377EA46A83E50%40phx.gbl%3E"
+       TITLE="[mikeos-developer] How to convert all OS files into one ISO/FLP?">danbarry at hotmail.co.uk
+       </A><BR>
+    <I>Sun Nov 17 21:37:48 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003252.html">[mikeos-developer] How to convert all OS files into one ISO/FLP?
+</A></li>
+        <LI>Next message: <A HREF="003254.html">[mikeos-developer] MikeOS on OSFirstTimer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3253">[ date ]</a>
+              <a href="thread.html#3253">[ thread ]</a>
+              <a href="subject.html#3253">[ subject ]</a>
+              <a href="author.html#3253">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>Yea, I tried Ubuntu at first but I had issues with just about everything.&gt;In windows, I understand that NASM commands only work when my cmd is in the NASM directory, but in Ubuntu I &gt;couldn't get any NASM commands to work.
+</I>As somebody that programs in both Windows and Lubuntu (Ubuntu) I can say both appear to be just as easy :)
+&gt;<i>So I was hoping there would be someone knowing how to do it in windows :p
+</I>Windows is pretty simple, just drop your NASM files into System 32. You should then be able to type 'nasm' over the command line!
+Next thing is making your own bin file. If you are anything like me you may use spaces in folders, so to get around this simply type something like 'nasm &quot;directory/of/program.asm&quot;'. It then creates a binary called 'program' and if it's important to you then rename it to 'program.bin' (which I believe MikeOS expects).
+All you then have to do is get your floppy image, mount it using which ever mounting tool is your favourite and then copy your binary files over. I personally used PowerISO to mount my floppy drives and ISOs but everybody to there own.
+Also... on my Windows XP machine I used to be able to drag and drop my .asm files over nasm.exe and it would compile it automatically although it does appear they took that out with newer versions, but running some backwards compatibility settings may or may not help you do the same.
+Hope that helps.
+Dan 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131117/656596de/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131117/656596de/attachment.html</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003252.html">[mikeos-developer] How to convert all OS files into one ISO/FLP?
+</A></li>
+	<LI>Next message: <A HREF="003254.html">[mikeos-developer] MikeOS on OSFirstTimer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3253">[ date ]</a>
+              <a href="thread.html#3253">[ thread ]</a>
+              <a href="subject.html#3253">[ subject ]</a>
+              <a href="author.html#3253">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

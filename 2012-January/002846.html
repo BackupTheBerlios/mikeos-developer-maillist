@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Memory for programs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Memory%20for%20programs&In-Reply-To=%3CCACtjVkF%2BdQxveYYNNxg1OnqbY5j4peOOhQVOCGCgH8_kRXSd8w%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002845.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Memory for programs</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Memory%20for%20programs&In-Reply-To=%3CCACtjVkF%2BdQxveYYNNxg1OnqbY5j4peOOhQVOCGCgH8_kRXSd8w%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Memory for programs">okachi at gmail.com
+       </A><BR>
+    <I>Fri Jan 27 12:51:25 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002845.html">[mikeos-developer] Memory for programs
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2846">[ date ]</a>
+              <a href="thread.html#2846">[ thread ]</a>
+              <a href="subject.html#2846">[ subject ]</a>
+              <a href="author.html#2846">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, Jan 27, 2012 at 12:12 PM, Dan Dart &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">dandart at googlemail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Although I still don't quite get the kernel lookup table bit for
+</I>&gt;<i> programs to call routines - I can understand how the rest falls into
+</I>&gt;<i> place.
+</I>
+Which bit don't you get? The table of &quot;jmp&quot; instructions at the start
+of the kernel stays in the same place. For instance, if you want to
+use os_print_string in your application, you don't know where the code
+for that routine is in the kernel. It could be at byte 13257 in MikeOS
+4.2, but if we add some new code in MikeOS 4.3, it could move to
+14283. The location of the routine can shift around.
+
+However, by using a list of &quot;jmp&quot; instructions at the start of the
+kernel, they always stay in the same place and never move, so external
+programs can &quot;call&quot; them.
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002845.html">[mikeos-developer] Memory for programs
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2846">[ date ]</a>
+              <a href="thread.html#2846">[ thread ]</a>
+              <a href="subject.html#2846">[ subject ]</a>
+              <a href="author.html#2846">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

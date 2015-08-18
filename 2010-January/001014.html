@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Single byte KB I/O code...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Single%20byte%20KB%20I/O%20code...&In-Reply-To=%3C20100130143026.UH0FT.158035.root%40web11-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001013.html">
+   <LINK REL="Next"  HREF="001016.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Single byte KB I/O code...</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Single%20byte%20KB%20I/O%20code...&In-Reply-To=%3C20100130143026.UH0FT.158035.root%40web11-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] Single byte KB I/O code...">wisecracker at tesco.net
+       </A><BR>
+    <I>Sat Jan 30 15:30:26 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001013.html">[mikeos-developer] PS/2 LED test with libmikeos
+</A></li>
+        <LI>Next message: <A HREF="001016.html">[mikeos-developer] Single byte KB I/O code...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1014">[ date ]</a>
+              <a href="thread.html#1014">[ thread ]</a>
+              <a href="subject.html#1014">[ subject ]</a>
+              <a href="author.html#1014">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Finally realised my error...
+
+My original code was written for MS-DOS duh!
+
+Remember my phrase:-
+
+Enjoy finding simple simple solutions to often difficult problems...
+
+Here is the MikeOS code for single byte I/O just setting the capslock LED
+in ths example but simultaneous numlock and scrol lock are easy. This is 24
+bytes in size and can NOW be ENTIRELY entered from MikeBASIC...
+
+This is where my interest lies, the BASIC interpreter...  COOL MIKE...
+The assembler side doesn`t interest me, and SASANO many thanks for that
+one piece of info you gave...
+
+Tested with a USB to PS2 adaptor and a genuine PS2 KB, and MikeOS on the
+Quad core tool and this notebook...
+
+the rest as they say is EASY...
+
+	pushf
+	push    ax
+	push    dx
+	push    ds
+	mov     dx,0040h
+	mov     ds,dx
+	mov     al,[0017h]
+	or      al,040h
+	mov     [0017h],al
+	int     9
+	pop     ds
+	pop     dx
+	pop     ax
+	popf
+	ret
+
+
+Enjoy...
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001013.html">[mikeos-developer] PS/2 LED test with libmikeos
+</A></li>
+	<LI>Next message: <A HREF="001016.html">[mikeos-developer] Single byte KB I/O code...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1014">[ date ]</a>
+              <a href="thread.html#1014">[ thread ]</a>
+              <a href="subject.html#1014">[ subject ]</a>
+              <a href="author.html#1014">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Improved Mac OS build shell script
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2013-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Improved%20Mac%20OS%20build%20shell%20script&In-Reply-To=%3CBLU0-SMTP443AE34788B4833200659DBC1F10%40phx.gbl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="003237.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Improved Mac OS build shell script</H1>
+    <B>Caleb Xu</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Improved%20Mac%20OS%20build%20shell%20script&In-Reply-To=%3CBLU0-SMTP443AE34788B4833200659DBC1F10%40phx.gbl%3E"
+       TITLE="[mikeos-developer] Improved Mac OS build shell script">calebcenter at live.com
+       </A><BR>
+    <I>Tue Nov  5 03:22:20 CET 2013</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="003237.html">[mikeos-developer] Game
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3236">[ date ]</a>
+              <a href="thread.html#3236">[ thread ]</a>
+              <a href="subject.html#3236">[ subject ]</a>
+              <a href="author.html#3236">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello fellow MikeOS devs, 
+
+I don't know how many Mac users there are in this community, but I've taken the original shell script for Mac packaged in the zip archive and added some improvements to it, because it didn't work for me at first and took me a while to get working. Specifically, my new script checks to make sure nasm is new enough (the default version shipped with OS X at least with 10.8.4 is nasm 0.98.10, which if used causes errors at build time; I ended up getting 2.10.09 from MacPorts) and invokes diskutils umount instead of just umount (which is deprecated on Mac OS X).
+
+Currently, if anyone wants to test this out on their own, you can view the script at <A HREF="http://pastebin.com/ethdfeVr">http://pastebin.com/ethdfeVr</A>
+(to use, simply place it in the top level of the MikeOS directory, i.e. in the same directory as build-windows.bat and build-linux.sh). Your feedback is more than welcome.
+
+In theory, the script should also work on Linux machines if &quot;diskutil&quot; is removed from line 143 and the elif block from lines 110 through 117 may also need to be changed or removed. Anyone on a Linux system willing to give me feedback on this is also welcome to do so. 
+
+-- 
+Caleb Xu
+
+For where two or three come together in my name, there am I with them. 
+-Matthew 18:20
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131104/5071b07d/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131104/5071b07d/attachment.html</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="003237.html">[mikeos-developer] Game
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3236">[ date ]</a>
+              <a href="thread.html#3236">[ thread ]</a>
+              <a href="subject.html#3236">[ subject ]</a>
+              <a href="author.html#3236">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Regarding clearing interrupts while changing	stack.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Regarding%20clearing%20interrupts%20while%20changing%0A%09stack.&In-Reply-To=%3Cec219fa91002051036u6093d12eu1a0398f44c2ed236%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001136.html">
+   <LINK REL="Next"  HREF="001129.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Regarding clearing interrupts while changing	stack.</H1>
+    <B>nascent mind</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Regarding%20clearing%20interrupts%20while%20changing%0A%09stack.&In-Reply-To=%3Cec219fa91002051036u6093d12eu1a0398f44c2ed236%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Regarding clearing interrupts while changing	stack.">nascent.mind at gmail.com
+       </A><BR>
+    <I>Fri Feb  5 19:36:17 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001136.html">[mikeos-developer] Regarding clearing interrupts while changing	stack.
+</A></li>
+        <LI>Next message: <A HREF="001129.html">[mikeos-developer] Regarding clearing interrupts while changing	stack.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1127">[ date ]</a>
+              <a href="thread.html#1127">[ thread ]</a>
+              <a href="subject.html#1127">[ subject ]</a>
+              <a href="author.html#1127">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Its embedded in the main executable. Its one single setup file. I have a
+dell. Also just out of curiosity I was reading about coreboot. Looks very
+promising. Wondering whether I can integrate mikeos as a payload :)
+
+On Fri, Feb 5, 2010 at 11:16 PM, Paulo Valongo
+&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">paulovalongo at rocketmail.com</A>&gt;wrote:
+
+&gt;<i> Hi nascent mind,
+</I>&gt;<i>
+</I>&gt;<i> A good place to start for anything bios related is:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://www.bioscentral.com">http://www.bioscentral.com</A>
+</I>&gt;<i>
+</I>&gt;<i> Also look in the downloads section, always handy stuff there.
+</I>&gt;<i>
+</I>&gt;<i> When you say the installer comes with the bios code in it, do you mean that
+</I>&gt;<i> it is embedded in the main executable or is it in an external file?
+</I>&gt;<i> My guess it's an external file and if so why not run it thru a hex editor
+</I>&gt;<i> and a disassembler to
+</I>&gt;<i> see if the output makes any sense (i.e. it contains valid opcodes).
+</I>&gt;<i>
+</I>&gt;<i> Paulo.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ------------------------------
+</I>&gt;<i> *From:* nascent mind &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">nascent.mind at gmail.com</A>&gt;
+</I>&gt;<i> *To:* MikeOS (and similar OS) developers &lt;
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+</I>&gt;<i> *Sent:* Fri, February 5, 2010 7:05:14 PM
+</I>&gt;<i> *Subject:* Re: [mikeos-developer] Regarding clearing interrupts while
+</I>&gt;<i> changing stack.
+</I>&gt;<i>
+</I>&gt;<i> I meant the BIOS code. Is there any way I can extract it out from the ROM?
+</I>&gt;<i> My machine's flasher comes with an installer and the bios is embedded in it.
+</I>&gt;<i>
+</I>&gt;<i> On Fri, Feb 5, 2010 at 2:34 AM, &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">wisecracker at tesco.net</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> Hi nascent mind...
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> &gt; Awesome. This is exactly what I wanted. I want to see the code though.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I`m not sure what you mean here........
+</I>&gt;&gt;<i> If you mean MikeOS then his source is issued as part of the archive
+</I>&gt;&gt;<i> download.
+</I>&gt;&gt;<i> If however you mean the BIOS then I`m afraid you`ll have to do what I do
+</I>&gt;&gt;<i> even today and use MS-DOS, (say MS-DOS 5.xx for example), and use MS-DOSs
+</I>&gt;&gt;<i> DEBUG.EXE to &quot;unassemble&quot; it MANUALLY, (note I mentioned DEBUG.EXE as it
+</I>&gt;&gt;<i> IS
+</I>&gt;&gt;<i> part of ANY MS OS). You can do it through Windies using the Command Prompt
+</I>&gt;&gt;<i> and running DEBUG from the prompt but sometimes &quot;NT&quot; gets in the way.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> &gt; Is it a good idea to disassemble the bios?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I`ve been looking at it for years and always find something new... :)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> &gt; I am not sure how I can proceed to do that.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> See above.
+</I>&gt;&gt;<i> If you try DEBUG.EXE and want help in using it just shout; it is a little
+</I>&gt;&gt;<i> convoluted,
+</I>&gt;&gt;<i> BUT, it is also FREE and still true 16 bit - woohoo... ;o)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> &gt; Also is it by any chance documented somewhere?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> The BIOS?
+</I>&gt;&gt;<i> I doubt anyone will have the source code for ANY ONE BIOS as it/they
+</I>&gt;&gt;<i> is/are
+</I>&gt;&gt;<i> proprietary code but there is some information about BIOS coding in the
+</I>&gt;&gt;<i> internet
+</I>&gt;&gt;<i> ether. BIOS interrupts and related stuff is in great abundance however.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i> 73...
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Bazza, G0LCU...
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Team AMIGA...
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> mikeos-developer mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100206/ae1149b5/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100206/ae1149b5/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001136.html">[mikeos-developer] Regarding clearing interrupts while changing	stack.
+</A></li>
+	<LI>Next message: <A HREF="001129.html">[mikeos-developer] Regarding clearing interrupts while changing	stack.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1127">[ date ]</a>
+              <a href="thread.html#1127">[ thread ]</a>
+              <a href="subject.html#1127">[ subject ]</a>
+              <a href="author.html#1127">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

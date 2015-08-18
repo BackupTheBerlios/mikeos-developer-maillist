@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] software delays with parallel ports
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20software%20delays%20with%20parallel%20ports&In-Reply-To=%3C878507.96877.qm%40web113103.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000817.html">
+   <LINK REL="Next"  HREF="000818.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] software delays with parallel ports</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20software%20delays%20with%20parallel%20ports&In-Reply-To=%3C878507.96877.qm%40web113103.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] software delays with parallel ports">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Mon Dec  7 20:31:34 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000817.html">[mikeos-developer] software delays with parallel ports
+</A></li>
+        <LI>Next message: <A HREF="000818.html">[mikeos-developer] software delays with parallel ports
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#816">[ date ]</a>
+              <a href="thread.html#816">[ thread ]</a>
+              <a href="subject.html#816">[ subject ]</a>
+              <a href="author.html#816">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bazza,
+
+After reading your last post again, I saw you mentioned that you were using this for a ADC.
+Many DAC's especially the TLP/TLC range from TI are quite finicky to timing when accessing them,
+especially when using the SPI interface.
+
+Many of the newer ADC's that use I2C are also very touchy about the bus timings and in general you
+should limit I2C comms to 400KHz or less for reliable comms.
+
+I've often used the parallel port to mimic the I2C protocol with no problems.
+again make sure you use pull-ups on the lines which you are using as SDA and SCL.
+
+Another thing is try and avoid using CMOS logic as it's terribly slow and can suffer from latch-up conditions.
+Hence my recommendation in my help file to stick with the 74HC range of logic which offers the speed of TTL
+but the low power consumption of CMOS.
+
+Paulo.
+
+
+      
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20091207/abf4f9fa/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20091207/abf4f9fa/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000817.html">[mikeos-developer] software delays with parallel ports
+</A></li>
+	<LI>Next message: <A HREF="000818.html">[mikeos-developer] software delays with parallel ports
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#816">[ date ]</a>
+              <a href="thread.html#816">[ thread ]</a>
+              <a href="subject.html#816">[ subject ]</a>
+              <a href="author.html#816">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

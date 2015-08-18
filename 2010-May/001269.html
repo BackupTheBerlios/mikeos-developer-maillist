@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Booting from USB flash drive
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Booting%20from%20USB%20flash%20drive&In-Reply-To=%3C0127AC9A78D64C3DB37316A4C7BC67B7%40userfe6b65a555%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001266.html">
+   <LINK REL="Next"  HREF="001271.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Booting from USB flash drive</H1>
+    <B>mikegonta at gmail.com</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Booting%20from%20USB%20flash%20drive&In-Reply-To=%3C0127AC9A78D64C3DB37316A4C7BC67B7%40userfe6b65a555%3E"
+       TITLE="[mikeos-developer] Booting from USB flash drive">mikegonta at gmail.com
+       </A><BR>
+    <I>Wed May 12 12:09:34 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001266.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+        <LI>Next message: <A HREF="001271.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1269">[ date ]</a>
+              <a href="thread.html#1269">[ thread ]</a>
+              <a href="subject.html#1269">[ subject ]</a>
+              <a href="author.html#1269">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+----- Original Message ----- 
+From: &quot;Paulo Valongo&quot;To: &quot;MikeOS (and similar OS) developers&quot; 
+&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+Sent: Wednesday, May 12, 2010 5:55 AM
+Subject: Re: [mikeos-developer] Booting from USB flash drive
+
+
+&gt;&gt;<i> When using dd to write to a flash drive first copy dd.exe and rename it 
+</I>&gt;&gt;<i> dd-removable.exe.
+</I>&gt;<i>
+</I>&gt;<i> I did that and dd complained about it.
+</I>
+dd-removable is only used to write to a flash drive.
+It will not read from a flash drive or write to a floppy disk.
+
+&gt;&gt;<i> Unfortunately MikeOS is hard coded (in many places) to assume floppy disk 
+</I>&gt;&gt;<i> geometry.
+</I>&gt;&gt;<i> This prevents it from being run from a flash drive which boots on a BIOS 
+</I>&gt;&gt;<i> which uses
+</I>&gt;&gt;<i> hard drive emulation. See the code in pdBIOS32, specifically boot.asm 
+</I>&gt;&gt;<i> which allows
+</I>&gt;&gt;<i> it to boot and run under either setup.
+</I>&gt;<i>
+</I>&gt;<i> Interesting point.
+</I>&gt;<i> With all machines I have tried the flash drive on, the BIOS must be set to 
+</I>&gt;<i> boot off USB-HDD
+</I>&gt;<i> and not USB-FDD otherwise not even the boatloader runs.
+</I>
+USB-HDD refers to a physical USB external hard drive, not a flash drive.
+USB-FDD refers to a physical USB external floppy disk drive, not a flash 
+drive.
+This BIOS can only boot from USB with floppy disk emulation.
+
+
+Mike Gonta
+look and see - many look but few see
+
+<A HREF="http://mikegonta.com/pdBIOS32">http://mikegonta.com/pdBIOS32</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001266.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+	<LI>Next message: <A HREF="001271.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1269">[ date ]</a>
+              <a href="thread.html#1269">[ thread ]</a>
+              <a href="subject.html#1269">[ subject ]</a>
+              <a href="author.html#1269">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

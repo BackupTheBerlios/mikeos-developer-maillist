@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] The KB I/O idea...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20The%20KB%20I/O%20idea...&In-Reply-To=%3C20100512203727.AOOTT.338809.root%40web11-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001278.html">
+   <LINK REL="Next"  HREF="001291.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] The KB I/O idea...</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20The%20KB%20I/O%20idea...&In-Reply-To=%3C20100512203727.AOOTT.338809.root%40web11-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] The KB I/O idea...">wisecracker at tesco.net
+       </A><BR>
+    <I>Wed May 12 21:37:27 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001278.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+        <LI>Next message: <A HREF="001291.html">[mikeos-developer] The KB I/O idea...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1288">[ date ]</a>
+              <a href="thread.html#1288">[ thread ]</a>
+              <a href="subject.html#1288">[ subject ]</a>
+              <a href="author.html#1288">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi fellas and fella-esses...
+
+Just remembered to do this...
+
+The photos of the keyboard I/O project for any machine with
+legacy USB facility...
+
+This will work on just about any OS that is thrust upon it 
+but it is primarily for MikeOS... 
+
+<A HREF="http://homepages.tesco.net/wisecracker/public/CHIP.JPG">http://homepages.tesco.net/wisecracker/public/CHIP.JPG</A> 
+<A HREF="http://homepages.tesco.net/wisecracker/public/KBTOP.JPG">http://homepages.tesco.net/wisecracker/public/KBTOP.JPG</A> 
+<A HREF="http://homepages.tesco.net/wisecracker/public/LED.JPG">http://homepages.tesco.net/wisecracker/public/LED.JPG</A> 
+<A HREF="http://homepages.tesco.net/wisecracker/public/OPENKB.JPG">http://homepages.tesco.net/wisecracker/public/OPENKB.JPG</A> 
+<A HREF="http://homepages.tesco.net/wisecracker/public/REARPLG1.JPG">http://homepages.tesco.net/wisecracker/public/REARPLG1.JPG</A> 
+<A HREF="http://homepages.tesco.net/wisecracker/public/REARPLG2.JPG">http://homepages.tesco.net/wisecracker/public/REARPLG2.JPG</A> 
+<A HREF="http://homepages.tesco.net/wisecracker/public/TTLIP1.JPG">http://homepages.tesco.net/wisecracker/public/TTLIP1.JPG</A> 
+<A HREF="http://homepages.tesco.net/wisecracker/public/TTLIP2.JPG">http://homepages.tesco.net/wisecracker/public/TTLIP2.JPG</A> 
+<A HREF="http://homepages.tesco.net/wisecracker/public/TTLOP1.JPG">http://homepages.tesco.net/wisecracker/public/TTLOP1.JPG</A> 
+<A HREF="http://homepages.tesco.net/wisecracker/public/TTLOP2.JPG">http://homepages.tesco.net/wisecracker/public/TTLOP2.JPG</A> 
+
+I`m now working on analogue input using it... :-O 
+
+The keyboard is STILL fully working and means I can code 
+and test at the same time... 
+
+2 bit real time inputs and 2 toggled outputs...
+
+I`ve not bothered with the MikeOS BASIC code here as I will
+be doing DEMO code to use this I/O project...
+
+As promised the assembler code to use a modified KB as I/O 
+inside MikeOS and running from a netbook... :-O 
+Notice I have kept these as separate subroutines rather than 
+a single piece of code which would of course be smaller in 
+compiled size... 
+
+; CAPSLOCK, (NUMLOCK), ON/OFF sub-routines along with left
+; CAPS SHIFT and right CAPS SHIFT read subroutine for MikeOS.
+; Original copyright, (C)2010, B.Walker, G0LCU.
+; For use with MikeBASIC and issued as Public Domain.
+
+; KEYFLAGS.ASM, Version 0.00.20, assembly code.
+
+; Assembled under MS-DOS using the AD86 combination.
+; The binary is 48 bytes in size.
+
+; KEYLOCKON:
+	pushf			;Store flags and all of the used
+	push	ax		;registers.
+	push	dx		;
+	push	ds		;
+	mov	dx,0040h	;Point to the SEGMENT to access
+	mov	ds,dx		;the toggled BYTE KB storage.
+	mov	al,[0017h]	;Move the BYTE value from memory
+				;into the AL register.
+	or	al,040h		;SET the required bit, (bit 6),
+				;to a ~1~.
+				;NOTE, change this value for NUMLOCK!
+	mov	[0017h],al	;Replace the modified byte back
+				;into the memory location.
+	int	9		;Now execute the necessary interrupt.
+	call	readflags	;Make sure to store a copy.
+	pop	ds		;Restore the registers back to
+	pop	dx		;their original values...
+	pop	ax		;
+	popf			;And the flags too.
+	ret			;Return to the calling routine.
+
+; KEYLOCKOFF:
+	pushf			;Store flags and all of the used
+	push	ax		;registers.
+	push	dx		;
+	push	ds		;
+	mov	dx,0040h	;Point to the SEGMENT to access
+	mov	ds,dx		;the toggled BYTE KB storage.
+	mov	al,[0017h]	;Move the BYTE value from memory
+				;into the AL register.
+	and	al,0bfh		;RESET the required bit, (bit 6),
+				;to a ~0~, keeping all other bits intact.
+				;NOTE, change this value for NUMLOCK!
+	mov	[0017h],al	;Replace the modified byte back
+				;into the memory location.
+	int	9		;Now execute the necessary interrupt.
+	call	readflags	;Make sure to store a copy.
+	pop	ds		;Restore the registers back to
+	pop	dx		;their original values...
+	pop	ax		;
+	popf			;And the flags too.
+	ret			;Return to the calling routine.
+
+readflags:
+	pushf			;Store flags and all of the used
+	push	ax		;registers
+	push	dx		;
+	push	ds		;
+	mov	dx,0040h	;Point to the SEGMENT to access
+	mov	ds,dx		;the real time BYTE KB storage.
+	mov	al,[0017h]	;Move the BYTE value from memory
+				;into the AL register ready to read.
+	pop	ds		;Restore the DS and DX registers.
+	pop	dx		;
+	mov	[store],al	;Move the flags to a known memory area.
+	pop	ax		;Restore the remaining registers and
+	popf			;flags.
+	ret			;Return to the calling routine.
+store	db	0c3h		;This is the keyboard flag byte.
+
+; End of KEYFLAGS.ASM code...
+
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001278.html">[mikeos-developer] Booting from USB flash drive
+</A></li>
+	<LI>Next message: <A HREF="001291.html">[mikeos-developer] The KB I/O idea...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1288">[ date ]</a>
+              <a href="thread.html#1288">[ thread ]</a>
+              <a href="subject.html#1288">[ subject ]</a>
+              <a href="author.html#1288">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

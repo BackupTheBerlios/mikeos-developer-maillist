@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Memory for programs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Memory%20for%20programs&In-Reply-To=%3CF68A52F5443547159EECDCD7C6610DA2%40BlakeBurgessPC%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002842.html">
+   <LINK REL="Next"  HREF="002844.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Memory for programs</H1>
+    <B>Blake Burgess</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Memory%20for%20programs&In-Reply-To=%3CF68A52F5443547159EECDCD7C6610DA2%40BlakeBurgessPC%3E"
+       TITLE="[mikeos-developer] Memory for programs">blakeburgess at gamenetstudios.com
+       </A><BR>
+    <I>Fri Jan 27 05:18:24 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002842.html">[mikeos-developer] Let's release MikeOS 4.3!
+</A></li>
+        <LI>Next message: <A HREF="002844.html">[mikeos-developer] Memory for programs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2843">[ date ]</a>
+              <a href="thread.html#2843">[ thread ]</a>
+              <a href="subject.html#2843">[ subject ]</a>
+              <a href="author.html#2843">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I was trying to design a COM program loader. The way it was supposed to work is that MikeOS would open the 32k program LOADCOM.BIN as usual, display a file selection menu, and load the MS-DOS COM file into the next 64k segment. (3000h) After much difficulty and finally realizing that os_load_file doesn&#8217;t support an option to load the file into another segment and discovering no other possible workaround, I gave up.
+
+The 32k limit for programs is sufficient for most of your typical hobby OS programs, but I don&#8217;t understand why MikeOS wasn&#8217;t designed to allow programs a full 64k block in the first place. Program development would&#8217;ve certainly been easier had it been set up that way.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120126/eb92fdf4/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120126/eb92fdf4/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002842.html">[mikeos-developer] Let's release MikeOS 4.3!
+</A></li>
+	<LI>Next message: <A HREF="002844.html">[mikeos-developer] Memory for programs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2843">[ date ]</a>
+              <a href="thread.html#2843">[ thread ]</a>
+              <a href="subject.html#2843">[ subject ]</a>
+              <a href="author.html#2843">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

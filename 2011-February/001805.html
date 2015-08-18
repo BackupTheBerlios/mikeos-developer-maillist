@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] 32-bit Protected Mode
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%2032-bit%20Protected%20Mode&In-Reply-To=%3CAANLkTimEgm7roU30TDirJbiZgyHOyPXXW_cmrNqVExR_%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001803.html">
+   <LINK REL="Next"  HREF="001808.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] 32-bit Protected Mode</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%2032-bit%20Protected%20Mode&In-Reply-To=%3CAANLkTimEgm7roU30TDirJbiZgyHOyPXXW_cmrNqVExR_%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] 32-bit Protected Mode">okachi at gmail.com
+       </A><BR>
+    <I>Thu Feb  3 10:01:46 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001803.html">[mikeos-developer] 32-bit Protected Mode
+</A></li>
+        <LI>Next message: <A HREF="001808.html">[mikeos-developer] 32-bit Protected Mode
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1805">[ date ]</a>
+              <a href="thread.html#1805">[ thread ]</a>
+              <a href="subject.html#1805">[ subject ]</a>
+              <a href="author.html#1805">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Scott,
+
+&gt;<i> I saw somewhere translated to a 32-bit protected mode version of MikeOS.
+</I>
+That's using a special BIOS implementation from Mike Gonta. It's very
+cool but it's not a standalone protected mode OS.
+
+&gt;<i> think everyone would want to be in protected mode? &#160;Unless it causes grief
+</I>&gt;<i> using the BIOS interrupts?
+</I>
+Correct. We cannot use BIOS routines from protected mode. Currently we
+use the BIOS for screen output, keyboard input, disk drive
+reading/writing etc. Without the BIOS, we'd have to write very picky,
+complex drivers for each of those devices, and MikeOS would become
+MUCH more complicated.
+
+Right now, MikeOS shows you how to do the interesting things in an OS
+-- create system calls, execute programs etc. I never want thousands
+of lines of complex hardware driver code.
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001803.html">[mikeos-developer] 32-bit Protected Mode
+</A></li>
+	<LI>Next message: <A HREF="001808.html">[mikeos-developer] 32-bit Protected Mode
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1805">[ date ]</a>
+              <a href="thread.html#1805">[ thread ]</a>
+              <a href="subject.html#1805">[ subject ]</a>
+              <a href="author.html#1805">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

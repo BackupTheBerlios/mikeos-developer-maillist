@@ -1,0 +1,217 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Xmodem based uploader for MikeOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Xmodem%20based%20uploader%20for%20MikeOS&In-Reply-To=%3C914312.19233.qm%40web113107.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000867.html">
+   <LINK REL="Next"  HREF="000872.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Xmodem based uploader for MikeOS</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Xmodem%20based%20uploader%20for%20MikeOS&In-Reply-To=%3C914312.19233.qm%40web113107.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] Xmodem based uploader for MikeOS">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Mon Dec 28 14:26:56 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000867.html">[mikeos-developer] Linux utility to send data to serial ports
+</A></li>
+        <LI>Next message: <A HREF="000872.html">[mikeos-developer] Xmodem based uploader for MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#871">[ date ]</a>
+              <a href="thread.html#871">[ thread ]</a>
+              <a href="subject.html#871">[ subject ]</a>
+              <a href="author.html#871">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Xmodem based utility for MikeOS
+
+
+Xfer.bin is an application to allow the transfer of compiled MikeOS programs
+from a development machine to another computer running MikeOS.
+Xfer.bin requires a null modem cable connected to the serial ports of both
+machines running at 9600 8 N 1 and uses the original Xmodem protocol for the transfer.
+
+The baud rate can also be set to 1200 if preferred.
+
+Although MikeOS can be put onto floppy, cd-rom, USB key or run in a 
+virtual machine, to test real hardware it needs to be run on a dedicated computer
+or maybe you just want to quickly test your new software masterpiece.
+
+How to use Xfer.bin
+
+On your development machine, write your program you wish to test in the usual way, with one exception:
+Set the ORG directive to 36864 instead of the usual 32768.
+(The reason being that Xfer.bin is loaded at 32768 and when it downloads your
+newly compiled program, it's loaded and run in RAM at 36864).
+
+Now compile your program as usual using NASM.
+
+The address of 36864 was also chosen as MikeOS already uses this address to load
+pcx files to view.
+
+Start up Xfer.bin on the MikeOS computer and on the development computer
+start up HyperTerminal if you are using Windows or the equivalent in which ever
+distro of Linux you happen to be using.
+
+Make sure you set the transmission parameters to 9600bps, 8 bits, no parity and 1 stop bit.
+You can alternatively use 1200 baud.
+
+Also ensure you have selected Xmodem with 128 byte packets and checksum and not another
+variant of the protocol such as Xmodem1K with CRC.
+
+Ensure that the sending computer is listening and ready to send before selecting option 1 or 2 on Xfer.bin
+The transfer to the MikeOS computer will commence.
+
+Once the download is complete, you can run your new program immediately by selecting option 3.
+Note however that the newly downloaded program exists only in RAM so if
+you reboot or switch off it's gone.
+
+If you're happy with your new program, simply go back to the source on the development
+machine and change ORG back to 32768.
+Recompile and it can now be included in your next MikeOS image.
+
+Limitations, bugs and improvements.
+
+- The size limit of the program to be downloaded is 16KB.
+   Considering that the average size for a MikeOS program (excluding the kernel)
+   is around 1KB, if your program is nearing the 16KB limit, it's probably &quot;bloatware&quot; ;-)
+   Please note that I have not included any checks for size over-runs.
+   If you do, it will over write code and crash and you will have to reboot.
+
+- Speed. 
+   At about 1 second/KB, it's not the fastest of transfer apps due to the fact that MikeOS is limited to 9600bps
+  and Xmodem is not exactly the most efficient of protocols, but it's easy to code and gets the job done.
+
+Actually most modern serial ports can operate at up to 115K, but that creates a whole new range of problems and pitfalls.
+
+-  Since the transfer is not being done via modems but via a null modem cable, error checking is not really required.
+   I've never had a single transfer error as yet.
+   If  however you want to add error checking/correction then proceed as follows:
+
+   Store each of the 128 data bytes belonging to a  packet into temp_store
+   Save the received checksum byte that follows each packet into header_checksum
+   Now add up all of the 128 bytes and save the result.
+   Keep subtracting 256 from the result until you get 255 or less.
+   Now compare this to the header_checksum saved earlier.
+   If they are the same then all the data is OK and proceed to get the next packet by transmitting a ACK to the sending computer.
+   If not the same then request the last packet to be re-sent by transmitting a NAK to the sending computer.
+
+The program could also benefit from having a routine that periodically checks for a key press should the sending computer stop
+transmitting data &quot;mid-stream&quot; for any reason.
+Due to time constraints, I haven't included these features into the program.
+It however greatly simplifies the compiling and testing of new programs for MikeOS especially if access to ports is required.
+(Normally a problem when running under a Virtual Machine in a non real time OS such as Linux or Windows).
+As time permits, I will improve on the program.
+
+- If you find any bugs, then please let me know via the MikeOS mailing list or via email: paulovalongo(-at-)rocketmail.com
+or even better, improve on the program and post it back so we can all benefit.
+
+I release Xfer under the same terms and conditions as MikeOS.
+
+Details about serial ports:
+
+Depending on the age of the computer you are using, it will have one of these UART chips for the serial port:
+
+1) 8250 ,very old computer....consider donating to a museum, using as a door stop or boat anchor!!
+2) 16550/60, you will still come across these in computers older than about 8 years.
+3) 16750, the newer computers use these.
+
+Actually newer computers don't have any of these chips, but instead use a chip called Super I/O
+which emulates the UART (Universal Asynchronous Receiver Transmitter)  amongst other ports.
+This also applies to USB to Serial adapters.
+
+The key difference between these chips is the existence and size of a FIFO buffer.
+The 8250 only has a 1 byte  buffer while the 16550 has 16 bytes and the 16750 has 64 bytes.
+
+Not having a buffer is OK if you are receiving the occasional ascii character followed by relatively
+long pauses in the order of tens of milliseconds such as when emulating a VT100 terminal.
+But the situation quickly changes when receiving lots of consecutive bytes such as when using Xmodem
+or other protocols.
+Over-runs and lost data is guaranteed as the UART has no place to store received data until the program
+gets round to retrieving them.
+
+You could always use an interrupt driven routine to alleviate this to a certain extent, but it's an unpleasant task.
+Also if you are receiving lots of data, then too many interrupts will be generated which actually becomes counter productive.
+So it's always better to stick to a polled based routine unless interrupts are absolutely required.
+
+The FIFO buffer is deactivated by default and must be activated by writing to the appropriate registers.
+It is also good practise to clear the buffers of any residual data before using them and disabling the UART generated interrupts.
+The standard MikeOS os_serial_port_enable makes no provision for this so I have used direct register access instead (see code).
+Also some BIOS' can take up to 200uS to access the UART when using INT 14h which MikeOS relies on for os_get_via_serial.
+Again I have used my own routines.
+
+Finally, I have assumed that your computer has either the 16550/650 or 750 UART and have set up the FIFO for 16 bytes.
+The 8250 is not supported nor is it tested for.
+ 
+
+Some Xmodem history:
+
+Xmodem  was invented by Ward Christensen back in the mid-70's as a simple protocol
+which would enable almost any type of computer to transfer data using modems connected to telephone lines.
+
+There have been many changes and variants of the original protocol, but the original Xmodem is still
+widely used today especially in embedded systems where RAM and CPU power/speed is limited.
+Xmodem is perfectly suited to these systems due to it's small CPU demand.
+
+Ward Christensen developed Xmodem on the CP/M system in which all files are multiples of 128 bytes.
+The Xmodem protocol carries this particularity.
+This means that if you upload a file of say 120 bytes, the remaining 8 bytes will be padded. (normally with 1Ah).
+This is not a problem as the last byte of your compiled bin file should be a RET so any data after that is ignored.
+
+Below is the structure of a Xmodem packet:
+
+&lt;SOH&gt;&lt;packet #&gt;&lt;complement of packet #&gt;&lt;128 bytes of actual data&gt;&lt;check sum&gt;
+
+The SOH byte is simply a start of packet marker (01h).
+Packet # is the packet number (1 to 255)
+Complement of packet # (255 - packet #)
+Then follows 128 bytes of actual data
+Then a 1 byte checksum.
+
+Total bytes per packet 132.
+
+To get the sending computer to transmit the next packet, the receiving computer sends it a ACK (06h)
+To get the sending computer to resend the last packet again, the receiving computer sends it a NAK (15h)
+Note that a NAK is also sent to the transmitting computer once at the beginning to initiate a transfer.
+If there are no more packets to send, the sending computer sends a EOT (04h) instead of SOH etc.
+The receiving computer then responds with a ACK (06h) and the transfer is complete.
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000867.html">[mikeos-developer] Linux utility to send data to serial ports
+</A></li>
+	<LI>Next message: <A HREF="000872.html">[mikeos-developer] Xmodem based uploader for MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#871">[ date ]</a>
+              <a href="thread.html#871">[ thread ]</a>
+              <a href="subject.html#871">[ subject ]</a>
+              <a href="author.html#871">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

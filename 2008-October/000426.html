@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Wellcome into the unreal mode.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Wellcome%20into%20the%20unreal%20mode.&In-Reply-To=%3C19d8b3b00810280717h4672a841u3c55526ede3b5eba%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000424.html">
+   <LINK REL="Next"  HREF="000427.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Wellcome into the unreal mode.</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Wellcome%20into%20the%20unreal%20mode.&In-Reply-To=%3C19d8b3b00810280717h4672a841u3c55526ede3b5eba%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Wellcome into the unreal mode.">okachi at gmail.com
+       </A><BR>
+    <I>Tue Oct 28 15:17:11 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000424.html">[mikeos-developer] Wellcome into the unreal mode.
+</A></li>
+        <LI>Next message: <A HREF="000427.html">[mikeos-developer] Wellcome into the unreal mode.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#426">[ date ]</a>
+              <a href="thread.html#426">[ thread ]</a>
+              <a href="subject.html#426">[ subject ]</a>
+              <a href="author.html#426">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Takayoshi,
+
+I think I'm starting to understand. (I never did any DOS programming,
+so the concept of memory models is a bit unusual to me! Hence why I
+was so adamant to put everything in one segment in the original MikeOS
+:<i>-) )
+</I>
+&gt;<i> The new memory map is well-planned, so I am thinking simply using
+</I>&gt;<i> &quot;user code segment&quot; with tiny model.
+</I>&gt;<i>
+</I>&gt;<i> This means CS=DS=SS points &quot;user code segment&quot; while
+</I>&gt;<i> running C-based program, can I do that?
+</I>
+Technically, in the startup code for C programs you could point DS and
+SS at CS and thereby have them all pointing to the same segment. So
+that might be possible, providing you reset DS back to 0 when the
+program exits.
+
+How about using a different compiler? According to some mailing list
+posts, GCC can generate code for use in unreal mode, providing you
+pass all the usual --nostdlib --no-nothing-else-ever etc. flags.
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000424.html">[mikeos-developer] Wellcome into the unreal mode.
+</A></li>
+	<LI>Next message: <A HREF="000427.html">[mikeos-developer] Wellcome into the unreal mode.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#426">[ date ]</a>
+              <a href="thread.html#426">[ thread ]</a>
+              <a href="subject.html#426">[ subject ]</a>
+              <a href="author.html#426">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

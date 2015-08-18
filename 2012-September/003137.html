@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Crazy Mouse Code
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Crazy%20Mouse%20Code&In-Reply-To=%3CBAY151-W44308F37B1C104EA6E3FED83920%40phx.gbl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003136.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Crazy Mouse Code</H1>
+    <B>Dan Barry</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Crazy%20Mouse%20Code&In-Reply-To=%3CBAY151-W44308F37B1C104EA6E3FED83920%40phx.gbl%3E"
+       TITLE="[mikeos-developer] Crazy Mouse Code">danbarry at hotmail.co.uk
+       </A><BR>
+    <I>Wed Sep 12 22:18:08 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003136.html">[mikeos-developer] Nano Clone
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3137">[ date ]</a>
+              <a href="thread.html#3137">[ thread ]</a>
+              <a href="subject.html#3137">[ subject ]</a>
+              <a href="author.html#3137">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hello there...
+ 
+I'm having a massive issue with some mouse code I manipulated from the old Mike OS that supported a mouse...
+ 
+I got the mouse up and running by simply calling 'mouse_setup' below. Then all I have to do is manually check for 3 bytes as they arrive. Works a treat - makes a great edition for a file browser I've been working on.
+ 
+The problem comes when you want to use the keyboard, as Int 16h will not read a key pressed on the keyboard.
+ 
+I'm not worried about using the mouse while using the keyboard - there are loads of ways of getting around that. I just can't get the keyboard to work after initialising the mouse.
+ 
+If anybody has any ideas, greatly appreciated!
+ 
+(If possible a solution requiring the least amount of code possible - as I'm trying to keep things reasonably minimalistic...)
+ 
+Dan
+ 
+[Code as follows]:
+ 
+mouse_port_enable:
+ mov  al, 0xa8   ; Enable mouse port
+ out  0x64, al   ; Write to keyboardcontroller
+ call keyboard_check_port ; Check if command is progressed (demand!)
+ ret
+ 
+keyboard_check_port:
+ xor  cx, cx
+.again:
+ in   al, 0x64   ; Read from keyboardcontroller
+ test al, 2   ; Check if input buffer is empty
+ jz  .done
+ jmp .again   ; (Demand!) This may cause hanging, use only when sure.
+.done:
+ ret
+ 
+mouse_write:
+ mov  al, 0xd4   ; Write to mouse device instead of to keyboard
+ out  0x64, al   ; Write to keyboardcontroller
+ call keyboard_check_port ; Check if command is progressed (demand!)
+ ret
+ 
+keyboard_buffer_check:
+ xor  cx, cx
+.mn:
+ in   al, 0x64   ; Read from keyboardcontroller
+ test al, 0x20   ; Check if mouse output buffer is full
+ jz  .mnn
+ loop .mn
+.mnn:
+ ret
+ 
+mouse_activate:
+ call mouse_write
+ mov  al, 0xf4   ; Command to activate mouse itselve (Stream mode)
+ out  0x60, al   ; Write ps/2 controller output port (activate mouse)
+ call keyboard_check_port ; Check if command is progressed (demand!)
+ call mouse_check  ; Check if a byte is available
+ ret
+ 
+mouse_check:
+ mov  bl, 0
+ xor  cx, cx
+.vrd:
+ in   al, 0x64   ; Read from keyboardcontroller
+ test al, 1   ; Check if controller buffer (60h) has data
+ jnz .yy
+ loop .vrd
+ mov  bl, 1
+.yy:
+ ret
+ 
+keyboard_disable:
+ mov  al, 0xad   ; Disable Keyboard
+ out  0x64, al   ; Write to keyboardcontroller
+ call keyboard_check_port ; Check if command is progressed (demand!)
+ ret
+ 
+keyboard_enable:
+ mov  al, 0xae   ; Enable Keyboard
+ out  0x64, al   ; Write to keyboardcontroller
+ call keyboard_check_port ; Check if command is progressed (demand!)
+ ret
+ 
+mouse_get_byte:
+.cagain:
+ call mouse_check  ; Check if a byte is available
+ or   bl, bl
+ jnz .cagain
+ call keyboard_disable  ; Disable keyboard to read mouse byte
+ xor  ax, ax
+ in   al, 0x60   ; Read ps/2 controller output port (mousebyte)
+ mov  dl, al
+ call keyboard_enable  ; Enable keyboard
+ mov  al, dl
+ ret
+ 
+mouse_setup:
+ call mouse_port_enable 
+ call mouse_activate 
+ call mouse_get_byte  ; Get the responce byte of the mouse
+ ret 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120912/6116731e/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120912/6116731e/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003136.html">[mikeos-developer] Nano Clone
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3137">[ date ]</a>
+              <a href="thread.html#3137">[ thread ]</a>
+              <a href="subject.html#3137">[ subject ]</a>
+              <a href="author.html#3137">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

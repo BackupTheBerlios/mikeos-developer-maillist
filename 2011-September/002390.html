@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] The floppy disk is dead - long live	thefloppy disk.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20The%20floppy%20disk%20is%20dead%20-%20long%20live%0A%09thefloppy%20disk.&In-Reply-To=%3CECA6409E28494287BC3269698882731F%40userfe6b65a555%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002387.html">
+   <LINK REL="Next"  HREF="002391.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] The floppy disk is dead - long live	thefloppy disk.</H1>
+    <B>Mike Gonta</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20The%20floppy%20disk%20is%20dead%20-%20long%20live%0A%09thefloppy%20disk.&In-Reply-To=%3CECA6409E28494287BC3269698882731F%40userfe6b65a555%3E"
+       TITLE="[mikeos-developer] The floppy disk is dead - long live	thefloppy disk.">mikegonta at gmail.com
+       </A><BR>
+    <I>Fri Sep 30 12:25:34 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002387.html">[mikeos-developer] The floppy disk is dead - long live the	floppy disk.
+</A></li>
+        <LI>Next message: <A HREF="002391.html">[mikeos-developer] The floppy disk is dead - long live	thefloppy disk.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2390">[ date ]</a>
+              <a href="thread.html#2390">[ thread ]</a>
+              <a href="subject.html#2390">[ subject ]</a>
+              <a href="author.html#2390">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>----- Original Message ----- 
+From: &quot;M Saunders&quot;
+To: &quot;MikeOS (and similar OS) developers&quot;
+Sent: Friday, September 30, 2011 6:03 AM
+Subject: Re: [mikeos-developer] The floppy disk is dead - long live 
+thefloppy disk.
+
+
+&gt;<i> Hi Mike,
+</I>&gt;<i>
+</I>&gt;<i> On Fri, Sep 30, 2011 at 10:51 AM, Mike Gonta wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> However, it should be noted that the 1.44 Mb FAT12 floppy disk USB image 
+</I>&gt;&gt;<i> can
+</I>&gt;&gt;<i> boot and run from a USB flash drive on _ANY_ PC with a classic BIOS that 
+</I>&gt;&gt;<i> can
+</I>&gt;&gt;<i> boot from USB.
+</I>&gt;<i>
+</I>
+As I stated:
+
+Some simple guidelines must be followed.
+
+1. Use the BIOS returned value in dl to access the drive. Don't assume dl=0.
+2. Use int 13h, ah=8 - Get Drive Parameters to obtain the emulated geometry.
+   Don't assume SecsPerTrack=18 or Sides=2.
+
+&gt;<i> Thanks for the info, but I'm confused! Earlier you said:
+</I>&gt;<i>
+</I>&gt;&gt;<i> On a side note, MikeOS will only boot and run with a USB flash drive on
+</I>&gt;&gt;<i> older computers which support USB floppy disk emulation, as well as on
+</I>&gt;&gt;<i> some older computers which support USB floppy disk emulation with a small
+</I>&gt;&gt;<i> capacity flash drive under 1Gb.
+</I>
+Presently MikeOS _assumes_ floppy disk geometry and dl=0.
+This prevents boot and run on PC which emulate the flash drive as a hard 
+drive.
+
+&gt;<i> So will USB flash drives with the floppy disk image injected work on
+</I>&gt;<i> any PC, or only older ones that support USB floppy disk emulation?
+</I>
+It will work on any PC simply by following the guidelines.
+Remember, historically FAT12 was a valid hard drive format. It is
+still a valid USB flash drive emulated hard drive format.
+With these guidelines the image will boot and run under either emulation,
+and of course will also boot and run from a real or virtual (loopback) 
+floppy drive.
+
+
+Mike Gonta
+look and see - many look but few see
+
+<A HREF="http://mikegonta.com">http://mikegonta.com</A>
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002387.html">[mikeos-developer] The floppy disk is dead - long live the	floppy disk.
+</A></li>
+	<LI>Next message: <A HREF="002391.html">[mikeos-developer] The floppy disk is dead - long live	thefloppy disk.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2390">[ date ]</a>
+              <a href="thread.html#2390">[ thread ]</a>
+              <a href="subject.html#2390">[ subject ]</a>
+              <a href="author.html#2390">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

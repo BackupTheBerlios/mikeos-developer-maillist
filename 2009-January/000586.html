@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 3.1 released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%203.1%20released&In-Reply-To=%3C19d8b3b00901040634x331db8b6gb0e3b12de93ca93b%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000600.html">
+   <LINK REL="Next"  HREF="000588.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 3.1 released</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%203.1%20released&In-Reply-To=%3C19d8b3b00901040634x331db8b6gb0e3b12de93ca93b%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 3.1 released">okachi at gmail.com
+       </A><BR>
+    <I>Sun Jan  4 15:34:04 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000600.html">[mikeos-developer] TomOS-0.1 released
+</A></li>
+        <LI>Next message: <A HREF="000588.html">[mikeos-developer] MikeOS 3.1 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#586">[ date ]</a>
+              <a href="thread.html#586">[ thread ]</a>
+              <a href="subject.html#586">[ subject ]</a>
+              <a href="author.html#586">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+Main changes in this release are a new game (HANGMAN.BIN), renaming of
+PCXVIEW to VIEWER because you can now view text files with it, file
+size information in FILEMAN, and a couple of new system calls. Full
+changelog below.
+
+Get it from: <A HREF="http://prdownload.berlios.de/mikeos/mikeos-3.1.zip">http://prdownload.berlios.de/mikeos/mikeos-3.1.zip</A>
+
+I'll update the site with handbooks and screenshots later on. Enjoy
+the hangman game if you want to test your geography knowledge :-)
+
+Cheers,
+Mike
+
+
+# HANGMAN game added, in which the player works out names of cities
+
+# PCXVIEW program renamed to VIEWER, and can display text files as
+well as images
+
+# FILEMAN program now has an option to show a file's size
+
+# New system call: os_string_charchange (source/features/string.asm),
+switches all instances of a specified char to a different one
+
+# New system call: os_get_random (source/features/math.asm), generates
+integer between 0 and 255 using the BIOS clock
+
+# API bumped to version 9
+
+# os_draw_block routine (source/features/screen.asm) now available to
+user programs
+
+# When a program is called from the app selector, there's no longer a
+key press prompt after the program has finished
+
+# os_dialog_box uses coloured blocks to denote highlighted button
+instead of '[=' characters
+
+# os_string_strip now uses its own buffer (not the OS disk buffer)
+
+# Keyboard codes (eg KEY_ESC) and more colours added to programs/mikedev.inc
+
+# os_get_file_size system call fixed
+
+# Registers AX, BX, CX, DX, SI, DI cleared to zero before program
+execution to ease debugging
+
+# MONITOR program has better help text at the start
+
+# build-win.bat renamed buildwin.bat (more suitable in DOS)
+
+# Build scripts copy README.TXT to the floppy image, for reading in
+the new VIEWER program
+
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000600.html">[mikeos-developer] TomOS-0.1 released
+</A></li>
+	<LI>Next message: <A HREF="000588.html">[mikeos-developer] MikeOS 3.1 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#586">[ date ]</a>
+              <a href="thread.html#586">[ thread ]</a>
+              <a href="subject.html#586">[ subject ]</a>
+              <a href="author.html#586">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

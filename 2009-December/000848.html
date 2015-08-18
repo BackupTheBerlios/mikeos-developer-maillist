@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] uploading and running programs on MikeOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20uploading%20and%20running%20programs%20on%20MikeOS&In-Reply-To=%3C20091212135317.QEKGU.239170.root%40web10-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000847.html">
+   <LINK REL="Next"  HREF="000852.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] uploading and running programs on MikeOS</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20uploading%20and%20running%20programs%20on%20MikeOS&In-Reply-To=%3C20091212135317.QEKGU.239170.root%40web10-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] uploading and running programs on MikeOS">wisecracker at tesco.net
+       </A><BR>
+    <I>Sat Dec 12 14:53:17 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000847.html">[mikeos-developer] uploading and running programs on MikeOS
+</A></li>
+        <LI>Next message: <A HREF="000852.html">[mikeos-developer] $%#@*! serial ports
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#848">[ date ]</a>
+              <a href="thread.html#848">[ thread ]</a>
+              <a href="subject.html#848">[ subject ]</a>
+              <a href="author.html#848">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Paolo...
+
+&gt;<i> The reason I didn't want to write to video ram directly (B800:0000 or A000:0000
+</I>&gt;<i> for VGA) is that I wanted to keep my porting of MikeOS as close as possible to
+</I>&gt;<i> the original.
+</I>
+Using es: and your own assembly code will do. You must remember to...
+
+os_paolo:
+push es
+&lt;Some code ready to do task&gt;
+CLD ;or STD, whichever way.
+&lt;some more code to do task&gt;
+pop es
+ret
+
+&gt;<i> Hence my original decision to rather change the   mov al, ' '
+</I>&gt;<i> to      mov al, 219     then include a whole new routine.
+</I>
+Do I take it you want to make the block &quot;graphic&quot; character blink?
+
+&gt;<i> I am going to try your suggestion, especially if it gives me blinking text.
+</I>
+Beware!!!
+MikeOS is not friendly with the blink bit set!
+
+
+73...
+
+Bazza...
+
+Team AMIGA...
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000847.html">[mikeos-developer] uploading and running programs on MikeOS
+</A></li>
+	<LI>Next message: <A HREF="000852.html">[mikeos-developer] $%#@*! serial ports
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#848">[ date ]</a>
+              <a href="thread.html#848">[ thread ]</a>
+              <a href="subject.html#848">[ subject ]</a>
+              <a href="author.html#848">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Running MikeOS on an 8086 emulator
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-June/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Running%20MikeOS%20on%20an%208086%20emulator&In-Reply-To=%3CBANLkTin%2Bw1fm9Fw1Pn558ExVUUSeWYNpMA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001881.html">
+   <LINK REL="Next"  HREF="001883.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Running MikeOS on an 8086 emulator</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Running%20MikeOS%20on%20an%208086%20emulator&In-Reply-To=%3CBANLkTin%2Bw1fm9Fw1Pn558ExVUUSeWYNpMA%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Running MikeOS on an 8086 emulator">okachi at gmail.com
+       </A><BR>
+    <I>Fri Jun 17 14:01:13 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001881.html">[mikeos-developer] I'm writing an operating system. Can I get some help?
+</A></li>
+        <LI>Next message: <A HREF="001883.html">[mikeos-developer] Running MikeOS on an 8086 emulator
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1882">[ date ]</a>
+              <a href="thread.html#1882">[ thread ]</a>
+              <a href="subject.html#1882">[ subject ]</a>
+              <a href="author.html#1882">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi folks,
+
+Bazza in particular might be able to answer this! I've tried to get
+MikeOS running on this 8086 PC emulator I saw on OSDev:
+
+<A HREF="http://fake86.rubbermallet.org">http://fake86.rubbermallet.org</A>
+
+It kind-of works, but goes straight to the command line and takes no
+input. Running with the -verbose flag it reports:
+
+Illegal opcode: 66 @ 0000:7C54
+Illegal opcode: 0F @ 2000:34BA
+Illegal opcode: 0F @ 2000:0139
+
+The first is due to the use of eax in the bootloader; the second and
+third are to do with &quot;jnz&quot; instructions:
+
+000034BA  0F8572FF          jnz word 0x3430
+00000139  0F859400          jnz word 0x1d1
+
+I'm puzzled by this -- &quot;jnz&quot; seems a valid instruction for the 8086.
+But could the 8086 version only use single byte displacement or
+something?
+
+Thanks!
+Mike
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001881.html">[mikeos-developer] I'm writing an operating system. Can I get some help?
+</A></li>
+	<LI>Next message: <A HREF="001883.html">[mikeos-developer] Running MikeOS on an 8086 emulator
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1882">[ date ]</a>
+              <a href="thread.html#1882">[ thread ]</a>
+              <a href="subject.html#1882">[ subject ]</a>
+              <a href="author.html#1882">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

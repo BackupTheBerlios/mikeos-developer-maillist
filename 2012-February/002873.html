@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] VGA Documentation
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20VGA%20Documentation&In-Reply-To=%3C7B128126B73447A0A07B27C001E54856%40BlakeBurgessPC%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002871.html">
+   <LINK REL="Next"  HREF="002872.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] VGA Documentation</H1>
+    <B>Blake Burgess</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20VGA%20Documentation&In-Reply-To=%3C7B128126B73447A0A07B27C001E54856%40BlakeBurgessPC%3E"
+       TITLE="[mikeos-developer] VGA Documentation">blakeburgess at gamenetstudios.com
+       </A><BR>
+    <I>Sun Feb 12 20:10:44 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002871.html">[mikeos-developer] VGA Documentation
+</A></li>
+        <LI>Next message: <A HREF="002872.html">[mikeos-developer] VGA documentation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2873">[ date ]</a>
+              <a href="thread.html#2873">[ thread ]</a>
+              <a href="subject.html#2873">[ subject ]</a>
+              <a href="author.html#2873">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I seriously thought about doing it in mode 13h, but when I drew out the UI, I realized that there really isn&#8217;t a lot of space left to work with. Seeing that 320x200 is almost as half as big as the resolution Windows 1.01 used is kinda pathetic, LOL.
+
+I wanted to compromise between mode 13h&#8217;s vast color palette and the 16 color modes&#8217; larger resolution. Since most if not all (I can&#8217;t remember) of the 16 color modes used planar memory, I decided to opt with the largest resolution of them all: 640x480.
+
+Also, I kinda wanted a challenge and not just some easy to program video mode. I looked closer at it this morning and it doesn&#8217;t seem that hard, actually. App developers won&#8217;t have to worry about messing with the VGA registers. That&#8217;ll all be handled through the API. :-) 
+From: Joshua Beck 
+Sent: Sunday, February 12, 2012 7:26 AM
+To: MikeOS Mailing List 
+Subject: Re: [mikeos-developer] VGA Documentation
+
+Do you really need that many pixels?
+As far as I can tell VGA mode 12h is 640x480x16 and you have to mess around with &quot;planes&quot; and stuff like that to use it.
+I think a far better choice would be mode 13h. 
+This mode is 320x200x256, and has a single byte of memory in the video segment for each pixel It's really easy to use, you could have 
+your video driver written in ten minutes. 
+
+
+--------------------------------------------------------------------------------
+_______________________________________________
+mikeos-developer mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+
+
+
+--------------------------------------------------------------------------------
+
+No virus found in this message.
+Checked by AVG - www.avg.com
+Version: 2012.0.1913 / Virus Database: 2112/4805 - Release Date: 02/12/12
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120212/b213e24d/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120212/b213e24d/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002871.html">[mikeos-developer] VGA Documentation
+</A></li>
+	<LI>Next message: <A HREF="002872.html">[mikeos-developer] VGA documentation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2873">[ date ]</a>
+              <a href="thread.html#2873">[ thread ]</a>
+              <a href="subject.html#2873">[ subject ]</a>
+              <a href="author.html#2873">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

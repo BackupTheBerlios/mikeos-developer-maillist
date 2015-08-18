@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] On the cho(m)p functions
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20On%20the%20cho%28m%29p%20functions&In-Reply-To=%3C19d8b3b00901121005g76180f29o96119b48f81c6446%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000614.html">
+   <LINK REL="Next"  HREF="000616.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] On the cho(m)p functions</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20On%20the%20cho%28m%29p%20functions&In-Reply-To=%3C19d8b3b00901121005g76180f29o96119b48f81c6446%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] On the cho(m)p functions">okachi at gmail.com
+       </A><BR>
+    <I>Mon Jan 12 19:05:46 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000614.html">[mikeos-developer] On the cho(m)p functions
+</A></li>
+        <LI>Next message: <A HREF="000616.html">[mikeos-developer] On the cho(m)p functions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#615">[ date ]</a>
+              <a href="thread.html#615">[ thread ]</a>
+              <a href="subject.html#615">[ subject ]</a>
+              <a href="author.html#615">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Tslil,
+
+The chomp routines look good. Nice idea on adding an os_string_reverse
+routine, although there's a quicker way to do it, and without having
+to reserve 256 bytes -- see the end of this message.
+
+&gt;<i>  tiny modification on my original into-to-str function. I have now
+</I>&gt;<i>  tested and confirmed it to work for values in the range -4367..4367,
+</I>&gt;<i>  which I believe to be the valid range for two's compliment, 16 bit.
+</I>
+So we should probably have os_sint_to_string for signed, and
+os_uint_to_string for unsigned -- what do you reckon?
+
+Here's my os_string_reverse, tested briefly:
+
+
+; SI = string to reverse
+
+os_string_reverse:
+	pusha
+
+	mov ax, si
+	call os_string_length
+
+	mov di, si
+	add di, ax
+	dec di				; DI now points to last char in string
+
+.loop:
+	mov byte al, [si]		; Swap bytes
+	mov byte bl, [di]
+
+	mov byte [si], bl
+	mov byte [di], al
+
+	inc si				; Move towards string centre
+	dec di
+
+	cmp di, si			; Both reached the centre?
+	ja .loop
+
+	popa
+	ret
+
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000614.html">[mikeos-developer] On the cho(m)p functions
+</A></li>
+	<LI>Next message: <A HREF="000616.html">[mikeos-developer] On the cho(m)p functions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#615">[ date ]</a>
+              <a href="thread.html#615">[ thread ]</a>
+              <a href="subject.html#615">[ subject ]</a>
+              <a href="author.html#615">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

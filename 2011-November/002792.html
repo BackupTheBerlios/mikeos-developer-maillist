@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] A preview of what I'm working on!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20preview%20of%20what%20I%27m%20working%20on%21&In-Reply-To=%3CBAY151-W14988B11F9888129B17A4083B30%40phx.gbl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002787.html">
+   <LINK REL="Next"  HREF="002793.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] A preview of what I'm working on!</H1>
+    <B>Dan Barry</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20preview%20of%20what%20I%27m%20working%20on%21&In-Reply-To=%3CBAY151-W14988B11F9888129B17A4083B30%40phx.gbl%3E"
+       TITLE="[mikeos-developer] A preview of what I'm working on!">danbarry at hotmail.co.uk
+       </A><BR>
+    <I>Tue Nov 29 17:31:00 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002787.html">[mikeos-developer] A preview of what I'm working on!
+</A></li>
+        <LI>Next message: <A HREF="002793.html">[mikeos-developer] A preview of what I'm working on!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2792">[ date ]</a>
+              <a href="thread.html#2792">[ thread ]</a>
+              <a href="subject.html#2792">[ subject ]</a>
+              <a href="author.html#2792">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+&gt;<i> Currently, the kernel loads at 1000:0000, connects to the Advanced 
+</I>&gt;<i> Power Management (APM) interface if it can find one, searches for 
+</I>&gt;<i> CPUID.BIN, loads it to 2000:0000 in two stages (first the file is read 
+</I>&gt;<i> and loaded to 1000:8000 using fat12_file_load, then the file is 
+</I>&gt;<i> relocated to 2000:0000), sets up segments for it, and executes it. When 
+</I>&gt;<i> the program returns with a retf instruction, the kernel restores all the 
+</I>&gt;<i> segment registers to 1000h, and prompts the user to press any key to 
+</I>&gt;<i> shut down the computer via APM.
+</I>
+I'm not completely sure what you mean by 'APM' (Advanced Power management)... but I have built using the MikeOS bootloader a miniture DOS like thing in 512 bytes... I'm using it as the base to my project.
+ 
+What it can do:-
+ - Automatically trys to run 'AUTORUN.BIN'
+ - On failure to do so it offers a dos like prompt, where programs can be typed in (automatically adds the extension of '.BIN'.)
+ - Offers programs the ability to print to screen (0x0000:0x7C00 + 1AEh) and the ability to do l2hts conversions (Can't remeber the call location).
+ - Loads programs/kernels to 2000h:0000h
+ - Programs/kernels can jump back to the bootloader at 0x0000:0x7C00.
+ 
+It's not the most brilliant thing in the world, but with little adjustement it might be able to offer a 'backup' type service, or give you the ability to run other programs once your management has been run.
+ 
+Let me know if you would like a copy.
+ 
+Dan 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111129/19b02819/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111129/19b02819/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002787.html">[mikeos-developer] A preview of what I'm working on!
+</A></li>
+	<LI>Next message: <A HREF="002793.html">[mikeos-developer] A preview of what I'm working on!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2792">[ date ]</a>
+              <a href="thread.html#2792">[ thread ]</a>
+              <a href="subject.html#2792">[ subject ]</a>
+              <a href="author.html#2792">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

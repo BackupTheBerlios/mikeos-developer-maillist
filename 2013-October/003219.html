@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS Mouse Library
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2013-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%20Mouse%20Library&In-Reply-To=%3CCAEz6_zjQdMJhSBSOh1Ym7zacGjum7Sir0OUS-yGMtg5j8jP8YQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003225.html">
+   <LINK REL="Next"  HREF="003221.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS Mouse Library</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%20Mouse%20Library&In-Reply-To=%3CCAEz6_zjQdMJhSBSOh1Ym7zacGjum7Sir0OUS-yGMtg5j8jP8YQ%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS Mouse Library">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Mon Oct 28 05:10:17 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003225.html">[mikeos-developer] Two GUI's?
+</A></li>
+        <LI>Next message: <A HREF="003221.html">[mikeos-developer] MikeOS Mouse Library
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3219">[ date ]</a>
+              <a href="thread.html#3219">[ thread ]</a>
+              <a href="subject.html#3219">[ subject ]</a>
+              <a href="author.html#3219">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hey guys,
+I've created a mouse library for MikeOS by modifying the TachyonOS
+mouse code. This library can be included with any assembly program to
+give it mouse capabilities.
+
+Functions:
+mouselib_install_driver --- Installs the mouse driver (use this first).
+mouselib_range --- Sets the movement range of the mouse.
+mouselib_scale --- Sets the movement speed of the mouse.
+mouselib_remove_driver --- Removes the mouse driver (use this at the end).
+mouselib_locate --- Returns the current mouse position.
+mouselib_move --- Sets the mouse position.
+mouselib_show --- Shows the mouse cursor in text mode.
+mouselib_hide --- Hides the mouse cursor.
+mouselib_wait --- Waits for mouse input.
+mouselib_anyclick --- Checks for any mouse button currently pressed.
+mouselib_[left/right/middle]click --- Checks for a specific mouse
+button currently pressed.
+mouselib_input_wait --- Waits for either mouse or keyboard input.
+mouselib_freemove --- Allows the user to move the cursor and returns
+the position if a key is pressed or mouse button clicked.
+
+You can get the library from the downloads section of my Google Code.
+<A HREF="https://code.google.com/p/mikebasic-applications/downloads/detail?name=libmouse-1.0.0.zip&amp;can=2&amp;q=">https://code.google.com/p/mikebasic-applications/downloads/detail?name=libmouse-1.0.0.zip&amp;can=2&amp;q=</A>
+
+Joshua,
+<A HREF="https://code.google.com/p/tachyon-os/">https://code.google.com/p/tachyon-os/</A>
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003225.html">[mikeos-developer] Two GUI's?
+</A></li>
+	<LI>Next message: <A HREF="003221.html">[mikeos-developer] MikeOS Mouse Library
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3219">[ date ]</a>
+              <a href="thread.html#3219">[ thread ]</a>
+              <a href="subject.html#3219">[ subject ]</a>
+              <a href="author.html#3219">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

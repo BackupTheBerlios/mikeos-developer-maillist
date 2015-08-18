@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] FW: Contents of mikeos-developer digest Issue 2,	vol 26
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FW%3A%20Contents%20of%20mikeos-developer%20digest%20Issue%202%2C%0A%09vol%2026&In-Reply-To=%3CBAY151-w53FE38B542E6A6F56B7BA2F2360%40phx.gbl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001506.html">
+   <LINK REL="Next"  HREF="001513.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] FW: Contents of mikeos-developer digest Issue 2,	vol 26</H1>
+    <B>Royce Ng</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FW%3A%20Contents%20of%20mikeos-developer%20digest%20Issue%202%2C%0A%09vol%2026&In-Reply-To=%3CBAY151-w53FE38B542E6A6F56B7BA2F2360%40phx.gbl%3E"
+       TITLE="[mikeos-developer] FW: Contents of mikeos-developer digest Issue 2,	vol 26">royce_33 at hotmail.com
+       </A><BR>
+    <I>Mon Nov 15 06:11:43 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001506.html">[mikeos-developer] Contents of mikeos-developer digest Issue 1, vol 26
+</A></li>
+        <LI>Next message: <A HREF="001513.html">[mikeos-developer] FW: Contents of mikeos-developer digest Issue 2, vol 26
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1512">[ date ]</a>
+              <a href="thread.html#1512">[ thread ]</a>
+              <a href="subject.html#1512">[ subject ]</a>
+              <a href="author.html#1512">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+
+From: <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">royce_33 at hotmail.com</A>
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+Subject: Re: Contents of mikeos-developer digest Issue 2, vol 26
+Date: Sun, 14 Nov 2010 19:22:11 +0800
+
+I made the shutdown program, here it is, compile to a .BIN using nasm!
+
+
+
+
+
+
+
+
+org 100h
+PowerOff:
+        mov ax,5300h
+        mov bx,0
+        int 15h
+        push ax
+
+    mov ax,5308h
+    mov bx,1
+    mov cx,1
+    int 15h
+    mov ax,5308h
+    mov bx,0ffffh
+    mov cx,1
+    int 15h
+
+    mov ax,5301h
+    mov bx,0
+    int 15h
+    mov ax,530Eh
+    mov bx,0
+        pop cx
+
+    int 15h
+    mov ax,530Dh
+    mov bx,1
+    mov cx,1
+    int 15h
+    mov ax,530Fh
+    mov bx,1
+    mov cx,1
+    int 15h
+    mov ax,5307h
+    mov bx,1
+    mov cx,3
+    int 15h
+        int 20h
+
+
+
+
+ 
+
+&gt;<i>From 
+</I>
+Royce
+ 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20101115/a7b1b309/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20101115/a7b1b309/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001506.html">[mikeos-developer] Contents of mikeos-developer digest Issue 1, vol 26
+</A></li>
+	<LI>Next message: <A HREF="001513.html">[mikeos-developer] FW: Contents of mikeos-developer digest Issue 2, vol 26
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1512">[ date ]</a>
+              <a href="thread.html#1512">[ thread ]</a>
+              <a href="subject.html#1512">[ subject ]</a>
+              <a href="author.html#1512">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

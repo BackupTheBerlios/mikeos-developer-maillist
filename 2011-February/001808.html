@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] 32-bit Protected Mode
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%2032-bit%20Protected%20Mode&In-Reply-To=%3CE2F056324688423F8646F5D9EB9C3BA0%40userfe6b65a555%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001805.html">
+   <LINK REL="Next"  HREF="001809.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] 32-bit Protected Mode</H1>
+    <B>Mike Gonta</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%2032-bit%20Protected%20Mode&In-Reply-To=%3CE2F056324688423F8646F5D9EB9C3BA0%40userfe6b65a555%3E"
+       TITLE="[mikeos-developer] 32-bit Protected Mode">mikegonta at gmail.com
+       </A><BR>
+    <I>Thu Feb  3 10:45:18 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001805.html">[mikeos-developer] 32-bit Protected Mode
+</A></li>
+        <LI>Next message: <A HREF="001809.html">[mikeos-developer] 32-bit Protected Mode
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1808">[ date ]</a>
+              <a href="thread.html#1808">[ thread ]</a>
+              <a href="subject.html#1808">[ subject ]</a>
+              <a href="author.html#1808">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>----- Original Message ----- 
+From: &quot;M Saunders&quot;
+To: &quot;MikeOS (and similar OS) developers&quot;
+Sent: Thursday, February 03, 2011 4:01 AM
+Subject: Re: [mikeos-developer] 32-bit Protected Mode
+
+
+&gt;<i> Hi Scott,
+</I>
+&gt;&gt;<i> I saw somewhere translated to a 32-bit protected mode version of MikeOS.
+</I>
+&gt;<i> That's using a special BIOS implementation from Mike Gonta.
+</I>
+Actually, aeBIOS is a BIOS extender.
+All PM32 BIOS calls made in the PM32 translated MikeOS are executed
+by the native motherboard 16 bit real mode BIOS.
+Unlike DOS extenders there is no hosted environment, aeBIOS
+does not run under an existing OS. There are no special calls or
+setup to do. aeBIOS takes over in a way similar to the video and hard disk
+option roms, aeBIOS is software based and not permanent.
+
+RM16 MikeOS story:
+The native RM16 BIOS loads someone elses non MikeOS boot sector code
+which then loads RM16 MikeOS (generally the boot sector is not considered
+to be the OS). Then RM16 MikeOS interacts with the BIOS.
+RM16 BIOS &lt;-&gt; RM16 MikeOS
+
+RM32 MikeOS story:
+The native RM16 BIOS loads aeBIOS which then loads PM32 MikeOS. Then
+PM32 MikeOS interacts with the BIOS.
+RM16 BIOS &lt;-&gt; aeBIOS &lt;-&gt; PM32 MIkeOS
+
+&gt;<i> It's very cool
+</I>
+Thank you
+
+&gt;<i> but it's not a standalone protected mode OS.
+</I>
+If your PC booted up in PM32 it would be.
+
+&gt;&gt;<i> think everyone would want to be in protected mode? Unless it causes
+</I>&gt;&gt;<i> grief using the BIOS interrupts?
+</I>
+No grief with aeBIOS, see the PM32 MIkeOS source code.
+
+&gt;&gt;<i> We cannot use BIOS routines from protected mode. Currently we
+</I>&gt;&gt;<i> use the BIOS for screen output, keyboard input, disk drive
+</I>&gt;&gt;<i> reading/writing etc. Without the BIOS, we'd have to write very picky,
+</I>&gt;&gt;<i> complex drivers for each of those devices, and MikeOS would become
+</I>&gt;&gt;<i> MUCH more complicated.
+</I>
+aeBIOS to the rescue!
+
+&gt;&gt;<i> Right now,
+</I>&gt;&gt;<i> MikeOS shows you how to do the interesting things in an OS
+</I>&gt;&gt;<i> -- create system calls, execute programs etc. I never want thousands
+</I>&gt;&gt;<i> of lines of complex hardware driver code.
+</I>
+Right now,
+***PM32*** MikeOS shows you how to do the interesting things in an OS
+-- create system calls, execute programs etc. I never want thousands
+of lines of complex hardware driver code.
+<A HREF="http://board.flatassembler.net/topic.php?t=12381">http://board.flatassembler.net/topic.php?t=12381</A>
+
+
+Mike Gonta
+look and see - many look but few see
+
+<A HREF="http://aeBIOS.com">http://aeBIOS.com</A>
+
+I'm currently working on FAT32 file system support for aeBIOS - it works
+like a charm and will be released soon.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001805.html">[mikeos-developer] 32-bit Protected Mode
+</A></li>
+	<LI>Next message: <A HREF="001809.html">[mikeos-developer] 32-bit Protected Mode
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1808">[ date ]</a>
+              <a href="thread.html#1808">[ thread ]</a>
+              <a href="subject.html#1808">[ subject ]</a>
+              <a href="author.html#1808">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

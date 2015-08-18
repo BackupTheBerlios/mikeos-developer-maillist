@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] INT 18H.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20INT%2018H.&In-Reply-To=%3C20110113201647.OXAAS.493081.root%40web10-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001773.html">
+   <LINK REL="Next"  HREF="001776.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] INT 18H.</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20INT%2018H.&In-Reply-To=%3C20110113201647.OXAAS.493081.root%40web10-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] INT 18H.">wisecracker at tesco.net
+       </A><BR>
+    <I>Thu Jan 13 21:16:47 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001773.html">[mikeos-developer] INT 18H...
+</A></li>
+        <LI>Next message: <A HREF="001776.html">[mikeos-developer] ADC-PC.ZIP... WOW!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1775">[ date ]</a>
+              <a href="thread.html#1775">[ thread ]</a>
+              <a href="subject.html#1775">[ subject ]</a>
+              <a href="author.html#1775">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi guys...
+
+Well it didn`t take to long to do a demo INT 18H interrupt vector change.
+
+Here is the code:-
+
+Watch fro wordwrapping etc...
+
+This is ORGed for MikeOS.
+
+On running use the CLI mode and enter int18[RETURN].
+
+The MikeOS cursor overwrites the first few letters but that doesn`t matter
+at this point as this is a demo principle only.
+It will SELF test on the first run and another file TEST18.BIN used to test it
+at any other time.
+
+========================================
+
+;
+;                              INT 18H Hello World.
+;                              --------------------
+;
+;                Assume ORG 100h for MS-DOS and 32768 for MikeOS.
+;
+; This is an example of re-vectoring INT 18H and does three things.
+; 1) It sets the Video Mode to Text Mode 3.
+; 2) It clears the screen.
+; 3) It prints &quot;Hello World.&quot; in the top left hand corner in glorious technicolour.
+; It was ORGed at 256 decimal for MS-DOS but I have recompiled for MikeOS.
+;
+;        org 256                   ;MS-DOS offset.
+         org 32768                 ;MikeOS offset.
+; The interrupt vector is placed at 0x2000:0xC000 for testing purposes.
+; Use the test code TEST18.BIN to test it.
+;start:
+        push ax                   ;Push all registers.
+        push cx                   ;Note 8088 compatible to suit DEBUG.EXE.
+        push dx                   ;
+        push si                   ;
+        push di                   ;
+        push ds                   ;
+        push es                   ;
+
+        push ds                   ;Push DS: again ready for vector cahnge.
+        cli                       ;Clear interrupts for code shifting.
+        mov ax, 0h                ;Set AX to new DS:.
+        mov ds, ax                ;Do it.
+        mov ax, 02000h            ;Set INT18H CS: to 0x2000.
+        mov word [0062h], ax      ;Set vector CS: to 0x2000 for INT 18h test.
+	mov ax, 49152             ;Set offset to 48KiB bytes above CS:.
+        mov word [0060h], ax      ;Do it.
+        sti                       ;Reset the interrupts again.
+        pop ds                    ;Regain the DS: segment.
+
+        cld                       ;Ensure we transfer bytes upward.
+        mov ax, 02000h            ;Set ES: register.
+	mov es, ax                ;Do it.
+        mov dx, 49152             ;Set INT 18H code to offset 0xC000.
+        mov si, intstart          ;Set source index to start of code to transfer. 
+        es mov di, dx             ;Move destination index to 0xC000.
+        mov cx, intend-intstart   ;Get length of file to be transfered.
+        repz                      ;Transfer the bytes...
+        movsb                     ;One byte at a time.
+        pop es                    ;Pop all registers back.
+        pop ds                    ;
+        pop di                    ;
+        pop si                    ;
+        pop dx                    ;
+        pop cx                    ;
+        pop ax                    ;
+        nop                       ;These two bytes NOT needed but used as a breath
+        nop                       ;before testing the interrupt vector.
+        mov ax, 0                 ;Set vector fuction, (AH) and offset (AL).
+        int 18h                   ;Run the interrupt.
+        ret                       ;Exit back to shell.
+
+intstart:
+        cmp ax, 0                 ;Compare AH = 0 function and AL = 0 offset.
+        jnz intgetout             ;If wrong exit and in this particular case QUIT.
+;
+; Have the fuction jump list here, over 200 functions available.
+;
+; This is the INT 18H test function.
+        push ax                   ;Push all registers.
+        push cx                   ;Again 8088 compatible.
+        push dx                   ;
+        push si                   ;
+        push di                   ;
+        push ds                   ;
+        push es                   ;
+
+        mov ax, 0003h             ;Set up video mode to &quot;CGA&quot; colour text.
+        int 10h                   ;Do it. This clears the screen sets to CGA Mode 3.
+        cld                       ;Clear direction flag for upwards word transfer.
+        mov ax, 0b800h            ;Point to CGA memory area.
+        mov es, ax                ;Do it.
+        mov ax, 02000h            ;Ensure DS: is at 0x2000, (CS:).
+        mov ds, ax                ;Do it.
+
+        mov dx, 0                 ;Set up the end point for the transfer.
+;
+; The commented out code below written as db's to FIX the offset for the code to work.
+;       ds mov si, helloworld     ;Set source index to start of text to move.
+;
+        db 03eh                   ;DS:.
+        db 0beh                   ;&quot;mov si, helloworld&quot;.
+        db 033h                   ;&quot;helloworld&quot; pointer correct offset.
+        db 0c0h                   ;Ditto.
+
+        es mov di, dx             ;Set the start of the destination index.
+        mov cx, 12                ;Counter for the number of WORDs to be moved.
+        repz                      ;Do it...
+        movsw                     ;Print &quot;Hello World.&quot; to the CGA memory...
+        pop es                    ;Replace all used registers.
+        pop ds                    ;
+        pop di                    ;
+        pop si                    ;
+        pop dx                    ;
+        pop cx                    ;
+        pop ax                    ;
+intgetout: 
+        iret                      ;Interrupt return.
+helloworld:
+db 72,1,101,2,108,3,108,4,111,5,32,6,87,7,111,8,114,9,108,10,100,11,46,12
+intend:
+        nop                       ;Spare byte.
+
+
+========================================
+
+; TEST18.ASM
+
+
+mov ax, 0
+int 18h
+ret
+
+
+========================================
+
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+<A HREF="http://homepages.tesco.net/wisecracker/">http://homepages.tesco.net/wisecracker/</A>
+
+<A HREF="http://main.aminet.net/search?readme=wisecracker">http://main.aminet.net/search?readme=wisecracker</A>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: INT18.zip
+Type: application/octet-stream
+Size: 2030 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110113/08b0c518/attachment.obj">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110113/08b0c518/attachment.obj</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001773.html">[mikeos-developer] INT 18H...
+</A></li>
+	<LI>Next message: <A HREF="001776.html">[mikeos-developer] ADC-PC.ZIP... WOW!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1775">[ date ]</a>
+              <a href="thread.html#1775">[ thread ]</a>
+              <a href="subject.html#1775">[ subject ]</a>
+              <a href="author.html#1775">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

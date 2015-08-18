@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] FAT16 bootloader
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT16%20bootloader&In-Reply-To=%3CCAPRjAGhES97tPA0hVtp_Pe50kbCvoK-x%2B5_sXu3zbT2QRXMFow%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002474.html">
+   <LINK REL="Next"  HREF="002481.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] FAT16 bootloader</H1>
+    <B>Paulo V</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT16%20bootloader&In-Reply-To=%3CCAPRjAGhES97tPA0hVtp_Pe50kbCvoK-x%2B5_sXu3zbT2QRXMFow%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] FAT16 bootloader">paulomobilemail at gmail.com
+       </A><BR>
+    <I>Sat Oct  1 23:00:17 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002474.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+        <LI>Next message: <A HREF="002481.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2475">[ date ]</a>
+              <a href="thread.html#2475">[ thread ]</a>
+              <a href="subject.html#2475">[ subject ]</a>
+              <a href="author.html#2475">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Mike,
+
+&gt;<i>That's really cool, but you can do something similar in QEMU --
+</I>
+I suspected that there might be a way to do it in QEMU, however
+I didn't bother for several reasons:
+
+- I've never got round to loading and learning QEMU
+- It will take longer to learn QEMU then to fire up the soldering iron
+  and make up a null modem cable.
+- QEMU is not always available, especially with real hardware.
+
+It would be nice to include a debug_message type call in MikeOS
+that can be used in situations where one needs to see how far a pgm
+gets before crashing.
+For example it could send 2 bytes to the serial port at various locations
+of a pgm.
+
+e.g.
+; first initialise the serial port (only required once before first call)
+
+mov ax, 0
+call os_serial_port_enable
+
+; now we put one ascii char in al and another in ah
+; this will allow for 100 different &quot;codes&quot; indicating
+; where about in the code the pgm is.
+
+mov al, '30h'
+mov ah, '31h'
+call os_send_debug_msg
+
+this would send the ascii chars 01 to the serial port.
+
+Windows has a OutputDebugString in the kernel and it's very handy.
+Obviously in windows, the debug message would be captured by
+another app listening out for them.
+In MikeOS we don't have this luxury so we could send it to the serial port.
+
+Serial null modem cables are stocked by the better computer stores so
+those that either can't or don't want to make one could buy one.
+
+Paulo.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111001/cdfc099f/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111001/cdfc099f/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002474.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+	<LI>Next message: <A HREF="002481.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2475">[ date ]</a>
+              <a href="thread.html#2475">[ thread ]</a>
+              <a href="subject.html#2475">[ subject ]</a>
+              <a href="author.html#2475">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

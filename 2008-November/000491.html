@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Some tasks for 3.0 -- any takers?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Some%20tasks%20for%203.0%20--%20any%20takers%3F&In-Reply-To=%3C4f03362c0811210621k690a2b81g728dc060e6755207%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000487.html">
+   <LINK REL="Next"  HREF="000492.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Some tasks for 3.0 -- any takers?</H1>
+    <B>Ian Seyler</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Some%20tasks%20for%203.0%20--%20any%20takers%3F&In-Reply-To=%3C4f03362c0811210621k690a2b81g728dc060e6755207%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Some tasks for 3.0 -- any takers?">iseyler at gmail.com
+       </A><BR>
+    <I>Fri Nov 21 15:21:06 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000487.html">[mikeos-developer] Some tasks for 3.0 -- any takers?
+</A></li>
+        <LI>Next message: <A HREF="000492.html">[mikeos-developer] Some tasks for 3.0 -- any takers?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#491">[ date ]</a>
+              <a href="thread.html#491">[ thread ]</a>
+              <a href="subject.html#491">[ subject ]</a>
+              <a href="author.html#491">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Here is the updated batch file contents:
+
+=======================================================
+@echo off
+echo Build script for Windows
+echo.
+
+echo Assembling bootloader...
+cd source\bootload
+nasm -f bin -o bootload.bin bootload.asm
+cd ..
+
+echo Assembling MikeOS kernel...
+nasm -f bin -o kernel.bin kernel.asm
+
+echo Assembling programs...
+cd ..\programs
+ for %%i in (*.asm) do nasm -fbin %%i
+ for %%i in (*.bin) do del %%i
+ for %%i in (*.) do ren %%i %%i.bin
+cd ..
+
+echo Adding bootsector to disk image...
+cd disk_images
+partcopy ..\source\bootload\bootload.bin 0 200 mikeos.flp 0
+cd ..
+
+echo Mounting disk image...
+imdisk -a -f disk_images\mikeos.flp -s 1440K -m B:
+
+echo Copying kernel and applications to disk image...
+copy source\kernel.bin b:\
+copy programs\*.bin b:\
+
+echo Dismounting disk image...
+imdisk -D -m B:
+
+echo Done!
+=======================================================
+
+This will compile the source code, copy the bootloader, mount the disk
+image, copy the kernel and programs, and then dismount the disk image.
+The only requirement is that NASM, partcopy, and imdisk be in the path
+(imdisk will be since it installs to the windows folder).
+
+-Ian
+
+
+On Thu, Nov 20, 2008 at 5:29 PM, Ian Seyler &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">iseyler at gmail.com</A>&gt; wrote:
+&gt;<i> I'll take a look at the batch file and add what is needed. Should have it
+</I>&gt;<i> done tomorrow.
+</I>&gt;<i>
+</I>&gt;<i> -Ian
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On 20-Nov-08, at 4:54 PM, M Saunders wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> Great stuff Ian, thanks! Would it be possible to include the partcopy
+</I>&gt;&gt;<i> and imdisk bits into the build-win.bat script?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> That is, the user installs those two programs, and then just needs to
+</I>&gt;&gt;<i> run one script to assemble the OS, add the bootloader and copy the
+</I>&gt;&gt;<i> files onto the disk image.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> M
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i> Mike Saunders
+</I>&gt;&gt;<i> <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> mikeos-developer mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000487.html">[mikeos-developer] Some tasks for 3.0 -- any takers?
+</A></li>
+	<LI>Next message: <A HREF="000492.html">[mikeos-developer] Some tasks for 3.0 -- any takers?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#491">[ date ]</a>
+              <a href="thread.html#491">[ thread ]</a>
+              <a href="subject.html#491">[ subject ]</a>
+              <a href="author.html#491">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

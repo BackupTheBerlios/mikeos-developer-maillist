@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Added New BASIC Commands!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Added%20New%20BASIC%20Commands%21&In-Reply-To=%3CCAEz6_zj%2B80LwZq0CimwF7v-QX2ULZ9rNBmtFc6NZpnttPLnSFw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002689.html">
+   <LINK REL="Next"  HREF="002691.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Added New BASIC Commands!</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Added%20New%20BASIC%20Commands%21&In-Reply-To=%3CCAEz6_zj%2B80LwZq0CimwF7v-QX2ULZ9rNBmtFc6NZpnttPLnSFw%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Added New BASIC Commands!">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Fri Oct 21 12:08:32 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002689.html">[mikeos-developer] (no subject)
+</A></li>
+        <LI>Next message: <A HREF="002691.html">[mikeos-developer] Added New BASIC Commands!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2690">[ date ]</a>
+              <a href="thread.html#2690">[ thread ]</a>
+              <a href="subject.html#2690">[ subject ]</a>
+              <a href="author.html#2690">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I added another couple of commands the BASIC interpreter.
+
+---Get cursor colour---
+i.e. CURSCOL A
+Gets the colour of the character below the cursor.
+I didn't want to add it to CURSCHAR because the rewriting
+would be enormous.
+
+---Get timer value---
+i.e. T = TIMER
+Get the lower word value of the system clock.
+Useful for performance testing and checking for a delay without
+stopping the program.
+Added as a keyword.
+
+---Change the page---
+i.e. PAGE 1 0
+Sets the working page and the active (display) page.
+Useful for smooth animations / screen redraws.
+The command was easy to write but getting all the command to display
+on the working page was a nightmare. INPUT still uses active page.
+Remember there will be a delay between switching the display page
+and it appearing on the screen.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: basic.asm
+Type: application/octet-stream
+Size: 48790 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111021/72fe71ad/attachment.obj">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111021/72fe71ad/attachment.obj</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002689.html">[mikeos-developer] (no subject)
+</A></li>
+	<LI>Next message: <A HREF="002691.html">[mikeos-developer] Added New BASIC Commands!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2690">[ date ]</a>
+              <a href="thread.html#2690">[ thread ]</a>
+              <a href="subject.html#2690">[ subject ]</a>
+              <a href="author.html#2690">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

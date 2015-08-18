@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] TBOS2 Progress
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20TBOS2%20Progress&In-Reply-To=%3C807441E6CFA34208B83C1FA41EFF308F%40VistaLaptop%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000121.html">
+   <LINK REL="Next"  HREF="000124.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] TBOS2 Progress</H1>
+    <B>Troy Martin</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20TBOS2%20Progress&In-Reply-To=%3C807441E6CFA34208B83C1FA41EFF308F%40VistaLaptop%3E"
+       TITLE="[mikeos-developer] TBOS2 Progress">blasterman95 at gmail.com
+       </A><BR>
+    <I>Sat Sep 13 01:42:41 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000121.html">[mikeos-developer] TBOS2 Progress
+</A></li>
+        <LI>Next message: <A HREF="000124.html">[mikeos-developer] TBOS2 Progress
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#123">[ date ]</a>
+              <a href="thread.html#123">[ thread ]</a>
+              <a href="subject.html#123">[ subject ]</a>
+              <a href="author.html#123">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>WRITTEN A FEW NIGHTS AGO BUT NEVER SENT OFF:
+
+The keyboard driver is still messed up. It's my next project. It was recently labeled stroke-induced by someone at the OSDev forums for the lack of a jump table and the continuous re-usage of &quot;printing character, moving cursor&quot; in EVERY CHARACTER SECTION (wait until you see the source for it, you'll die in horror.)
+
+WRITTEN TODAY:
+
+The 4GB flat memory model is going to be fun to work with. Not that TBOS will ever grow to need all that though. :P
+
+My continous re-usage stated above is no more, since doing a &quot;call .printandmove&quot; is much more efficient. Let's see what medical condition induced this one...
+
+I think the next TBOS core project will be a shell and some more syscalls. My goal is to work on a FAT12 read driver and toss in syscall vectors in between revisions and have FAT12 ready by 0.2.10. Version scheme below:
+
+Beta versions: 0.2.xx
+Release versions: 2.x.x
+First 'x' is major revision number, second 'x' is minor revision number.
+Current version is 0.2.01.
+
+And BTW, does anyone have a VGA 256-color chart that maps it to 6-digit hexadecimal numbers?
+
+Troy Martin
+www.blasterman.co.nr
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080912/ed31fd38/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080912/ed31fd38/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000121.html">[mikeos-developer] TBOS2 Progress
+</A></li>
+	<LI>Next message: <A HREF="000124.html">[mikeos-developer] TBOS2 Progress
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#123">[ date ]</a>
+              <a href="thread.html#123">[ thread ]</a>
+              <a href="subject.html#123">[ subject ]</a>
+              <a href="author.html#123">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

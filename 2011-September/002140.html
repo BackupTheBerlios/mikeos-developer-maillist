@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeShell%200.420%20and%20EDIT%200.420%20for%204.1.2%0A%09released&In-Reply-To=%3CCACtjVkGD4MVE1kBUgE4Jef_1sQE2rT%2Bra_7zzrPG%2BeZwWaGe2g%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002132.html">
+   <LINK REL="Next"  HREF="002141.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeShell%200.420%20and%20EDIT%200.420%20for%204.1.2%0A%09released&In-Reply-To=%3CCACtjVkGD4MVE1kBUgE4Jef_1sQE2rT%2Bra_7zzrPG%2BeZwWaGe2g%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released">okachi at gmail.com
+       </A><BR>
+    <I>Mon Sep 12 11:43:58 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002132.html">[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released
+</A></li>
+        <LI>Next message: <A HREF="002141.html">[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2140">[ date ]</a>
+              <a href="thread.html#2140">[ thread ]</a>
+              <a href="subject.html#2140">[ subject ]</a>
+              <a href="author.html#2140">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>OK, I've had more time to play around with the new shell and editor
+now. My thoughts:
+
+1) Good work Troy! Well formatted and commented code, and no bugs that
+I can see, but I'd like to give it lots of testing.
+
+2) I'd like to simplify the text editor so that instead of Rename we
+have Save As. So you hit F2 to save with the current name, and F3 to
+save with a different. Put New in F4. You can add space for the Save
+As help in the bottom info bar by putting &quot;Press Esc to quit&quot; in the
+top bar.
+
+3) Let's make the default new filename &quot;UNTITLED.TXT&quot; rather than just
+&quot;UNTITLED&quot;. MikeOS requires that filenames have three-letter
+extensions -- when it's &quot;UNTITLED&quot; it doesn't save correctly (I'll
+update the error messages to show that)
+
+4) When you use &quot;del&quot;, it shows the filename in the resulting text:
+&quot;Deleted FOO.BIN&quot;. That's cool -- can we do the same for &quot;copy&quot; and
+&quot;ren&quot; etc.? Eg &quot;Copied BLAH.FOO to LOLWUT.BAR&quot; as the output text?
+
+5) There are a couple of things in the code that could be clearer.
+Line 27 of your cli.asm has this comment: &quot;The final prompt is
+returned in AX&quot;, but that makes no sense to me there (presumably it's
+left over from some other code). Line 323 has an instruction commented
+out -- can we just get rid of it? Same with line 60 of edit.asm. See
+if there are any other comments you can add to explain things.
+
+If you can fix those and re-send the code, that'd be great! Otherwise
+it looks ready to go into 4.2 -- nice work. Thanks!
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002132.html">[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released
+</A></li>
+	<LI>Next message: <A HREF="002141.html">[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2140">[ date ]</a>
+              <a href="thread.html#2140">[ thread ]</a>
+              <a href="subject.html#2140">[ subject ]</a>
+              <a href="author.html#2140">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

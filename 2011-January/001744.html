@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] GUI
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20GUI&In-Reply-To=%3CAANLkTimBJonECHzuZCkC8cdoBHkXT%2Btnfjxai140Fhza%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001743.html">
+   <LINK REL="Next"  HREF="001745.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] GUI</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20GUI&In-Reply-To=%3CAANLkTimBJonECHzuZCkC8cdoBHkXT%2Btnfjxai140Fhza%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] GUI">okachi at gmail.com
+       </A><BR>
+    <I>Wed Jan 12 10:12:32 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001743.html">[mikeos-developer] GUI
+</A></li>
+        <LI>Next message: <A HREF="001745.html">[mikeos-developer] GUI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1744">[ date ]</a>
+              <a href="thread.html#1744">[ thread ]</a>
+              <a href="subject.html#1744">[ subject ]</a>
+              <a href="author.html#1744">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+On Wed, Jan 12, 2011 at 6:55 AM, Raghav Sood &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">raghavsood at gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> compared to my other pentium. So instead I tried adapting the drivers from
+</I>&gt;<i> Kolibri OS (it is also written completely in assembly). This is not working
+</I>&gt;<i> very well for me. Can anyone help me adapt these drivers to work with
+</I>&gt;<i> MikeOS?
+</I>
+I think you're drastically underestimating the amount of work involved
+in porting drivers. MikeOS and KolibriOS are EXTREMELY different OSes
+-- the latter is 32-bit protected mode for starters, and will have its
+own driver model. Just because they're both in assembly, doesn't mean
+it's easy to port. Many OS kernels are written in C, but drivers
+aren't necessarily portable.
+
+If it was that easy, we'd have all sorts of goodies from KolibriOS now
+such as networking! There may be some specs and ideas you can grab
+from the driver source, but only if you have a VERY good understanding
+of the tech involved (I'd wager it's all VESA video modes).
+
+As we're in real mode in MikeOS, why not just use the BIOS? Look:
+
+  mov ax, 12h
+  int 10h
+
+There -- in two lines of code you're in 640x480x16 video mode (VGA).
+You can also plot pixels using int 10h as per here:
+<A HREF="http://www.ctyme.com/intr/int-10.htm">http://www.ctyme.com/intr/int-10.htm</A>
+
+There, you have a basic video driver. That is seriously about 0.01% of
+the work required to make a GUI though!
+
+&gt;<i> I have tried but the GUI fails to start and the screen remains blank.
+</I>
+If you try something and it doesn't work, SHOW US THE CODE! There's a
+reason sites like pastebin.com. We're not mind-readers -- we can't
+just magically guess your problem with no information! We need to see
+what you've done if there's any chance of fixing it.
+
+But I'd definitely go the BIOS route. See mikeos-gui.tgz for an
+example of switching to 640x480x2, and a pixel plotting routine that
+uses video RAM directly rather than the BIOS. There's also a font
+rendering subsystem in there, along with the first 1% of widgets.
+(It's 99% uncomplete and still with many hundreds of lines of code, so
+consider just how vast the job of writing a GUI is.)
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001743.html">[mikeos-developer] GUI
+</A></li>
+	<LI>Next message: <A HREF="001745.html">[mikeos-developer] GUI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1744">[ date ]</a>
+              <a href="thread.html#1744">[ thread ]</a>
+              <a href="subject.html#1744">[ subject ]</a>
+              <a href="author.html#1744">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

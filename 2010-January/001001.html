@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Ret
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Ret&In-Reply-To=%3C385927.73991.qm%40web113102.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001000.html">
+   <LINK REL="Next"  HREF="001002.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Ret</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Ret&In-Reply-To=%3C385927.73991.qm%40web113102.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] Ret">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Fri Jan 29 11:10:39 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001000.html">[mikeos-developer] Ret
+</A></li>
+        <LI>Next message: <A HREF="001002.html">[mikeos-developer] Ret
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1001">[ date ]</a>
+              <a href="thread.html#1001">[ thread ]</a>
+              <a href="subject.html#1001">[ subject ]</a>
+              <a href="author.html#1001">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Dan,
+
+RET always returns to the next instruction after the CALL instruction.
+As to where you put it, will depend on your code.
+
+As a side note, I assume that all the programs will reside/execute from the same segment?
+You can't just jump to arbitrary segments and still hope to use os_calls.
+The kernel in MikeOS is loaded into segment 2000h.
+User programs are loaded at offset 32768 (8000h) in segment 2000h, so there is nothing stopping you from
+loading other programs at different offsets within the same segment, just watch for overlapping.
+
+Just make sure you include the right offset after the ORG directive or the os_calls will not work.
+If you decide to use this method, it will very soon get very &quot;hairy&quot; as different programs will have to be compiled
+with different offsets, it will be a nightmare to control.
+
+Have a look at my code in xfer.zip    <A HREF="http://prdownload.berlios.de/mikeos/mikeos-xfer.zip">http://prdownload.berlios.de/mikeos/mikeos-xfer.zip</A> 
+where I run a program within a program so to speak.
+The main program is executed at offset 32768 and the secondry program at 36864.
+This might give you some ideas.
+
+Paulo.
+
+
+
+
+----- Original Message ----
+From: 05Barry &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">05Barry at colne.essex.sch.uk</A>&gt;
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+Sent: Fri, January 29, 2010 11:43:48 AM
+Subject: [mikeos-developer] Ret
+
+Hi guys,
+
+I am working on making a 16bit OS run multiple programs at a time, but
+need to know where the 'ret' function goes... Where can I retrieve the
+data that allows 'ret' to jump back to what it was previously doing?
+
+Thanks,
+
+Dan
+_______________________________________________
+mikeos-developer mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001000.html">[mikeos-developer] Ret
+</A></li>
+	<LI>Next message: <A HREF="001002.html">[mikeos-developer] Ret
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1001">[ date ]</a>
+              <a href="thread.html#1001">[ thread ]</a>
+              <a href="subject.html#1001">[ subject ]</a>
+              <a href="author.html#1001">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

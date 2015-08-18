@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Head and Tail
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Head%20and%20Tail&In-Reply-To=%3CCAEz6_zjx4w-o--8Te9Y3j94cg6sCZY4AKjSbXe2DsUn_Z4zg5g%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002488.html">
+   <LINK REL="Next"  HREF="002490.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Head and Tail</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Head%20and%20Tail&In-Reply-To=%3CCAEz6_zjx4w-o--8Te9Y3j94cg6sCZY4AKjSbXe2DsUn_Z4zg5g%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Head and Tail">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Mon Oct  3 07:53:08 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002488.html">[mikeos-developer] ADVENTURE! v2.0
+</A></li>
+        <LI>Next message: <A HREF="002490.html">[mikeos-developer] Head and Tail
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2485">[ date ]</a>
+              <a href="thread.html#2485">[ thread ]</a>
+              <a href="subject.html#2485">[ subject ]</a>
+              <a href="author.html#2485">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>G'day all,
+I made some new command line applications &quot;head&quot; and &quot;tail&quot;.
+You can use them like:
+head (filename) [lines]
+tail (filename) [lines]
+You can only read text files, so will only accept .TXT and .BAS files.
+
+Here are some examples that will work:
+head memedit.bas
+head tail.bas 12
+tail draw.bas 8
+tail readme.txt 20
+tail head.bas
+
+Here are some example that will not work:
+head kernel.bin      &lt;-----Unsupported extention
+tail calc.bas 200    &lt;-----Too many lines
+head asdfsdasdfga.txt &lt;----Invalid filename
+head *#&amp;$%@#vbCrLf%%@.wtf 500000 &lt;---All of the above
+tail foo 10          &lt;-----No extention
+
+Also I made a kind of command line memory viewer &quot;GETBYTES.BAS&quot;
+Simply type &quot;getbytes start end&quot; and it will be neatly printed to the
+screen in hexdecimal. For example, &quot;getbytes 100 200&quot;.
+
+Available on my Google Code at <A HREF="http://code.google.com/p/mikebasic-applications">http://code.google.com/p/mikebasic-applications</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002488.html">[mikeos-developer] ADVENTURE! v2.0
+</A></li>
+	<LI>Next message: <A HREF="002490.html">[mikeos-developer] Head and Tail
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2485">[ date ]</a>
+              <a href="thread.html#2485">[ thread ]</a>
+              <a href="subject.html#2485">[ subject ]</a>
+              <a href="author.html#2485">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

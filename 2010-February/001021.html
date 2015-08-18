@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Extra for MikeOS BASIC
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Extra%20for%20MikeOS%20BASIC&In-Reply-To=%3C19d8b3b01002011517k70f66e96s202d02c0f51ce602%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001018.html">
+   <LINK REL="Next"  HREF="001026.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Extra for MikeOS BASIC</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Extra%20for%20MikeOS%20BASIC&In-Reply-To=%3C19d8b3b01002011517k70f66e96s202d02c0f51ce602%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Extra for MikeOS BASIC">okachi at gmail.com
+       </A><BR>
+    <I>Tue Feb  2 00:17:54 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001018.html">[mikeos-developer] Extra for MikeOS BASIC
+</A></li>
+        <LI>Next message: <A HREF="001026.html">[mikeos-developer] Extra for MikeOS BASIC
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1021">[ date ]</a>
+              <a href="thread.html#1021">[ thread ]</a>
+              <a href="subject.html#1021">[ subject ]</a>
+              <a href="author.html#1021">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Paulo,
+
+Interesting ideas, but in the name of simplicity I'd rather not
+conflate the two different programming approaches. BASIC should stand
+on its own: it should evolve to support the needs of programmers
+rather than to awkwardly have bits of assembler shoe-horned in.
+
+After all, there's already a defined API for asm developers so I don't
+think BASIC needs to compensate for anything. Simple asm operations
+can also be accomplished by, eg:
+
+POKE 250 65500
+POKE 195 65501
+CALL 65500
+
+to execute CLI then RET.
+
+&gt;<i> reg.AH = 8
+</I>&gt;<i> reg.BH = 0
+</I>&gt;<i> INT(10h)
+</I>&gt;<i> a = (reg.AL) &#160; ; character returned in al
+</I>&gt;<i> b = (reg.AH) &#160; ; character's colour returned in ah
+</I>
+The best thing here would be to implement it as a BASIC instruction.
+Ultimately, if you really want to do something in BASIC but it's only
+possible through falling back to asm, then the BASIC interpreter is
+missing something and we should implement it in BASIC.
+
+I'm up for adding more BASIC instructions for MikeOS 4.2 so fire away!
+Within reason of course. An XML parser might be beyond my nous :-)
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001018.html">[mikeos-developer] Extra for MikeOS BASIC
+</A></li>
+	<LI>Next message: <A HREF="001026.html">[mikeos-developer] Extra for MikeOS BASIC
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1021">[ date ]</a>
+              <a href="thread.html#1021">[ thread ]</a>
+              <a href="subject.html#1021">[ subject ]</a>
+              <a href="author.html#1021">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

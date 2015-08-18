@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] int 33h? ps/2 mouse?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20%3D%3Futf-8%3Fq%3Fint_33h%3D3F_ps/2_mouse%3D3F%3F%3D&In-Reply-To=%3Ce8d679a161d5a3b9cbcee012e6daca67%40cordilon.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002535.html">
+   <LINK REL="Next"  HREF="002533.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] int 33h? ps/2 mouse?</H1>
+    <B>Troy Martin</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20%3D%3Futf-8%3Fq%3Fint_33h%3D3F_ps/2_mouse%3D3F%3F%3D&In-Reply-To=%3Ce8d679a161d5a3b9cbcee012e6daca67%40cordilon.net%3E"
+       TITLE="[mikeos-developer] int 33h? ps/2 mouse?">blacklight at cordilon.net
+       </A><BR>
+    <I>Tue Oct  4 06:51:41 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002535.html">[mikeos-developer] int 33h? ps/2 mouse?
+</A></li>
+        <LI>Next message: <A HREF="002533.html">[mikeos-developer] MikeOS 4.3b2 Bugs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2536">[ date ]</a>
+              <a href="thread.html#2536">[ thread ]</a>
+              <a href="subject.html#2536">[ subject ]</a>
+              <a href="author.html#2536">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, 3 Oct 2011 22:56:42 -0500, Justin Tokarchuk wrote:
+&gt;<i> This is over my head, although I am improving at my asm. I have done
+</I>&gt;<i> some research and found this driver:
+</I>Well, I'm obviously not the best authority on this, but I'd suggest 
+using the BIOS functions instead of manually playing with the keyboard 
+controller right now. Subfunction 07h appears to basically be a callback 
+function that fires at the sample rate set using 02h.
+
+Suggested reference: <A HREF="http://www.ctyme.com/intr/int-15.htm">http://www.ctyme.com/intr/int-15.htm</A>
+
+-- 
+Troy
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002535.html">[mikeos-developer] int 33h? ps/2 mouse?
+</A></li>
+	<LI>Next message: <A HREF="002533.html">[mikeos-developer] MikeOS 4.3b2 Bugs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2536">[ date ]</a>
+              <a href="thread.html#2536">[ thread ]</a>
+              <a href="subject.html#2536">[ subject ]</a>
+              <a href="author.html#2536">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

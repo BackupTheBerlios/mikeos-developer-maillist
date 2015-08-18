@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.2b2 Bugs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.2b2%20Bugs&In-Reply-To=%3CCAEz6_zgZQRBTqjKWL8RiAHjWAFuUhj%3D2o3LUpuSOtHdiXLQSPQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002284.html">
+   <LINK REL="Next"  HREF="002286.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.2b2 Bugs</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.2b2%20Bugs&In-Reply-To=%3CCAEz6_zgZQRBTqjKWL8RiAHjWAFuUhj%3D2o3LUpuSOtHdiXLQSPQ%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 4.2b2 Bugs">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Sat Sep 24 06:08:11 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002284.html">[mikeos-developer] Additions to MikeBASIC for ver 4.3
+</A></li>
+        <LI>Next message: <A HREF="002286.html">[mikeos-developer] MikeOS 4.2b2 Bugs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2285">[ date ]</a>
+              <a href="thread.html#2285">[ thread ]</a>
+              <a href="subject.html#2285">[ subject ]</a>
+              <a href="author.html#2285">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Fixed all the bugs everyone's reporting, thanks guys.
+
+&gt;<i>Memedit is very nice, but could be made
+</I>&gt;<i> more user friendly by having the ASCII char
+</I>&gt;<i> on the right also highlighted same as the
+</I>&gt;<i> corresponding HEX byte on the left.
+</I>&gt;<i>  I would also prefer to have the line numbers
+</I>&gt;<i>  and offsets in hex as opposed to decimal.
+</I>
+Now does double columns.
+Location number is in hexdecimal.
+Goto's have also been changes to use hex-decimal.
+Offsets will stay the same.
+Fixed in Memory Manipulator 2.3.2
+
+&gt;<i>After terminating calc.bas, the screen stays
+</I>&gt;<i>   blank until a key is pressed which then goes
+</I>&gt;<i>  back to the editor.
+</I>&gt;<i>  This could be confusing to someone, thinking
+</I>&gt;<i>  it has crashed.
+</I>
+This bug didn't happen for me. What did you do to get it?
+Tell me your kernel version and version of Calculator.
+
+&gt;<i>Also found a typo in the main screen of the pgm
+</I>&gt;<i>it says ANCII Art Creator.
+</I>
+Seriously, the title. Fixed in ASCII Artist 1.0.2
+
+&gt;<i>I'm sure that means American Nonstandard Code for Information Interchange...
+</I>Haha, true. Every operating system seems to use it differently.
+
+&gt;<i>Draw.bas crashes after loading a file.
+</I>Only load picture files.
+
+&gt;<i>you could make the file format have a
+</I>&gt;<i>three-byte header (eg &quot;DRW&quot;), which isn't displayed on the screen but
+</I>&gt;<i>written to the start of a file during a file-save operation.
+</I>
+Maybe next version, that would stop all my pictures from working.
+
+&gt;<i>How about DRW01?
+</I>
+Okay, that sounds good.
+
+&gt;<i>When clearing the screen, it doesn't clear the very leftmost column
+</I>
+Actually that isn't saved, but the cursor won't go there now, so
+Fixed in ASCII Artist 1.0.2
+
+&gt;<i>Dividing by zero causes a total freeze (to be expected, but can we
+</I>have a check for that?)
+
+I made this trigger an error message (ERRBOX in MB++).
+Fixed in Calculator 1.0.2
+
+&gt;<i>Mike, now that you mention the operations of calc,
+</I>&gt;<i>any operation that has a result greater than 65535
+</I>&gt;<i>goes back to zero.
+</I>&gt;<i>e.g.  65535+1 =0     32768 X 2 = 0
+</I>&gt;<i>I know that MikeOS is a 16 bit OS, but surely the calc
+</I>&gt;<i>should use the FPU rather?
+</I>
+There is no operations in MikeBASIC for 32-bit variables.
+
+&gt;<i>The new miketron draws really slow. Unsure if this was intended.
+</I>
+When travelling up an down the speed is halved. This is to compensate
+for the vertical larger size of the characters. Otherwise it looks
+too fast. So yes, this was intended. If it's left and right that's
+slow then we may have a problem.
+
+&gt;<i>Should I leave certain ones alone? (i.e. divide by zero in calc) for the
+</I>&gt;<i>respective owners to fix? I do not want to step on any toes.
+</I>
+Well, I've fixed them for now, but if you want to fix any bugs in future,
+go ahead! You can email it to me and tell me what you changed and I'll
+verify it and put it on my Google code. Just make sure your using the
+latest version. Links on the MikeOS site point to the stable versions.
+You can go here: <A HREF="http://code.google.com/p/mikebasic-applications/">http://code.google.com/p/mikebasic-applications/</A> for the
+latest version (if there isn't one use stable).
+
+&gt;<i>once your adventure game is done and tested, I'll put it on the MikeOS site.
+</I>
+Can't wait to see it. I tried to make one (with strong free software
+references) but gave up, I'm a developer not a writer.
+
+&gt;<i>I'm &quot;showing you the code&quot; :-)  for
+</I>&gt;<i>AND, XOR and OR logical functions
+</I>&gt;<i>added to MikeBASIC.
+</I>&gt;<i>&amp; = logical AND
+</I>&gt;<i>^ = logical XOR
+</I>&gt;|<i> = logical OR
+</I>
+That's great, that would be really useful!
+
+I've updated Memory Manipulator, ASCII Artist and Calculator.
+I also release a new unstable version of MB++ today.
+They should be linked to the MikeOS site but changelog and downloads
+are on my Google Code: <A HREF="http://code.google.com/p/mikebasic-applications/">http://code.google.com/p/mikebasic-applications/</A>
+
+Good, I think that's all cleared up.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002284.html">[mikeos-developer] Additions to MikeBASIC for ver 4.3
+</A></li>
+	<LI>Next message: <A HREF="002286.html">[mikeos-developer] MikeOS 4.2b2 Bugs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2285">[ date ]</a>
+              <a href="thread.html#2285">[ thread ]</a>
+              <a href="subject.html#2285">[ subject ]</a>
+              <a href="author.html#2285">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

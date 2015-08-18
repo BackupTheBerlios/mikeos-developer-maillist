@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Planning for MikeOS 2.1 and 3.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%0A%09%3D%3Futf-8%3Fq%3FPlanning_for_MikeOS_2%3D2E1_and_3%3D2E0%3F%3D&In-Reply-To=%3C611c7753.18c9ce90.48ff37be.54f42%40o2.pl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000382.html">
+   <LINK REL="Next"  HREF="000361.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Planning for MikeOS 2.1 and 3.0</H1>
+    <B>Tomasz Gorol</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%0A%09%3D%3Futf-8%3Fq%3FPlanning_for_MikeOS_2%3D2E1_and_3%3D2E0%3F%3D&In-Reply-To=%3C611c7753.18c9ce90.48ff37be.54f42%40o2.pl%3E"
+       TITLE="[mikeos-developer] Planning for MikeOS 2.1 and 3.0">gavian at tlen.pl
+       </A><BR>
+    <I>Wed Oct 22 16:25:02 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000382.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+        <LI>Next message: <A HREF="000361.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#383">[ date ]</a>
+              <a href="thread.html#383">[ thread ]</a>
+              <a href="subject.html#383">[ subject ]</a>
+              <a href="author.html#383">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+&gt;<i> On the note of unreal mode, we currently only use two BIOS calls that
+</I>&gt;<i> require an exact memory location (as far as I can see): reading disk
+</I>&gt;<i> sectors and writing disc sectors. Instead of trying to pass EBX to the
+</I>&gt;<i> BIOS, which probably won't work, we could just copy data into
+</I>&gt;<i> os_buffer (which'll be in the first 64K of RAM) and then point BX at
+</I>&gt;<i> that before calling the BIOS.
+</I>&gt;<i> 
+</I>&gt;<i> I will investigate tonight!
+</I>
+I think it is a cost we have to pay (I mean mean mess with BX and ENX)  for being betwen protected mode and read mode.
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000382.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+	<LI>Next message: <A HREF="000361.html">[mikeos-developer] Planning for MikeOS 2.1 and 3.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#383">[ date ]</a>
+              <a href="thread.html#383">[ thread ]</a>
+              <a href="subject.html#383">[ subject ]</a>
+              <a href="author.html#383">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

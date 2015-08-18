@@ -1,0 +1,224 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] BIN to POKE converters.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20BIN%20to%20POKE%20converters.&In-Reply-To=%3CCAPRjAGiXsPEkivLNJASBgYkn7vXWgPZjGet9Xz8-mXizSxF%3DgQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002303.html">
+   <LINK REL="Next"  HREF="002307.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] BIN to POKE converters.</H1>
+    <B>Paulo V</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20BIN%20to%20POKE%20converters.&In-Reply-To=%3CCAPRjAGiXsPEkivLNJASBgYkn7vXWgPZjGet9Xz8-mXizSxF%3DgQ%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] BIN to POKE converters.">paulomobilemail at gmail.com
+       </A><BR>
+    <I>Mon Sep 26 23:10:38 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002303.html">[mikeos-developer] New E-Mail
+</A></li>
+        <LI>Next message: <A HREF="002307.html">[mikeos-developer] BIN to POKE converters.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2306">[ date ]</a>
+              <a href="thread.html#2306">[ thread ]</a>
+              <a href="subject.html#2306">[ subject ]</a>
+              <a href="author.html#2306">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+If like me, you make use of the POKE command in
+MikeBASIC, then you will know it's quite a pain to
+write the pgm in assembler, then compile, then
+disassemble then convert all the hex bytes to decimal.
+
+I have written two programs that will do it automatically.
+All you have to do is compile the ASM pgm you want to
+include into your basic pgm, then run the .bin thru
+one of my pgms.
+
+It will ask you for the name and path to the bin file,
+the name and path to create the new text file
+and finally the start address (in decimal) of your POKEs.
+
+The format of the created text file which you can then
+include into your Basic pgm as follows:
+
+poke 192 40000
+poke 208 40001
+poke 175 40002
+poke 198 40003
+etc etc
+call 40000
+
+The first version is for those that compile/develop
+MikeBASIC apps under DOS/WIN and the second
+version is a perl script for those that use Linux.
+I have written it for QuickBasic 4.5, but should run
+on other flavours of Basic such as TurboBasic
+or even GWBasic (with some changes).
+
+Note that the DOS/WIN version gives you the option
+of creating the text file with CRLF or just LF formatting.
+
+The DOS/WIN version:
+
+'=======================================
+' .bin/.com to MikeBASIC POKE converter
+' compile with QuickBasic 4.5
+' Paulo Valongo 26 September 2011
+'=======================================
+
+DIM FileData AS STRING * 1
+
+INPUT &quot;Enter file name and path to open &quot;; InFile$
+INPUT &quot;Enter file name and path to create the POKE statements in &quot;; OutFile$
+INPUT &quot;Enter the start address in decimal &quot;; PokeAddr
+
+'=============================
+AskFileType:
+'=============================
+
+INPUT &quot;Enter 1 for CRLFs in text file (WIN/DOS) or 2 for LFs only (LINUX) or
+3 to exit&quot;; FileType
+
+IF FileType = 3 THEN GOTO finish
+OrigPokeAddr = PokeAddr
+
+OPEN InFile$ FOR BINARY AS #1
+OPEN OutFile$ FOR OUTPUT AS #2
+
+IF FileType = 1 THEN GOTO CRLF
+IF FileType = 2 THEN GOTO LF
+GOTO UserError
+
+'===============================
+CRLF:
+'===============================
+
+FOR x = 1 TO LOF(1)
+GET #1, x, FileData
+DecValue$ = STR$(ASC(FileData))
+PRINT #2, &quot;poke&quot;; DecValue$; PokeAddr
+PokeAddr = PokeAddr + 1
+NEXT x
+
+PRINT #2, &quot;call&quot;; OrigPokeAddr
+
+CLOSE #1
+CLOSE #2
+
+'================================
+finish:
+'================================
+
+END
+
+'================================
+UserError:
+'================================
+
+PRINT &quot; &quot;
+PRINT &quot;Invalid option entered&quot;
+PRINT &quot; &quot;
+GOTO AskFileType
+
+'================================
+LF:
+'================================
+
+FOR x = 1 TO LOF(1)
+GET #1, x, FileData
+DecValue$ = STR$(ASC(FileData))
+PRINT #2, &quot;poke&quot;; DecValue$; PokeAddr; CHR$(10);
+PokeAddr = PokeAddr + 1
+NEXT x
+
+PRINT #2, &quot;call&quot;; OrigPokeAddr
+
+CLOSE #1
+CLOSE #2
+
+GOTO finish
+
+' ========== END =================
+
+The Linux perl script:
+(Don't forget to set the appropriate permissions)
+
+
+
+#!/usr/bin/perl
+
+print &quot;Bin to POKE converter for MikeBASIC\n&quot;;
+print &quot;by Paulo Valongo 26 September 2011\n&quot;;
+print &quot;    &quot;\n&quot;;
+print &quot;Enter name and path to bin file\n&quot;;
+$FileIn = &lt;&gt;;
+print &quot;Enter name and path to text file to be created\n&quot;;
+$FileOut = &lt;&gt;;
+print &quot;Enter start POKE address in decimal\n&quot;;
+$PokeAddr = &lt;&gt;;
+
+chomp($FileOut);
+chomp($PokeAddr);
+$OrigPokeAddr = $PokeAddr;
+
+open (FILE1, &quot;&gt;&quot;, $FileOut) or die $!;
+
+open (FILE2, $FileIn) or die $!;
+binmode FILE2;
+my ($data, $n);
+
+while (($n = read FILE2, $data, 1) != 0)
+{
+    $ord = ord($data);
+    print FILE1 &quot;poke &quot;, $ord, &quot; &quot;, $PokeAddr, &quot;\n&quot;;
+    $PokeAddr = $PokeAddr + 1;
+}
+
+print FILE1 &quot;call &quot;, $OrigPokeAddr;
+close FILE2;
+close FILE1;
+$NumBytes = $PokeAddr - $OrigPokeAddr;
+print &quot;DONE, processed &quot;, $NumBytes, &quot; bytes\n&quot;;
+
+
+Hope it's of help to others.
+Paulo.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110926/afbd3b0a/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110926/afbd3b0a/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002303.html">[mikeos-developer] New E-Mail
+</A></li>
+	<LI>Next message: <A HREF="002307.html">[mikeos-developer] BIN to POKE converters.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2306">[ date ]</a>
+              <a href="thread.html#2306">[ thread ]</a>
+              <a href="subject.html#2306">[ subject ]</a>
+              <a href="author.html#2306">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

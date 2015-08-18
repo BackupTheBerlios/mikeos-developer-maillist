@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] OS_PAUSE
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20OS_PAUSE&In-Reply-To=%3C276701.78804.qm%40web113111.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001338.html">
+   <LINK REL="Next"  HREF="001362.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] OS_PAUSE</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20OS_PAUSE&In-Reply-To=%3C276701.78804.qm%40web113111.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] OS_PAUSE">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Tue May 18 15:13:07 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001338.html">[mikeos-developer] OS_PAUSE
+</A></li>
+        <LI>Next message: <A HREF="001362.html">[mikeos-developer] OS_PAUSE
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1316">[ date ]</a>
+              <a href="thread.html#1316">[ thread ]</a>
+              <a href="subject.html#1316">[ subject ]</a>
+              <a href="author.html#1316">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Mike,
+
+For now I'm adding another call to my copy of MikeOS4.
+This one is called os_wait_sec and as the name suggests waits in multiples of 1 second.
+I will also probably add another call os_wait_msecs with a granularity of 55mS.
+
+
+;---------------------------------------------------------------------------------------------------------------------------------
+;os_wait_secs -- waits for predetermined amount of seconds
+;
+; IN: BX = number of seconds to wait   
+; OUT: AL =0 if timer has not overflowed past 24 hrs since reset
+;---------------------------------------------------------------------------------------------------------------------------------
+os_wait_secs:
+
+mov ah,0
+int 1ah        ; get tick count
+mul bx,18    ; multiply required seconds by 18
+add dx,bx    ; add to original tick count
+mov bx,dx    ; and store it for later comparison
+
+checkloop:
+
+mov ah,0
+int 1ah        ; get new tick count
+cmp dx,bx    ; compare with original tick count 
+jge time_up    ; if greater or equal to bx means time's up so bail out
+jmp checkloop    ; wait some more
+
+time_up:
+
+ret        ; all done
+
+
+Paulo.
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001338.html">[mikeos-developer] OS_PAUSE
+</A></li>
+	<LI>Next message: <A HREF="001362.html">[mikeos-developer] OS_PAUSE
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1316">[ date ]</a>
+              <a href="thread.html#1316">[ thread ]</a>
+              <a href="subject.html#1316">[ subject ]</a>
+              <a href="author.html#1316">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

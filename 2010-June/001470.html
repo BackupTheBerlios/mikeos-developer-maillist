@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Two bugs with os_file_selector
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-June/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Two%20bugs%20with%20os_file_selector&In-Reply-To=%3C164561.99110.qm%40web56105.mail.re3.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001469.html">
+   <LINK REL="Next"  HREF="001471.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Two bugs with os_file_selector</H1>
+    <B>M. Horvat</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Two%20bugs%20with%20os_file_selector&In-Reply-To=%3C164561.99110.qm%40web56105.mail.re3.yahoo.com%3E"
+       TITLE="[mikeos-developer] Two bugs with os_file_selector">redjazz_slo at yahoo.com
+       </A><BR>
+    <I>Fri Jun 25 15:24:09 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001469.html">[mikeos-developer] A new system call: os_exponentation
+</A></li>
+        <LI>Next message: <A HREF="001471.html">[mikeos-developer] Two bugs with os_file_selector
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1470">[ date ]</a>
+              <a href="thread.html#1470">[ thread ]</a>
+              <a href="subject.html#1470">[ subject ]</a>
+              <a href="author.html#1470">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>1. If the disk label is not an empty string, MikeOS will hang when displaying the list of files. The same happens with the DIR command, so the bug is probably in os_get_file_list.
+
+2. The routine seems to be having problems when there are more files than can appear on the screen. If the number of files on the root of the volume is equal to the number of lines in the os_file_selector dialog box, the last one will appear invisible - that is, it will not have its name displayed, however, one will still be able to select it.
+
+Sorry if this has already been reported.
+
+-Matej Horvat
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001469.html">[mikeos-developer] A new system call: os_exponentation
+</A></li>
+	<LI>Next message: <A HREF="001471.html">[mikeos-developer] Two bugs with os_file_selector
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1470">[ date ]</a>
+              <a href="thread.html#1470">[ thread ]</a>
+              <a href="subject.html#1470">[ subject ]</a>
+              <a href="author.html#1470">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

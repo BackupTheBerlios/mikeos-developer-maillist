@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] libmikeos-0.2.0 released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20libmikeos-0.2.0%20released&In-Reply-To=%3C87eiz917ap.wl%25uaa%40mx5.nisiq.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000643.html">
+   <LINK REL="Next"  HREF="000612.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] libmikeos-0.2.0 released</H1>
+    <B>SASANO Takayoshi</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20libmikeos-0.2.0%20released&In-Reply-To=%3C87eiz917ap.wl%25uaa%40mx5.nisiq.net%3E"
+       TITLE="[mikeos-developer] libmikeos-0.2.0 released">uaa at mx5.nisiq.net
+       </A><BR>
+    <I>Mon Jan 12 05:23:42 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000643.html">[mikeos-developer] new build script for OpenBSD
+</A></li>
+        <LI>Next message: <A HREF="000612.html">[mikeos-developer] libmikeos-0.2.0 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#610">[ date ]</a>
+              <a href="thread.html#610">[ thread ]</a>
+              <a href="subject.html#610">[ subject ]</a>
+              <a href="author.html#610">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+Here is tested library, libmikeos-0.2.0 for MikeOS-3.x series :-
+
+<A HREF="http://www.bi.a.u-tokyo.ac.jp/~uaa/gomitext/2009/20090112/libmikeos-0.2.0.tar.gz">http://www.bi.a.u-tokyo.ac.jp/~uaa/gomitext/2009/20090112/libmikeos-0.2.0.tar.gz</A>
+
+The differencies from untested version (20081213.tar.gz) are :-
+
+	- removed unused API glue (mouse/interrupt handler)
+	- added MikeOS-3.1 API glue (os_string_charchange, os_draw_block,
+	  and os_get_random)
+	- fixed the bug of os_filename_convert/os_get_time_string glue
+	- samples are modified
+		test03 (string operations)
+			os_string_charchange test added
+		test05 (misc #1)
+			os_draw_block and os_get_random test added
+		test07 (interrupt handler)
+			removed
+		test09 (file operation #1)
+			the target of os_file_selector is changed
+			MIKEKERN.BIN -&gt; HELLO.BIN, and the result of API
+			requires &quot;MIKEKERNBIN&quot; -&gt; &quot;HELLO.BIN&quot;
+		test0c (mouse #1)
+			removed
+		test0d (mouse #2)
+			removed
+
+----		
+Mike, the address of os_get_time_string (in source/kernel.asm) is wrong.
+
+&gt;<i>       jmp os_string_truncate          ; 004Eh
+</I>&gt;<i>       jmp os_bcd_to_int               ; 0051h
+</I>&gt;<i>       jmp os_get_time_string          ; 0055h
+</I>&gt;<i>       jmp os_get_api_version          ; 0057h
+</I>&gt;<i>       jmp os_file_selector            ; 005Ah
+</I>
+os_get_time_string is at 0054h.
+
+----
+SASANO Takayoshi (JG1UAA/1) [<A HREF="http://www.uaa.org.uk/">http://www.uaa.org.uk/</A>] &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">uaa at uaa.org.uk</A>&gt;
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000643.html">[mikeos-developer] new build script for OpenBSD
+</A></li>
+	<LI>Next message: <A HREF="000612.html">[mikeos-developer] libmikeos-0.2.0 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#610">[ date ]</a>
+              <a href="thread.html#610">[ thread ]</a>
+              <a href="subject.html#610">[ subject ]</a>
+              <a href="author.html#610">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

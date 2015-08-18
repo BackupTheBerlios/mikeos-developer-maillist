@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Bits 'n bobs for 3.2.1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Bits%20%27n%20bobs%20for%203.2.1&In-Reply-To=%3C19d8b3b00901271210h49549f0dg435fa19f7e858c58%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000662.html">
+   <LINK REL="Next"  HREF="000664.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Bits 'n bobs for 3.2.1</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Bits%20%27n%20bobs%20for%203.2.1&In-Reply-To=%3C19d8b3b00901271210h49549f0dg435fa19f7e858c58%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Bits 'n bobs for 3.2.1">okachi at gmail.com
+       </A><BR>
+    <I>Tue Jan 27 21:10:24 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000662.html">[mikeos-developer] On the use of internal data buffers in	system calls
+</A></li>
+        <LI>Next message: <A HREF="000664.html">[mikeos-developer] Bits 'n bobs for 3.2.1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#663">[ date ]</a>
+              <a href="thread.html#663">[ thread ]</a>
+              <a href="subject.html#663">[ subject ]</a>
+              <a href="author.html#663">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Lo all,
+
+I've been doing some work on what will become 3.2.1. The changelog so far:
+
+# CLI now includes 'CAT' command to display a file: 'CAT FILE.TXT'.
+This can be used to quickly see the contents of a text file without
+having to run VIEWER.BIN
+
+# CLI code (source/features/cli.asm) cleaned up -- split into sections
+with fewer local labels
+
+# os_string_parse call is now accessible to external programs
+
+# API version bumped to 11
+
+# Fixed comment typos
+
+So it's a bunch of small changes; I'm going to keep going through the
+code and making sure that everything is as clear and well explained as
+possible. If anyone has ever spotted any typos or confusing comments
+in the code before, let me know and we can make 3.2.1 the most solid
+and clearly documented release yet!
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000662.html">[mikeos-developer] On the use of internal data buffers in	system calls
+</A></li>
+	<LI>Next message: <A HREF="000664.html">[mikeos-developer] Bits 'n bobs for 3.2.1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#663">[ date ]</a>
+              <a href="thread.html#663">[ thread ]</a>
+              <a href="subject.html#663">[ subject ]</a>
+              <a href="author.html#663">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

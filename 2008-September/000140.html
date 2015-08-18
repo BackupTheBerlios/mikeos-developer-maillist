@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Testing libmikeos for Bruce Evans'	bcc	(dev86)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Testing%20libmikeos%20for%20Bruce%20Evans%27%0A%09bcc%09%28dev86%29&In-Reply-To=%3C877i8z9s6s.wl%25uaa%40mx5.nisiq.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000150.html">
+   <LINK REL="Next"  HREF="000127.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Testing libmikeos for Bruce Evans'	bcc	(dev86)</H1>
+    <B>SASANO Takayoshi</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Testing%20libmikeos%20for%20Bruce%20Evans%27%0A%09bcc%09%28dev86%29&In-Reply-To=%3C877i8z9s6s.wl%25uaa%40mx5.nisiq.net%3E"
+       TITLE="[mikeos-developer] Testing libmikeos for Bruce Evans'	bcc	(dev86)">uaa at mx5.nisiq.net
+       </A><BR>
+    <I>Fri Sep 26 11:23:23 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000150.html">[mikeos-developer] Testing libmikeos for Bruce Evans' bcc(dev86)
+</A></li>
+        <LI>Next message: <A HREF="000127.html">[mikeos-developer] BareMetal OS and MikeOS compatibility
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#140">[ date ]</a>
+              <a href="thread.html#140">[ thread ]</a>
+              <a href="subject.html#140">[ subject ]</a>
+              <a href="author.html#140">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+&gt;<i> Great work on the updates. Given the license differences, for
+</I>&gt;<i> simplicity, it might be better to have MikeOS in one package and the C
+</I>&gt;<i> files in another -- then there won't be any complications. What do you
+</I>&gt;<i> think?
+</I>
+Thank you for good idea and I am planning the licence of libmikeos' package
+will be LGPL and MikeOS as follows.
+
+	<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">uaa at framboise</A>:~/libmikeos$ ls -l
+	total 28
+	drwxr-xr-x   2 uaa  users  2560 Sep 21 20:08 build/	-&gt; LGPL
+	drwxr-xr-x   2 uaa  users   512 Sep 14 17:59 include/	-&gt; LGPL
+	drwxr-xr-x   2 uaa  users   512 Sep 14 21:28 lib/	-&gt; LGPL
+	drwxr-xr-x  12 uaa  users   512 Sep 20 22:19 sample/	-&gt; MikeOS
+	drwxr-xr-x   2 uaa  users  2560 Sep 21 11:42 src/	-&gt; LGPL
+	<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">uaa at framboise</A>:~/libmikeos$
+
+Even if almost all of sources in src/ directory are written from
+scratch, I think using LGPL is better choice now. 
+Because the fundamentals for bcc is under LGPL, so using same licence will
+be easy to port bcc's stuffs to MikeOS.
+
+For libmikeos' sample codes, there is no reason to use GPL.
+So samples are under MikeOS' license.
+
+
+Now I am testing int/long-int operation, please wait for next release...
+-- 
+SASANO Takayoshi (JG1UAA/1) [<A HREF="http://www.uaa.org.uk/">http://www.uaa.org.uk/</A>] &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">uaa at uaa.org.uk</A>&gt;
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000150.html">[mikeos-developer] Testing libmikeos for Bruce Evans' bcc(dev86)
+</A></li>
+	<LI>Next message: <A HREF="000127.html">[mikeos-developer] BareMetal OS and MikeOS compatibility
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#140">[ date ]</a>
+              <a href="thread.html#140">[ thread ]</a>
+              <a href="subject.html#140">[ subject ]</a>
+              <a href="author.html#140">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

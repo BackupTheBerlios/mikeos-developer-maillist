@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] FAT16 bootloader
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT16%20bootloader&In-Reply-To=%3CCAPRjAGgVVkAm_ZLLAsDn_UiJ7JqOGrisTZB%3DUnAXpKF5Qq%2B22A%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002569.html">
+   <LINK REL="Next"  HREF="002573.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] FAT16 bootloader</H1>
+    <B>Paulo V</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT16%20bootloader&In-Reply-To=%3CCAPRjAGgVVkAm_ZLLAsDn_UiJ7JqOGrisTZB%3DUnAXpKF5Qq%2B22A%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] FAT16 bootloader">paulomobilemail at gmail.com
+       </A><BR>
+    <I>Wed Oct  5 13:50:38 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002569.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+        <LI>Next message: <A HREF="002573.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2570">[ date ]</a>
+              <a href="thread.html#2570">[ thread ]</a>
+              <a href="subject.html#2570">[ subject ]</a>
+              <a href="author.html#2570">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Mike,
+
+So if the iso works, then the ima is also
+correct which means the bootloader and
+BPB are also ok.
+
+I don't know why your images are different.
+
+I know it's not a priority to convert to FAT16
+just yet, but when/if you do, then seriously
+consider standardizing on an image size
+of 512MB.
+
+It's not too big and when zipped it's down to
+about 500Kb making it easy for downloads.
+
+So what's the way forward?
+
+There are FAT16 write and read routines to write
+and you might even have to make some changes
+to the memory layout of MikeOS as the current
+buffer is way too small for FAT16 stuff.
+
+The recommended files buffer for FAT16 seems to
+be around 128KB and to make things easier all
+files must be in the root of the drive, no directories.
+
+A lot of work still ahead.
+
+Paulo.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111005/75621e65/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111005/75621e65/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002569.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+	<LI>Next message: <A HREF="002573.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2570">[ date ]</a>
+              <a href="thread.html#2570">[ thread ]</a>
+              <a href="subject.html#2570">[ subject ]</a>
+              <a href="author.html#2570">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

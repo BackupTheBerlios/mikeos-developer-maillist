@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Good way to load the kernel
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Good%20way%20to%20load%20the%20kernel&In-Reply-To=%3CAANLkTimDGDZiJ8TWwOaYjFOmJgFX8-DtbUUfszR%2Bi5gj%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001534.html">
+   <LINK REL="Next"  HREF="001536.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Good way to load the kernel</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Good%20way%20to%20load%20the%20kernel&In-Reply-To=%3CAANLkTimDGDZiJ8TWwOaYjFOmJgFX8-DtbUUfszR%2Bi5gj%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Good way to load the kernel">okachi at gmail.com
+       </A><BR>
+    <I>Mon Nov 22 22:24:59 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001534.html">[mikeos-developer] Good way to load the kernel
+</A></li>
+        <LI>Next message: <A HREF="001536.html">[mikeos-developer] Good way to load the kernel
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1535">[ date ]</a>
+              <a href="thread.html#1535">[ thread ]</a>
+              <a href="subject.html#1535">[ subject ]</a>
+              <a href="author.html#1535">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Derek,
+
+&gt;<i> Okay, sorry if this is a n00b question, but whats a good (..and easy) way to
+</I>&gt;<i> load the kernel from my bootsector and an example.
+</I>
+That's a very, very broad question. So much depends on:
+
+1) If you're booting from a floppy or hard drive
+2) The filesystem format of the media in question
+3) Whether you want to be in real mode or protected mode
+
+For a 16-bit, real-mode OS running from a FAT12 floppy, a great
+example is the MikeOS bootloader code (bootload.asm). Demonstrates how
+to parse the FAT tables on the disk to find a kernel filename, then
+load the sectors to the right point in RAM and jump to that point to
+begin execution.
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001534.html">[mikeos-developer] Good way to load the kernel
+</A></li>
+	<LI>Next message: <A HREF="001536.html">[mikeos-developer] Good way to load the kernel
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1535">[ date ]</a>
+              <a href="thread.html#1535">[ thread ]</a>
+              <a href="subject.html#1535">[ subject ]</a>
+              <a href="author.html#1535">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Interactive Interpreter (MB++)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Interactive%20Interpreter%20%28MB%2B%2B%29&In-Reply-To=%3CCAEz6_zg8j26iT%3DV2%2BZYb_wsq3zy7jAw9Ezjb5Rm%2BEDdO07FONA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002621.html">
+   <LINK REL="Next"  HREF="002625.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Interactive Interpreter (MB++)</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Interactive%20Interpreter%20%28MB%2B%2B%29&In-Reply-To=%3CCAEz6_zg8j26iT%3DV2%2BZYb_wsq3zy7jAw9Ezjb5Rm%2BEDdO07FONA%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Interactive Interpreter (MB++)">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Tue Oct 11 14:15:27 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002621.html">[mikeos-developer] Updates
+</A></li>
+        <LI>Next message: <A HREF="002625.html">[mikeos-developer] Interactive Interpreter (MB++)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2624">[ date ]</a>
+              <a href="thread.html#2624">[ thread ]</a>
+              <a href="subject.html#2624">[ subject ]</a>
+              <a href="author.html#2624">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>G'day all,
+I've made a new expanded version of my interpreter the includes the
+MB++ library (is it a library?). It prompts for a command in a MB++ input box
+and displays text in a message box. It can be used to simulate the framework.
+It has a preconfigured start section with a default configuration.
+It starts with no interface but you could get the interface up by doing:
+  $z = &quot;BASEINT&quot;:Z = 14:GOSUB REFRESH
+  $t = &quot;Application&quot; : GOSUB SETTITLE
+In this version you will have to move the cursor to print text however,
+i.e. 'MOVE 10 2 : PRINT &quot;Hai World!&quot;'.
+All text strings are preserved between commands.
+This version will be separate from the normal version.
+Get it from my (well, not just mine anymore) Google Code at:
+<A HREF="http://code.google.com/p/mikebasic-applications/downloads/detail?name=BASIC2.BAS&amp;can=2&amp;q=">http://code.google.com/p/mikebasic-applications/downloads/detail?name=BASIC2.BAS&amp;can=2&amp;q=</A>
+
+PS I'm working on a Brain**** interpreter.
+<A HREF="http://tinyurl.com/4f6mt">http://tinyurl.com/4f6mt</A>
+It will only be an 8-bit version, meaning 256 bytes of RAM
+maximum but the variables are set at the start and you can change that.
+I haven't quite got those bracket figured yet, it seems to be
+jumping to weird addresses.
+Sorry for any offence anyone takes the name...
+
+
+Joshua
+<A HREF="http://code.google.com/p/mikebasic-applications/">http://code.google.com/p/mikebasic-applications/</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002621.html">[mikeos-developer] Updates
+</A></li>
+	<LI>Next message: <A HREF="002625.html">[mikeos-developer] Interactive Interpreter (MB++)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2624">[ date ]</a>
+              <a href="thread.html#2624">[ thread ]</a>
+              <a href="subject.html#2624">[ subject ]</a>
+              <a href="author.html#2624">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

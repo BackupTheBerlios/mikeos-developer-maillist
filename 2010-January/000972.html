@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Windows build script updated
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Windows%20build%20script%20updated&In-Reply-To=%3C19d8b3b01001251624v7f279eem6e1c05eee4df524d%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000970.html">
+   <LINK REL="Next"  HREF="000973.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Windows build script updated</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Windows%20build%20script%20updated&In-Reply-To=%3C19d8b3b01001251624v7f279eem6e1c05eee4df524d%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Windows build script updated">okachi at gmail.com
+       </A><BR>
+    <I>Tue Jan 26 01:24:56 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000970.html">[mikeos-developer] Windows build script updated
+</A></li>
+        <LI>Next message: <A HREF="000973.html">[mikeos-developer] Windows build script updated
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#972">[ date ]</a>
+              <a href="thread.html#972">[ thread ]</a>
+              <a href="subject.html#972">[ subject ]</a>
+              <a href="author.html#972">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Lo Paulo,
+
+Thanks, I appreciate your efforts! We're both here battling the
+Windows command line late at night (whereabouts are you on the globe
+BTW?). Burning the midnight oil :-)
+
+I think I've figured it out now. &quot;nul&quot; doesn't exist on Windows XP. If
+you change the tests to:
+
+  nasm &gt; wut.txt 2&gt; wut2.txt
+  if eERRORLEVEL 9009 SET MIKEOS_NONASM=1
+
+Then it works on XP. Of course, you have to remove those .txt files at
+the end. (You can't redirect both stdout and stderr to the same file
+-- Windows complains.)
+
+Fingers crossed, that's the solution!
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000970.html">[mikeos-developer] Windows build script updated
+</A></li>
+	<LI>Next message: <A HREF="000973.html">[mikeos-developer] Windows build script updated
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#972">[ date ]</a>
+              <a href="thread.html#972">[ thread ]</a>
+              <a href="subject.html#972">[ subject ]</a>
+              <a href="author.html#972">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

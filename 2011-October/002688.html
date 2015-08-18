@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] First BASIC addition: CURSPOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20First%20BASIC%20addition%3A%20CURSPOS&In-Reply-To=%3CCACtjVkEzuzeSOrmZ7U9iWo3b7arpdD-tA6YXerSB_9aTK6X4EQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002687.html">
+   <LINK REL="Next"  HREF="002689.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] First BASIC addition: CURSPOS</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20First%20BASIC%20addition%3A%20CURSPOS&In-Reply-To=%3CCACtjVkEzuzeSOrmZ7U9iWo3b7arpdD-tA6YXerSB_9aTK6X4EQ%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] First BASIC addition: CURSPOS">okachi at gmail.com
+       </A><BR>
+    <I>Wed Oct 19 12:55:53 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002687.html">[mikeos-developer] First BASIC addition: CURSPOS
+</A></li>
+        <LI>Next message: <A HREF="002689.html">[mikeos-developer] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2688">[ date ]</a>
+              <a href="thread.html#2688">[ thread ]</a>
+              <a href="subject.html#2688">[ subject ]</a>
+              <a href="author.html#2688">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Lo Joshua,
+
+&gt;<i> I have been learning assembly and I made my first addition to the MikeOS
+</I>&gt;<i> source code. I added a BASIC command &quot;CURSPOS&quot;.
+</I>
+&gt;<i>From a first glance, looks great! You seem to grok the BASIC
+</I>interpreter well. I'll add it to beta 4.
+
+&gt;<i> Next I'll write a function to get the colour of the selected
+</I>&gt;<i> byte but I'm not sure what to call it, &quot;CURSCOL&quot; make it sound like it
+</I>&gt;<i> gets the column and &quot;CURSCOLOUR&quot; is a bit too cumbersome. If anyone has
+</I>&gt;<i> any ideas on what to call it please let me know.
+</I>
+Hrm. I reckon we should add it to the existing CURSCHAR command.
+Currently that takes one variable (to store the char itself), but you
+could make it take a second variable which stores the colour number.
+That'd be better than creating a whole new command, I reckon.
+
+Of course, this might break compatibility with a few things, but I
+think that's inevitable, given how many changes are happening to BASIC
+at the moment. Better to occasionally break compatibility rather than
+try to accommodate older stuff forever, I reckon.
+
+Great stuff! You can probably sort out the &quot;no newline after printing
+single char&quot; business at this rate :-)
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002687.html">[mikeos-developer] First BASIC addition: CURSPOS
+</A></li>
+	<LI>Next message: <A HREF="002689.html">[mikeos-developer] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2688">[ date ]</a>
+              <a href="thread.html#2688">[ thread ]</a>
+              <a href="subject.html#2688">[ subject ]</a>
+              <a href="author.html#2688">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

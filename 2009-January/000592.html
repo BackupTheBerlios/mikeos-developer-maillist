@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 3.1 released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%203.1%20released&In-Reply-To=%3C8d87c8a30901041608i4874c646t6bc376c53898b4e%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000590.html">
+   <LINK REL="Next"  HREF="000593.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 3.1 released</H1>
+    <B>Bob Moss</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%203.1%20released&In-Reply-To=%3C8d87c8a30901041608i4874c646t6bc376c53898b4e%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 3.1 released">bobbyjmoss at googlemail.com
+       </A><BR>
+    <I>Mon Jan  5 01:08:09 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000590.html">[mikeos-developer] MikeOS 3.1 released
+</A></li>
+        <LI>Next message: <A HREF="000593.html">[mikeos-developer] MikeOS 3.1 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#592">[ date ]</a>
+              <a href="thread.html#592">[ thread ]</a>
+              <a href="subject.html#592">[ subject ]</a>
+              <a href="author.html#592">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It's a Sony VAIO PCG-3D1M.
+
+I can say with some certainty that producing truly random numbers between
+two values in ASM from scratch is a hefty maths exercise! As far as I'm
+aware there's two widely used algorithms named 'Monte Carlo' and 'Las
+Vegas'. Here are a couple of links:
+
+<A HREF="http://en.wikipedia.org/wiki/Monte_Carlo_method">http://en.wikipedia.org/wiki/Monte_Carlo_method</A>
+<A HREF="http://en.wikipedia.org/wiki/Las_Vegas_algorithm">http://en.wikipedia.org/wiki/Las_Vegas_algorithm</A>
+
+I would be interested to see how that could be implemented in ASM... good
+luck! :D
+
+
+2009/1/4 M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+
+&gt;<i> On 1/4/09, Bob Moss &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">bobbyjmoss at googlemail.com</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I'm playing with some of the hangman code
+</I>&gt;<i> &gt; to use Linux distros instead of cities :D
+</I>&gt;<i>
+</I>&gt;<i> Also, on that note, the current os_get_random system call is rather
+</I>&gt;<i> primitive; it simply uses the BIOS clock routines to generate a number
+</I>&gt;<i> between 0 and 255.
+</I>&gt;<i>
+</I>&gt;<i> It's fine for the hangman game, but for a program which needs a
+</I>&gt;<i> succession of random numbers generated very quickly, patterns will
+</I>&gt;<i> emerge.
+</I>&gt;<i>
+</I>&gt;<i> So I would like to turn it into a more versatile random number
+</I>&gt;<i> generator which can, say, take a minimum in AX and maximum in BX, and
+</I>&gt;<i> generate a random integer between the two. Any list lurkers are
+</I>&gt;<i> welcome to take it on!
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Mike Saunders
+</I>&gt;<i> <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+This email is not intended to offend, annoy or inconvenience anyone. If it
+has, email me and state that it has, and we'll sort out the problem in an
+amicable way. Thank you for reading this message, I hope for a reply from
+you soon!
+
+Why not visit my tech site?: <A HREF="http://bjm1904.741.com/">http://bjm1904.741.com/</A>
+or Apollo OS?:
+<A HREF="http://apolloopsys.sourceforge.net/">http://apolloopsys.sourceforge.net/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20090105/ca5388a4/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20090105/ca5388a4/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000590.html">[mikeos-developer] MikeOS 3.1 released
+</A></li>
+	<LI>Next message: <A HREF="000593.html">[mikeos-developer] MikeOS 3.1 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#592">[ date ]</a>
+              <a href="thread.html#592">[ thread ]</a>
+              <a href="subject.html#592">[ subject ]</a>
+              <a href="author.html#592">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

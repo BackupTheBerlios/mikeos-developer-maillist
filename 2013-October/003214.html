@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Optimisation (nasm -Ox)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2013-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Optimisation%20%28nasm%20-Ox%29&In-Reply-To=%3CDUB113-W84CEF1CB3E9FE53852613E830F0%40phx.gbl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003213.html">
+   <LINK REL="Next"  HREF="003215.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Optimisation (nasm -Ox)</H1>
+    <B>Dan Barry</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Optimisation%20%28nasm%20-Ox%29&In-Reply-To=%3CDUB113-W84CEF1CB3E9FE53852613E830F0%40phx.gbl%3E"
+       TITLE="[mikeos-developer] Optimisation (nasm -Ox)">danbarry at hotmail.co.uk
+       </A><BR>
+    <I>Sun Oct 27 15:56:07 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003213.html">[mikeos-developer] GUI Mouse Driver Repair (Maybe?)
+</A></li>
+        <LI>Next message: <A HREF="003215.html">[mikeos-developer] Two GUI's?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3214">[ date ]</a>
+              <a href="thread.html#3214">[ thread ]</a>
+              <a href="subject.html#3214">[ subject ]</a>
+              <a href="author.html#3214">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I saw a thread on OSDev about turning off Optimisations in NASM for MikeOS - is this still happening? (<A HREF="http://forum.osdev.org/viewtopic.php?f=13&amp;t=23868&amp;start=0">http://forum.osdev.org/viewtopic.php?f=13&amp;t=23868&amp;start=0</A>)
+I've spent a little while researching the problem of not being able to optimise the code and have come up with a simple solution to the problem after realising the jmp table at the top of the kernel was being optimised when comparing the binaries. It basically sends everything haywire and where programs think they are jumping to they are not. (E9h followed by 2 address bytes format).
+<A HREF="http://courses.engr.illinois.edu/ECE390/archive/spr2002/books/labmanual/inst-ref-jmp.html">http://courses.engr.illinois.edu/ECE390/archive/spr2002/books/labmanual/inst-ref-jmp.html</A> - after looking at this site I realised that by simply changing the code from  jmp function_nameto  jmp near function_namefixed my code and increased efficiency by a considerable amount.
+I thought it would be worth putting on here anyway for any other hobby OS people having the same issue but as far as I'm aware there doesn't seem to be anything online about how to resolve this issue without rawling through as I did.
+<A HREF="Danhttp://code.google.com/p/heluxos/">Danhttp://code.google.com/p/heluxos/</A> 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131027/9c44a3d0/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131027/9c44a3d0/attachment.html</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003213.html">[mikeos-developer] GUI Mouse Driver Repair (Maybe?)
+</A></li>
+	<LI>Next message: <A HREF="003215.html">[mikeos-developer] Two GUI's?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3214">[ date ]</a>
+              <a href="thread.html#3214">[ thread ]</a>
+              <a href="subject.html#3214">[ subject ]</a>
+              <a href="author.html#3214">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

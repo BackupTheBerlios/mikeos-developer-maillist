@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Suggestion for next version of MikeOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Suggestion%20for%20next%20version%20of%20MikeOS&In-Reply-To=%3C4f03362c0811270756w717c0787xf75efc6cafe8afc0%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000509.html">
+   <LINK REL="Next"  HREF="000512.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Suggestion for next version of MikeOS</H1>
+    <B>Ian Seyler</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Suggestion%20for%20next%20version%20of%20MikeOS&In-Reply-To=%3C4f03362c0811270756w717c0787xf75efc6cafe8afc0%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Suggestion for next version of MikeOS">iseyler at gmail.com
+       </A><BR>
+    <I>Thu Nov 27 16:56:09 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000509.html">[mikeos-developer] Wikipedia drama
+</A></li>
+        <LI>Next message: <A HREF="000512.html">[mikeos-developer] Suggestion for next version of MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#510">[ date ]</a>
+              <a href="thread.html#510">[ thread ]</a>
+              <a href="subject.html#510">[ subject ]</a>
+              <a href="author.html#510">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi everyone,
+
+Since there is no memory protection in MikeOS (or BareMetal) it may be
+possible to write too much data into a buffer and cause it to
+overwrite some code. In BareMetal I keep all buffers in a part of
+memory that is not near the kernel.
+
+Instead of this in cli.asm:
+
+	.input	times 255 db 0
+	.dirlist	times 255 db 0
+
+I would use this:
+	.input:	equ 0xE000 ; Or some other area in memory (can't recall the
+new memory map off the top of my head)
+	.dirlist:	equ 0xE100
+
+This way if more than 255 bytes is written into .dirlist then it won't
+start to overwrite anything serious. This doesn't really add any
+complexity to the code.. we should just have a good descriptive
+comment saying why it looks like that.
+
+Plus we save 1K in the kernel size since .input, .dirlist, .buffer,
+and .free_clusters are not stored within the kernel anymore.
+
+-Ian
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000509.html">[mikeos-developer] Wikipedia drama
+</A></li>
+	<LI>Next message: <A HREF="000512.html">[mikeos-developer] Suggestion for next version of MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#510">[ date ]</a>
+              <a href="thread.html#510">[ thread ]</a>
+              <a href="subject.html#510">[ subject ]</a>
+              <a href="author.html#510">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] A quick question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20quick%20question&In-Reply-To=%3C20091118190438.GA12873%40hiato-arch%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000735.html">
+   <LINK REL="Next"  HREF="000744.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] A quick question</H1>
+    <B>Tslil Clingman</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20quick%20question&In-Reply-To=%3C20091118190438.GA12873%40hiato-arch%3E"
+       TITLE="[mikeos-developer] A quick question">hiato1 at gmail.com
+       </A><BR>
+    <I>Wed Nov 18 20:04:38 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000735.html">[mikeos-developer] A quick question
+</A></li>
+        <LI>Next message: <A HREF="000744.html">[mikeos-developer] A quick question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#743">[ date ]</a>
+              <a href="thread.html#743">[ thread ]</a>
+              <a href="subject.html#743">[ subject ]</a>
+              <a href="author.html#743">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> I've been thinking about this too, for a future version of MikeOS. My
+</I>&gt;<i> idea is this:
+</I>&gt;<i> 
+</I>&gt;<i> * The CLI takes a string
+</I>&gt;<i> * It parses it into multiple chunks (there's an os_string_parse call
+</I>&gt;<i> in MikeOS that could do this)
+</I>&gt;<i> * It writes subsequent arguments after the program name to a specific
+</I>&gt;<i> point in RAM
+</I>&gt;<i> * You then create a new system call, eg os_get_args, that takes AX as
+</I>&gt;<i> the argument to retrieve, and it returns a pointer to the string
+</I>&gt;<i> os_string_parse in MikeOS is pretty rudimentary (essentially replacing
+</I>&gt;<i> spaces with zero-termination to make strings within a string) but it
+</I>&gt;<i> could be used in my case. If you're using multiple segments it might
+</I>&gt;<i> be more complicated and my idea may not be suitable. But it might
+</I>&gt;<i> help!
+</I>
+Hmm... Sounds doable. I must say that a while ago I came up with an extravagent
+message type system where each memory block would have an input and output buffer
+at its disposal and could then generate asynchronous signals to get a handler to
+process the pending messages and such. In fact, I have completed the documentation
+of this and and am underway implementing it. But, as with anything, it's the simple
+things that are unfathomable.
+
+This brings up my question. Having just firgured out segmenst (and
+hence come to appreciate why they are not appreciated), I can't seem to get what is,
+for all intents and purposes, a direct port of the MikeOS fat12 (?) routines to
+write to a segment:offset of my choosing. I beleive that the int13h with ah=02
+writes to es:bx, but, setting es just before or in the routine of the read file
+seems to have no effect and the system locks up anyway (technically, it enters a
+fit of reboots). Is this an oversight on my behalf or is there something deeply
+ingrained about that interrupt/routine that limits it to one segment or is it merely
+my coding?
+
+&gt;<i> Have you got a website or anything for COS? I'll link to it on the
+</I>&gt;<i> MikeOS site if so.
+</I>
+I do. Though admittedly there's not much to it now, what with my bad
+release policy and the fact that it probably only contains old, broken
+releases. But, nonetheless: <A HREF="http://sites.google.com/site/fduluco/">http://sites.google.com/site/fduluco/</A>
+
+&gt;<i> No need to apologise :-) The more x86 real mode OS dev discussion here
+</I>&gt;<i> the better, I think -
+</I>&gt;<i> we're all working with the same tech and languages, and have similar
+</I>&gt;<i> goals. I like the OSDev.org forums but 99% of stuff is about
+</I>&gt;<i> (understandably) C++ kernels, protected mode etc. All questions
+</I>&gt;<i> relating to the cheerfully bare-metal real mode world of OS
+</I>&gt;<i> development are welcome here :-)
+</I>
+Why thank you :) Always good to know that I'm not becoming a nuisence
+;)
+
+Thanks, let me know,
+Tslil
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000735.html">[mikeos-developer] A quick question
+</A></li>
+	<LI>Next message: <A HREF="000744.html">[mikeos-developer] A quick question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#743">[ date ]</a>
+              <a href="thread.html#743">[ thread ]</a>
+              <a href="subject.html#743">[ subject ]</a>
+              <a href="author.html#743">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

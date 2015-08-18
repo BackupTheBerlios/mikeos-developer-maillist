@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] INT 18H...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20INT%2018H...&In-Reply-To=%3C20110112202726.6IE0A.469074.root%40web11-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001772.html">
+   <LINK REL="Next"  HREF="001775.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] INT 18H...</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20INT%2018H...&In-Reply-To=%3C20110112202726.6IE0A.469074.root%40web11-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] INT 18H...">wisecracker at tesco.net
+       </A><BR>
+    <I>Wed Jan 12 21:27:26 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001772.html">[mikeos-developer] GUI Mouse Driver Repair
+</A></li>
+        <LI>Next message: <A HREF="001775.html">[mikeos-developer] INT 18H.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1773">[ date ]</a>
+              <a href="thread.html#1773">[ thread ]</a>
+              <a href="subject.html#1773">[ subject ]</a>
+              <a href="author.html#1773">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi guys...
+
+Another bizarre idea for MikeOS and in keeping with its simplicity.
+
+How about re-vectoring INT 18H towards code in segment 0 for MOS usage
+only.
+
+It normally points to ROM BASIC from the XT days, with an extension to
+INT 19H if ROM BASIC is not found.
+
+I`ve been doing some experiments re-vectoring and will post some test code
+as INT18.BIN to run from MikeOS as a command ASAP.
+
+We would have the capability of over 200 register AH offsets that we could
+design for ourselves down inside segment 0.
+
+It could be loaded at 0x0000:1000.
+
+I will do a DMA &quot;Hello World...&quot; vector using AH as 0 and AL as 0...
+
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+<A HREF="http://homepages.tesco.net/wisecracker/">http://homepages.tesco.net/wisecracker/</A>
+
+<A HREF="http://main.aminet.net/search?readme=wisecracker">http://main.aminet.net/search?readme=wisecracker</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001772.html">[mikeos-developer] GUI Mouse Driver Repair
+</A></li>
+	<LI>Next message: <A HREF="001775.html">[mikeos-developer] INT 18H.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1773">[ date ]</a>
+              <a href="thread.html#1773">[ thread ]</a>
+              <a href="subject.html#1773">[ subject ]</a>
+              <a href="author.html#1773">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.4b3 for testing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.4b3%20for%20testing&In-Reply-To=%3CCACtjVkEviyWBvHZ68tr0Ws0J%2BR2y8jQeb_ZBiv-m0CLzbnbE9Q%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003107.html">
+   <LINK REL="Next"  HREF="003109.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.4b3 for testing</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.4b3%20for%20testing&In-Reply-To=%3CCACtjVkEviyWBvHZ68tr0Ws0J%2BR2y8jQeb_ZBiv-m0CLzbnbE9Q%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 4.4b3 for testing">okachi at gmail.com
+       </A><BR>
+    <I>Sun Aug 12 23:32:02 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003107.html">[mikeos-developer] Nano for MikeOS
+</A></li>
+        <LI>Next message: <A HREF="003109.html">[mikeos-developer] Nano for MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3108">[ date ]</a>
+              <a href="thread.html#3108">[ thread ]</a>
+              <a href="subject.html#3108">[ subject ]</a>
+              <a href="author.html#3108">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi folks,
+
+<A HREF="http://mikeos.berlios.de/mikeos-4.4b3.zip">http://mikeos.berlios.de/mikeos-4.4b3.zip</A>
+
+Two big changes from beta 2 here. First, Sudoku is finished (with
+three difficulty levels and help), and included. And as per Joshua's
+request, the string variable assignment functionality in BASIC has
+been greatly expanded. You can now do this, for example:
+
+$1 = &quot;Hello &quot;
+$2 = &quot; worlds&quot;
+a = 9000
+$3 = $1 + a + $2 + &quot;!&quot;
+print $3
+end
+
+That prints &quot;Hello 9000 worlds!&quot;. Joshua: would it help if we bumped
+up the strings from 128 bytes to 256 bytes? I'm not sure if that'd
+break anything...
+
+Anyway, full changelog since 4.3 below. Please help to test!
+
+Cheers,
+Mike
+
+
+# New game: MikeOS Sudoku (SUDOKU.BAS), a puzzle game
+
+# New game: Cosmic Flight (CF.BAS) from Joshua
+
+# BASIC: string additions now possible with literal strings, other string
+  variables, or numeric variables, eg: $1 = $2 + &quot;foo&quot; + x + &quot;bar&quot;
+
+# BASIC: Now displays line numbers with error messages
+
+# BASIC: CASE command from Joshua (changes case of a string)
+
+# BASIC: ELSE keyword from Joshua (used with IF)
+
+# BASIC: Files command from Joshua (shows file listing from disk)
+
+# Updated MikeBASIC Plus Plus (MBPP.BAS) to version 3.2.1
+
+# Updated Calculator (CALC.BAS) to 2.0.0
+
+# Handbook fixes
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003107.html">[mikeos-developer] Nano for MikeOS
+</A></li>
+	<LI>Next message: <A HREF="003109.html">[mikeos-developer] Nano for MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3108">[ date ]</a>
+              <a href="thread.html#3108">[ thread ]</a>
+              <a href="subject.html#3108">[ subject ]</a>
+              <a href="author.html#3108">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

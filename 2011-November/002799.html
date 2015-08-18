@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.3 beta 8 released for testing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.3%20beta%208%20released%20for%20testing&In-Reply-To=%3CCACtjVkEgRsuqrQAV2vMqGhcDbFoifM8_su2%2BZXHAAjE98UBsDA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002798.html">
+   <LINK REL="Next"  HREF="002800.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.3 beta 8 released for testing</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.3%20beta%208%20released%20for%20testing&In-Reply-To=%3CCACtjVkEgRsuqrQAV2vMqGhcDbFoifM8_su2%2BZXHAAjE98UBsDA%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 4.3 beta 8 released for testing">okachi at gmail.com
+       </A><BR>
+    <I>Wed Nov 30 09:44:21 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002798.html">[mikeos-developer] hello
+</A></li>
+        <LI>Next message: <A HREF="002800.html">[mikeos-developer] MikeOS 4.3 beta 8 released for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2799">[ date ]</a>
+              <a href="thread.html#2799">[ thread ]</a>
+              <a href="subject.html#2799">[ subject ]</a>
+              <a href="author.html#2799">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi folks,
+
+It's here: <A HREF="http://prdownload.berlios.de/mikeos/mikeos-4.3b8.zip">http://prdownload.berlios.de/mikeos/mikeos-4.3b8.zip</A>
+
+Changes since beta 7 are Joshua's latest BASIC updates (including the
+new PEEKINT and POKEINT commands). But we're definitely in feature
+freeze now, so I'm not looking for anything other than bugfixes.
+Please try it out, test the new features, and provide feedback on the
+list, so that we can get it released eventually! Full changelog below.
+
+Cheers,
+Mike
+
+
+# New game: ADVNTURE.BAS, a text adventure
+
+# New game: MUNCHER.BAS, an apple-eating action game
+
+# New app: ANIMATE.BAS to show the PAGE command in action
+
+# Updated to latest versions of MEMEDIT, CALC and DRAW
+
+# BASIC: DO + LOOP UNTIL/WHILE/ENDLESS loops implemented
+
+# BASIC: New STRING command to get or set bytes at locations in a string
+
+# BASIC: New PEEKINT and POKEINT commands
+
+# BASIC: INK keyword added to get current colour
+
+# BASIC: FOR/NEXT loops now accept variables (eg &quot;FOR X = Y TO Z&quot;)
+
+# BASIC: PRINT no longer scrolls if followed by semi colon on last
+line (with the exception of HEX)
+
+# BASIC: NUMBER added, to convert between strings and integers
+
+# BASIC: RENAME, SIZE and FILES commands added
+
+# BASIC: ASKFILE command, which shows the file selector
+
+# BASIC: Sums now check for division by zero and break with an error
+
+# BASIC: ALERT command can now take a string variable
+
+# BASIC: LISTBOX added -- shows list dialog box where first string is
+&quot;Foo,Bar,Baz&quot; and second and third are help
+
+# BASIC: INCLUDE added, to append another BAS file onto the end of the
+current one and call routines in it
+
+# BASIC: CURSPOS added, to get cursor position
+
+# BASIC: CURSCOL added, to get cursor color
+
+# BASIC: Can use var = TIMER to get lower word value of system clock
+
+# BASIC: PAGE added to switch between working and active (display) pages
+
+# BASIC: LEN added to get length of string
+
+# BASIC: DELETE added to delete files
+
+# BASIC: READ added to read data from label
+
+# BASIC: INK command added for printing strings
+
+# BASIC: AND added to IF
+
+# BASIC: ALERT, ASKFILE and LISTBOX preserve cursor location
+
+# BASIC: Added VERSION keyword to get the API version
+
+# BASIC: SAVE returns 2 in R variable if file exists
+
+# USB drive floppy disk emulation updates from Mike Gonta
+
+# VIEWER can now read BAS files
+
+# SERIAL now clears screen after initial dialog box
+
+# HANGMAN now limits input to &quot;a&quot; to &quot;z&quot; keys (and Esc)
+
+# Fix CLI bug (eg running COPY internal command even if user had
+intended to run a program called COPYMEGA.BIN)
+
+# Bump API to version 15
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002798.html">[mikeos-developer] hello
+</A></li>
+	<LI>Next message: <A HREF="002800.html">[mikeos-developer] MikeOS 4.3 beta 8 released for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2799">[ date ]</a>
+              <a href="thread.html#2799">[ thread ]</a>
+              <a href="subject.html#2799">[ subject ]</a>
+              <a href="author.html#2799">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

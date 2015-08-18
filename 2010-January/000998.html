@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] New computers
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20computers&In-Reply-To=%3C52592.92268.qm%40web113115.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000997.html">
+   <LINK REL="Next"  HREF="001004.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] New computers</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20computers&In-Reply-To=%3C52592.92268.qm%40web113115.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] New computers">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Fri Jan 29 09:40:28 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000997.html">[mikeos-developer] New computers
+</A></li>
+        <LI>Next message: <A HREF="001004.html">[mikeos-developer] New computers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#998">[ date ]</a>
+              <a href="thread.html#998">[ thread ]</a>
+              <a href="subject.html#998">[ subject ]</a>
+              <a href="author.html#998">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bazza,
+
+I suspect the reason your keyboard code from the 8088 days does not work any more
+is due to the fact that they used XT keyboards where as the new ones are PS/2 as you know.
+I have no idea which ports were used for the XT and what the protocol was, but
+with PS/2 all is done via ports 60h and 64h.
+
+As far as IrDA is concerned, like you say it's not a very popular port but a lot of desktop mobo's
+do have the port but just need the infra-red transceiver to be plugged in.
+Luckily both my laptops do have IrDA so I will use the one with XP and the other for MikeOS.
+
+Will keep you posted.
+
+Paulo.
+
+
+
+
+----- Original Message ----
+From: &quot;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">wisecracker at tesco.net</A>&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">wisecracker at tesco.net</A>&gt;
+To: MikeOS (and similar OS) developers &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+Sent: Fri, January 29, 2010 9:46:14 AM
+Subject: Re: [mikeos-developer] New computers
+
+Hi Paulo...
+
+&gt;<i> As far as IrDA is concerned, it's actually easier then you might imagine.
+</I>&gt;<i> Remember that the fancy protocols used by IrDA are only required when
+</I>&gt;<i> the port is being used at very fast speeds of 4MB/s
+</I>&gt;<i> At lower speeds (i.e 9600) raw access is perfectly acceptable and the
+</I>&gt;<i> physical layer has many similaraties to a standard serial port hence loads
+</I>&gt;<i> of memory and coding is not required to simulate a good old fashioned
+</I>&gt;<i> com port.
+</I>
+I wish you well with it, and if successful I may use it. I never looked into
+it because it is not common enough for my needs as yet. 3 out of 4 of
+my machines have not got IrDA so I haven`t pursued it with any vigour.
+
+&gt;<i> I have played around with using different segments by loading them
+</I>&gt;<i> into the ES and DS regs with no problems what so ever.
+</I>&gt;<i> Just watch what you do with CS.
+</I>
+CS, (and SS), were the ones I was thinking of. I have already used ES
+in the TESTCARD proggy, I know that that causes no problems...
+
+&gt;<i> Be more optimistic Bazza....remember what you said about USB keyboards ?
+</I>
+;o)
+
+(The KBs arrived yesterday at work, not had time to strip them yet.)
+
+Don`t get me on that, I wrote a simple Caps Lock and CLS SW arround 20
+years ago when I was learning 8088 assembly. This has worked on everything
+I used it on but guess what?
+
+Well it doesn`t work correctly on current machines even in MikeOS... :/
+
+Not really a problem but why oh why do &quot;manufacturers&quot; change things that
+have worked well enough for decades... :(
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+_______________________________________________
+mikeos-developer mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000997.html">[mikeos-developer] New computers
+</A></li>
+	<LI>Next message: <A HREF="001004.html">[mikeos-developer] New computers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#998">[ date ]</a>
+              <a href="thread.html#998">[ thread ]</a>
+              <a href="subject.html#998">[ subject ]</a>
+              <a href="author.html#998">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

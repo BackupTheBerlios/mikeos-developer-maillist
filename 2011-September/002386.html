@@ -1,0 +1,507 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] The floppy disk is dead - long live the floppy	disk.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20The%20floppy%20disk%20is%20dead%20-%20long%20live%20the%20floppy%0A%09disk.&In-Reply-To=%3C4716C862C740448F9002E42EAA16F8FE%40userfe6b65a555%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002383.html">
+   <LINK REL="Next"  HREF="002387.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] The floppy disk is dead - long live the floppy	disk.</H1>
+    <B>Mike Gonta</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20The%20floppy%20disk%20is%20dead%20-%20long%20live%20the%20floppy%0A%09disk.&In-Reply-To=%3C4716C862C740448F9002E42EAA16F8FE%40userfe6b65a555%3E"
+       TITLE="[mikeos-developer] The floppy disk is dead - long live the floppy	disk.">mikegonta at gmail.com
+       </A><BR>
+    <I>Fri Sep 30 11:51:39 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002383.html">[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 65
+</A></li>
+        <LI>Next message: <A HREF="002387.html">[mikeos-developer] The floppy disk is dead - long live the	floppy disk.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2386">[ date ]</a>
+              <a href="thread.html#2386">[ thread ]</a>
+              <a href="subject.html#2386">[ subject ]</a>
+              <a href="author.html#2386">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Recently there has been a call to upgrade MikeOS to FAT16 to better meet the
+requirements of USB boot and run.
+This is a good thing.
+However, it should be noted that the 1.44 Mb FAT12 floppy disk USB image can
+boot and run from a USB flash drive on _ANY_ PC with a classic BIOS that can
+boot from USB.
+Some simple guidelines must be followed.
+The changes to MikeOS are trivial. The three updated files are attached.
+
+1. Use the BIOS returned value in dl to access the drive. Don't assume dl=0.
+2. Use int 13h, ah=8 - Get Drive Parameters to obtain the emulated geometry.
+   Don't assume SecsPerTrack=18 or Sides=2.
+
+The bootload.asm is updated as follows:
+
+     ; NOTE: A few early BIOSes are reported to improperly set DL
+       mov byte [bootdev], dl  ; Save boot device number
+
+     ;*******************************************************************
+       mov ah, 8
+       int 13h
+       jc fatal_disk_error
+       and cx, 3Fh          ; maximum sector number
+       mov [SectorsPerTrack], cx
+       movzx dx, dh            ; maximum head number
+       add dx, 1
+       mov [Sides], dx
+     ;*******************************************************************
+
+       mov eax, 0   ; Needed for some older BIOSes
+     ; First, we need to load the root directory from the disk. Technical 
+details:
+
+The kernel.asm is updated as follows:
+
+       mov fs, ax   ; live entirely in 64K
+       mov gs, ax
+
+     ;*******************************************************************
+       mov byte [bootdev], dl  ; Save boot device number
+       push es
+       mov ah, 8
+       int 13h
+       pop es
+       and cx, 3Fh          ; maximum sector number
+       mov [SecsPerTrack], cx
+       movzx dx, dh            ; maximum head number
+       add dx, 1
+       mov [Sides], dx
+     ;*******************************************************************
+
+       mov ax, 1003h   ; Set text output with certain attributes
+       mov bx, 0   ; to be bright, and not blinking
+
+The disk.asm is updated as follows:
+
+     ; Reset floppy disk
+
+     disk_reset_floppy:
+       push ax
+       push dx
+       mov ax, 0
+     ;*******************************************************************
+     ; mov dl, 0
+       mov dl, byte [bootdev]
+     ;*******************************************************************
+       stc
+       int 13h
+       pop dx
+       pop ax
+       ret
+
+
+     ; ------------------------------------------------------------------
+     ; disk_convert_l2hts -- Calculate head, track and sector for int 13h
+     ; IN: logical sector in AX; OUT: correct registers for int 13h
+
+     disk_convert_l2hts:
+       push bx
+       push ax
+
+       mov bx, ax   ; Save logical sector
+
+       mov dx, 0   ; First the sector
+       div word [SecsPerTrack]  ; Sectors per track
+       add dl, 01h   ; Physical sectors start at 1
+       mov cl, dl   ; Sectors belong in CL for int 13h
+       mov ax, bx
+
+       mov dx, 0   ; Now calculate the head
+       div word [SecsPerTrack]  ; Sectors per track
+       mov dx, 0
+       div word [Sides]  ; Floppy sides
+       mov dh, dl   ; Head/side
+       mov ch, al   ; Track
+
+       pop ax
+       pop bx
+
+     ;*******************************************************************
+     ; mov dl, byte 0   ; Set correct device
+       mov dl, byte [bootdev] ; Set correct device
+     ;*******************************************************************
+
+       ret
+
+
+     Sides dw 2
+     SecsPerTrack dw 18
+     ;*******************************************************************
+     bootdev  db 0  ; Boot device number
+     ;*******************************************************************
+
+     ; ==================================================================
+
+
+
+Mike Gonta
+look and see - many look but few see
+
+<A HREF="http://mikegonta.com">http://mikegonta.com</A>
+
+
+begin 666 USB_update.zip
+M4$L#!!0````(`- H/C_RJQPL^0T```XF```,````8F]O=&amp;QO860N87-MQ5I[
+M;QI'$/^;2/D.FZA2H24.V$[J4%F5L:&amp;EM4UE.VVD*+*.NX6[^KBEMX&gt;Q^^G[
+MFYG=&gt;V&quot;G#]52&lt;13@=F9VWC,[R[?J\#^_GC_[5EW%6ITE-UI-5SH/BB1;J,M[
+M6^BEFAE3I&quot;:(=$YPQV9UGR&gt;+N%#MXX[:[?7&gt;JE=XZ_&lt;9&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">WJI3O2M3 at V</A>(6/7J
+ME;):J\B$KT\GQZ/SR]'.U8&lt;K4&quot;%&quot;P\#J2)E,!6J&gt;`XJV4;*/FMVK$0C%*=C8
+M49-&quot;V3#(K&quot;K X_CHJK]+^'-LLKI7&lt;Y.KGT87YZ/3G&gt;'D7+4!XSFYT7FFTTZ7
+MJ5J5%&quot;K((J7O=<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">+ at N-</A>'W?$&lt;$3JY9K6ZA%;C8J,RH-\H7.L5N0J3?]77!#X&amp;V3
+M:<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">8 at 3</A>%B8'R4U2Q,S//,F&quot;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">E. at 4</A>&amp;^<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">, at 9QIL8</A>]')9)-%%A3K7*OVT=&amp;;-W%G1YV;
+M0A/]0B692-0E$H$*4S&quot;&quot;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">O1,1U at 9+K0</A>*+!=EX4/$#WI_&amp;]/37&amp;DZN+E7_+7_^
+M;;E2-C9Y4;/\M2V&quot;O&amp;A]JWY&lt;8W450%M18F]4I&amp;V8)ZLB,1FQ2.^@D)E5&quot;Z]O
+MU&lt;\!++P&amp;(0TSZ0&lt;HM!V)\&gt;H_OXC*R39#13!+=5&lt;51BV#&amp;\WV5[=!FD3.=X#$
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">MEA at H</A>:Z!G,R&gt;=6TTP:PVE@^,XR*-7H8ET!$N)2&lt;PZ#_4+POVEA,.*`&gt;(:'DV^
+M.QF&gt;L5_V=_;WU=FPJ_9VWKQDZ751:))Y.CH[#68Z;;6BF7IY-OEI-)Q.KUZV
+MG!0IK3U_-B1#_ZSS2S8^8#=D?U(LKR@$F7.,Y\\$AJ&quot;/Q8&gt;(&lt;I]@986AG7\!
+M_ *&quot;YK&lt;Z&amp;IM\&quot;&quot;L3;8'V&quot;XZP)4'$CW,=FCQZ_NQ\O9SI?#H?!X5E_IDC&gt;4I*
+M#,TJT1:??+QB-^&quot;?)/DH*W(L\6:[N_M--&quot;V+I.&lt;&lt;X% 7V&amp;R)'[4!K;Y2&gt;[OJ
+M4'W3?WN M_Y^R6%AP%L0=9X_.S6+) Q2D=CM&lt;W#0:VZ4&quot;I!'?_[L3$?)&gt;DDJ
+M97%ZXUY,&amp;/*X]&quot;A2`T#JFH8&amp;&gt;(]W6VH6H2NXJSP(;T3%!]N@!:VI]M[;U^$]
+MTAUBK0/4!+NV&quot;&amp;-;N9967L&lt;0%XS_D$21SBII([4E:LP`E:2GE-G^`OYT&gt;%0!
+MG^3)K3XWS(8`\A.$S$#UP*-+:Z*T_7X)4&quot;6\`1Z3_Y3Q]HM)UTL].9&amp;]W2L&amp;
+MHBRHR&lt;D`.?I&gt;9&lt;R1A]^*%&amp;1V&gt;KTLL7A=$%&amp;&amp;PC@@[L=)JJ6 &quot;29G64+#;E@#
+MEU+=BOL5^(Q,]F5!J-E&quot;OWC:M'06)%DMDRK*)D1_.[D.X.U+&lt;ZN&quot;NZ[J?7,,
+MM8BK%&amp;J]4OL_L?$+\A6[&quot;D)4A9F!JF?K^9P4U0JBB#'?[.\SWL&amp;-6U.'7#-6
+M01XL\F 56_6UVFM\;PL7'5 )TP38DH4H&gt;2(8D2WR]:JP:A-#:Z(BE#?AQ;%L
+M;1&gt;;^R^KKMKOO7N+K[8`.9=4X%-U&lt;L^??5;&lt;*&quot;BHWBV6R B(;6RL@;K17^)_
+M9C5RJ)';%E_AQ-.KT4 =J;G&gt;*!WDZ;T:3J:7+CWG&gt;H5ZIB,BERQ7.=<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">H3 at K</A>#8
+M[&gt;34L\+AK3Z272)]^ZFKHI19&quot;FY=(&lt;?3)-2E&lt;\*X7_WWEU=#W%4'^)Q YOY&gt;
+M3&amp;4X5'-H(KVFNG$-M1FR,W4P(52V-XZ5?X')97&quot;7+-=+%[R.14?<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">ZXU8B at F2A</A>
+M,]8?=RH&quot;L0BTJE=%C=(,T_(NQM!]3Y&gt;S%.GI[JE40=L[ZIH=@YWB7&amp;L8G1*)
+M*]0IW-69U\?J.,EM@;8,YM%L9W85JD!E-6$MW*/9-$M^3GK=45&lt;ZC#.N!Y$N
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">M at B2U</A>`R)W21&amp;)D!/D0[55+A%#]2J(TE0O&quot;D HBTS_'&lt;@YX!J]9D&DTN;:NM=P
+M&gt;C#YNFKT7HM-N&gt;0U6%N#)0X6++5MG&gt;$.^&amp;N+W:I'%4][&gt;Z0SR&lt;G7YF;@8S2(
+M[GTM57/2IYJE)KP!&quot;=ZF&quot;EA()<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">2A.LXIW1Z at 56</A>\65Q6_A&gt;ZK2W;@6]3;INOQ4
+MAOWH&lt;C#\0/NO3&quot;*!CT[+)[$VG2-T%H$73J ='[+DO=:[C.WB0;6&quot;7;!A%5^[
+MKB?<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">- at Z6T-2</A>[8!B*R*,37/X^70EI)J4?8G@#QW34W2R:_6MLX&lt;/TN$@WR#3&amp;O
+M*=5!'68E+DJ8UV2):RAL0&AFY; FF0H#2UEJD5!WQCD+.^,C]Y.&gt;3[\7[VJ+
+MD+$EY?ED%QD&lt;8 I.;#[+T1'+9P]'J#*XEQ;.A*3.5.0,D(58&quot;O(P)G:%R[E(
+MOZ&amp;T//T)VKU)5M KGCD;8QT;7XL&gt;&quot;64*'&gt;6;Q.JN+'D5AP9.;M)4YWPB(X&lt;/
+M%BB3;N.&amp;JHC.F-&amp;8!FW]G3^FX DE9L&lt;&gt;2=Z5G D]K%&amp;^O-STYZ6IE%_Y!CM1
+MTZ,3&quot;W(;:<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">D8_B at M</A>^JIP,&quot;*77GDS(V 7.D(&quot;=&amp;U^92O?VFW#2WJ!_5A^;L?^)
+M&quot;#%O&quot;BKD3K?C&gt;V&amp;'ZC)A&quot;4B6&quot;BC8YZ2/GLB7Z;M&quot;E,89A(2\&quot;^,%[QL)O[_R
+M&quot;44=?W!G&amp;;QESD=W=G;JL&lt;E'Y^LY&quot;GZ&amp;$RAP7=:Q?G\*'W&gt;^5AZL)FB?:@1B
+M087+E9V1L30PUEG$-*\+&lt;TW9F2/&amp;&lt;$] &gt;MPDD'^F*]&amp;83*VWV9,`'N((ZCC1
+MD5&lt;5A4E?M2F-ED&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">C5 at 0RQ0.C2</A>*SZ-$.:$UA?Y!+I*YP*N&gt;B%HL+O=&lt;&amp;:,QB!
+MT,&amp;?E#F31HC4J+:LT- IBYYAB34A/NMT*.Y6B([ )&gt;H0G9M]7*URL(HN$6^+
+MAN&gt;+Z1]J=L#,CG41QG+D&lt;Y%&amp;:W0X@&gt;4A^,71F?&gt;PTCFU'43)U[UQ_(GBUYL!
+M]:3_!A5D]<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">VV7 at Q</A>&gt;Q:E7?%IZXD'$DW+-/7HE5U1 ?=I4!Y+C(^%)AYO*=^'M8
+M-!X:4 J&amp;5 O;+!?UXO!(&quot;?#Y5*VX%+CTW\:^G4&gt;R_SO)LN#FG5\E7OO&quot;Z;^M
+M`$A/3Y/\_T$VAZ,V,[KG`$7__TCIV+GU&gt;#K?;G0'M;&quot;IGM;2O(2$Y'&gt;UU-8&amp;
+M&quot;TT;2US\?&gt; ('Y\I%34U/58K:.CICRMR2JF.*-C3]YTNM!MEH^:8O&lt;_[I=&lt;I
+M\2$^VNA&amp;2I?C.E0&gt;41)Q)&amp;J!VZZW(1W8#CBR6.9D(2.O#8!XY%DR2ZZ\W1G_
+M`)F^M&quot;HF&lt;)YSTBQ/9&quot;5RTO1QNTS899[I(;&quot;7&amp;)T$]&lt;G)(4]5FJ ^!Y#3N$&lt;&quot;
+M.&amp;9 -\:2;:C%;0N,/]UT:.[&lt;:;3&gt;'N5K[H&gt;K+KE#]!HOT-LF1^=BUBUTXK*I
+M&amp;[I6IM_*&lt;*3[8Y/=ZKS,8H7Q+7!5N)AN(Z6QU&lt;YH*!FLJ$_+DP!'S]6#SO2S
+M;E&gt;X3&quot;&gt;CV TFR&gt;1]MY0XR&amp;O$=QYUO5((3IS&lt;UXB/_VMO\C[X,&quot;/YA$,HX3J%
+M;-=&lt;&amp;)W&gt;)(R+6/PK,Q)[W(+\V[0C(8]LXZ*[:3L?T)QFO9MWO:_5Y[PTGI 9
+M+QV[D@(JLX:$CTD9A2$:U%P'6&amp;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">2W6 at 9</A>%3%6'E'GCXX*8=(.*2 =T&gt;2'W! $W
+M)42#&amp;=XG(N6 E#3#ZW1=8G)^EI)5*S#&lt;/#0H$(R;1J]G5O^^UAF3D-'5HTJO
+M&gt;W'EP+ZP&lt;CZJ'&amp;2//J_3YF%J%Y^CA#Z[$=$'=5A14DL3`63[=&quot;=!@ =ETWP$
+M-%(:*<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">5NRCL at LBG</A>&gt;-V(.(B^S )N*J`(^JGG8R%T9Z%2O43.$.*D,^=8M]45A2
+M? EU1I&amp;XYQ\,U')4'J)C&quot;T3FEBF8'3^69N.*_1PR;4D[&quot;&quot;[U,R4R;8H5,H.-
+M&lt;Q9M7\(M3N8%&gt;5 #G&quot;^R[M$.IX8J.3P/92\NF]K&amp;-4W=S-=4B,7K28B!C(SD
+M&quot;#%&amp;9G69Q[+/RN55R2#]/: U^&amp;QOQ\Q3W'CI)7R7*[_;@&gt;Q&amp;']2A/[U3&lt;&quot;)Z
+M&lt;E3'\O*+I GX?._[_:T&lt;U?7W'I,LS#7R4IG^W/&amp;A[_,OCB*+(O[+;(!M!LZ 
+MOW+.7!<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">AIZ at G23XY</A>&gt;;&quot;7%XU0'&amp;2:Q!.CFL&amp;VX\@:7&lt;Y0&amp;=&lt;1#QP1UQ,=4VMT:
+M*$I[:&amp;Z3R/&lt;&amp;[$#UV:([0PK[DO '/4G[[NX-_(D+B.C0J)N).I)//+RF6ZG3
+MZ=')Z$)=OA]&gt;3-]?3&lt;Y'W%!R']4&lt;6OL&quot;\#<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">9VV at V2PAT4</A>[RVZPQO]&amp;/0[W\&quot;&quot;
+M(!O&quot;C^9%<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">DGH+YR95TW6Q at O</A>/*,W*B2SZ$6[B&amp;SGR?W&amp;BO&gt;J.X:K!ZN+C5J:;!
+MOYJOL]#?1.Z@==?2GJ&lt;FLK.6/_'QE0)W1VY/[^8I*,OA=B=&quot;CG:IA,$IB_RA
+M&lt;]-U?E]A.AX`W*QK+*@4UBJT'4_$'F_A^U$^7KLXK]?*`;-P/JB\3AW6'0P[
+MOK\:H&quot;[G.8^_R^%05&lt;[]I^BN;JW/&gt;O5V[1&lt;&amp;@5T&amp;4)U7[GX&amp;$E&amp;^3/&amp;8N&gt;LN
+MPH+,GV*(/?H9PE9#U'(2-B:-#(#2TG7BF9RFO&gt;69JD'&quot;RS&gt;[J\M&lt;%3I\+=N@
+MK4VJDZB;R,C&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">F9W6 at 7</A>&quot;1E&amp;SY&lt;/#NYPOD-WWQR)_C&gt;UN_C73M;@!6_3PEE9N(
+MZM[05042^?BT+EIE, CR@%GN_*N6#$R+ZO^&amp;Y8I&amp;#= -_\OEN.3Q!U!\3;&gt;4
+MGGTL!;+$%&amp;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">OMIGQ at 5C_K7J</A>[==2;U;@P$=JJG37:75Q&gt;3\^\OU='YB?KEZ&amp;)R
+M-#R57-=JC,/X.E%^&lt;J)POC['C:+[Q&lt;GV1(QQJ_,K([K#+S]X0&gt;,&quot;:^GFDG(D
+M.N&quot;7HN;FJ(CQJM^X5).B%R_].=*I2^ZO%0W)'KFP:KDZ31&gt;Z!%6=L&lt;R\*H ;
+M_ NRPA=&quot;H%&amp;EJ=&quot;JH9U,D89&lt;B;ODAXR D'5Z&gt;%KKC&amp;&quot;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">5Z9 at KDKH</A>&lt;'5]-+]A0
+MP_?C,56GJZ,+&amp;&lt;84&quot;&gt;8!Z!=ZK]I?O/KBBXXBE;C?HN1Z&amp;&gt; &lt;*Q*3SES8&lt;2'F
+M?(TVB,7D7^KPM''K)SPG4[IJ5,&lt;_')U_/WK1$1FE&amp;QF4=Z?EY&gt;M,+VA4UCY 
+M9IM#93PI[DH#X0[03.*I?LSS)U!+`P04````&quot; #7*#<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">X_. at 0</A>](J,:``&quot;2&lt; ``
+M&quot; ```&amp;1I&lt;VLN87-M[1UI&lt;]M$]'.8X3\LGY* &amp;Q*'([C#,#1M(!QM:&lt;)P3&lt;8C
+M6YM81):,5L[!!WX[[]I+DATG=1FN!AI;VGW[]MW[]NWVL?KTM?^\_=9C]6UV
+MJ5^&lt;J$&gt;/U.E$TS?U8J:KI,Z*&quot;W5R:VH]59&gt;Z*G2.K0_+V6V574QJM76XK?J[
+MNQ^I1_!K;\_&quot;&gt;:JO=%X&quot;`(<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">, at C</A>=8J+&lt;?O?W-\^.SYR;.=TQ]/`0H&quot;.OK\=*^O
+MCKYY\?+E3^KI\&lt;G7ZM6+[T^/GS\[&gt;?NM]4P-X3QZ[3\(I33#&quot;UT/S[-&lt;#_/,
+MU#BS+W2!1-)J7$ZGR2.C9PE^396I*Z1&lt;&gt;:ZPO5%EH&lt;Z!(+-;A'3\_'V8Y4!]
+M_J/Z5.7E&amp;*@,[^L2&gt;I655K_KJGQ4ZVJ:%0B+(!3)5 M0G%,3E\';;VW,YF:2
+MX,N-:7FEKLLJ5;_LN!;#&gt;CH[ZZGDQK70R4U/[6YL;#Q6S[5.&lt;:&quot;R4J:$@&lt;H\
+MU95Z&lt;OSB1!MJ/T[R7*69N1Q6VL# /!?L^M4&lt;*)$5:IP832W4=6+4&gt;)(4%SIU
+M8^%0&gt;Y_06*_*LH:&amp;,%*=5+5120TDN,A@!)&quot;3,1 `&amp;D8CCLOB2E?U,.]/:N,@
+MFJS'KT?S\W-=(&gt;1G)X,G/RHS*&gt;=YJF9E5M1(TW)&gt;*6XC/4&lt;W/&gt;CM49OT5)\P
+M&gt;PF\FQJB`O;=VY\,5*635#@GZ!G;+X&lt;I?4 =/R]2:@C?D&gt;/U1$\!O'!<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">D at V</A>%7
+M*!H:$=(%\!;F7,Z@$?SL8-=A!609`EF(D^4LB1AJZC'\<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">+4 at QP</A>%?0R6*TE$&amp;'
+M$ST&amp;INC-*TU($GKJQ=?0Z==BK': 7M&lt;X\# KLIJ$`5&quot;L*@#;4T!Z, !S?8&lt;,
+M/,/F(,KTG#I599[#)),&quot;AJMN57*19(4,&amp;$\7'TYG:B&lt;M&quot;TWS&gt;EK.1[EF#'I*
+MWV2UVH1VFZHJYX +H1+C;&quot;D6&quot;=ON8C%YFM0)40(0/*_**0LB,,XIFHFT&quot;/KW
+M6IJ$=$*53+4!K%B!&gt;0AA*@$=Z@*F/<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">P at DYA</A>&gt;3O;&gt;W=T93/0*((/<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">Z at U</A>*-YK5GP
+MJ ,2&gt;SJC]KM'$VK[0U:DY;51TZ0&quot;,PP&quot;?)G-5%8C^;3:P6^$,X&quot;I63(/N-^Q
+M`7YGH&amp;6H&lt;B0MMSR&amp;@L&amp;NRGP.&lt;\B3D&lt;X_(_;\SK&quot;HZT\:)&quot;&quot;[*, DT4CQ+,X&quot;
+M)/O]3WBP&lt;W7-0H:/U*= G5R'%JR!KI\E==\#W$&gt;W8$P_%10+?04\FAN=4D&gt;6
+M$NAH41FC5:&amp;N)RAWDZ0&quot;X9NC&gt;DF#E%2=6CS1%UE1B$V&gt;E&lt;9D(&amp;8\#O$+*0&lt;D
+M&lt;@S+BC%T;&lt;R9()U&quot;2^+5M(0/\V)N$@!%PR=C&amp;-L$$]M4FR'[R+K6V128/9N#
+M[=M56]^?'CTZV$9N[!X=37&quot;&gt;N=HI;APN(; _-O%]<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">TG at OR</A>(YON&quot;E3A&lt;GR%.@%
+MGPDWQX3/A)@796T?B19&amp;1&amp; ZAZT&amp;;'F^*$'$'#00+[#@L\08F!3V!Q*'NG?#
+MB*&quot;GNYYH$&quot;7P6]C&amp;.S//RUT8#^VBU1B2!D?\F*PR&quot;9;/H9DE8QUV^B7-T-OE
+MCI/R(&lt;VZR'<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">4 at T</A>)(T':9E'1$R$+WA&amp;' 36C&amp;BB'Z$@Q.=%&lt;&gt;)0=<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">D7 at _94-G</A>&lt;V
+MW11:_3QV73U[F\B&quot;[XU$*&gt;B#;*#B39X#CO!&quot;`1NTN7EB#28UZ*E9!5J.IKXD
+MNX2_&quot;WU3$R1\@&quot;!@<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">9 at 1BO</A>\\@)MEY;1O&quot;0T+8J&quot;W\ZI#:MA/UQA2FZR:,8%.-
+M.+&lt;GO8N#_!P%4C8FV[K0H'I5EI+)AU&lt;YTP5&amp;\[X79B2&amp;)C;\&amp;QOI-&lt;KIF@/+
+MO 2?B -A4/D-?%'T)2N 0J\^_Y:#QD; &amp;'JLGCH,7T%'[(;TS2TPA$%1YQ-H
+M24^ '[]KM05MB?C;X.^3&quot;LPN.O'LG)L4)=JZ&gt;4&amp;A7(CHP$8$\) ).YS/(.#'
+M.%!&gt;(?I#BZ$-XYS&quot;_[+C7@':%)JR;*&amp;_L:_&lt;C%PG0@#L=X9/H=?XA@,PMBYN
+MQO6$@;RSYG#WF&quot;-=&amp;Q).(-8=:<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">5W8 at -</A>?&amp;./QZ6%ZR]&lt;L0(=&gt;)8$($]ED4L&gt;Q 
+MR#.&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">F at L9C</A>$&lt;FIXI,Z*E1D@&amp;QYV(TD.SG$,CD0XJ46&quot;#]L ,?)-X&quot;322,S2KT
+ML$#22Y2=%+K_)\)SB,HKF14U&lt;4W7'J0SF,_5N;X6&lt;5+C7&quot;=5#Z8(XY?%9DW:
+M-:MP;9S?<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">+ at OJ77P._</A>&lt;&lt;3-W04H:M/5PW17U8E!&quot;G3AP;I,E]KC^G%C$$<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">V at W</A>:,
+MWFXX7K2XM\GFG3Z'V/W^!Z3\U%[!+,BU9-H`JRWS0@%YM-_W49WB8=&quot;V)^B6
+MSG&amp;&quot;NV%/<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">0 at 9</A>=&quot;Z(BCD2&lt;$H&amp;ST.;3F0#3J&lt;-@=*OVU): ?&lt;_YJFT;8[8E_24*
+MMQL&lt;D&lt;*<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">QV5ORJ- at +1HZ</A>#ZC23=0'JJ8\G45?1%G9$S-\DAKTE-8 7%2G\&amp;)=\
+M.N5 +^86`&amp;G'[3\DO$<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">H at 4</A>!RTN]Y-LDF&lt;?ZN-6X0T9N$7.%_H&amp;N &amp;:QRD7&amp;,&gt;
+M1\UUBIGI&lt;9;D+F2F41&lt;@LZXU3QNL#RAD1C:F^#Q-`; -*@!@7?IAF T6AK&gt;M
+M*:]!#LE4BF2PN% /A$'.DWS+4L?<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">JS6O3 at 9</A>(&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">G at Q.CKM</A>#!.&lt;:`49K`(A_T/ 1
+MCO,*XSXAF&quot;&amp;Q,F T?IMK8Z4&quot;[ /%!)<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">Q_JLNA at XL</A>&amp;LY.&lt;D1&quot;Z(-5YY.-FN(&amp;L
+MFB:_PM^H6Y(.&quot;(TL!&amp;CSJE#763VA. 9FO8NFS,&lt;P8137@&gt;]@@TWI-5CK&gt;CP!
+M0PV9+#&amp;'^!YSDRX`&lt;[QD`&gt;\?G&amp;W$P0KC`(T9+_R$- ;BNL1%.R^'?2CP\2H1
+M4J2&gt;A+ S0XG!GKB140FO*S3&lt;,(9H!\<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">3 at 1</A>!SG\:&gt; GIV8\\U^%A^=/8 &amp;,@%I
+M&amp;J&lt;4$[\@EUA!?&lt;IAAPT&gt;RG/^CI!7&quot;&quot;/2!6$$QP]F80&quot;1=@40XFK5C ()&quot;1[:
+M4&lt;,G&lt;4[ODW9*SP&lt;$YXE+/T&amp;O(#ZLP#$1U0$D_-(IV!*+P.+4GGA?!QLBN25^
+MO=EZJ9MF/<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">0 at A6</A>\3EC8OLATR2@&gt;=ID^&gt;A+&gt;/&amp;P @;)K*#HV[[L'A&gt;S&amp;2$\FUR
+M&quot;?9EAO%0E&gt;$:;=8*\@&quot;$XVLK_H&gt;7(9]W^\R[+]6G$7=[ZO-OX-&amp;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">O at +XD</A>:@-^
+M[^<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">XM9 at 2</A>@/I[<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">G at -B0</A>;)H0P*EGI3&gt;-*B0:V]G9N2,(&gt;X%=KC.C&gt;Q*%\2M4-[0;
+ME&gt;5HBQ&lt;K+11&gt;,&lt;@$NJ6K+1&lt;Z9Q&lt;QWO,\8,(^?I[G\#EXV,?%&gt;(:?-WS&amp;YY?#
+M;[<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">X_.7WVZ at PL</A>$01Y&quot;]&lt;&amp;M+!E*&lt;L*- TH`&amp;3_]B#:RFKC$PB <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">5DLP4S. at _</A>!&quot;\
+M@&amp;Z0](/<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">_Q8 at R</A>'KL&gt;$_@&amp;6&lt;4&quot;,IOR;@_'`4^9L@?[%&lt;(!;&amp;#[MSNF(*PJQ\CK
+M`\(-[ /A`9UIZNR3D*+6GCZ&amp;P7 `[HL&amp;T'4F/L K)+J95#2I#WR&amp;!#D8M5=;
+M$+&gt;4Q04J7%*0#V!7[7(EGJDR.FI=C=)7&lt;+K%ZBPMC6FN% H7I+.8A920[-O$
+M7-+X-&gt;&quot;\A1/&gt;#I!&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">,,Y at L9</A>?P#E.&gt;6J]<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">GQST at M4O8D</A>&lt;%+XCE#:J_[/]SK\XS;
+MVK+1/5G\0&lt;A!]!$Y8HE8(W=.B4W0I?$E&quot;N:3'Q'A7&quot;*00PPT&gt;'T'LG%1ENPS
+MX^31&quot;$PP..5T!#)(2PQ:%.BK; S!SGPZ(J]ER02Y)6EV*(ZX#** :<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">_ at OH46S</A>
+M'6&lt;'O6#4[R4_()\=ZE@/%8JZ842RB?#Z^&amp;V3L(P&quot;20+&amp;&gt;&gt;[IK*R2ZI:W)0&amp;7
+MSK1,S!G7^P&gt;TCKCME.=Q1@:Z&gt;**[YB?P)9PMX\7A*&lt;UA@]+F: ^0EKA**BM)
+M8.&amp;4+W2U#&lt;MJ^&amp;B3RMUF$CIO1FDL=42OQ6XB&lt;:GA9F^=6;Y&amp;MN^ZRFKMTGTG
+MR15,8IK&lt;J(\^^'J;&gt;2W&lt;B_)^/M?W!+Y2^L;Q@?-_O##%SCB&quot;R_B%DHJ6Z,77
+M/&lt;GQT:SG%5$[PJNUGRRFM[UT`)PNZDFHR!R,%CC8CL&quot;W%EM2.P],'=IXP3[G
+MZH%'IKXEJ?IUW!RT'7)+Q#V^B5]9,L*K4&gt;.5'8Q,6(0Z&quot;3&amp;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">D. at R</A>',D\I+&quot;\!
+M42*C;)$@D6$+DYN]0_Z]A2;^V&amp;5_CX)\-KL3#8TJ[0RL49B%YCW+I+@%&lt;0&lt;[
+M4LX-0-?C.&gt;+ON&gt;;CYP:,&lt;.NL?P`6$&lt;6B&amp;%(;7+V%!MSFTMW&gt;@/<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">M at EWK-WBX</A>$
+M=;-Z#C88_#0*!*N7]1OP!-8=4Y@(VG)&gt;:KN)PF*4UIQ9%1&lt;1&gt;,ZE*&amp;K&gt;DB,,
+MR;5&gt;96FX;AH1?!@9=Y[\&quot; 7E@%<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">W0P at +LH</A>/YZP9LTR7&quot;$F^)QP(&gt;[QU/(E4'2
+MV,W,.F,[@//&amp;J'K#LL!)&gt;(@#'R1C*.I:P?-._VF&amp;C*X(H6]#($(I%1]FOY/K
+MBJ1V#/&amp;O*#DY&amp;OJJP-37MS9C)1$%<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">N at R</A>;%NI4,+_E.TY0]EGNZY(D=ZK3+.E!
+MR#V=H31'2&quot;/#0H44XH]:<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">U at .V</A>]PVDXAIAM5W#B,.F&gt;!'WOMQ*M3O.Q-P=K^QL
+M^OGD&amp;%)3J)Y;F,F:@2&amp;26*N^+IVD;$&lt;+D/Y&amp;D&quot;21-G[7V4^1%*S-OU!X&quot;=(+
+M2BL&quot;YEVJSID+$+1A^&amp;Y RI&gt;:ZPV79$MHS*51''*3`EB*&lt;2F!8^'B4\H[PA=)
+MM]'(4]S5Q-B4U=Z&amp;]GY'@GGKIB_;&lt;2;C9IN$Y*:&quot;&quot;8-^E 52E;*:YC'(##S(
+M;VU 0VVP&quot;&gt;WOM^9G9]&lt;.D'E:@&quot;.&amp;_O02_M]H3*8]8^<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">A at 9</A>\C37S3%2ZUG$-J!
+M9(A&quot;M]G!EJY)3^M ?0V!:9GB=D#L5SEI[(9,1JZ)C2O!%&amp;*/;X)-^3PGU;/P
+MK6WZS.Y ._WRJC5D.;.&amp;':&amp;)T;;+,&gt;(PMG)MA!1./N+YTZ._;OIO&lt;FZL+OP3
+M0R5#S:FS+C]=4T4(KH? 35!26]-60GDN03^LXQ %VD1X3&quot;44T!ILBIF5O(\.
+M\#PC27DF7%[W&amp;#_QRN;7&lt;@1906A-0-BPPUC2&quot;U4-9IA15[<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">NFQ at F+.</A>;&gt;!@#5%
+MC3G(/DJ7:?MEAQZ&gt;4:[OL=1 YDUC2$0C'%IQ!&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">JI at Q</A>)D[!%36EE;6&quot;*YOE/;
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">MH at K</A>/L9?%?6GTX_9?FE'@B+.B;AG8`$;#C\2V@ U F\K!'48$E#]08F%]5V_L
+M'Y8^L;-=FC^)&lt;B,;*V13V&quot;P^((L2T-^F0QYWY5%\%L6E-T+?M&amp;LW?7Z64)&lt;S
+M&amp;WY]BR5?&quot;UD8,=!YB'*!'^W@\'M]RV-11E3+Y\]^/ WX9B8Y-??UG;(&amp;`7YS
+MF$'ESTC8:4*<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">_D,XNJ at OW</A>]D+J=N=!:&quot;EGDPQA-(.QC+5?L&gt;K1,V_]OV7W*7% 
+MFPI!+9(U&lt;%XS%Z2!@$U_3RYA3\^J?R[-\2&gt;R6X/5J'E_H_7V6_^;HF*(I+;V
+MB+ZTC)(K):U@&quot;_P*I!RW(WB7&quot;;.3:BOT33 A\J3;/&amp;F7Q-R=!*%B5I&lt;XI$=@
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">M at 8Z</A>=R#YK,@*I`I9)O)X4D4-IC 0#X8^,,U@@^HW%$RW29/7$J:=R3L:+E,$G
+MGGR PRX.TV_XUD 7)*_=6K$]WHDC&quot;D(,VY*X/T&quot;R&gt;9,2A6!1;HEGXK&gt;9P_VY
+ME3&gt;A6NO2,!L4[2WMAX5%[?TBCDW=T&amp;%FR6&gt;LG4UP'T16/*F8\JW)#1;Q8P*+
+M8&lt;LZY$NCU D2OQRL5-0=8?%^TWP&amp;%A +NVF[@GIZP4;3CJU\&amp;J5!PZ@\:&amp;E&quot;
+M(NH&amp;&amp;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">9A at 3AW</A>]8N&amp;0; 8ORIMVWW&gt;5S6QOZ),K/QG+`/;:/L/11F &lt;)R5:`QQ0
+MXK!=&amp;[*_:VM#CBRU6DVH?*1+$QT1HS6&amp;W9KE[0:_HV S+_Z]<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">+X at XQ+HZEX9Y</A>
+MIUW#ZO+MP8Z#_&lt;XN;L-]M523!_&quot;H&amp;7C[-X[7_E',1I&gt;Z/U#K+9X-TNJ-A&quot;P`
+MYX,O9$9GF-(OQG8+@]RVK\?L3+([N9$4^CA.H=-JUV71BY((':/PT )9SG)'
+MR6V'E3-Q]TK%6ZDAH&lt;$W(9AE:NTZV.I$$<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">Q7G+JK2 at .</A>&gt;+E5X\;%DQ,86PYWF&quot;
+MNS9M07&lt;HL*ASBS&lt;F04%RE&quot;2(ON+ZO= @N(](G]L&quot;1-.\LT1;!.DYI(EEBRH&gt;
+M&lt;,#*_MJ[(UURXQVC?&quot;*&gt;BJWTS5!9,&quot;N_?)M#&amp;[M+YRL.Z?UGMGR!6X&gt;E!D%A
+ML&gt;N#?[&lt;V*L%F1H,NKP4Z*263^U0RN&gt;_$IX.PKI2-XRU(&amp;Z <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">-M5 at 7</A>$^&lt;%;(FG
+M+0[%KQUG3]+H[,ENH\;P/$XTZBC1V#K.]&gt;S#R4/ZVQAIOQ^E)R]@8&gt;8VNFU;
+M7X/GW6S$$BD._P&amp;G9WA;A#9KLW../ZGLF&gt;(&amp;V&quot;:QXNHM0?&lt;60],CL9ZS&gt;I-&lt;
+MB4:'&amp;MR:Z&lt;!E^!:.XW&gt;O]@C4#'/'9F37Z;*,J]U&gt;`#\HSQW3Z&lt;##T^-MD10S
+M'\%3=V+J&quot;4=2[DQ@)&quot;L43I'E2L#'`F&amp;7%<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">HJZ at WVM-GUJ</A>(R4[%63'6RWV[VSQ
+M`;8X_&amp;@BFSAL;M#1MEI^B&quot;T_?K9&quot;RX^P9=@,5\GM9A^OUNP`F[DJY60\UL9T
+MM_QDU99]%VH=R[G$@NU=J^'&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">J at W</A>[0D&lt;97L*G3OKT]YF2*[4E_L0-NZ?TX:H-
+MF3NR4&gt;Q.9=A M]7\X_LU/[@SB.U_&lt;F&gt;3E4/AJ,G2N)CW'7T(X^V,+\<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">3Q at 02</A>?
+MZ9F3!&quot;T.F_^26*+2,&amp;\?2SS%JGIVG5SB?I[)P5C:T'&lt;NU=!=&quot;W=&amp;$VBC&gt; 1$
+MWP[7*-YXS4BBJ\YB6?P`+YDMRQ:+8M:=76U%`,O\_4OK[.U2KAFFNCS8I(2(
+M/_8==X6ES_ WK(:AP4A+'3&gt;PB+Q%+(76!U-/WOR&amp;+OZ&lt;7&quot;N?I&lt;U ZJW#%:W5
+M14EP.CGP[F9Q,9VX.T['^&quot;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">,8_ at BDQ</A>!K$R^JR=1)BBS&quot;@YJ%8;4,2BHL!_+Y9
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">MUM at K</A>\DDR`&quot;#GR(!*#4\)+*)2%B,E)G87J(WFTI.Y^^R6]_L4?-N K:?@] 44
+MOL ,&amp;=2UYI/Q*?#A'.R]G*/V`R^U,2S'+&quot;4=.11B#.&gt;%%U4B&lt;&amp;:&amp;R^7QS%(H
+MN-WB;!GX]-C7LA,C[&lt;:T7S]W;)W)JV;&gt;E[8&lt;-0#K.E! &gt;U5RB(&quot;#S^L$MZZ8
+MWR0&quot;$H!*T(&lt;G)=(R*G_8YXRPYO,O&amp;#+ZK)$)]\!$IE?/+Y,\#E=),J^05EY#
+MO; E\?T+AFW/-U8Q3!MJWA ORF)'6QU6'85&gt;LM&amp;Q*&amp;7L%]TKER4#36[5&amp;ZI-
+MEHDV4^=KG^E]:J#OG/$;*I&amp;V&amp;] ^E),[03Z+BJ&gt;%XK$AB9:.53)2^-:517=O
+M$[3CK]@\W&quot;]5:=]'*&lt;4WFQ6LR+'YG X=U&quot;9;@&lt;]1%9,PI[.X[I:*%[&amp;W5.!B
+M4LB_W&amp;K&gt;VL01E]FV5;C^8!J.Y'(C,89.VD&lt;W7N[_*6'5/&lt;/,-&lt;5C1 ?&quot;\+MY
+M1I:I?7F!F\S(3R9DG[\;HH1]?52N_);O-$FY[G^[L:/Z&gt;I/V]=3VJ[^TA2]7
+MZT*N:P&gt;C%6KXC,A*$8^#)L(2TE5JR)N*[8F^.#D;`!C\)8LM%!YWJ # -PYR
+M9 46:O B&quot;CXU%F&quot;=VAY?EN$!V8M*YGC-&quot;57L$PK5&quot;G=GA$CZ1=KKB1*QQIN*
+M#A-QQTH:.CTHC]^$UEG&quot;&lt;7#6+&amp;BF6^B@@5O(MWIR(^AX/U\&quot;?=S^T[KN#D2Q
+M@*-?S^'PX(L3=S,ABM?SDO-4?(V4%,/@1E-Y@&gt;&lt;7UR7E`*63]8$CVSQ]=G*Z
+M\^3X^2;9!_ZNX \^PM4&lt;2!(OX-MB[FV+=5+MA(.,Z*\TW H%'&lt;:\2O(L)?O8
+MA&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">GB at R0K</A>[%_)_1U'W@&amp;7&quot;L,M&quot;G4NXN7X$7Q&amp;A$S943$0-SW)IAED&lt;'/,YDHO
+M&lt;MY8F]R\EBKEBF(7F%DJ,*YVPR2N.,0[X88+KK?&quot;;#0M2&amp;T5]RB\UFIGTY[D
+MOH%EG $6#,F D,&quot;7T+:]<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">0 at 8</A>,&amp;]20&amp;T(&lt;&quot;+9!N%ZJ2E?'[!%!%)OC#5I5M=W$
+M]F.DH!!X4L!=70%@V_=&gt;I&gt;70=2&amp;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">2X at 42</A>=&amp;^607&quot;2D\@(U '7BB^J&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">Y at EJ3TE</A>
+M8S,1^)EAP-O*/?'9*5EIR8BTHBLT*G%2^&gt;NW^&amp;77/5IJ\^Y+Q'(5`+$'&gt;SB@
+MZ,E6!*@%XN6)!P.'A'&amp;2P:'*?M?-&lt;BVV6 FQ?=?;&lt;K7[M2RAG6UW(5.L%/?*
+MW0;6_R%;3!OAP+8081_.$+ZI%4&gt;'JX01Y&amp;:;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">S at TI1CVSMQ</A>$NBT:&gt;AI=[-&amp;*_
+MCLVJU2*3#HP#J[WD-%QKI[5QA&lt;\6/-OV&gt;ZS^;D[;L'UI#_$;UI4==_7&lt;C&quot;&lt;7
+M8O!D^Y*JE Y_E!)W^%7(E4U\$M\<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">CWK at NY</A>&lt;Q&gt;8&gt;&lt;O#B(&gt;V/==FXR@(F84[L_*
+M&quot;2I_YA:88Q&lt;K?D8`H.&gt;H3OU\;=IJ]P[9ZX;&gt;Y[S&quot;W&lt;LX2:1X68CWD)EQEIXI
+M':F++NNQ*R&quot;@+*WOW(YRFRV!HG&lt;K928Y&lt;B]P&quot;RYE&amp;40[L;Z^=M38CJ6\96-J
+MG2$FO Y*5D@&lt;_94&lt;^F:<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">L9X at 0</A>,JT[$D5,!%9K&quot;=0N&gt;L(';^!RP(9=\?EF@ U3
+MX_M9D B2HY9ZE-;:GTV*JSV)\A'M@\#12,X2M.]XP&lt;&amp;7W!*GMI)S5 L\`2\/
+MMU&gt;HPVPD&gt;T6&gt;^-87\OM6R ^^AJ&quot;\??-+'Q.#\ET;=YYWK??*+;HA!F'XZVWN
+M?;L&lt;7LN&quot;S^YQNUQ:@FK%=\JY[-+RR^5LK0X.BI=I+KVXY-7J=\;929&quot; -.X[
+M;%Q08WOXTZ1'D+\%%(+;Y+&quot;+P]$2)BI'\WK-.H G&lt;X6TMKEG5V&lt;7;UUX\Y5N
+M;FKJ/..Z6BB2)[!,&quot;@*2[3&gt;9_8C3M?9&quot;`11 NQO$LPRU2I+BC6L&amp;L$\CJ%C%
+M5-#8_TA;D9H5#&lt;7^0D-!DU_%4E##1:9B31K^`XX1J_A8ZN3OUK)N5;F'@M X
+M?UL-B5)A-D/8WNMU.M/I,Q&lt;U;FA-?)&amp;N)W$;$:&lt;R?^V_E-&quot;I):^G(@_UI8O_
+M&quot;06UA;('&lt;P1YOT[PL.R]/:HE\U_O5MW(MJ1_7?[5`EZWDWW[K3;.:_.WV#&quot;.
+MX=N6I)T/V H2`MO_+$\&lt;&amp;!JRRDTSL]@U-WRRZT=<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">I at Q6</A>\LV.HQ^9?:&amp;T&gt;[)&quot;]
+MN&gt;&amp;6=]N;U[&lt;0#;?&lt;=LJOJ3G_!!_\*KCOT)TP;-G&quot;H-C#?DIOXG_5Y?&amp;[K_\'
+MH' .A7.&gt;]K/D-^G*-GUUMJZQXI.&quot;LNN6^M*3-TGVMJ+2UI&amp;M2Z'<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">3 at SWP-</A>)AF
+M20KKQT*-$CL4V0)Z&quot;PE*:W_*&quot;LV:&lt;PRMZSO;6&quot;RH&lt;_ *#U]=?6EC[/@TL[\Q
+M.SB52A5F-B$$5]&amp;:E[HZQ4F&gt;^;MI:6&gt;,IVZ38W09Z(1-R^36!&amp;,:T&lt;$$YF33
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">M at WD</A>/&gt;FP$`*48&quot;&amp;ES^$U(@R6'L=T%O*Y6&quot;*;!?+G_)!S4N&amp;L&amp;*?&quot;S(%0P^, V
+MG[A9? ECOH_O[ 3A5&lt;*O:<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">-A at QY</A>@_T&amp;36I26/(RWT9:8B7?;2Q(7:JKI:KPNY
+M*/5'],2:I3Y\&quot;?F&quot;S_8.UC7FALQ,+H_LO#MR76.M:\,&lt;?_X$4$L#!!0````(
+M`-LH/C\/7D].(PX``+&lt;K```*````:V5R;F5L+F%S;=U:&gt;T\;1Q#_FTK]#MM*
+M%4UE'C:$$**V,L94* 0J(&amp;FCJK+6=VO?E?/M]?8.0SY]?S.[&gt;P^?056#6JF&amp;
+M!/OFL;OSGEF_$=]_]NO++]Z(=_&amp;MNKP66UOB)E+\25QF*I=%G,[%]8,IU$+&lt;
+MJCQ5&quot;6&amp;/=/:0Q_.H$-^.7HC![NZ!V,*??M_S.5%W*M%@8(BE44J$<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">.M at Y</A>/QN-
+M+Z['VS&gt;_WH +?K%8; 1^$RU#%8I9KA&gt;BP 9F(,X&gt;=D8G/3%]$,&gt;7ES?GE\.3
+M[&gt;.SBYZ01KP=7UV,S^GC-G$YC7-3B*42D;Q33&amp;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">_LC at .9</A>).).!87.34\LHSB(
+MA&quot;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">ED7 at B</A>)7[S%^0*<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">1Z3 at MB</A>,],YR++]3R7&quot;R,*+?XH%QG^;HM3G21Z&quot;5&amp; .2AC
+MPXLL9)PZH8A ATK(- 0;@J5&quot;AF%&lt;Q#J526,S#H_.G 9)B2-C_\^C0OK9.#Z[
+MN1;]`W[_S&lt;GX].QB+-Z=O1U?7D\^C*_$YO[V8#K8W'@CH*([* ?[$VFYF*J\
+M2S#\^8R)^OO QP=/T)%2$*<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">G at UFW</A> :M0+*-&amp;!+(@$&lt;KH:OB-*+Z\P-K&gt;&quot;#(01
+MH)S!_ENFE[-&quot;Y41MU0*EJ9QUZBDCZ&lt;WEC8B+32,.WQ)_$W]2/&gt;8P58$LC1+J
+M'IP@?[]92^86B,D$F.W&gt;X*U=ZHA/0!N;3,O93.4;ZL]R8[#_\A4+E!2U]=DO
+M&lt;&quot;'ACX;GY^+#&gt;'1S&gt;&lt;5.=\V66 G,D*C6&amp;3&amp;17^A&quot;'='6C0(L376!(XN%OE-A
+M3X ,0@'!-%?REK&quot;8WGQE#W!#G_5BH=+&quot;&quot;!/I):<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">0D at Z</A>*QL)Y!FJ;(RX _XP.8
+MQ$!6_*!'7&amp;0*,4(KD'((A$K .PMX?ZCNMF'=PFAV%B!W-$';)CZD)&gt;E&quot;1NNT
+MR[B(=%F0/[/3:7&amp;;ZB5.9MQ^,VW(<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">NX at +</A>;: V#RQ;YH%B/]O&gt;WJ93:S,AIA,G
+MPB,H^0_X-1Z3`V]LP&amp;1V\8I(#R,@^<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">C at TU</A>;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">I at 0</A>\MKBBR'H4P@'FS+$&gt;Y%-9B4
+M, G*W.C&lt;00\:T&quot;!1,I^8(%&lt;J=&gt;#7T2KO2.?QITD2I\JAC#HHJ5HVX*&lt;-^%+&amp;
+MQ02F,[E5#Q;&lt;'S3 [*DK\)&lt;-.#$O=.MX_&lt;,&amp;W&amp;1*0LS \:OWC]&gt; ]6SFH.,&amp;
+ME$0YF&lt;6)HQSTF^&lt;BA]UP@/T&amp;8&quot;8+F4Q4GGN!#EXUH&amp;$NEY.I#&amp;[GN2[3T&amp;$,
+M:PQWE$FBTGD1.?A)%UYFB$2!-&amp;YO&gt;[MK6.AE&quot;V6O);&gt;L;%O%WD&amp;70X&quot;DZ:&quot;O
+MFX&gt;(9:+GDZF^=\!1E_0/Q&quot;&lt;';:I[<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">K at J6</A>*,S%%!:^/UBW\&quot;*#NSJ$EVL0(F X
+M\&amp;$'S'\\^<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">+ at +1JQ</A>($3T\_Z;.IT$(8R&amp;[LL&quot;7_97=%_%&quot;M03W&lt;G\%0V;QQ&amp;4&gt;
+MA]&amp;P`'MZHQ)V;0&lt;?KG (9;&amp;R1LL&quot;5!I.[F*)-SDT83$.=ML\<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">N at A</A>[K4V 11#)
+M' =U&quot;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">UFD at S87</A>%QDF&quot;%Z.2]?]328#Y:&quot;CII6@%&amp;D=XN&quot;T0QO&amp;\]@)^M6@`^U'
+MZMX!7W: @QIXV 'NU\#CED.G\W;(L#CC=3BIFE&lt;F&lt;MAORM];P6Q1./!^$^P5
+M6(.;^J&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">4U at JXATWM1W</A>&amp;HVM&quot;359'F:@[?@7U9A-==S[=_`N\@KYN:7^8QME8'
+MM=&lt;'J[:I[L'&gt;,V^J.T!^;M,VU(UM(96TH*&lt;M:&quot;H73&gt;APL&quot;XJH&quot;3R\)&gt;KT&lt;J%
+M'0=NZ)QBR0JTZ_/8`?FDYS[N(+2\_KC?B=FH-VX=&lt;-7A&lt;U07&gt;N&amp; KSJ&lt;V='P
+M+YTKB])0N'-1.%A&gt;3&quot;&quot;C:&gt;)<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">P6 at Z_</A>)LN-UJ@]D]4!1TV=(]<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">HAYY at X</A>&lt;+&quot;&amp;RNW&quot;
+MTP?H%=6+@[]&gt;&quot;_?Q?#1:)[M;E5:Z&amp;YU&amp;SUM^7M\,KV[$Y:EX-SR[&lt;*V4&amp;%V&gt;
+MC&amp;D15Q51D10D\0;GY!'5+0)B0QXNL\(`!NL4\KXG=MU[8WKXS-C7JJ#&amp;*KA%
+MR3BG0I/+Q4PSO4?/0'J*%QW&gt;%&amp;Z=*V40Q55K)=Y'2'!;O(9J)LND0/^0(^;[
+M=L0*KM%/@,S2+.,DH?)XL\PVQ198P^]H4T&quot;G%BU7QKCN!&amp;O5YQI005@=!T6A
+M/PQW/ M9!!%W)K[LK'M8QR2L!3)T'<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">4U,+2 at UPNEF</A>(5*E0F(UU078&lt;,'K*%5%
+M6:])WB;D'(JA]M=5S&quot;17*HFK\MLQF-4,DAC],#A 6,D#G?<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">- at _ZW</A>#FC,6V]5W
+MG_]R3,FTQ6]4.*,+^+TGPH1%2%TY/11X&amp;@&gt;J;CFSTD0XL!=\U!.'&gt;$]M7Y]=
+M+M.9!=-1`^@%Y8_P+W!&gt;R/MX42Z$X?SO^#INOUVKP/RL\IL&lt;MOA[#^06\.E&gt;
+MA. <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">4 at E</A>']JEE%2H8U(Y@(8_&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">KID at IADYV_UR</A>&quot;:UA='_5=;74%VB:!.()HS?8A
+M`I47-'*0!&lt;Q]6A:5X*;DB43'%@59\VRFQP;&quot;[2':A5M8O)?M;L3+4E=DHZ8*
+M&amp;V'WFDS3?G2&quot;$'.5DF?IW#7YYPJ--X]UXIDHR _P40ID'=<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">MN at L</A>'P/7K;]Q&lt;T
+MH^%]J'L58,M,'A=$9W0/FYV1Q\^U;?.(5]4D)A)U)3D'?*!LR4F6A&gt;8P'*&lt;V
+MTU$Z= =:R;P47 ,(8=*@X4/&gt;QAF&lt;\)YF`#G.00V5P:Y:^PZU,N2LS,KOP-KA
+MX-7!(4O\DHZ_C(UB_V\=`++6%%G0A]:;J_L@&amp;_&gt;]8/@PCI+X@@ABX[9&gt;Z-3)
+MQB&amp;3L)&quot;&gt;BFKH&lt;ID+A+Y(9J;61EH?97C-JOF1L-NB.%HG56G^GE1U1K&V;FAK
+MH?II`0NTWL5S&quot;72=--VSU3[;G\\OX= ZB?RJ;$X1(#]L]VQD4U&amp;6*TY=3F$R
+MRUHMQQ!JFFNG(8(*![662WDB=&gt;S0:YA*:1=ZR?<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">D at -EDB</A>'^ ^MNA&quot;I+P7FN9/
+M=M[(8Y8&lt;8'1I&quot;)X`V3D9,]\*&lt;X3X:@)3K&lt;R#(,FC'EC1%EFW/&lt;L,[06MW]1=
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">MTPIL at 8</A>@IPL+,?2 J,]H&amp;]IJ GQ(MP4Z9Q'=H1.65:N-9GUY3KB)<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">T at M</A>',$&lt;2!
+MFMD%MQ1^-X\H0)65`KM]?=/WG9!\J=1G!9A;&amp;)H5TU(B7[:<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">5 at -</A>^F'/S&amp;.[P&amp;
+M?N&lt;=R)Z%V$S <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">1OJ+XI4 at XF</A>*IMZPPF_K[]O(MK3N2::&quot;2%^YH[6[?AF&quot;RIXKK
+MV4R [EO';O&lt;%J1S]:&lt;_.K%NG(EN$3E-8.AMD_?P11VB[%D%2ITD*SW8%5O/H
+M_*S!PDF.!U+&gt;`[J.?SF;N3B]`W)GJ6[22@\B28,[Z#VLK/\$DQVJW:S33/5=
+M:V:WT3+#&lt;&quot;HV?W'65VA7_FS:<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">ZK,VOAKW at YM4</A>`Z6&gt;?C,Z&quot;%8,R%+&lt;H*&amp;X-78_
+M^0,`E'C=0E^YE5:LQ1+^#$$:Y=0&quot;2=9&gt;=@1=^@.NY;!G.3C79&gt;GUG,4PG1,]
+MIZ9MR\'^-/7]A.N&gt;P(OHCJ+2,Z(,3O5O.ZZ#=4&lt;U/ZF&quot;?994:I^[$L(6+MP+
+M^#J&gt;K03%&gt;IEP\K,2;-TO#'^M&lt;+^U-775VO.L&amp;MNA*+Z ,$,XY&quot;,9[$H594[9
+MUKO&quot;#JG%&amp;S3C&lt;5(;&UP;4?<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">. at ZNADXJKN</A>/HE#'[G9H(AA7L(@ZXNKS1]]4 $9
+M99U.SNU.\*IBQF:IB2L=.$YC$$+FQZ-2L&lt;#.Y%S9*JM..% =M2#&lt;?%0W-SRE
+M;Z998&amp;SFBJI,M&lt;A(W'[WL6$V=S+!\;:V2.JN&gt;]$Y^AUW-T93&gt;RH&amp;Z9 \^4\-
+M#^I]N6_0[55=`9V9CBQH+9W+/$X&gt;@%J9*+&quot;]@?,')YK.:+&gt;I!-#9RKVID&gt;LS
+MR&amp;U);:<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">CMX2 at 5</A>(Y7Z#51Q)U0!R+IOP*<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">0JRH at 36-B8</A>&quot;2;U*&gt;F6I=8J570`-:L&lt;
+MO,]5)A#VS=0VASD)@&gt;Y&amp;]J .&quot;6/=9./P\5T77!A6*]@T0&lt;][).J%]4*Z1MFD
+M&quot;FO3REDC4;2;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">ZNJ at A+</A> JTFX1]HN]==/=&amp;JQ1:W6F^N?X4&quot;UD9&gt;VZW ?V3_I9
+M4^X&gt;/9*RZMF#_&gt;RZ!;+%E+N9YB&quot;B,:D`J\KY6RU2==3Z?5B_ARP:S^U[O[-:
+M,B/Z6$3=ZT5.7ST?A/R-MN1:6*&lt;AWS/JF&gt;_IZV!5Q?_2%&amp;25MM&gt;#!Q:;+Q[-
+MYDY'*=E.;&quot;*Z^0L:DGJD4I6V4J4`W6FVN&quot;&quot;GGTYX.;(6(?.4\G19N Q)'.IV
+MQ))\56N$GX1)G6B](BI0M_&quot;J0-W*JU+Q);P&quot;O6_A)C]US?5(D?6(**ZM[U9S
+M%?9_^NEXW%'M4+[THS@&amp;W8:E+]%<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">7 at IT-K</A>(^$O+BP*PK\TGT2C,)&amp;;6SA_Q/Z
+MI/E'H6]XW0I]EDTW]+DTQ]5,(^+]EY'MLR,8;[%2I3?W&quot;XU.WW[<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">3 at MX9LZZ</A>!
+M]5TH'D F&gt;;=WY0E&quot;9&quot;OLKUH&amp;P_03'T6H#'0+K-QV^\&gt;KM\QKCOX&lt;(6A%]4?K
+M50QX)[SXQ]W0LONOQQ)2B_.9\.EVIUT`4F/0JA5]+EH[^&amp;+DQMC*-1N=&lt;4X7
+M=WA=&lt;78A;\,N35SPD$CKAU5YL1K9&amp;3KB;Z*P5S7G?:Z'\OG![6TU`:R&lt;UW]_
+M*&quot;!?T3/'@]N&quot;]0SVF &amp;H: L2_^&gt;+.C%O5X=LVHL]TUG*U6SMVG4\$Q]U25]4
+M8&gt;J:MF[]=)H\5,?D;4.])-1J(%^OW'4S9O'##S]89ZV&lt;P*%0?6T;#!P';D:,
+MGOD6Z./US?B=^#&quot;\.AL&gt;GX_MMY!40&lt;G&lt;M+[B15)O?CFG'F#=X-J6H71!2S0+
+MR?0,GBUPY3R8#/;IH+LVE*5;GU2NQ??XLM=6E#N*&quot;INX,')/;.[@2VKTIH^K
+M&amp;.&quot;_VSG9^=@3)SOO=CZ2E#_BS4E50ATCI;X&quot;%GV=B)3(VU_HM(CL/9!+'%.+
+M!K:N)+/7%=_C4R9YNLUI2 8(F,\KZ]/Q\.;]E97Q&quot;%[/L;Q,$CO0K,&gt;.3K+?
+MG%V,SM^?C,77,]P1E[&quot;&quot;'=S%;4NS^/K++\0Z,'UIS&lt;'<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">7 at 6</A>% 4RWS\ D4*&quot;)Z
+M&quot;AR;X DPW6N:)^ V)3R%0..&quot;)^#6\YY 8 =S\&quot;^_&gt;*XO5;X1XXL3NBJUL&gt;FY
+MV'[YQ5]02P$&quot;% `4````&quot; #0*#X_\JL&lt;+/D-```.)@``# ```````````&quot; @
+M````````8F]O=&amp;QO860N87-M4$L!`A0`% ````@`UR@^/SH$/2*C&amp;@``DG `
+M``@````````````@( ``(PX``&amp;1I&lt;VLN87-M4$L!`A0`% ````@`VR@^/P]&gt;
+M3TXC#@``MRL```H````````````@( ``[&quot;@``&amp;ME&lt;FYE;&quot;YA&lt;VU02P4&amp;````
+/``,``P&quot;H````-S&lt;`````
+`
+end
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002383.html">[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 65
+</A></li>
+	<LI>Next message: <A HREF="002387.html">[mikeos-developer] The floppy disk is dead - long live the	floppy disk.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2386">[ date ]</a>
+              <a href="thread.html#2386">[ thread ]</a>
+              <a href="subject.html#2386">[ subject ]</a>
+              <a href="author.html#2386">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

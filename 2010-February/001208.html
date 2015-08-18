@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Possible%20addition%20to%20MikeOS%20and%20MikeOS%20BASIC&In-Reply-To=%3Cb5aca8071002092305n5c1d448fs5869bdc3f344b719%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001205.html">
+   <LINK REL="Next"  HREF="001206.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC</H1>
+    <B>Tslil Clingman</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Possible%20addition%20to%20MikeOS%20and%20MikeOS%20BASIC&In-Reply-To=%3Cb5aca8071002092305n5c1d448fs5869bdc3f344b719%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC">hiato1 at gmail.com
+       </A><BR>
+    <I>Wed Feb 10 08:05:46 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001205.html">[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+</A></li>
+        <LI>Next message: <A HREF="001206.html">[mikeos-developer] On making a 'Super' MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1208">[ date ]</a>
+              <a href="thread.html#1208">[ thread ]</a>
+              <a href="subject.html#1208">[ subject ]</a>
+              <a href="author.html#1208">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi guys,
+
+ &gt; 1) What format would the input be in ? (i.e how would one pass say 12.75)
+&gt;<i> Hundreds in say AX, tens in BX, etc etc
+</I>&gt;<i> &gt; 2) What format would the output be in ? Hundreds in AX, tens in BX, etc
+</I>&gt;<i> etc
+</I>&gt;<i> &gt; 3) How many decimal points would be sufficient ? (Bazza hinted at 3 --
+</I>&gt;<i> seems enough)
+</I>&gt;<i>
+</I>
+This is what my &quot;half-precidion&quot; floating point format addresses, all the
+hard work is done behind the scenes and one can just interface with
+mth_i_tofloat or mth_f_toint and so on and so forth (also float/int &lt;-&gt;
+string). The idea is that the only things that will need to use a float are
+neatly tucked away in the library, nothing else has to wossy about the
+format of the storage.
+
+I talk of floats, by the way, as fixed precision humbers as you suggest are
+too cumbersome and require more bandwidth (er, memory?) to store equivalent
+ranges. With floats, due to the space between the mins of the denormalised
+and zero (I forget what it's called), we can alse have things like NaN and
++/- Inf. as well as -0. All of which are handy, but would require further
+space in the abovementioned fixed point format.
+
+As for (3) above, well as things stand, the floats can cover the entire
+range of a word as well as various numbers well above and inbetween, to the
+maximum accuracy of (generally) 2^-128 which is,er, 39 decimal places? But,
+in general, to make use of far less is no problem at all. For those in the
+know, it currently stands at a 1.5.1+10 format with a bias of -127.
+(Basically, this makes use of exactly one word)
+
+I think, wheather or not this is ever used in MikeOS, I'm going to forge
+ahead anyway - it's certainly a valuable learning experience.
+
+Tslil
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100210/46b374de/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100210/46b374de/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001205.html">[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+</A></li>
+	<LI>Next message: <A HREF="001206.html">[mikeos-developer] On making a 'Super' MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1208">[ date ]</a>
+              <a href="thread.html#1208">[ thread ]</a>
+              <a href="subject.html#1208">[ subject ]</a>
+              <a href="author.html#1208">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

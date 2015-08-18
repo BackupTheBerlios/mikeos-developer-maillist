@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Converting a string to an integer
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Converting%20a%20string%20to%20an%20integer&In-Reply-To=%3C4f03362c0811210655rea85faerd7dab26bb38fa818%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000490.html">
+   <LINK REL="Next"  HREF="000494.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Converting a string to an integer</H1>
+    <B>Ian Seyler</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Converting%20a%20string%20to%20an%20integer&In-Reply-To=%3C4f03362c0811210655rea85faerd7dab26bb38fa818%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Converting a string to an integer">iseyler at gmail.com
+       </A><BR>
+    <I>Fri Nov 21 15:55:45 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000490.html">[mikeos-developer] Converting a string to an integer
+</A></li>
+        <LI>Next message: <A HREF="000494.html">[mikeos-developer] Development: MikeOS 2.9.3 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#493">[ date ]</a>
+              <a href="thread.html#493">[ thread ]</a>
+              <a href="subject.html#493">[ subject ]</a>
+              <a href="author.html#493">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This should work for MikeOS.. I adapted the version I just added to BareMetal.
+
+; ---------------------------------------------------------------
+; os_string_to_int -- Convert a binary interger into an string string
+; IN: SI = location of string
+; OUT: CX = integer value, SI = ptr past end of string
+os_string_to_int:
+	push ax
+	push bx
+	xor cx, cx
+	xor ax, ax
+	mov bl, 9
+	cld
+os_string_to_int_continue:
+	lodsb
+	sub al, '0'
+	js os_string_to_int_exit
+	cmp al, bl
+	ja os_string_to_int_exit
+	lea cx, [cx+4*cx]
+	lea cx, [2*cx+ax]
+	jmp short os_string_to_int_continue
+os_string_to_int_exit:
+	pop bx
+	pop ax
+	ret
+; ---------------------------------------------------------------
+
+The 64-bit version is the exact same except for using the 64-bit
+registers (ie CX becomes RCX).
+
+-Ian
+
+
+On Thu, Nov 20, 2008 at 8:36 PM, Ian Seyler &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">iseyler at gmail.com</A>&gt; wrote:
+&gt;<i> Doh. It was a long day to day and I misread the function name. At the moment
+</I>&gt;<i> BareMetal does not have a string_to_int function.
+</I>&gt;<i>
+</I>&gt;<i> I remembered where I found that funtion.. It is part of the Linux AsmLib
+</I>&gt;<i> (<A HREF="http://sourceforge.net/projects/asmlib/">http://sourceforge.net/projects/asmlib/</A>).
+</I>&gt;<i>
+</I>&gt;<i> Here is their ascii_to_dword function:
+</I>&gt;<i>
+</I>&gt;<i> ;  ascii_to_dword - convert decimal ascii string to binary
+</I>&gt;<i> ; INPUTS
+</I>&gt;<i> ;    esi = ptr to ascii string
+</I>&gt;<i> ; OUTPUT
+</I>&gt;<i> ;    ecx = binary value
+</I>&gt;<i> ;    esi = ptr past end of ascii string
+</I>&gt;<i> ; NOTES
+</I>&gt;<i> ;    source file: ascii_to_dword.asm
+</I>&gt;<i> ;  * ----------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i>  global ascii_to_dword
+</I>&gt;<i> ascii_to_dword:
+</I>&gt;<i>  xor   ecx,ecx
+</I>&gt;<i>  xor   eax,eax
+</I>&gt;<i>  mov   bl,9
+</I>&gt;<i>  cld
+</I>&gt;<i> atd_lp:
+</I>&gt;<i>  lodsb
+</I>&gt;<i>  sub al,'0'
+</I>&gt;<i>  js atd_exit
+</I>&gt;<i>  cmp al,bl
+</I>&gt;<i>  ja atd_exit
+</I>&gt;<i>  lea ecx,[ecx+4*ecx]
+</I>&gt;<i>  lea ecx,[2*ecx+eax]
+</I>&gt;<i>  jmp short atd_lp
+</I>&gt;<i> atd_exit:
+</I>&gt;<i>  ret
+</I>&gt;<i>
+</I>&gt;<i> -Ian
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On 20-Nov-08, at 5:55 PM, M Saunders wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> That is indeed a fascinatingly compact routine -- I can't fathom out
+</I>&gt;&gt;<i> the recursion at a quick glance either! I'll test that out as a
+</I>&gt;&gt;<i> replacement for the current int_to_string routine in MikeOS, as yours
+</I>&gt;&gt;<i> is considerably shorter.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> My original post was a string_to_int routine, the opposite of this,
+</I>&gt;&gt;<i> but by luck I've chanced upon potential new code here :-) Do you have
+</I>&gt;&gt;<i> a string_to_int routine in BareMetal?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i> Mike Saunders
+</I>&gt;&gt;<i> <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> mikeos-developer mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000490.html">[mikeos-developer] Converting a string to an integer
+</A></li>
+	<LI>Next message: <A HREF="000494.html">[mikeos-developer] Development: MikeOS 2.9.3 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#493">[ date ]</a>
+              <a href="thread.html#493">[ thread ]</a>
+              <a href="subject.html#493">[ subject ]</a>
+              <a href="author.html#493">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

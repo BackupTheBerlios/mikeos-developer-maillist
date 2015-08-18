@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeShell%200.420%20and%20EDIT%200.420%20for%204.1.2%0A%09released&In-Reply-To=%3CCACtjVkGW2y4znXen4nOR1Y08jQPPRx6dBBiT1P-JFOJ1aEg9QQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002155.html">
+   <LINK REL="Next"  HREF="002142.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeShell%200.420%20and%20EDIT%200.420%20for%204.1.2%0A%09released&In-Reply-To=%3CCACtjVkGW2y4znXen4nOR1Y08jQPPRx6dBBiT1P-JFOJ1aEg9QQ%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released">okachi at gmail.com
+       </A><BR>
+    <I>Fri Sep 16 18:27:21 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002155.html">[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released
+</A></li>
+        <LI>Next message: <A HREF="002142.html">[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2156">[ date ]</a>
+              <a href="thread.html#2156">[ thread ]</a>
+              <a href="subject.html#2156">[ subject ]</a>
+              <a href="author.html#2156">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Troy: there are still various places where you could make the code
+simpler. For instance, here in cli.asm:
+
+------------------------------
+shell_builtin_echo:
+        mov si, input
+        mov ax, si                      ; Get the first token.
+        call os_string_length
+        add si, ax
+        inc si
+
+        mov cx, word [input_tokens]
+        mov ax, cx                      ; Record the number of tokens we have
+        inc cx
+------------------------------
+
+You don't need to do all the addition -- you have the tokenize
+routine. And you don't need the &quot;mov ax&quot; operation either, as you
+don't use it. So you could do:
+
+------------------------------
+shell_builtin_echo:
+        mov si, input
+        mov al, 0
+        call os_string_tokenize
+
+        mov si, di
+        call os_string_tokenize
+
+        mov cx, word [input_tokens]
+        inc cx
+------------------------------
+
+I've found a few other things like this, where it could be simpler or
+registers are being wasted. Not a big deal, but I might have to do
+some rewriting for the final release!
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002155.html">[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released
+</A></li>
+	<LI>Next message: <A HREF="002142.html">[mikeos-developer] MikeShell 0.420 and EDIT 0.420 for 4.1.2	released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2156">[ date ]</a>
+              <a href="thread.html#2156">[ thread ]</a>
+              <a href="subject.html#2156">[ subject ]</a>
+              <a href="author.html#2156">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

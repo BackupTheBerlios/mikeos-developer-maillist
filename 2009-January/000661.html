@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] On the use of internal data buffers in	system calls
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20On%20the%20use%20of%20internal%20data%20buffers%20in%0A%09system%20calls&In-Reply-To=%3Cb5aca8070901270614i272b348ekceb3744c13c0a9cd%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000660.html">
+   <LINK REL="Next"  HREF="000662.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] On the use of internal data buffers in	system calls</H1>
+    <B>Hiato</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20On%20the%20use%20of%20internal%20data%20buffers%20in%0A%09system%20calls&In-Reply-To=%3Cb5aca8070901270614i272b348ekceb3744c13c0a9cd%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] On the use of internal data buffers in	system calls">hiato1 at gmail.com
+       </A><BR>
+    <I>Tue Jan 27 15:14:49 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000660.html">[mikeos-developer] On the use of internal data buffers in system	calls
+</A></li>
+        <LI>Next message: <A HREF="000662.html">[mikeos-developer] On the use of internal data buffers in	system calls
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#661">[ date ]</a>
+              <a href="thread.html#661">[ thread ]</a>
+              <a href="subject.html#661">[ subject ]</a>
+              <a href="author.html#661">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>First off, congratulations on your 3.2 release! Well done, and wow,
+looking at the 1.xx releases, you certainly have come a long a way :)
+
+Secondly, I am honoured that you included my name in the list of
+developers - thank you!
+
+Finally, on topic, I recently had this little struggle with my own
+kernel. I eventully decided in favour of creating a new command to
+assign a temporary buffer to a procedure. I took this decision for
+three main reasons:
+
+-The size bonus (where minimalism is fun and a good challenge :P )
+-It easily allows for future Memory Managers or Psuedo-MM's to be
+inplement as the code is already being allocated memory in a vague
+kind of map
+-For whatever conceivable reason, you can theoreticlly transfer entire
+memory buffers to and from various procedures
+
+It is quite a radical jump and is now top priority as modifying the
+structure of the entire system is anything but trivial. Personally,
+with a kernel as advanced as that of MikeOS, I would implement the
+necesasry syscalls for memory mapping and then slowly ween the kernel
+of internal memory use.
+
+Just my two cents,
+
+Tslil
+
+PS: I see no reaon why not to fork the kernel, one frozen at 3.2 with
+the old memory buffers and one, say, M.3.2 which will be devloped with
+the psuedo-memory allocation.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000660.html">[mikeos-developer] On the use of internal data buffers in system	calls
+</A></li>
+	<LI>Next message: <A HREF="000662.html">[mikeos-developer] On the use of internal data buffers in	system calls
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#661">[ date ]</a>
+              <a href="thread.html#661">[ thread ]</a>
+              <a href="subject.html#661">[ subject ]</a>
+              <a href="author.html#661">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

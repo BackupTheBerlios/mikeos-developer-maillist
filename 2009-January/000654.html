@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 3.2 released!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%203.2%20released%21&In-Reply-To=%3C19d8b3b00901250950w44d7ececq2517916828b63029%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000659.html">
+   <LINK REL="Next"  HREF="000660.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 3.2 released!</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%203.2%20released%21&In-Reply-To=%3C19d8b3b00901250950w44d7ececq2517916828b63029%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 3.2 released!">okachi at gmail.com
+       </A><BR>
+    <I>Sun Jan 25 18:50:24 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000659.html">[mikeos-developer] You guys have an Ohloh account
+</A></li>
+        <LI>Next message: <A HREF="000660.html">[mikeos-developer] On the use of internal data buffers in system	calls
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#654">[ date ]</a>
+              <a href="thread.html#654">[ thread ]</a>
+              <a href="subject.html#654">[ subject ]</a>
+              <a href="author.html#654">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+This release includes a couple of new system calls, a rewrite of
+os_int_to_string from Tslil, Takayoshi's updated build-openbsd.sh and
+simplification of the FAT12/disk code.
+
+Most notably, now you don't have to manipulate filenames into FAT12
+format before using the OS disk calls -- eg beforehand you had to call
+os_filename_convert before calling os_load_file, but now you can use
+filenames such as 'FOO.BAR' without having to pad them out.
+
+Download: <A HREF="http://prdownload.berlios.de/mikeos/mikeos-3.2.zip">http://prdownload.berlios.de/mikeos/mikeos-3.2.zip</A>
+
+Full changelog below!
+
+Cheers,
+Mike
+
+
+# New system call: os_sint_to_string from Tslil -- converts a signed
+integer to a string
+
+# os_int_to_string rewritten by Tslil; cleaner code, and no longer
+needs to be passed BX for a string location (it returns a pointer to
+an internal string via AX)
+
+# New system call: os_serial_port_enable -- initialises the port
+
+# Serial port is no longer initialised by the kernel, but by any
+external programs that need it (eg in programs/serial.asm) to fix VM
+bug spotted by Bob
+
+# New system call: os_string_reverse (source/features/string.asm)
+
+# os_filename_convert removed; source/features/disk.asm now does the
+conversion internally
+
+# API version bumped to 10
+
+# Handbooks updated with API changes
+
+# build-openbsd.sh updated by Takayoshi
+
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000659.html">[mikeos-developer] You guys have an Ohloh account
+</A></li>
+	<LI>Next message: <A HREF="000660.html">[mikeos-developer] On the use of internal data buffers in system	calls
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#654">[ date ]</a>
+              <a href="thread.html#654">[ thread ]</a>
+              <a href="subject.html#654">[ subject ]</a>
+              <a href="author.html#654">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

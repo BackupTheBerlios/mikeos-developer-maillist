@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] FAT16 bootloader
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT16%20bootloader&In-Reply-To=%3CCACtjVkGMk6vh7SBEFjrm3-NY2DGo6K3-fHVFS6XCzOoU%2BJZ8dA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002559.html">
+   <LINK REL="Next"  HREF="002563.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] FAT16 bootloader</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT16%20bootloader&In-Reply-To=%3CCACtjVkGMk6vh7SBEFjrm3-NY2DGo6K3-fHVFS6XCzOoU%2BJZ8dA%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] FAT16 bootloader">okachi at gmail.com
+       </A><BR>
+    <I>Wed Oct  5 12:53:41 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002559.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+        <LI>Next message: <A HREF="002563.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2562">[ date ]</a>
+              <a href="thread.html#2562">[ thread ]</a>
+              <a href="subject.html#2562">[ subject ]</a>
+              <a href="author.html#2562">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, Oct 5, 2011 at 11:25 AM, Paulo V &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">paulomobilemail at gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> When you set up your VirtualBox, did you
+</I>&gt;<i> set the RAM to 128MB and the drive to 512MB
+</I>&gt;<i> and selected OS type as &quot;other&quot; and Version as &quot;other&quot;?
+</I>
+I didn't change the RAM, but that shouldn't affect it, should it? What
+I did was this:
+
+
+VBoxManage convertfromraw 512MB_fat16_bootable.img new.img
+VBoxSDL --startvm Linux --hda 512MB_fat16_bootable.img
+
+
+Note that the &quot;file&quot; command can't seem to find any information in
+your disk image:
+
+
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mike at mike-pc</A>:~$ file 512MB_fat16_bootable.img
+512MB_fat16_bootable.img: Claris clip art?
+
+
+Whereas if I make my own image I get the information:
+
+
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mike at mike-pc</A>:~$ dd if=/dev/zero bs=512 count=32768 of=foo
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mike at mike-pc</A>:~$ mkdosfs foo
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mike at mike-pc</A>:~$ file foo
+foo: x86 boot sector, mkdosfs boot message display, code offset 0x3c,
+OEM-ID &quot; mkdosfs&quot;, sectors/cluster 4, root entries 512, sectors 32768
+(volumes &lt;=32 MB) , Media descriptor 0xf8, sectors/FAT 32, heads 64,
+serial number 0x6f9e19fc, label: &quot;           &quot;, FAT (16 bit)
+
+
+But anyway, sure, please send me the .ISO and I'll try it in the
+VMs/emulators here!
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002559.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+	<LI>Next message: <A HREF="002563.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2562">[ date ]</a>
+              <a href="thread.html#2562">[ thread ]</a>
+              <a href="subject.html#2562">[ subject ]</a>
+              <a href="author.html#2562">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

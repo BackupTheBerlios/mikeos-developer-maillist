@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] The BASIC interpreter...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20The%20BASIC%20interpreter...&In-Reply-To=%3C20091124225816.1U3TL.1279659.root%40web10-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000770.html">
+   <LINK REL="Next"  HREF="000772.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] The BASIC interpreter...</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20The%20BASIC%20interpreter...&In-Reply-To=%3C20091124225816.1U3TL.1279659.root%40web10-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] The BASIC interpreter...">wisecracker at tesco.net
+       </A><BR>
+    <I>Tue Nov 24 23:58:16 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000770.html">[mikeos-developer] The BASIC interpreter...
+</A></li>
+        <LI>Next message: <A HREF="000772.html">[mikeos-developer] The BASIC interpreter...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#771">[ date ]</a>
+              <a href="thread.html#771">[ thread ]</a>
+              <a href="subject.html#771">[ subject ]</a>
+              <a href="author.html#771">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Mike...
+
+Here is the assembly code, already assembled and works in MS-DOS...
+BTW this is/was one of my kids computer projects for MS-DOS from
+yesteryear so once the code is working in MikeOS you can have the lot
+for PD...
+
+Apologies for any strange indents and wordwrapping, etc...
+
+BTW I`ve changed the BASIC code completely already to make it look
+prettier... ;oD
+
+&gt;<i> It's Bazza! Woohoo! (Bazza is a regular on the Linux Format forums)
+</I>
+Oh, no is that good or bad... ;o)
+
+&gt;<i> How are you planning to access the parallel port from inside BASIC?
+</I>
+The assembly code...
+
+;
+;            PARALLEL PORT ACCESS FOR ~IBM~ PC TYPE COMPUTERS.
+;            -------------------------------------------------
+;
+;      (C)1998  B.Walker, (G0LCU). Email to:-  <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">wisecracker at tesco.net</A>
+;      -------------------------------------------------------------
+;
+;----------------------------------------------------------------------------
+;
+; This is a subroutine only and the MS-DOS (TM) ~DEBUG~ command is used to
+; check that it works properly.
+;
+; It was compiled using the A86/D86 (C) combination and is only 65 Bytes
+; long. See ~(C)-AD86.TXT~ for further information.
+;
+;----------------------------------------------------------------------------
+;
+; NOTE:- This source code is FREE and can be used by anyone who needs it.
+; This is issued under the ~GPL~ terms and conditions, see ~LICENCE.GPL~.
+;
+;----------------------------------------------------------------------------
+;
+; Enter the subroutine here.
+; subroutinestart:
+        pushf                           ;Push used registers.
+        push    dx                      ;Note that the flags are ignored.
+        push    ax                      ;
+        mov     dx,037ah                ;Point to parallel port control bits.
+        mov     ax,00ah                 ;Set -STROBE high &amp; clear other bits.
+        out     dx,al                   ;Do it.
+        mov     al,00bh                 ;Now trigger the -STROBE bit.
+        out     dx,al                   ;Do it.
+        mov     al,8                    ;Set my board to 4 highest bits.
+        out     dx,al                   ;Do it.
+        mov     dx,0379h                ;Point to port status bits.
+        in      al,dx                   ;Read 4 bit data, high nibble.
+        shl     al,1                    ;Shift into top 4 bits.
+        and     al,0f0h                 ;Ensure 4 high bits only.
+        mov     ah,al                   ;Store data into ah register.
+        mov     dx,037ah                ;Point to port control bits again.
+        mov     al,00ah                 ;Keep -STROBE high &amp; clear other bits.
+        out     dx,al                   ;Do it.
+        mov     al,2                    ;Now set my board to 4 lowest bits.
+        out     dx,al                   ;Do it.
+        mov     dx,0379h                ;Point to port status bits.
+        in      al,dx                   ;Read 4 bit data, low nibble.
+        shr     al,1                    ;Shift to the right 3 times.
+        shr     al,1                    ;
+        shr     al,1                    ;
+        and     al,00fh                 ;Ensure low 4 bits only.
+        add     al,ah                   ;Add high nibble to low nibble.
+        xor     ah,ah                   ;Clear ah register.
+        mov     store,al                ;We now have the byte we want.
+        mov     dx,037ah                ;Point to control bits again.
+        mov     al,00ah                 ;Keep -STROBE high &amp; clear other bits.
+        out     dx,al                   ;Do it.
+        pop     ax                      ;Pop the registers back.
+        pop     dx                      ;
+        popf                            ;
+;
+; Time delaying software to go here IF required.
+;
+        ret                             ;Return to calling routine.
+; Note the byte below is NOP before corruption...
+store   db      090h                    ;My A-D Converter byte saved.
+
+&gt;<i> Unless port access is memory mapped somewhere, I'm not sure if it's
+</I>&gt;<i> possible. Should I add IN and OUT instructions to the BASIC
+</I>&gt;<i> interpreter to read and write to ports?
+</I>
+Not needed for my use...
+
+BTW, INT 17 has only three fuctions so I could have used those I suppose
+but I dunno if the port will hang waiting for a HW ACK line switch so I opted
+for &quot;DMA&quot; instead, note inverted commas...
+
+&gt;<i> I could do that pretty quickly -- I've had other stuff submitted for
+</I>&gt;<i> 4.1 so that's not far away. Your plans sound intriguing, so let me
+</I>&gt;<i> know what you need and I'll add it (if possible)!
+</I>
+No hold FTTB as I want to see how much power I can get from your
+exisiting interpreter. I just love being a minimalist... :D
+
+
+--
+73...
+
+Bazza...
+
+TA...
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000770.html">[mikeos-developer] The BASIC interpreter...
+</A></li>
+	<LI>Next message: <A HREF="000772.html">[mikeos-developer] The BASIC interpreter...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#771">[ date ]</a>
+              <a href="thread.html#771">[ thread ]</a>
+              <a href="subject.html#771">[ subject ]</a>
+              <a href="author.html#771">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

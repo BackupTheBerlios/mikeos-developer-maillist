@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] The FINAL Assembly code for my KB access	routines...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-June/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20The%20FINAL%20Assembly%20code%20for%20my%20KB%20access%0A%09routines...&In-Reply-To=%3C20100611150106.6JNTD.317548.root%40web09-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001435.html">
+   <LINK REL="Next"  HREF="001437.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] The FINAL Assembly code for my KB access	routines...</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20The%20FINAL%20Assembly%20code%20for%20my%20KB%20access%0A%09routines...&In-Reply-To=%3C20100611150106.6JNTD.317548.root%40web09-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] The FINAL Assembly code for my KB access	routines...">wisecracker at tesco.net
+       </A><BR>
+    <I>Fri Jun 11 16:01:06 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001435.html">[mikeos-developer] Position Independant Code...
+</A></li>
+        <LI>Next message: <A HREF="001437.html">[mikeos-developer] The FINAL Assembly code for my KB access	routines...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1436">[ date ]</a>
+              <a href="thread.html#1436">[ thread ]</a>
+              <a href="subject.html#1436">[ subject ]</a>
+              <a href="author.html#1436">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all...
+
+Now that the HW side for the KB I/O project is finished here are the FINAL
+Assembly routines I will use for its access.
+
+Watch for wordwrapping etc...
+
+All ridicule welcome... :o)
+
+Now to create an app` using them... ;oO
+
+Watch for strange indenting and wordwrapping etc...
+
+=====================================================
+
+; CAPSLOCK, (NUMLOCK), ON/OFF sub-routines along with left
+; CAPS SHIFT and right CAPS SHIFT read subroutine for MikeOS.
+; Original copyright, (C)2010, B.Walker, G0LCU.
+; For use with MikeBASIC and issued as Public Domain.
+
+; KEYFLAGS.ASM, Version 0.00.30, assembly code.
+
+; Assembled under MS-DOS using the AD86 combination and NASM.
+; The binary is 93 bytes in size.
+
+; This code is totally position independant and where ever it is
+; loaded any offest points for the code will ALWAYS be known.
+
+; KNOWN_READFLAGS_CALLING_ADDRESS:
+readflags:
+	pushf			;Store flags and all of the used
+	push	ax		;registers
+	push	dx		;
+	push	bp		;
+	push	ds		;
+	call	ipfetch		;Get the instruction pointer position.
+	jmp	carryon		;Short jump to miss out the NOP(s).
+; KNOWN_KB_FLAGS_STORAGE_ADDRESS:
+	nop			;My 8 bit storage space.
+	nop			;8 x 8 bits catered for IF needed.
+	nop			;The NOPs are my, ALWAYS KNOWN, position
+	nop			;independant storage space and can
+	nop			;cater for 32 bits and/or 64 bits of
+	nop			;data width if necessary.
+	nop			;
+	nop			;
+carryon:
+	mov	dx,0040h	;Point to the SEGMENT to access
+	mov	ds,dx		;the real time BYTE KB storage.
+	mov	al,[0017h]	;Move the BYTE value from memory
+				;into the AL register ready to read.
+	pop	ds		;Restore the DS register.
+	mov	[bp+0003h],al	;Move the KB flags to the KNOWN memory area.
+	pop	bp		;Restore the remaining registers and
+	pop	dx		;flags.
+	pop	ax		;
+	popf			;
+	ret			;Return to the calling routine.
+ipfetch:
+	pop	bp		;Pop the IP into BP.
+	push	bp		;Push it back again but keep it in BP.
+	ret			;Return to the calling routine.
+
+; KNOWN_KEYLOCKON_CALLING_ADDRESS:
+	pushf			;Store flags and all of the used
+	push	ax		;registers.
+	push	dx		;
+	push	ds		;
+	mov	dx,0040h	;Point to the SEGMENT to access
+	mov	ds,dx		;the toggled BYTE KB storage.
+	mov	al,[0017h]	;Move the BYTE value from memory
+				;into the AL register.
+; KNOWN_LOCK_ADDRESS:
+	or	al,040h		;SET the required bit, (bit 6),
+				;to a ~1~.
+				;NOTE, change this value for NUMLOCK!
+	mov	[0017h],al	;Replace the modified byte back
+				;into the memory location.
+	int	9		;Now execute the necessary interrupt.
+	call	readflags	;Make sure to store a copy of it.
+	pop	ds		;Restore the registers back to
+	pop	dx		;their original values...
+	pop	ax		;
+	popf			;And the flags too.
+	ret			;Return to the calling routine.
+
+; KNOWN_KEYLOCKOFF_CALLING_ADDRESS:
+	pushf			;Store flags and all of the used
+	push	ax		;registers.
+	push	dx		;
+	push	ds		;
+	mov	dx,0040h	;Point to the SEGMENT to access
+	mov	ds,dx		;the toggled BYTE KB storage.
+	mov	al,[0017h]	;Move the BYTE value from memory
+				;into the AL register.
+; KNOWN_UNLOCK_ADDRESS:
+	and	al,0bfh		;RESET the required bit, (bit 6),
+				;to a ~0~, keeping all other bits intact.
+				;NOTE, change this value for NUMLOCK!
+	mov	[0017h],al	;Replace the modified byte back
+				;into the memory location.
+	int	9		;Now execute the necessary interrupt.
+	call	readflags	;Make sure to store a copy of it.
+	pop	ds		;Restore the registers back to
+	pop	dx		;their original values...
+	pop	ax		;
+	popf			;And the flags too.
+	ret			;Return to the calling routine.
+
+; KNOWN_TOTAL_CODE_SIZE:
+; End of KEYFLAGS.ASM code...
+
+=====================================================
+
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001435.html">[mikeos-developer] Position Independant Code...
+</A></li>
+	<LI>Next message: <A HREF="001437.html">[mikeos-developer] The FINAL Assembly code for my KB access	routines...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1436">[ date ]</a>
+              <a href="thread.html#1436">[ thread ]</a>
+              <a href="subject.html#1436">[ subject ]</a>
+              <a href="author.html#1436">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

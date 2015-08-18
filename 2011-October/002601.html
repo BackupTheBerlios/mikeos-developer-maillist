@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Updated Basic.asm for review: (NEW LEN , DEL,	and SAVE)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Updated%20Basic.asm%20for%20review%3A%20%28NEW%20LEN%20%2C%20DEL%2C%0A%09and%20SAVE%29&In-Reply-To=%3C003901cc8534%24ed9f1080%24c8dd3180%24%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002600.html">
+   <LINK REL="Next"  HREF="002638.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Updated Basic.asm for review: (NEW LEN , DEL,	and SAVE)</H1>
+    <B>Justin Tokarchuk</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Updated%20Basic.asm%20for%20review%3A%20%28NEW%20LEN%20%2C%20DEL%2C%0A%09and%20SAVE%29&In-Reply-To=%3C003901cc8534%24ed9f1080%24c8dd3180%24%40gmail.com%3E"
+       TITLE="[mikeos-developer] Updated Basic.asm for review: (NEW LEN , DEL,	and SAVE)">jtokarchukalerts at gmail.com
+       </A><BR>
+    <I>Fri Oct  7 23:06:03 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002600.html">[mikeos-developer] (no subject)
+</A></li>
+        <LI>Next message: <A HREF="002638.html">[mikeos-developer] Updated Basic.asm for review: (NEW LEN , DEL, and SAVE)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2601">[ date ]</a>
+              <a href="thread.html#2601">[ thread ]</a>
+              <a href="subject.html#2601">[ subject ]</a>
+              <a href="author.html#2601">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Diff is here:
+
+<A HREF="http://diffchecker.com/r8xLyeg">http://diffchecker.com/r8xLyeg</A>
+
+ 
+
+ 
+
+Changes in a nutshell:
+
+ 
+
+LEN COMMAND:  Gets length of a string.
+
+USAGE: LEN $1 Y (or any var you feed it)
+
+RETURNS: string length as int
+
+ 
+
+DEL COMMAND: Deletes a file off disk
+
+USAGE: DEL $1 X (or any other variable
+
+RETURNS: 1 if file is deleted, 0 if file does not exist
+
+ALSO: Pushes an error on run if kernel.bas is specified
+
+(Mike, I know you aren't wild about these things, but in basic I wanted to
+withhold the sanity checks
+
+ 
+
+SAVE COMMAND: Now gives a new failure code if the file exists
+
+R will = 2 if the file exists.
+
+ 
+
+ 
+
+ 
+
+Let me know what you think! Thanks!
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111007/031801b6/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111007/031801b6/attachment.html</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: basic.asm
+Type: application/octet-stream
+Size: 46250 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111007/031801b6/attachment.obj">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111007/031801b6/attachment.obj</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002600.html">[mikeos-developer] (no subject)
+</A></li>
+	<LI>Next message: <A HREF="002638.html">[mikeos-developer] Updated Basic.asm for review: (NEW LEN , DEL, and SAVE)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2601">[ date ]</a>
+              <a href="thread.html#2601">[ thread ]</a>
+              <a href="subject.html#2601">[ subject ]</a>
+              <a href="author.html#2601">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

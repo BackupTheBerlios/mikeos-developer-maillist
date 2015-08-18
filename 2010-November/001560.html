@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Comparing two strings
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Comparing%20two%20strings&In-Reply-To=%3CAANLkTi%3DOMZV2wbrGc%3DCnM3810Y4ZwYX2OeL8Mpiu_nzx%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001559.html">
+   <LINK REL="Next"  HREF="001561.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Comparing two strings</H1>
+    <B>Raghav Sood</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Comparing%20two%20strings&In-Reply-To=%3CAANLkTi%3DOMZV2wbrGc%3DCnM3810Y4ZwYX2OeL8Mpiu_nzx%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Comparing two strings">raghavsood at gmail.com
+       </A><BR>
+    <I>Fri Nov 26 17:12:35 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001559.html">[mikeos-developer] Comparing two strings
+</A></li>
+        <LI>Next message: <A HREF="001561.html">[mikeos-developer] Comparing two strings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1560">[ date ]</a>
+              <a href="thread.html#1560">[ thread ]</a>
+              <a href="subject.html#1560">[ subject ]</a>
+              <a href="author.html#1560">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It works PERFECTLY!!!
+Not a single modification needed.
+Thanks a ton.
+I am just going to put up an updated version for download in about 10
+minutes!!
+Thanks again.
+
+On Fri, Nov 26, 2010 at 9:30 PM, Paulo Valongo
+&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">paulovalongo at rocketmail.com</A>&gt;wrote:
+
+&gt;<i> Raghav,
+</I>&gt;<i>
+</I>&gt;<i> I don't mind at all.
+</I>&gt;<i> I will try and help where I can depending on work load.
+</I>&gt;<i>
+</I>&gt;<i> To make the new os call for passwords you can try the following:
+</I>&gt;<i>
+</I>&gt;<i> Create a new one called os_input_dialog_pwd
+</I>&gt;<i> Now copy all the code from the existing os_input_dialog and put it into the
+</I>&gt;<i> new os_input_dialog_pwd
+</I>&gt;<i> Now change all references to os_input_string to a new one that you create
+</I>&gt;<i> called os_input_string_pwd
+</I>&gt;<i>
+</I>&gt;<i> To create os_input_string_pwd copy all the code from os_input_string then
+</I>&gt;<i> change the following in .nobackspace:
+</I>&gt;<i>
+</I>&gt;<i> ; ======== original ===============
+</I>&gt;<i>
+</I>&gt;<i> .nobackspace:
+</I>&gt;<i>     pusha
+</I>&gt;<i>     mov ah, 0Eh            ; Output entered, printable character
+</I>&gt;<i>     int 10h
+</I>&gt;<i>     popa
+</I>&gt;<i>
+</I>&gt;<i>     stosb                ; Store character in designated buffer
+</I>&gt;<i>     inc cx                ; Characters processed += 1
+</I>&gt;<i>     cmp cx, 254            ; Make sure we don't exhaust buffer
+</I>&gt;<i>     jae near .done
+</I>&gt;<i>
+</I>&gt;<i>     jmp near .more
+</I>&gt;<i>
+</I>&gt;<i> ; ========== change to ==============
+</I>&gt;<i>
+</I>&gt;<i> .nobackspace:
+</I>&gt;<i>     pusha
+</I>&gt;<i>     mov al, '*'
+</I>&gt;<i>     mov ah, 0Eh            ; Output entered, printable character
+</I>&gt;<i>     int 10h
+</I>&gt;<i>     popa
+</I>&gt;<i>
+</I>&gt;<i>     stosb                ; Store character in designated buffer
+</I>&gt;<i>     inc cx                ; Characters processed += 1
+</I>&gt;<i>     cmp cx, 254            ; Make sure we don't exhaust buffer
+</I>&gt;<i>     jae near .done
+</I>&gt;<i>
+</I>&gt;<i>     jmp near .more
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> I haven't tried it but I suspect it will work or at least get you in the
+</I>&gt;<i> right direction.
+</I>&gt;<i>
+</I>&gt;<i> Paulo.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+-- 
+Raghav Sood
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20101126/89227c16/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20101126/89227c16/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001559.html">[mikeos-developer] Comparing two strings
+</A></li>
+	<LI>Next message: <A HREF="001561.html">[mikeos-developer] Comparing two strings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1560">[ date ]</a>
+              <a href="thread.html#1560">[ thread ]</a>
+              <a href="subject.html#1560">[ subject ]</a>
+              <a href="author.html#1560">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

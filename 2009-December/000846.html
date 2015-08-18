@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] uploading and running programs on MikeOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20uploading%20and%20running%20programs%20on%20MikeOS&In-Reply-To=%3C20091212084416.VP3G9.160506.root%40web11-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000851.html">
+   <LINK REL="Next"  HREF="000847.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] uploading and running programs on MikeOS</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20uploading%20and%20running%20programs%20on%20MikeOS&In-Reply-To=%3C20091212084416.VP3G9.160506.root%40web11-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] uploading and running programs on MikeOS">wisecracker at tesco.net
+       </A><BR>
+    <I>Sat Dec 12 09:44:16 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000851.html">[mikeos-developer] uploading and running programs on MikeOS
+</A></li>
+        <LI>Next message: <A HREF="000847.html">[mikeos-developer] uploading and running programs on MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#846">[ date ]</a>
+              <a href="thread.html#846">[ thread ]</a>
+              <a href="subject.html#846">[ subject ]</a>
+              <a href="author.html#846">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Poalo...
+
+&gt;<i> For example, there is no support for blinking text and in os_draw_block,
+</I>&gt;<i> you use mov a, ' '.
+</I>
+(I assume you mean mov al, ' ')
+
+&gt;<i> I had to change this to mov al, 219 as XP won't print spaces if we use
+</I>&gt;<i> colour as well (it just draws  a black block).
+</I>
+&gt;<i> For the compiler, I use both Nasm and A86.
+</I>
+I only use the AD86 combination for Windies and Windies DEBUG.EXE...
+
+The memory mapping for, (assume absolute addresses in hex), CGA is:-
+
+B8000 == character.
+B8001 == colour attribute.
+B8002 == character.
+B8003 == colour attribute.
+And so on...
+
+To see what I mean open up a Command Prompt in Windows.
+Execute DEBUG.EXE.
+
+When in the debugger do this:-
+
+db800:0000&lt;RETURN/ENTER&gt;
+
+You will see the Microsoft Copyright etc, characters along with the atributes
+07h which is normal white on black.
+
+Use q&lt;RETURN/ENTER&gt; to quit DEBUG.EXE
+
+Even addresses are the printable character, odd addresses are the
+attributes therefore as for being unable to change colours use es:
+in some simple assembly code for your own and write direct to the
+first page CGA addresses, MikeOS does not crunch when going outside
+of the 64KB constraint when using es:.
+
+In a previous upload I mentioned I haven`t tried using ds: yet but, I do
+suspect it might cause instability in the OS if I did. 
+Obviously don`t change cs: AND ss: but so far es: is user friendly.
+
+
+73...
+
+Bazza...
+
+Team AMIGA...
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000851.html">[mikeos-developer] uploading and running programs on MikeOS
+</A></li>
+	<LI>Next message: <A HREF="000847.html">[mikeos-developer] uploading and running programs on MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#846">[ date ]</a>
+              <a href="thread.html#846">[ thread ]</a>
+              <a href="subject.html#846">[ subject ]</a>
+              <a href="author.html#846">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

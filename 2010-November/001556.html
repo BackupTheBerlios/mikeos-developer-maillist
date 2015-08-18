@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Comparing two strings
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Comparing%20two%20strings&In-Reply-To=%3CAANLkTim%3DyPhXBc4h-ycBoJwhPc%2BoXP_Jh%2BY6azeD4Tn-%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001555.html">
+   <LINK REL="Next"  HREF="001557.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Comparing two strings</H1>
+    <B>Raghav Sood</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Comparing%20two%20strings&In-Reply-To=%3CAANLkTim%3DyPhXBc4h-ycBoJwhPc%2BoXP_Jh%2BY6azeD4Tn-%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Comparing two strings">raghavsood at gmail.com
+       </A><BR>
+    <I>Fri Nov 26 16:24:25 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001555.html">[mikeos-developer] Comparing two strings
+</A></li>
+        <LI>Next message: <A HREF="001557.html">[mikeos-developer] Comparing two strings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1556">[ date ]</a>
+              <a href="thread.html#1556">[ thread ]</a>
+              <a href="subject.html#1556">[ subject ]</a>
+              <a href="author.html#1556">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thanks a lot your &quot;order mixed up&quot; one works perfectly with a few
+modifications.
+I had already finished the code by the time you sent the last mail.
+
+Thanks
+here is my final code:
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+mov ax, test1432
+mov bx, test1234
+call os_input_dialog
+
+mov si, ax
+mov di, test1324
+call os_string_compare
+jc option_screen
+
+mov ax, no_txt
+mov si, ax
+call os_print_string
+jmp all_done
+
+pwd_ok:
+
+mov ax, yes_txt
+mov si, ax
+call os_print_string
+
+all_done:
+
+; create endless loop here just for testing
+jmp pwd_screen
+
+; Text for the code given above...
+
+test1234        db 'Please enter your password:', 0
+test1324        db 'abc', 0
+test1432        times 255 db 0
+yes_txt        db 'correct',0
+no_txt        db 'incorrect',0
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+On Fri, Nov 26, 2010 at 8:51 PM, Paulo Valongo
+&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">paulovalongo at rocketmail.com</A>&gt;wrote:
+
+&gt;<i>  sorry got the order mixed up.
+</I>&gt;<i> corrected version:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> mov ax, test1432
+</I>&gt;<i> mov bx, test1234
+</I>&gt;<i> call os_input_dialog
+</I>&gt;<i>
+</I>&gt;<i> mov si, ax
+</I>&gt;<i> mov di, test1324
+</I>&gt;<i> call os_string_compare
+</I>&gt;<i> jnc pwd_ok
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> mov ax, no_txt
+</I>&gt;<i> mov si, ax
+</I>&gt;<i> call os_print_string
+</I>&gt;<i> jmp all_done
+</I>&gt;<i>
+</I>&gt;<i> pwd_ok:
+</I>&gt;<i>
+</I>&gt;<i> mov ax, yes_txt
+</I>&gt;<i> mov si, ax
+</I>&gt;<i> call os_print_string
+</I>&gt;<i>
+</I>&gt;<i> all_done:
+</I>&gt;<i>
+</I>&gt;<i> ; create endless loop here just for testing
+</I>&gt;<i> jmp all_done
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ; Text for the code given above...
+</I>&gt;<i>
+</I>&gt;<i> test1234        db 'Please enter your password:', 0
+</I>&gt;<i> test1324        db 'abc', 0
+</I>&gt;<i> test1432        times 255 db 0
+</I>&gt;<i> yes_txt        db 'correct',0
+</I>&gt;<i> no_txt        db 'incorrect',0
+</I>&gt;<i>
+</I>&gt;<i> **
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+-- 
+Raghav Sood
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20101126/d8b7d826/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20101126/d8b7d826/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001555.html">[mikeos-developer] Comparing two strings
+</A></li>
+	<LI>Next message: <A HREF="001557.html">[mikeos-developer] Comparing two strings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1556">[ date ]</a>
+              <a href="thread.html#1556">[ thread ]</a>
+              <a href="subject.html#1556">[ subject ]</a>
+              <a href="author.html#1556">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

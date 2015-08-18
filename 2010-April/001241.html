@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Installing qemu in Ylmf-Ubuntu
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-April/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Installing%20qemu%20in%20Ylmf-Ubuntu&In-Reply-To=%3C20100413153843.101300%40gmx.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001240.html">
+   <LINK REL="Next"  HREF="001242.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Installing qemu in Ylmf-Ubuntu</H1>
+    <B>P F</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Installing%20qemu%20in%20Ylmf-Ubuntu&In-Reply-To=%3C20100413153843.101300%40gmx.com%3E"
+       TITLE="[mikeos-developer] Installing qemu in Ylmf-Ubuntu">p.f at gmx.com
+       </A><BR>
+    <I>Tue Apr 13 17:13:29 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001240.html">[mikeos-developer] Arduino access now finished...
+</A></li>
+        <LI>Next message: <A HREF="001242.html">[mikeos-developer] Installing qemu in Ylmf-Ubuntu
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1241">[ date ]</a>
+              <a href="thread.html#1241">[ thread ]</a>
+              <a href="subject.html#1241">[ subject ]</a>
+              <a href="author.html#1241">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Dear All at MikeOS-Dev,
+
+I've just started with MikeOS, &amp; encountered one slight problem relating to installing Qemu in Ubuntu. My machine has Ylmf installed: Ubuntu 9.10 with an XP-like desktop!
+
+The instruction &quot;sudo apt-get install build-essential qemu nasm&quot;, from 'How to write a simple operating system' didn't work in my machine.
+
+However, the following terminal instructions did [don't use the &quot; &quot; marks]:
+
+ &quot;sudo aptitude install qemu qemulator&quot; [enter &amp; wait while it processes the command]
+
+then, at the next $ prompt:
+
+ &quot;sudo aptitude install qemu-launcher&quot; [enter &amp;c.]
+
+then at $:
+
+ &quot;sudo aptitude install qemu nasm&quot; [enter &amp;c.]
+
+All done!
+
+The first two lines came from: <A HREF="http://www.ubuntugeek.com/qemu-machine-emulator-and-virtualizer-setup-in-ubuntu.html">http://www.ubuntugeek.com/qemu-machine-emulator-and-virtualizer-setup-in-ubuntu.html</A> , which has further instructions on configuration of Qemu. The final line was a calculated guess!
+
+Hope this of help to anyone else who's encountered this problem.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100413/185f4b98/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100413/185f4b98/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001240.html">[mikeos-developer] Arduino access now finished...
+</A></li>
+	<LI>Next message: <A HREF="001242.html">[mikeos-developer] Installing qemu in Ylmf-Ubuntu
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1241">[ date ]</a>
+              <a href="thread.html#1241">[ thread ]</a>
+              <a href="subject.html#1241">[ subject ]</a>
+              <a href="author.html#1241">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

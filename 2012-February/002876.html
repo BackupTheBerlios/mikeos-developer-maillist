@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] os_get_random bug ?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20os_get_random%20bug%20%3F&In-Reply-To=%3CCACKyyijut%2BwMf_yvjWioLygM7MTGtSm7nC_XasCQBrV8OsE9ZQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002874.html">
+   <LINK REL="Next"  HREF="002877.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] os_get_random bug ?</H1>
+    <B>Leo Ono</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20os_get_random%20bug%20%3F&In-Reply-To=%3CCACKyyijut%2BwMf_yvjWioLygM7MTGtSm7nC_XasCQBrV8OsE9ZQ%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] os_get_random bug ?">ono.leo at gmail.com
+       </A><BR>
+    <I>Mon Feb 13 19:00:48 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002874.html">[mikeos-developer] VGA documentation
+</A></li>
+        <LI>Next message: <A HREF="002877.html">[mikeos-developer] mikeos-developer Digest, Vol 41, Issue 14
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2876">[ date ]</a>
+              <a href="thread.html#2876">[ thread ]</a>
+              <a href="subject.html#2876">[ subject ]</a>
+              <a href="author.html#2876">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all !
+
+I don't know if it's a bug but when i've tried ...
+
+mov ax, 0
+mov bx, 0ffffh
+call os_get_random ; cx = random number  -&gt; return always 0 ... bug ?
+ret
+
+... it's always returning cx=0 ... but if ax equal or greater than 1, then
+i think it's works ok ...
+
+mov ax, 1
+mov bx, 0ffffh
+call os_get_random ; cx = random number -&gt; return X~6553X
+ret
+
+Regards,
+Leo
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120213/5319745b/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120213/5319745b/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002874.html">[mikeos-developer] VGA documentation
+</A></li>
+	<LI>Next message: <A HREF="002877.html">[mikeos-developer] mikeos-developer Digest, Vol 41, Issue 14
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2876">[ date ]</a>
+              <a href="thread.html#2876">[ thread ]</a>
+              <a href="subject.html#2876">[ subject ]</a>
+              <a href="author.html#2876">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

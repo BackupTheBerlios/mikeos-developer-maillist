@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.1.1-RC ready for testing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.1.1-RC%20ready%20for%20testing&In-Reply-To=%3C20100525175328.PEDGV.60506.root%40web09-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001346.html">
+   <LINK REL="Next"  HREF="001348.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.1.1-RC ready for testing</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.1.1-RC%20ready%20for%20testing&In-Reply-To=%3C20100525175328.PEDGV.60506.root%40web09-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] MikeOS 4.1.1-RC ready for testing">wisecracker at tesco.net
+       </A><BR>
+    <I>Tue May 25 18:53:28 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001346.html">[mikeos-developer] MikeOS 4.1.1-RC ready for testing
+</A></li>
+        <LI>Next message: <A HREF="001348.html">[mikeos-developer] MikeOS 4.1.1-RC ready for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1347">[ date ]</a>
+              <a href="thread.html#1347">[ thread ]</a>
+              <a href="subject.html#1347">[ subject ]</a>
+              <a href="author.html#1347">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Paulo...
+
+BUT, you can`t touch dx at all, so add dx,bx is a non starter...
+
+As soon as you add the two together dx has shifted the 24 hour point on
+each interrupt call closer as it reaches the wrap around point to increase
+cx.
+
+There is no way of knowing even with your code how many REAL clock
+pulses have passed unless you know ALL the the instruction set clock timings
+per instruction.
+
+I made a 10MHz frequency counter for the AMIGA using the AMIGA games
+port many years ago and I had much the same problems using the timer...
+
+&gt;<i> As regards the INT 1Ah, I suspect that it's not necessary to actually check the hi order count in CX.
+</I>&gt;<i> My thinking as follows:
+</I>&gt;<i> 
+</I>&gt;<i> We continuously compare tick counts so it stands to reason that each new tick count returned must be greater
+</I>&gt;<i> than the previous one other wise it means that an overflow of the lo order count in DX has occurred.
+</I>&gt;<i> 
+</I>&gt;<i> Please check my code below and see if you can spot any mistakes/problems/down right stupid coding as it's been a verrrrrrry long day
+</I>&gt;<i> and the brain is working at 10%.
+</I>&gt;<i> 
+</I>&gt;<i> It still needs some touching up, just thought I would post it here now to see if my thinking is correct.
+</I>&gt;<i> Comments and suggestions please.
+</I>&gt;<i> 
+</I>&gt;<i> Paulo.
+</I>&gt;<i> 
+</I>&gt;<i> ;------------------------------------------------------------------------------------------------
+</I>&gt;<i> ;os_pause -- waits for predetermined amount of time.
+</I>&gt;<i> ;
+</I>&gt;<i> ; IN: AL = number of 110millisecond chunks to wait   
+</I>&gt;<i> ; OUT: AL =0 if timer has not overflowed past 24 hrs since reset
+</I>&gt;<i> ;------------------------------------------------------------------------------------------------
+</I>&gt;<i> os_pause:
+</I>&gt;<i> 
+</I>&gt;<i> pusha
+</I>&gt;<i> mov bl,al
+</I>&gt;<i> 
+</I>&gt;<i> mov ah,0
+</I>&gt;<i> int 1ah                             ; get tick count
+</I>&gt;<i> 
+</I>&gt;<i> mov al,2                          ; 
+</I>&gt;<i> mul bl                             ; mul required seconds by 18
+</I>&gt;<i> add dx,ax                       ; add to original tick count
+</I>&gt;<i> mov bx,dx                      ; and store it for later comparison
+</I>&gt;<i> mov [.orig_req_delay],bx
+</I>&gt;<i> 
+</I>&gt;<i> checkloop:
+</I>&gt;<i> 
+</I>&gt;<i> mov ah,0
+</I>&gt;<i> int 1ah                           ; get new tick count
+</I>&gt;<i> cmp dx,bx                     ; compare with original tick count 
+</I>&gt;<i> jle overflow                     ; if the new tick count is less than the original, DX has overflowed
+</I>&gt;<i>         
+</I>&gt;<i> jge time_up                    ; if greater or equal to BX means time's up so bail out
+</I>&gt;<i> jmp checkloop                ; wait some more
+</I>&gt;<i> 
+</I>&gt;<i> time_up:
+</I>&gt;<i> 
+</I>&gt;<i> popa
+</I>&gt;<i> mov al,[.midnite_overflow]
+</I>&gt;<i> ret
+</I>&gt;<i> 
+</I>&gt;<i> overflow:
+</I>&gt;<i> 
+</I>&gt;<i> ; Compensate for time already elapsed
+</I>&gt;<i> ; by subtracting the new tick count from the old one.
+</I>&gt;<i> ; The formula is: 
+</I>&gt;<i> ; time elapsed = (65535 - old_tick_count) + new_tick_count
+</I>&gt;<i> 
+</I>&gt;<i> mov ax,0FFFFh                    ; 65535
+</I>&gt;<i> sub ax,bx                             ; subtract the old_tick_count
+</I>&gt;<i> add ax,dx                             ; add the new_tick_count since the overflow (AX now has elapsed time)
+</I>&gt;<i> 
+</I>&gt;<i> sub [.orig_req_delay],ax         ; subtract the elapsed time from the original time delay the caller required.
+</I>&gt;<i> mov bx,[.orig_req_delay]         ; update it as the new_tick_count
+</I>&gt;<i> jmp checkloop
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> .orig_req_delay        dw    0
+</I>&gt;<i> .midnite_overflow    db    0
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i>       
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>
+
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001346.html">[mikeos-developer] MikeOS 4.1.1-RC ready for testing
+</A></li>
+	<LI>Next message: <A HREF="001348.html">[mikeos-developer] MikeOS 4.1.1-RC ready for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1347">[ date ]</a>
+              <a href="thread.html#1347">[ thread ]</a>
+              <a href="subject.html#1347">[ subject ]</a>
+              <a href="author.html#1347">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

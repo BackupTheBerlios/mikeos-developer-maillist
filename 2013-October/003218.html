@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] GUI Mouse Driver Repair (Maybe?)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2013-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20GUI%20Mouse%20Driver%20Repair%20%28Maybe%3F%29&In-Reply-To=%3CDUB113-W124043AD7E4B2FCCDD8FF7830F0%40phx.gbl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003216.html">
+   <LINK REL="Next"  HREF="003217.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] GUI Mouse Driver Repair (Maybe?)</H1>
+    <B>Dan Barry</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20GUI%20Mouse%20Driver%20Repair%20%28Maybe%3F%29&In-Reply-To=%3CDUB113-W124043AD7E4B2FCCDD8FF7830F0%40phx.gbl%3E"
+       TITLE="[mikeos-developer] GUI Mouse Driver Repair (Maybe?)">danbarry at hotmail.co.uk
+       </A><BR>
+    <I>Mon Oct 28 00:12:31 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003216.html">[mikeos-developer] GUI Mouse Driver Repair (Maybe?)
+</A></li>
+        <LI>Next message: <A HREF="003217.html">[mikeos-developer] Two GUI's?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3218">[ date ]</a>
+              <a href="thread.html#3218">[ thread ]</a>
+              <a href="subject.html#3218">[ subject ]</a>
+              <a href="author.html#3218">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> A touchpad is not a mouse and probably can't pretend to be one because
+</I>&gt;<i> it is an absolute pointing device rather than a relative one.
+</I>I'm sure I've seen it done before, or perhaps even automatically in some cases? But that's something for another weekend :L
+
+&gt;<i>The initialisation code doesn't really expect an incompatible device. I'll
+</I>&gt;<i> have to add more checks to os_mouse_setup, maybe I can disable the
+</I>&gt;<i> driver when the setup fails to at least prevent a lockups. 
+</I>If I remember correctly the system hangs waiting for an acknowledgement packet that it will never receive. I had a message which printed to screen before mouse init that said the the mouse wasn't working and the GUI would print over the top if the mouse had been init correctly. Otherwise it would hang and sit there. It was crude, but my old OS design relied on there being a mouse making it pointless (excuse the pun) to carry on without one.
+
+&gt;<i>Short of writing USB driver, there's not much I can do with these devices.
+</I>I once looked at the USB protocol, that's all I have to say on that. It's a large task for assembly in my opinion although I'm sure somebody is crazy enoug to have done it.
+
+Dan
+<A HREF="http://code.google.com/p/heluxos/">http://code.google.com/p/heluxos/</A>
+ 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131027/67123472/attachment-0001.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131027/67123472/attachment-0001.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003216.html">[mikeos-developer] GUI Mouse Driver Repair (Maybe?)
+</A></li>
+	<LI>Next message: <A HREF="003217.html">[mikeos-developer] Two GUI's?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3218">[ date ]</a>
+              <a href="thread.html#3218">[ thread ]</a>
+              <a href="subject.html#3218">[ subject ]</a>
+              <a href="author.html#3218">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

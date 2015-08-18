@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] 32-bit Protected Mode
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%2032-bit%20Protected%20Mode&In-Reply-To=%3C058132A32B5444588A781269639F2746%40userfe6b65a555%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001809.html">
+   <LINK REL="Next"  HREF="001811.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] 32-bit Protected Mode</H1>
+    <B>Mike Gonta</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%2032-bit%20Protected%20Mode&In-Reply-To=%3C058132A32B5444588A781269639F2746%40userfe6b65a555%3E"
+       TITLE="[mikeos-developer] 32-bit Protected Mode">mikegonta at gmail.com
+       </A><BR>
+    <I>Thu Feb  3 11:44:32 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001809.html">[mikeos-developer] 32-bit Protected Mode
+</A></li>
+        <LI>Next message: <A HREF="001811.html">[mikeos-developer] 32-bit Protected Mode
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1810">[ date ]</a>
+              <a href="thread.html#1810">[ thread ]</a>
+              <a href="subject.html#1810">[ subject ]</a>
+              <a href="author.html#1810">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>----- Original Message ----- 
+From: &quot;M Saunders&quot;
+To: &quot;MikeOS (and similar OS) developers&quot;
+Sent: Thursday, February 03, 2011 5:02 AM
+Subject: Re: [mikeos-developer] 32-bit Protected Mode
+
+
+&gt;<i> On Thu, Feb 3, 2011 at 9:45 AM, Mike Gonta wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> aeBIOS to the rescue!
+</I>&gt;<i> 
+</I>&gt;<i> You're absolutely right, and I think your project is brilliant. I'm
+</I>&gt;<i> just wondering what benefits we'd get from having MikeOS go 32-bit
+</I>&gt;<i> protected mode as the default.
+</I>
+Hi Mike,
+
+I am in no way proposing that your MikeOS project should become PM32. 
+Even though I am on a personal crusade against the evils of 16 bit
+real mode programming, my personal hobby aeBIOS project finds me
+deep in the RM16 BIOS plumbing (it's a smelly job, but some one has to
+do it). I actually have to *cough, cough* do some RM16 programming.
+
+&gt;<i> Right now, when you learn how MikeOS works and make modifications, you
+</I>&gt;<i> have your code running directly on the bare metal.
+</I>
+Actually it's running directly on a standard BIOS interface which runs
+on the bare metal. aeBIOS has the same interface (onlt PM32).
+
+&gt;<i> You can understand exactly what each part of the OS does -- there's
+</I>&gt;<i> just your code and the PC.
+</I>
+The MikeOs developer (as opposed to the application writter) needs to
+understand the BIOS interface which is between the OS and the PC.
+aeBIOS is a similar interface between the OS and the PC.
+
+&gt;<i> Adding a layer between that complicates things, and means
+</I>&gt;<i> there's something else you have to learn, to get a grand picture of
+</I>&gt;<i> everything. It's not quite as &quot;pure&quot; as before.
+</I>
+The FAT12 supported aeBIOS hides a lot of the PM32 business and allows the
+beginner to jump right in just like RM16. Take a look at the translated
+PM32 MikeOS and you will find none of the usual PM32 complications.
+It should be noted that aeBIOS allows advanced programmers full and
+unrestricted access to all PM32 features.
+
+I would like to thank you for not **complaining** about the translated
+PM32 MikeOS and the **trouble** that it's causing.
+I needed a **most excellent** RM16 example to translate and
+**show off** aeBIOS and MikeOS was it.
+
+As brilliant as aeBIOS might be, MikeOS far out shines (aeBIOS is just a
+couple of twisted wires in comparison).
+
+
+Mike Gonta
+look and see - many look but few see
+
+<A HREF="http://aeBIOS.com">http://aeBIOS.com</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001809.html">[mikeos-developer] 32-bit Protected Mode
+</A></li>
+	<LI>Next message: <A HREF="001811.html">[mikeos-developer] 32-bit Protected Mode
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1810">[ date ]</a>
+              <a href="thread.html#1810">[ thread ]</a>
+              <a href="subject.html#1810">[ subject ]</a>
+              <a href="author.html#1810">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

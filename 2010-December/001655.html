@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Command Line arguments?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Command%20Line%20arguments%3F&In-Reply-To=%3C895067D8-5E77-4502-928E-EEE045AA27C7%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001654.html">
+   <LINK REL="Next"  HREF="001658.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Command Line arguments?</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Command%20Line%20arguments%3F&In-Reply-To=%3C895067D8-5E77-4502-928E-EEE045AA27C7%40gmail.com%3E"
+       TITLE="[mikeos-developer] Command Line arguments?">okachi at gmail.com
+       </A><BR>
+    <I>Fri Dec 17 18:19:24 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001654.html">[mikeos-developer] Command Line arguments?
+</A></li>
+        <LI>Next message: <A HREF="001658.html">[mikeos-developer] Command Line arguments?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1655">[ date ]</a>
+              <a href="thread.html#1655">[ thread ]</a>
+              <a href="subject.html#1655">[ subject ]</a>
+              <a href="author.html#1655">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>What's the purpose of that Matt? Why the &quot;argument passed in reg ax&quot; bits? MikeOS doesn't support sending command line arguments to programs. Those registers are simply cleared so that programs can expect the system to be in a fairly clean state on launch.
+
+Unless you have added command line argument support, in which case, you haven't posted any of the implementation.
+
+M
+
+
+On 17 Dec 2010, at 14:42, Matthew Caswell &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">caswellrienzo at gmail.com</A>&gt; wrote:
+
+&gt;<i> Just puttin' this out there for anybody else who might be new to OS
+</I>&gt;<i> dev in assembly:
+</I>&gt;<i> 
+</I>&gt;<i> mov   ax, filename
+</I>&gt;<i> mov   bx, 0
+</I>&gt;<i> mov   cx, 32768
+</I>&gt;<i> call    os_load_file
+</I>&gt;<i> 
+</I>&gt;<i> mov   ax, 0    ; argument passed in reg ax
+</I>&gt;<i> mov   bx, 0    ; arg in bx
+</I>&gt;<i> mov   cx, 0    ; cx
+</I>&gt;<i> mov   dx, 0   ; dx
+</I>&gt;<i> mov   si, 0    ; si
+</I>&gt;<i> mov   di, 0    ; di
+</I>&gt;<i> 
+</I>&gt;<i> call    32768   ; start program
+</I>&gt;<i> 
+</I>&gt;<i> filename   db 'TESTAPP.BIN',0
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> On Tue, Dec 7, 2010 at 3:59 PM,  &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">wisecracker at tesco.net</A>&gt; wrote:
+</I>&gt;&gt;<i> Hi Matej...
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;&gt;<i> That's not entirely true. I basically learned x86 assembly from scratch by studying
+</I>&gt;&gt;&gt;<i> the MikeOS code.
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> I agree, I learnt Assembly by banging the metal and finding out how things work
+</I>&gt;&gt;<i> on an AMIGA A500(+) with this little baby:-
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> <A HREF="http://www.amiga-hardware.com/showhardware.cgi?HARDID=333">http://www.amiga-hardware.com/showhardware.cgi?HARDID=333</A>
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> I had the pleasure of both 68x00 and V30 coding at the flick of a switch. :)
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> As Mike pointed out though OS design is another ball game.
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> I view:-
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> <A HREF="http://www.osdev.org/">http://www.osdev.org/</A>
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> At a distance as these guys, seriously, take no prisoners.
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i> 73...
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> Bazza, G0LCU...
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> Team AMIGA...
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> <A HREF="http://homepages.tesco.net/wisecracker/">http://homepages.tesco.net/wisecracker/</A>
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> <A HREF="http://main.aminet.net/search?readme=wisecracker">http://main.aminet.net/search?readme=wisecracker</A>
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> mikeos-developer mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001654.html">[mikeos-developer] Command Line arguments?
+</A></li>
+	<LI>Next message: <A HREF="001658.html">[mikeos-developer] Command Line arguments?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1655">[ date ]</a>
+              <a href="thread.html#1655">[ thread ]</a>
+              <a href="subject.html#1655">[ subject ]</a>
+              <a href="author.html#1655">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

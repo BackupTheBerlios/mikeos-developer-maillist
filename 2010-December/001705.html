@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Implementing System Calls (API)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Implementing%20System%20Calls%20%28API%29&In-Reply-To=%3CAANLkTi%3DT5pb_REojsJ6S8U5QM-br3N%3DGfduBDFNDZiGO%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001704.html">
+   <LINK REL="Next"  HREF="001707.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Implementing System Calls (API)</H1>
+    <B>Matthew Veety</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Implementing%20System%20Calls%20%28API%29&In-Reply-To=%3CAANLkTi%3DT5pb_REojsJ6S8U5QM-br3N%3DGfduBDFNDZiGO%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Implementing System Calls (API)">mveety at gmail.com
+       </A><BR>
+    <I>Thu Dec 30 21:31:16 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001704.html">[mikeos-developer] Implementing System Calls (API)
+</A></li>
+        <LI>Next message: <A HREF="001707.html">[mikeos-developer] Implementing System Calls (API)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1705">[ date ]</a>
+              <a href="thread.html#1705">[ thread ]</a>
+              <a href="subject.html#1705">[ subject ]</a>
+              <a href="author.html#1705">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Well your issue is that you're jumping to system.io.screen.displaystring and
+not 0x3. The easiest thing to do is have an API call as Foo: jmp 0003h
+
+Hope that helps,
+Matt Veety
+On Dec 30, 2010 3:17 PM, &quot;Muzaffar Auhammud&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">muzhacker at scalux.tk</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Hi! I've started making my own OS from scratch some weeks ago and I came
+</I>upon MikeOS through Google. I ran through the source code and I've found
+that MikeOS is not coded in a difficult manner. The code has helped me a lot
+in my OS.
+&gt;<i>
+</I>&gt;<i> But I'm having problems with implementing system calls in my os (Not in
+</I>MikeOS). I've added jump instructions at the top like in MikeOS and I've
+even create a dev.inc file with the call in it.
+&gt;<i>
+</I>&gt;<i> part of kernel.asm (at the top where system calls are being implemented):
+</I>&gt;<i>
+</I>&gt;<i> jmp System.IO.Screen.DisplayString
+</I>&gt;<i>
+</I>&gt;<i> part of dev.inc:
+</I>&gt;<i>
+</I>&gt;<i> System.IO.Screen.DisplayString equ 0003h
+</I>&gt;<i>
+</I>&gt;<i> I've tried to create a program using the dev.inc and it would not work.
+</I>&gt;<i>
+</I>&gt;<i> I've attached my OS source code in this email...
+</I>&gt;<i>
+</I>&gt;<i> can you please implement at least one system call in the code
+</I>(System.IO.Screen.DisplayString) in the code so that I understand how to
+implement more henceforth
+&gt;<i>
+</I>&gt;<i> Please help me
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20101230/e8584423/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20101230/e8584423/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001704.html">[mikeos-developer] Implementing System Calls (API)
+</A></li>
+	<LI>Next message: <A HREF="001707.html">[mikeos-developer] Implementing System Calls (API)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1705">[ date ]</a>
+              <a href="thread.html#1705">[ thread ]</a>
+              <a href="subject.html#1705">[ subject ]</a>
+              <a href="author.html#1705">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

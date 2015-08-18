@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Wellcome into the unreal mode.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Wellcome%20into%20the%20unreal%20mode.&In-Reply-To=%3C878ws86dpe.wl%25uaa%40mx5.nisiq.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000422.html">
+   <LINK REL="Next"  HREF="000426.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Wellcome into the unreal mode.</H1>
+    <B>SASANO Takayoshi</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Wellcome%20into%20the%20unreal%20mode.&In-Reply-To=%3C878ws86dpe.wl%25uaa%40mx5.nisiq.net%3E"
+       TITLE="[mikeos-developer] Wellcome into the unreal mode.">uaa at mx5.nisiq.net
+       </A><BR>
+    <I>Tue Oct 28 14:39:41 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000422.html">[mikeos-developer] Wellcome into the unreal mode.
+</A></li>
+        <LI>Next message: <A HREF="000426.html">[mikeos-developer] Wellcome into the unreal mode.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#424">[ date ]</a>
+              <a href="thread.html#424">[ thread ]</a>
+              <a href="subject.html#424">[ subject ]</a>
+              <a href="author.html#424">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+&gt;<i> I'm not sure I understand -- are you saying that the OS and libmikeos
+</I>&gt;<i> programs need separate stacks?
+</I>
+Yes.
+
+Many compiler is based on &quot;memory model&quot; and
+bcc is a tiny/small model compiler, at least DS has to be same as SS.
+
+It is very hard task for me to explain &quot;memory model&quot;,
+please refer this web page:- 
+
+<A HREF="http://www.digitalmars.com/ctg/ctgMemoryModel.html">http://www.digitalmars.com/ctg/ctgMemoryModel.html</A>
+
+
+Currently libmikeos uses tiny model with a trick to switch DS/SS
+(by the value of SP). But the Mike's new memory map is difficult to
+apply this trick.
+
+
+The new memory map is well-planned, so I am thinking simply using
+&quot;user code segment&quot; with tiny model.
+
+This means CS=DS=SS points &quot;user code segment&quot; while
+running C-based program, can I do that?
+
+(OS API is invoked by INT instruction, so CS points kernel segment
+while OS-routine is running. But where DS/SS points?)
+----
+SASANO Takayoshi (JG1UAA/1) [<A HREF="http://www.uaa.org.uk/">http://www.uaa.org.uk/</A>] &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">uaa at uaa.org.uk</A>&gt;
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000422.html">[mikeos-developer] Wellcome into the unreal mode.
+</A></li>
+	<LI>Next message: <A HREF="000426.html">[mikeos-developer] Wellcome into the unreal mode.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#424">[ date ]</a>
+              <a href="thread.html#424">[ thread ]</a>
+              <a href="subject.html#424">[ subject ]</a>
+              <a href="author.html#424">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

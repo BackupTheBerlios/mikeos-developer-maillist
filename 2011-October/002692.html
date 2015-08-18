@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Added New BASIC Commands!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Added%20New%20BASIC%20Commands%21&In-Reply-To=%3CCAEz6_zh%2B4TtYjGBSd_TRCXaoSjXBCha9k7ti7HhZ3nid7n%3DYwg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002691.html">
+   <LINK REL="Next"  HREF="002694.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Added New BASIC Commands!</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Added%20New%20BASIC%20Commands%21&In-Reply-To=%3CCAEz6_zh%2B4TtYjGBSd_TRCXaoSjXBCha9k7ti7HhZ3nid7n%3DYwg%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Added New BASIC Commands!">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Fri Oct 21 13:28:32 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002691.html">[mikeos-developer] Added New BASIC Commands!
+</A></li>
+        <LI>Next message: <A HREF="002694.html">[mikeos-developer] Added New BASIC Commands!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2692">[ date ]</a>
+              <a href="thread.html#2692">[ thread ]</a>
+              <a href="subject.html#2692">[ subject ]</a>
+              <a href="author.html#2692">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>I presume this is all built on top of 4.3 beta 4's BASIC, yep?
+</I>
+Yep.
+
+
+&gt;&gt;<i> i.e. T = TIMER
+</I>&gt;&gt;<i> Get the lower word value of the system clock.
+</I>&gt;<i>Cool. What does the lower word represent though? Seconds?
+</I>&gt;<i>Milliseconds? Something else?
+</I>
+Ticks since midnight. They happen 18.2 times a second.
+This will go from 0-65535 in about an hour, then start again.
+It uses interrupt 1Ah function 00h, same as the &quot;pause&quot;
+instruction in the BASIC interpreter.
+<A HREF="http://www.ctyme.com/intr/rb-2271.htm">http://www.ctyme.com/intr/rb-2271.htm</A>
+
+
+&gt;&gt;<i> i.e. PAGE 1 0
+</I>&gt;&gt;<i> Sets the working page and the active (display) page.
+</I>
+&gt;<i>This looks good, although I have absolutely no idea what pages are.
+</I>&gt;<i>Are they basically separate parts of video RAM you can switch into the
+</I>&gt;<i>one being physically displayed, like a double-buffering system? So you
+</I>&gt;<i>can do all your printing operations into an offscreen page, and then
+</I>&gt;<i>switch it into the visible one, for better performance?
+</I>
+Basically, yes.
+It looks better if you don't see stuff being drawn.
+The syntax of my command is:
+PAGE [working page] [visible page]
+
+Video pages are part of the video memory that isn't used by a screen.
+Low resolution modes have a lot of pages, the default text resolution of
+the interpreter (mode 03h) has 8 pages (0-7). Low resolution graphic modes
+have 2-4 pages. Pages don't work on &quot;high&quot; resolution graphic modes, like
+mode 13h because they use up most of the video RAM.
+Here's a rough table of modes and how many pages you get:
+<A HREF="http://www.ctyme.com/intr/rb-0069.htm#Table10">http://www.ctyme.com/intr/rb-0069.htm#Table10</A>
+
+Video pages are accepted in almost all interrupt 10h functions and usually
+as the &quot;bh&quot; register. <A HREF="http://en.wikipedia.org/wiki/INT_10H">http://en.wikipedia.org/wiki/INT_10H</A>
+Functions can print to any page but only one can be visible.
+Normally in MikeOS this is set to zero via &quot;mov bh, 0&quot; before interrupt 10h,
+so the first video page will be used.
+To get all the BASIC commands to output to the selected video page, we use a
+variable &quot;work_page&quot;, so instead of &quot;mov bh, 0&quot; we use &quot;mov bh, [work_page]&quot;
+before interrupt 10h.
+I also use another variable &quot;disp_page&quot; because some functions will only
+output to the active page, so we set the the work page as the
+&quot;active&quot; page, do the command, then switch back to the display page.
+
+The active page gets switched back to 0 before the &quot;end&quot; command or on an
+error to keep the OS happy. Unfortunately the &quot;input&quot; command will still
+use the active page rather than the work page but that not really a problem
+since you probably won't want to get an input on a non-visible page.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002691.html">[mikeos-developer] Added New BASIC Commands!
+</A></li>
+	<LI>Next message: <A HREF="002694.html">[mikeos-developer] Added New BASIC Commands!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2692">[ date ]</a>
+              <a href="thread.html#2692">[ thread ]</a>
+              <a href="subject.html#2692">[ subject ]</a>
+              <a href="author.html#2692">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

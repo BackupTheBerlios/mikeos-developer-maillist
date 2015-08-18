@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] PAUSE...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20PAUSE...&In-Reply-To=%3C353848.55038.qm%40web113104.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001402.html">
+   <LINK REL="Next"  HREF="001404.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] PAUSE...</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20PAUSE...&In-Reply-To=%3C353848.55038.qm%40web113104.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] PAUSE...">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Thu May 27 21:33:48 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001402.html">[mikeos-developer] PAUSE...
+</A></li>
+        <LI>Next message: <A HREF="001404.html">[mikeos-developer] PAUSE...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1403">[ date ]</a>
+              <a href="thread.html#1403">[ thread ]</a>
+              <a href="subject.html#1403">[ subject ]</a>
+              <a href="author.html#1403">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bazza,
+
+You could well be right.
+In my code one is passing the delay time in AX which is then &quot;mov&quot;ed over to BX
+which is multiplied by al.
+
+So if BX=0, then  mov [.orig_req_delay],bx will cause a very short delay which I suspect is what you are hearing as a glitch
+or &quot;discountinuaty&quot; with your &quot;peeps&quot;  (multiplying by zero is never a good idea).
+
+ I wanted to put zero protection in, but the boss said no! :-)
+
+
+Roughly how often does it glitch?
+
+Paulo.
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001402.html">[mikeos-developer] PAUSE...
+</A></li>
+	<LI>Next message: <A HREF="001404.html">[mikeos-developer] PAUSE...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1403">[ date ]</a>
+              <a href="thread.html#1403">[ thread ]</a>
+              <a href="subject.html#1403">[ subject ]</a>
+              <a href="author.html#1403">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

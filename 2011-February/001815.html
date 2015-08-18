@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] 32-bit Protected Mode
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%2032-bit%20Protected%20Mode&In-Reply-To=%3CAANLkTik4PBtZS1gUwEcKSR0fp4JCRRdd7tubSwYyyQne%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001814.html">
+   <LINK REL="Next"  HREF="001816.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] 32-bit Protected Mode</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%2032-bit%20Protected%20Mode&In-Reply-To=%3CAANLkTik4PBtZS1gUwEcKSR0fp4JCRRdd7tubSwYyyQne%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] 32-bit Protected Mode">okachi at gmail.com
+       </A><BR>
+    <I>Fri Feb  4 16:54:20 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001814.html">[mikeos-developer] 32-bit Protected Mode
+</A></li>
+        <LI>Next message: <A HREF="001816.html">[mikeos-developer] 32-bit Protected Mode
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1815">[ date ]</a>
+              <a href="thread.html#1815">[ thread ]</a>
+              <a href="subject.html#1815">[ subject ]</a>
+              <a href="author.html#1815">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Raghav,
+
+On Fri, Feb 4, 2011 at 3:33 PM, Raghav Sood &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">raghavsood at gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> I would support switching to PM32-bit for a reasonably good reason. When the
+</I>&gt;<i> BIOS is phased out and the computers start using UEFI MikeOS would cease to
+</I>&gt;<i> function.
+</I>
+Indeed, and we've talked about this topic on the list before. There
+still doesn't appear to be a simple long-term solution. aeBIOS is a
+great intermediate solution for having the benefits of protected mode
+without writing native drivers, but because it itself uses the BIOS,
+it won't help on UEFI machines.
+
+We could start writing keyboard, screen and floppy disk controller
+drivers so that we can ditch the BIOS. (Although with USB keyboards
+that gets pretty complex.) We could then bundle them with MikeOS as
+some kind of hardware handling library. That might be the only
+solution in the long term.
+
+But still, I think MikeOS would lose some of its purity. I like the
+idea that anyone can get a good overview of the whole OS workings,
+without having to get bogged down in hardware specifics. I like the
+fact that's it's a reasonably featureful OS (as opposed to a glorified
+boot loader) which people can study and understand, with no need to
+worry about poking bytes into the keyboard controller.
+
+I can &quot;see&quot; every byte of MikeOS right now, what it does and how it
+works. It all fits together well, I think. Adding a big chunk of
+complicated and fussy driver code into the mix will lose that
+specialness. But then, I don't know of any other solution!
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001814.html">[mikeos-developer] 32-bit Protected Mode
+</A></li>
+	<LI>Next message: <A HREF="001816.html">[mikeos-developer] 32-bit Protected Mode
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1815">[ date ]</a>
+              <a href="thread.html#1815">[ thread ]</a>
+              <a href="subject.html#1815">[ subject ]</a>
+              <a href="author.html#1815">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] A quick question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20quick%20question&In-Reply-To=%3C4f03362c0911191210s45e2aaaey774cc896e56b9495%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000750.html">
+   <LINK REL="Next"  HREF="000736.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] A quick question</H1>
+    <B>Ian Seyler</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20quick%20question&In-Reply-To=%3C4f03362c0911191210s45e2aaaey774cc896e56b9495%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] A quick question">iseyler at gmail.com
+       </A><BR>
+    <I>Thu Nov 19 21:10:45 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000750.html">[mikeos-developer] A quick question
+</A></li>
+        <LI>Next message: <A HREF="000736.html">[mikeos-developer] MikeOS BASIC
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#754">[ date ]</a>
+              <a href="thread.html#754">[ thread ]</a>
+              <a href="subject.html#754">[ subject ]</a>
+              <a href="author.html#754">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I've been working on this as well. My os_string_parse is a bit different:
+
+;
+-----------------------------------------------------------------------------
+; os_string_parse -- Parse a string into individual words
+;  IN:    RSI = Address of string
+; OUT:    RCX = word count
+; Note:    This function will remove &quot;extra&quot; whitespace in the source string
+;    &quot;This is  a test. &quot; will update to &quot;This is a test.&quot; and RCX will
+contain 4.
+os_string_parse:
+    push rsi
+    push rdi
+    push rax
+
+    xor rcx, rcx
+    mov rdi, rsi
+
+    call os_string_chomp    ; Remove leading and trailing spaces
+
+    cmp byte [rsi], 0x00
+    je os_string_parse_done
+    inc rcx
+
+os_string_parse_next_char:
+    lodsb
+    stosb
+    cmp al, 0x00
+    je os_string_parse_done
+    cmp al, ' '
+    je os_string_parse_found_a_space
+    jmp os_string_parse_next_char
+
+os_string_parse_found_a_space:
+    lodsb
+    cmp al, ' '
+    jne os_string_parse_no_more_spaces
+    jmp os_string_parse_found_a_space
+
+os_string_parse_no_more_spaces:
+    dec rsi
+    inc rcx
+    jmp os_string_parse_next_char
+
+os_string_parse_done:
+
+    pop rax
+    pop rdi
+    pop rsi
+ret
+;
+-----------------------------------------------------------------------------
+
+The function removes the extra whitespace and counts the individual words.
+Since you have the word count you could get the word or argument you want by
+looking for the space before the word. If I wanted the 3rd word in the
+string I would look for the 2nd space and read the bytes until the next
+space or null.
+
+Maybe this function will be useful for you since it doesn't max out on
+arguments it will gather.
+
+-Ian
+
+
+On Tue, Nov 17, 2009 at 4:54 PM, M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt; wrote:
+
+&gt;<i> &gt; This leads me to my question, how would one parse arguments to a
+</I>&gt;<i> programme that
+</I>&gt;<i> &gt; is being run?
+</I>&gt;<i>
+</I>&gt;<i> I've been thinking about this too, for a future version of MikeOS. My
+</I>&gt;<i> idea is this:
+</I>&gt;<i>
+</I>&gt;<i> * The CLI takes a string
+</I>&gt;<i> * It parses it into multiple chunks (there's an os_string_parse call
+</I>&gt;<i> in MikeOS that could do this)
+</I>&gt;<i> * It writes subsequent arguments after the program name to a specific
+</I>&gt;<i> point in RAM
+</I>&gt;<i> * You then create a new system call, eg os_get_args, that takes AX as
+</I>&gt;<i> the argument to retrieve, and it returns a pointer to the string
+</I>&gt;<i>
+</I>&gt;<i> os_string_parse in MikeOS is pretty rudimentary (essentially replacing
+</I>&gt;<i> spaces with zero-termination to make strings within a string) but it
+</I>&gt;<i> could be used in my case. If you're using multiple segments it might
+</I>&gt;<i> be more complicated and my idea may not be suitable. But it might
+</I>&gt;<i> help!
+</I>&gt;<i>
+</I>&gt;<i> Have you got a website or anything for COS? I'll link to it on the
+</I>&gt;<i> MikeOS site if so.
+</I>&gt;<i>
+</I>&gt;<i> &gt; PS: My apologies if this is not the appropriate place to pose this
+</I>&gt;<i> question
+</I>&gt;<i>
+</I>&gt;<i> No need to apologise :-) The more x86 real mode OS dev discussion here
+</I>&gt;<i> the better, I think -
+</I>&gt;<i> we're all working with the same tech and languages, and have similar
+</I>&gt;<i> goals. I like the OSDev.org forums but 99% of stuff is about
+</I>&gt;<i> (understandably) C++ kernels, protected mode etc. All questions
+</I>&gt;<i> relating to the cheerfully bare-metal real mode world of OS
+</I>&gt;<i> development are welcome here :-)
+</I>&gt;<i>
+</I>&gt;<i> M
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Mike Saunders
+</I>&gt;<i> <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20091119/6159a3e5/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20091119/6159a3e5/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000750.html">[mikeos-developer] A quick question
+</A></li>
+	<LI>Next message: <A HREF="000736.html">[mikeos-developer] MikeOS BASIC
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#754">[ date ]</a>
+              <a href="thread.html#754">[ thread ]</a>
+              <a href="subject.html#754">[ subject ]</a>
+              <a href="author.html#754">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

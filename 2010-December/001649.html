@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] GUI with BIOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20GUI%20with%20BIOS&In-Reply-To=%3CAANLkTinQ8JvDw9LrM7uNRXyEiTVbXeqYuNAan2LJJXdX%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001648.html">
+   <LINK REL="Next"  HREF="001651.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] GUI with BIOS</H1>
+    <B>Kieran Youngman</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20GUI%20with%20BIOS&In-Reply-To=%3CAANLkTinQ8JvDw9LrM7uNRXyEiTVbXeqYuNAan2LJJXdX%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] GUI with BIOS">youngmankw at gmail.com
+       </A><BR>
+    <I>Thu Dec 16 23:10:47 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001648.html">[mikeos-developer] GUI with BIOS
+</A></li>
+        <LI>Next message: <A HREF="001651.html">[mikeos-developer] GUI with BIOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1649">[ date ]</a>
+              <a href="thread.html#1649">[ thread ]</a>
+              <a href="subject.html#1649">[ subject ]</a>
+              <a href="author.html#1649">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Oops - *And to plot a pixel I used this to plot pixels:
+
+*Shouldn't be like that ;)  Should be* And to plot a pixel I used this:
+
+*
+
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> I'm new to this mailing list so ;)  please give me a chance...
+</I>&gt;<i>
+</I>&gt;<i> I did some simple graphics a little while ago and I used this to get me
+</I>&gt;<i> into graphics mode:
+</I>&gt;<i>
+</I>&gt;<i> *mov ax, 13h   ; AH=0 AL=13, MCGA 320x200 256 color graphics mode
+</I>&gt;<i> int 10h
+</I>&gt;<i>
+</I>&gt;<i> *And to plot a pixel I used this to plot pixels:
+</I>&gt;<i>
+</I>&gt;<i> *mov cx, 320 ; Width of the screen
+</I>&gt;<i> mul cx
+</I>&gt;<i> add ax, bx
+</I>&gt;<i>
+</I>&gt;<i> xchg si, ax
+</I>&gt;<i> mov bx, 0a000h
+</I>&gt;<i> mov es, bx
+</I>&gt;<i> mov word [es:si], 11 ; display bright pixel*
+</I>&gt;<i>
+</I>&gt;<i> AX is the column (Y coordinate) and BX is the row (X coordinate)... I
+</I>&gt;<i> think...  :)
+</I>&gt;<i>
+</I>&gt;<i> Kieran
+</I>&gt;<i>
+</I>&gt;<i> On 16 December 2010 21:41, Derek Bank &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">derekbank.bank9 at gmail.com</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> Already knew how to switch into graphics mode, but how can I actually plot
+</I>&gt;&gt;<i> pixels to the screen?
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> mikeos-developer mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20101216/b2da9306/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20101216/b2da9306/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001648.html">[mikeos-developer] GUI with BIOS
+</A></li>
+	<LI>Next message: <A HREF="001651.html">[mikeos-developer] GUI with BIOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1649">[ date ]</a>
+              <a href="thread.html#1649">[ thread ]</a>
+              <a href="subject.html#1649">[ subject ]</a>
+              <a href="author.html#1649">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

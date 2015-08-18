@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] mikeos-developer Digest, Vol 36, Issue 28
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20mikeos-developer%20Digest%2C%20Vol%2036%2C%20Issue%2028&In-Reply-To=%3CCACtjVkGVYAc505ACe5duMsSiL93tG476pQrUM-UEajysxZeOTA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002171.html">
+   <LINK REL="Next"  HREF="002173.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 28</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20mikeos-developer%20Digest%2C%20Vol%2036%2C%20Issue%2028&In-Reply-To=%3CCACtjVkGVYAc505ACe5duMsSiL93tG476pQrUM-UEajysxZeOTA%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 28">okachi at gmail.com
+       </A><BR>
+    <I>Mon Sep 19 11:57:47 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002171.html">[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 28
+</A></li>
+        <LI>Next message: <A HREF="002173.html">[mikeos-developer] MikeOS 4.2 beta 2 released for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2172">[ date ]</a>
+              <a href="thread.html#2172">[ thread ]</a>
+              <a href="subject.html#2172">[ subject ]</a>
+              <a href="author.html#2172">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Lo Joshua,
+
+&gt;<i> It was a really bad idea from the start, the problem was, it worked.
+</I>&gt;<i> I learn that using some such as $a or $d (case sensitive) would cause
+</I>&gt;<i> trouble, so I avoided them.
+</I>
+Given that the BASIC interpreter works on ASCII values for the string
+variables as mentioned, you're better off using upper-case letters:
+
+<A HREF="http://www.asciitable.com">http://www.asciitable.com</A>
+
+eg 'A' is closer to the 0 - 9 characters than 'a'. Now that the string
+storage will be at the end of the kernel for 4.2, there's lots of
+space free, but it gets tight towards the end. For instance, the
+string variable '$z': z = 122 in ASCII, subtract 49, and then multiply
+the result by 128 = 9344 bytes offset. So with the kernel at around
+16K and the disk buffer at 24K, using variables like $x, $y and $z
+intrudes in the disk buffer space.
+
+Using '$Z' (capital) results in 5376 offset which is safely in that free RAM.
+
+&gt;<i> If I have to make a call on this one (call 65515?) I'd say do, you don't have to
+</I>&gt;<i> do all possible characters, just to case insensitive letters. Most of the time
+</I>&gt;<i> I don't use the full 128 characters anyway
+</I>
+Righto, sounds like an idea. I won't change anything for 4.2 now --
+there are enough changes in there already, so I just want to focus on
+making it stable. But for 4.3 I'd like to focus a lot on BASIC, so we
+could investigate changes like 64-char strings, using $0 - 9 and $A -
+Z (with the interpreter dealing with the case itself). This could
+potentially break things like Bazza's projects, so we'd give this lots
+of testing. But that's a while off yet.
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002171.html">[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 28
+</A></li>
+	<LI>Next message: <A HREF="002173.html">[mikeos-developer] MikeOS 4.2 beta 2 released for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2172">[ date ]</a>
+              <a href="thread.html#2172">[ thread ]</a>
+              <a href="subject.html#2172">[ subject ]</a>
+              <a href="author.html#2172">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

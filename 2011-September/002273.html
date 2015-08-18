@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.2b2 Bugs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.2b2%20Bugs&In-Reply-To=%3CCAPRjAGiM37%3DFp6KBf0VQNH221XZG8fd2gS-KpTek0Lhyc41adA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002271.html">
+   <LINK REL="Next"  HREF="002274.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.2b2 Bugs</H1>
+    <B>Paulo V</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.2b2%20Bugs&In-Reply-To=%3CCAPRjAGiM37%3DFp6KBf0VQNH221XZG8fd2gS-KpTek0Lhyc41adA%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 4.2b2 Bugs">paulomobilemail at gmail.com
+       </A><BR>
+    <I>Fri Sep 23 16:39:18 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002271.html">[mikeos-developer] MikeOS 4.2b2 Bugs
+</A></li>
+        <LI>Next message: <A HREF="002274.html">[mikeos-developer] MikeOS 4.2b2 Bugs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2273">[ date ]</a>
+              <a href="thread.html#2273">[ thread ]</a>
+              <a href="subject.html#2273">[ subject ]</a>
+              <a href="author.html#2273">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>How would CALC.BAS access the FPU?
+</I>
+In general terms using the FPU as shown below.
+
+Obviously MikeOS does not support it natively
+but could be done via POKEs.
+
+Also see the attached pic.
+
+;============================================
+; Simple x87 math co-processor test.
+; Compile with A86 then run with DEBUG
+;
+; var_one contains the number 65535 (FFFFh)
+; var_two contains the number 2
+;
+; once run under DEBUG with g=100
+; the answer var_three is at cs:011Bh
+; which should be 01000100h hex not bin (65537)
+; keep in mind that each var is 4 bytes
+;
+;============================================
+
+finit
+
+fld DWORD var_one
+fld DWORD var_two
+
+faddp  ; add the top copies (and pop)
+
+fstp DWORD var_three ; store and pop
+
+fwait
+
+int 3h
+
+var_one DD 65535
+var_two DD 2
+var_three DD 0
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110923/6b5f6d07/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110923/6b5f6d07/attachment.html</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: FPU.jpg
+Type: image/jpeg
+Size: 65847 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110923/6b5f6d07/attachment.jpg">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110923/6b5f6d07/attachment.jpg</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002271.html">[mikeos-developer] MikeOS 4.2b2 Bugs
+</A></li>
+	<LI>Next message: <A HREF="002274.html">[mikeos-developer] MikeOS 4.2b2 Bugs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2273">[ date ]</a>
+              <a href="thread.html#2273">[ thread ]</a>
+              <a href="subject.html#2273">[ subject ]</a>
+              <a href="author.html#2273">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

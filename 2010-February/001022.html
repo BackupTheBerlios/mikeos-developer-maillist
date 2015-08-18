@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Single byte KB I/O code...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Single%20byte%20KB%20I/O%20code...&In-Reply-To=%3C19d8b3b01002011527w1d345350ib49e8d5fa7b3e6e8%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001020.html">
+   <LINK REL="Next"  HREF="001023.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Single byte KB I/O code...</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Single%20byte%20KB%20I/O%20code...&In-Reply-To=%3C19d8b3b01002011527w1d345350ib49e8d5fa7b3e6e8%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Single byte KB I/O code...">okachi at gmail.com
+       </A><BR>
+    <I>Tue Feb  2 00:27:52 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001020.html">[mikeos-developer] Single byte KB I/O code...
+</A></li>
+        <LI>Next message: <A HREF="001023.html">[mikeos-developer] Single byte KB I/O code...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1022">[ date ]</a>
+              <a href="thread.html#1022">[ thread ]</a>
+              <a href="subject.html#1022">[ subject ]</a>
+              <a href="author.html#1022">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Bazza,
+
+On Mon, Feb 1, 2010 at 9:55 PM,  &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">wisecracker at tesco.net</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> POKE 156 65500
+</I>&gt;<i> POKE 80 65501
+</I>&gt;<i> POKE 82 65502
+</I>&gt;<i> POKE 30 65503
+</I>&gt;<i> POKE 186 65504
+</I>
+This suggests we need some kind of READ X facility as in BASICs of old
+with accompanying DATA bits. What do you reckon folks?
+
+For instance, imagine DATA here contains some machine code (I've just
+made it up), and READ pulls a byte from the DATA section and
+increments the DATA section pointer. If it's the end of the data, the
+R variable contains 1. So we POKE bytes from the DATA section into RAM
+and then call it -- just like old BASIC routines for inputting hex
+from magazine listings. I'm sure it'd have lots of uses beyond
+prodding machine code into RAM too!
+
+
+y = 60000
+
+loopy:
+  read x
+  if r = 1 then goto endloop
+  poke x y
+  y = y + 1
+  goto loopy
+
+endloop:
+  call 60000
+  end
+
+data 201 191 85 22 99 154 88 224 195
+
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001020.html">[mikeos-developer] Single byte KB I/O code...
+</A></li>
+	<LI>Next message: <A HREF="001023.html">[mikeos-developer] Single byte KB I/O code...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1022">[ date ]</a>
+              <a href="thread.html#1022">[ thread ]</a>
+              <a href="subject.html#1022">[ subject ]</a>
+              <a href="author.html#1022">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

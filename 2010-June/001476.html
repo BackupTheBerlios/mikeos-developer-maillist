@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Two bugs with os_file_selector
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-June/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Two%20bugs%20with%20os_file_selector&In-Reply-To=%3C0585FDC4EF174685B3A5C7E0BB6EC041%40userfe6b65a555%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001475.html">
+   <LINK REL="Next"  HREF="001477.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Two bugs with os_file_selector</H1>
+    <B>Mike Gonta</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Two%20bugs%20with%20os_file_selector&In-Reply-To=%3C0585FDC4EF174685B3A5C7E0BB6EC041%40userfe6b65a555%3E"
+       TITLE="[mikeos-developer] Two bugs with os_file_selector">mikegonta at gmail.com
+       </A><BR>
+    <I>Fri Jun 25 22:50:50 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001475.html">[mikeos-developer] Two bugs with os_file_selector
+</A></li>
+        <LI>Next message: <A HREF="001477.html">[mikeos-developer] Opinions...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1476">[ date ]</a>
+              <a href="thread.html#1476">[ thread ]</a>
+              <a href="subject.html#1476">[ subject ]</a>
+              <a href="author.html#1476">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+----- Original Message ----- 
+From: &quot;M. Horvat&quot;
+To:
+Sent: Friday, June 25, 2010 9:24 AM
+Subject: [mikeos-developer] Two bugs with os_file_selector
+
+
+&gt;<i> 1. If the disk label is not an empty string, MikeOS will hang when 
+</I>&gt;<i> displaying the list of files. The same happens with the DIR command, so 
+</I>&gt;<i> the bug is probably in os_get_file_list.
+</I>
+This fix is trivial, just replace the following line in os_get_file_list =&gt;
+
+ test al, 10h   ; Is this a directory entry?
+
+with =&gt;
+
+ test al, 18h   ; Is this a directory entry or volume label?
+
+
+Mike Gonta
+look and see - many look but few see
+
+<A HREF="http://mikegonta.com/pdBIOS32">http://mikegonta.com/pdBIOS32</A>
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001475.html">[mikeos-developer] Two bugs with os_file_selector
+</A></li>
+	<LI>Next message: <A HREF="001477.html">[mikeos-developer] Opinions...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1476">[ date ]</a>
+              <a href="thread.html#1476">[ thread ]</a>
+              <a href="subject.html#1476">[ subject ]</a>
+              <a href="author.html#1476">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

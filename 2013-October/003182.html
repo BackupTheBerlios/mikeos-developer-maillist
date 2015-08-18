@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Query : Segmentation Code in MikeOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2013-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Query%20%3A%20Segmentation%20Code%20in%20MikeOS&In-Reply-To=%3CCAJq3fOaRjeA%2BZTDJkRRBQ-nT3Padx%2Bcr3TZS2NneqjB%2B-UeJLw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003181.html">
+   <LINK REL="Next"  HREF="003183.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Query : Segmentation Code in MikeOS</H1>
+    <B>ALLDESP Coder</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Query%20%3A%20Segmentation%20Code%20in%20MikeOS&In-Reply-To=%3CCAJq3fOaRjeA%2BZTDJkRRBQ-nT3Padx%2Bcr3TZS2NneqjB%2B-UeJLw%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Query : Segmentation Code in MikeOS">sidgautam999 at gmail.com
+       </A><BR>
+    <I>Tue Oct 22 11:30:43 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003181.html">[mikeos-developer] EXTFloppy : External Floppy Device Feature for	MikeOS and it's clones
+</A></li>
+        <LI>Next message: <A HREF="003183.html">[mikeos-developer] Query : Segmentation Code in MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3182">[ date ]</a>
+              <a href="thread.html#3182">[ thread ]</a>
+              <a href="subject.html#3182">[ subject ]</a>
+              <a href="author.html#3182">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Note : I am very much aware that segmentation is extremely a complex and a
+toedious task in Real Mode.
+My goal is to achieve this :
+Small little 64K segment
++++++++++++++
+Kernel - 24K
+Disk Buffer - 8K
+Extra Space - 32K
++++++++++++++
++++++++++++++
+[EMPTY 64K Segment]
++++++++++++++
+Now THIS IS TOUGH! Firstly I don't want to do anything with that 32K app
+space, it would be a tedious task to rewrite the apps with org 65530 or
+something like that plus Joshua apps like Yotta which are not open source
+won't
+run on this.
+Also before I set out on this project,
+I'd like to understand the os_main function
+cli ; Clear interrupts
+mov ax, 0
+mov ss, ax ; Set stack segment and pointer
+mov sp, 0FFFFh
+sti
+I understand CLI and STI, but I have a doubt,
+SS = 0 Right?
+SP = 0xFFFh Right?
+So to my understanding this is the one that gives us our 64K segment? Or is
+there
+some thing wrong in my understanding?
+And here :
+mov ax, 2000h ; Set all segments to match where kernel is loaded mov ds, ax
+; After this, we don't need to bother with mov es, ax ; segments ever
+again, as MikeOS and its programs mov fs, ax ; live entirely in 64K mov gs,
+ax
+I think the secret to the next 64K segment lies here,
+But I am not able to figure it out, I checked the Segmentation page on OSDev
+about this but they give really limited knowledge of what to do with these
+segments.
+Does anyone have articles, pages, wikis that thoroughly explains x86 Memory
+Segmentation?
+PS: The other &quot;EMPTY 64K Segment would be used for something special&quot;
+which I am trying to develop, I have almost developed it, but it requires
+another
+segment to load, it would still work in that 32K segment, but......
+~Help would be appreciated...............
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131022/e196a121/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131022/e196a121/attachment.html</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003181.html">[mikeos-developer] EXTFloppy : External Floppy Device Feature for	MikeOS and it's clones
+</A></li>
+	<LI>Next message: <A HREF="003183.html">[mikeos-developer] Query : Segmentation Code in MikeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3182">[ date ]</a>
+              <a href="thread.html#3182">[ thread ]</a>
+              <a href="subject.html#3182">[ subject ]</a>
+              <a href="author.html#3182">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

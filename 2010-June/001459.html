@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] A new system call: os_exponentation
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-June/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20new%20system%20call%3A%20os_exponentation&In-Reply-To=%3CAANLkTik1YIGLP5E85Q5vKqQVfjL6UYol5pkoHo80_3J4%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001458.html">
+   <LINK REL="Next"  HREF="001462.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] A new system call: os_exponentation</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20new%20system%20call%3A%20os_exponentation&In-Reply-To=%3CAANLkTik1YIGLP5E85Q5vKqQVfjL6UYol5pkoHo80_3J4%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] A new system call: os_exponentation">okachi at gmail.com
+       </A><BR>
+    <I>Sun Jun 20 11:04:28 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001458.html">[mikeos-developer] A new system call: os_exponentation
+</A></li>
+        <LI>Next message: <A HREF="001462.html">[mikeos-developer] A new system call: os_exponentation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1459">[ date ]</a>
+              <a href="thread.html#1459">[ thread ]</a>
+              <a href="subject.html#1459">[ subject ]</a>
+              <a href="author.html#1459">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Matej,
+
+&gt;<i> Seriously, these special cases make no sense to me. As if anyone is actually
+</I>&gt;<i> going to feed it zeros.
+</I>
+Perhaps not explicitly, but if your routine is being used in a loop
+somewhere with values moving around all the time, you can never be
+sure what's going to happen. The worst thing is to not cater for such
+behaviour or have different results each time.
+
+If you're not sure what to do in such cases, you could always call
+os_fatal_error (with string location in AX). It's quite severe, but it
+removes any ambiguity!
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001458.html">[mikeos-developer] A new system call: os_exponentation
+</A></li>
+	<LI>Next message: <A HREF="001462.html">[mikeos-developer] A new system call: os_exponentation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1459">[ date ]</a>
+              <a href="thread.html#1459">[ thread ]</a>
+              <a href="subject.html#1459">[ subject ]</a>
+              <a href="author.html#1459">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

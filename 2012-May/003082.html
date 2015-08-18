@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] basic.asm (loop_in) - fixme
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20basic.asm%20%28loop_in%29%20-%20fixme&In-Reply-To=%3C0D16FF27FF1C4F309409BBF4411566EE%40userfe6b65a555%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003081.html">
+   <LINK REL="Next"  HREF="003083.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] basic.asm (loop_in) - fixme</H1>
+    <B>Mike Gonta</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20basic.asm%20%28loop_in%29%20-%20fixme&In-Reply-To=%3C0D16FF27FF1C4F309409BBF4411566EE%40userfe6b65a555%3E"
+       TITLE="[mikeos-developer] basic.asm (loop_in) - fixme">mikegonta at gmail.com
+       </A><BR>
+    <I>Fri May 25 23:12:09 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003081.html">[mikeos-developer] basic.asm (loop_in) - fixme
+</A></li>
+        <LI>Next message: <A HREF="003083.html">[mikeos-developer] basic.asm (loop_in) - fixme
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3082">[ date ]</a>
+              <a href="thread.html#3082">[ thread ]</a>
+              <a href="subject.html#3082">[ subject ]</a>
+              <a href="author.html#3082">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>----- Original Message ----- 
+From: &quot;Joshua Beck&quot;
+To: &quot;MikeOS Mailing List&quot;
+Sent: Thursday, May 24, 2012 7:17 AM
+Subject: Re: [mikeos-developer] basic.asm (loop_in) - fixme
+
+
+&gt;<i> What's with this index problem?
+</I>
+Hi Joshua,
+
+Not a problem, just an issue (something to consider).
+
+&gt;<i> It's suppose to be a an offset.
+</I>
+And it is an offset, however this is not consistent with the
+&quot;gosub_depth&quot; variable which is both similar in concept and
+in code and which is an index.
+
+&gt;<i> I don't know what your trying to do, please explain.
+</I>
+&quot;do_loop_store&quot; has storage for 10 loops and is the cousin of
+&quot;loop_in&quot; which checks for a maximum value of 10, which is
+only 5 loop offsets. So either way something trivial needs fixing.
+
+Keep up the good work.
+
+
+Mike Gonta
+look and see - many look but few see
+
+<A HREF="http://mikegonta.com/MikeOS32">http://mikegonta.com/MikeOS32</A>
+
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003081.html">[mikeos-developer] basic.asm (loop_in) - fixme
+</A></li>
+	<LI>Next message: <A HREF="003083.html">[mikeos-developer] basic.asm (loop_in) - fixme
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3082">[ date ]</a>
+              <a href="thread.html#3082">[ thread ]</a>
+              <a href="subject.html#3082">[ subject ]</a>
+              <a href="author.html#3082">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

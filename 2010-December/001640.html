@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] GUI with BIOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20GUI%20with%20BIOS&In-Reply-To=%3C20101215220545.QCTV2.115479.root%40web10-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001639.html">
+   <LINK REL="Next"  HREF="001641.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] GUI with BIOS</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20GUI%20with%20BIOS&In-Reply-To=%3C20101215220545.QCTV2.115479.root%40web10-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] GUI with BIOS">wisecracker at tesco.net
+       </A><BR>
+    <I>Wed Dec 15 23:05:45 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001639.html">[mikeos-developer] GUI with BIOS
+</A></li>
+        <LI>Next message: <A HREF="001641.html">[mikeos-developer] GUI with BIOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1640">[ date ]</a>
+              <a href="thread.html#1640">[ thread ]</a>
+              <a href="subject.html#1640">[ subject ]</a>
+              <a href="author.html#1640">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Derek...
+
+&gt;<i> I'm not reviving the thread from last season, I want to know the most basic
+</I>&gt;<i> graphics mode implementations. Can you help me? (specifically Mike :) )
+</I>
+I have no idea what you are aiming at here, but I`ll hazard a guess.
+
+MikeOS has NO access to graphics modes as it uses Video Mode 3, CGA, (under
+emulation these days), text; emulated as 720x400x4bits normally.
+
+Under M/C code you do have access, depending on the graphics card, (also under
+emuation), from Video Modes 0 to 19 decimal, (less 11 and 12). Note that very few
+machines can emulate Tandy Modes 8, 9 and 10.
+
+(I doubt that current graphics cards can access the really strange IBM XT CGA
+graphics games modes at all.)
+
+The standard modes are all available from BIOS INT 10h.
+
+mov ax,&lt;word_length_video_mode_in_hex&gt;
+int 10h
+
+To return back to MikeOS I am now using jmp 0h to restart the kernel.
+
+I might be barking up the wrong tree but I hope that helps.
+
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+<A HREF="http://homepages.tesco.net/wisecracker/">http://homepages.tesco.net/wisecracker/</A>
+
+<A HREF="http://main.aminet.net/search?readme=wisecracker">http://main.aminet.net/search?readme=wisecracker</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001639.html">[mikeos-developer] GUI with BIOS
+</A></li>
+	<LI>Next message: <A HREF="001641.html">[mikeos-developer] GUI with BIOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1640">[ date ]</a>
+              <a href="thread.html#1640">[ thread ]</a>
+              <a href="subject.html#1640">[ subject ]</a>
+              <a href="author.html#1640">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] $%#@*! serial ports
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20%24%25%23%40%2A%21%20serial%20ports&In-Reply-To=%3C125537.94870.qm%40web113105.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000853.html">
+   <LINK REL="Next"  HREF="000855.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] $%#@*! serial ports</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20%24%25%23%40%2A%21%20serial%20ports&In-Reply-To=%3C125537.94870.qm%40web113105.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] $%#@*! serial ports">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Tue Dec 15 14:04:17 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000853.html">[mikeos-developer] $%#@*! serial ports
+</A></li>
+        <LI>Next message: <A HREF="000855.html">[mikeos-developer] $%#@*! serial ports
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#854">[ date ]</a>
+              <a href="thread.html#854">[ thread ]</a>
+              <a href="subject.html#854">[ subject ]</a>
+              <a href="author.html#854">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Mike,
+
+I will post the source code as soon as I've found and squashed all the bugs.
+
+As regards changing the default baud to 1200, would it not be better to leave it at 9600
+and rather add another call, as one never knows what applications people have written
+for MikeOS ver 4 and earlier which might rely on this baud rate and then suddenly stops
+working in ver 4.1 and up.
+
+If you can't add the extra call due to time or space constraints, then perhaps leave it as is
+and let the developer re-initialize the port with a different baud rate if so required.
+
+The program I'm writing defaults to 9600 baud, but gives the user an option to foldback
+to 1200 if there are too many bad packets.
+
+Another related project which I want to start after I'm done with this one, is implementing
+a RS485 network using the serial port.
+
+RS485 is commonly used in Industrial enviroments and is easy and cheap to implement using CAT-5 cable.
+It allows up to 32 MikeOS machines to be connected together and communicate to a central server
+such as a Linux or Windows machine which can be up to 1KM away.(in theory anyway)
+
+It will work in a similar fashion to the MINICOM program but will have different commands so that each 
+MikeOS machine would receive a command destined for it and act on that command.
+
+The idea being that  old Pentium machines running MikeOS could then be used as a sort of home automation
+controller by connecting relays etc to the parallel port, things like coffee machines, motorised curtains, lights, etc
+could be controlled.
+Each of these machines can easily control 32 appliances so theoretically there could be  32 X 32 controls.
+
+All the commands would originate from the main Linux or Windows machine which would be running a Webserver
+such as Apache then with a perl script, data would be sent to the serial port to control  the MikeOS machines.
+Any returned data would be formatted into html by the same perl script and presto home automation control via a web browser
+and MikeOS.
+
+If the main machine is connected to the web via ADSL, one could even open up a port on the router which would allow the whole network
+to be controlled from anywhere.
+
+The best part is there is no horrible TCP/IP stacks and nonsense to contend with.
+
+Regards,
+Paulo.
+
+
+
+
+----- Original Message ----
+From: M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+To: MikeOS (and similar OS) developers &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+Sent: Tue, December 15, 2009 11:58:52 AM
+Subject: Re: [mikeos-developer] $%#@*! serial ports
+
+Hi Paulo,
+
+This is interesting stuff -- thanks for the info. How about this: for
+4.1 we just change os_serial_enable to 1200 baud by default? The only
+program that uses it right now is the MINICOM-like tool, and that
+doesn't need to be screamingly fast.
+
+So in the name of simplicity we could just have 1200 by default. If,
+in the future, someone else comes along who needs faster serial
+access, we can add another call or make os_serial_enable take an
+argument.
+
+I'm really intrigued by the stuff you're doing here: it'd be great to
+have a 'RECEIVE' (or similar) command in the CLI which pulls a binary
+over the serial port and executes it.
+
+Cheers,
+Mike
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+_______________________________________________
+mikeos-developer mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+
+
+
+      
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000853.html">[mikeos-developer] $%#@*! serial ports
+</A></li>
+	<LI>Next message: <A HREF="000855.html">[mikeos-developer] $%#@*! serial ports
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#854">[ date ]</a>
+              <a href="thread.html#854">[ thread ]</a>
+              <a href="subject.html#854">[ subject ]</a>
+              <a href="author.html#854">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

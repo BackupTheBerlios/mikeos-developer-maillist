@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Future of MikeOS?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Future%20of%20MikeOS%3F&In-Reply-To=%3CCAM2gqEtbXtNAj2UMDKofTtS4QF5SOpz-M7uN1%3D_691CUt%2B4M6g%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002669.html">
+   <LINK REL="Next"  HREF="002671.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Future of MikeOS?</H1>
+    <B>Justin Tokarchuk</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Future%20of%20MikeOS%3F&In-Reply-To=%3CCAM2gqEtbXtNAj2UMDKofTtS4QF5SOpz-M7uN1%3D_691CUt%2B4M6g%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Future of MikeOS?">jtokarchukalerts at gmail.com
+       </A><BR>
+    <I>Mon Oct 17 14:24:22 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002669.html">[mikeos-developer] Future of MikeOS?
+</A></li>
+        <LI>Next message: <A HREF="002671.html">[mikeos-developer] Future of MikeOS?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2670">[ date ]</a>
+              <a href="thread.html#2670">[ thread ]</a>
+              <a href="subject.html#2670">[ subject ]</a>
+              <a href="author.html#2670">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In PM32, it isn't exactly terrible. I had been messing around with it
+lately.
+
+Pluses:
+    You can map the memory to one &quot;segment&quot; of 4GB. Lots to play with.
+    Displaying video is just writing to video memory (0xB8000)
+
+While this would not exactly be a &quot;dive right in newbie project&quot;, we could
+create the framework (BASIC interpreted app development) for someone to get
+their feet wet in. I currently have a rudimentary kernel developed in C
+(that boots from GRUB) that does the following things:
+
+  - Sets up protected mode
+  - Enables A20
+  - Loads a GDT, IDT, and sets up thek ayboard as an interrupt service
+routine on IRQ1
+  - Maps out 4GB of RAM as one large sgement
+  - Remaps PIC to function as a system timer
+  - has basic &quot;putch, and puts&quot; functions, as well as accepts keyboard input
+(have to make the keyboard driver more robust)
+
+&gt;<i>From a design level, things completely change. One has to develop a keyboard
+</I>drive that pushes keyboard packets to some sort of buffer, which dispatches
+them to the appropriate process (or single tasked space) from there.
+
+However; things do not seem so bad. The amount of RAM to play with is
+somewhat exciting as well. If anyone has interests, I could share what I
+have. We could also keep to asm as well (will just amount in more code
+overall)
+
+On Mon, Oct 17, 2011 at 4:19 AM, M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt; wrote:
+
+&gt;<i> On Mon, Oct 17, 2011 at 10:14 AM, Paulo V &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">paulomobilemail at gmail.com</A>&gt;
+</I>&gt;<i> wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; UEFI also allows the OS to rely on EFI for
+</I>&gt;<i> &gt; basic graphics and network functions until
+</I>&gt;<i> &gt; OS specific drivers are loaded.
+</I>&gt;<i>
+</I>&gt;<i> It says this CAN happen. There's no guarantee that's the case, and
+</I>&gt;<i> everything I've read about it is horribly vague. With the BIOS, we
+</I>&gt;<i> know we always have interrupts for reading the keyboard and sectors
+</I>&gt;<i> from a drive. With UEFI, it seems we'd have to check if certain
+</I>&gt;<i> features are provided, which they might not be on some machines, and
+</I>&gt;<i> it gets very messy very quickly.
+</I>&gt;<i>
+</I>&gt;<i> &gt; So perhaps the question should be, when
+</I>&gt;<i> &gt; will we see/start a MikeOS UEFI port?
+</I>&gt;<i>
+</I>&gt;<i> when_someone_writes_the_code.jpg
+</I>&gt;<i>
+</I>&gt;<i> M
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111017/d8b413a2/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111017/d8b413a2/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002669.html">[mikeos-developer] Future of MikeOS?
+</A></li>
+	<LI>Next message: <A HREF="002671.html">[mikeos-developer] Future of MikeOS?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2670">[ date ]</a>
+              <a href="thread.html#2670">[ thread ]</a>
+              <a href="subject.html#2670">[ subject ]</a>
+              <a href="author.html#2670">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

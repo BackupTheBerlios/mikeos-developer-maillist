@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Comparing two strings
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Comparing%20two%20strings&In-Reply-To=%3C183512.52960.qm%40web113103.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001563.html">
+   <LINK REL="Next"  HREF="001566.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Comparing two strings</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Comparing%20two%20strings&In-Reply-To=%3C183512.52960.qm%40web113103.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] Comparing two strings">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Mon Nov 29 19:17:15 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001563.html">[mikeos-developer] Comparing two strings
+</A></li>
+        <LI>Next message: <A HREF="001566.html">[mikeos-developer] Comparing two strings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1564">[ date ]</a>
+              <a href="thread.html#1564">[ thread ]</a>
+              <a href="subject.html#1564">[ subject ]</a>
+              <a href="author.html#1564">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Mike,
+
+It should work as AX is pushed
+before the (*) is moved into AL so the (*) will only be displayed and not stored
+as the stosb is after the popa so the original data in AX will be stored in the 
+buffer.
+
+Raghav gave it a try and he says it worked for him.
+
+Regards,
+Paulo.
+
+
+
+
+
+----- Original Message ----
+From: M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+To: MikeOS (and similar OS) developers &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+Sent: Mon, November 29, 2010 6:48:11 PM
+Subject: Re: [mikeos-developer] Comparing two strings
+
+On Fri, Nov 26, 2010 at 4:00 PM, Paulo Valongo
+&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">paulovalongo at rocketmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> ; ========== change to ==============
+</I>&gt;<i>
+</I>&gt;<i> .nobackspace:
+</I>&gt;<i>     pusha
+</I>&gt;<i>     mov al, '*'
+</I>&gt;<i>     mov ah, 0Eh            ; Output entered, printable character
+</I>&gt;<i>     int 10h
+</I>&gt;<i>     popa
+</I>&gt;<i>
+</I>&gt;<i>     stosb                ; Store character in designated buffer
+</I>
+I don't think that will work; the stosb will always store the asterisk
+(*) character from AL in the buffer. You'd need to push AL, use an
+asterisk and pop AL back to use the original keyboard char.
+
+M
+_______________________________________________
+mikeos-developer mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+
+
+
+      
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001563.html">[mikeos-developer] Comparing two strings
+</A></li>
+	<LI>Next message: <A HREF="001566.html">[mikeos-developer] Comparing two strings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1564">[ date ]</a>
+              <a href="thread.html#1564">[ thread ]</a>
+              <a href="subject.html#1564">[ subject ]</a>
+              <a href="author.html#1564">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer]  New password entry routines
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20%20New%20password%20entry%20routines&In-Reply-To=%3CAANLkTinJg_hT64Z9R3MFaDv%2BnUhvKFJsx090yy0xkpbp%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001755.html">
+   <LINK REL="Next"  HREF="001757.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer]  New password entry routines</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20%20New%20password%20entry%20routines&In-Reply-To=%3CAANLkTinJg_hT64Z9R3MFaDv%2BnUhvKFJsx090yy0xkpbp%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer]  New password entry routines">okachi at gmail.com
+       </A><BR>
+    <I>Wed Jan 12 11:58:04 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001755.html">[mikeos-developer] GUI
+</A></li>
+        <LI>Next message: <A HREF="001757.html">[mikeos-developer] New password entry routines
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1756">[ date ]</a>
+              <a href="thread.html#1756">[ thread ]</a>
+              <a href="subject.html#1756">[ subject ]</a>
+              <a href="author.html#1756">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Changed the subject line now, as it's a different topic!
+
+&gt;<i> test1324&#160;&#160;&#160;&#160;&#160;&#160;&#160; db 'abc', 0
+</I>
+Well, you could always run os_input_string with this location for the
+user to change the password, but if they gave a password over three
+chars it'd be buffer overflow time! You could have something like
+
+  sys_password times 255 db 0
+
+in the SYSTEM VARIABLES part of kernel.asm. And then implement
+os_change_password or something like that. But do you mean writing it
+to disk permanently with each change? You could make some kind of
+AUTH.TXT file and read and write from it using the MikeOS disk API
+calls, but it wouldn't be very secure.
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001755.html">[mikeos-developer] GUI
+</A></li>
+	<LI>Next message: <A HREF="001757.html">[mikeos-developer] New password entry routines
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1756">[ date ]</a>
+              <a href="thread.html#1756">[ thread ]</a>
+              <a href="subject.html#1756">[ subject ]</a>
+              <a href="author.html#1756">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

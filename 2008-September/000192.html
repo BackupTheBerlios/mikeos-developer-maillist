@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Text Editor 0.1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Text%20Editor%200.1&In-Reply-To=%3Ce688f1220809281243l37ff9133taf53165a845b3a26%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000185.html">
+   <LINK REL="Next"  HREF="000193.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Text Editor 0.1</H1>
+    <B>Troy Martin</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Text%20Editor%200.1&In-Reply-To=%3Ce688f1220809281243l37ff9133taf53165a845b3a26%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Text Editor 0.1">blasterman95 at gmail.com
+       </A><BR>
+    <I>Sun Sep 28 21:43:05 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000185.html">[mikeos-developer] Text Editor 0.1
+</A></li>
+        <LI>Next message: <A HREF="000193.html">[mikeos-developer] Text Editor 0.1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#192">[ date ]</a>
+              <a href="thread.html#192">[ thread ]</a>
+              <a href="subject.html#192">[ subject ]</a>
+              <a href="author.html#192">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Next version will have some more stuff, like line editing. Don't exactly
+know how, but I'm definately going to use Fx keys.
+
+I'm thinking F5 will pull off an os_input_dialog (how does it work anyways,
+I'm not at my place right now) to get a line to jump to. Do a
+os_string_to_int on it and we're good to go.
+
+Either that or use cursor keys and use a db or dw to store current line
+number. That would be an inc or dec [linenumber] in nasm to move line
+number, I think..
+
+On Sun, Sep 28, 2008 at 11:46 AM, M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt; wrote:
+
+&gt;<i> On 9/28/08, Troy Martin &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">blasterman95 at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I think I meant to have it not accept any characters but F8 or backspace,
+</I>&gt;<i> &gt; so in this next release the check is put after the F8 and backspace
+</I>&gt;<i> checks.
+</I>&gt;<i>
+</I>&gt;<i> Ah right. All looks kosher now. Good work -- this is exactly the way
+</I>&gt;<i> to progress. Trying new things, taking it step-by-step, not setting
+</I>&gt;<i> unattainable goals. If you can get a workable multi-line editing
+</I>&gt;<i> system going, either using the cursor keys or via the aforementioned
+</I>&gt;<i> 'EDIT 15' etc. method, and it's robust, I'll add it to the next
+</I>&gt;<i> release.
+</I>&gt;<i>
+</I>&gt;<i> &gt; Everyone, what're your favourite features of text editors?
+</I>&gt;<i>
+</I>&gt;<i> I do like the F8 approach for saving -- I wrote a text editor for
+</I>&gt;<i> Linux/ncurses ages ago which used Fx keys for operations. Much quicker
+</I>&gt;<i> than pressing Ctrl+Foo or :wq! etc. Of course, this didn't work so
+</I>&gt;<i> well with certain X window managers, but in the case of MikeOS, it
+</I>&gt;<i> doesn't matter :-) So F8 for save, Fx for quit, Fx for other features
+</I>&gt;<i> you may implement (eg replace) is good in my book.
+</I>&gt;<i>
+</I>&gt;<i> In your code, there's some needless duplication that you can trim
+</I>&gt;<i> down. Take this bit:
+</I>&gt;<i>
+</I>&gt;<i>        mov si,filedata         ; Set SI to the buffer address.
+</I>&gt;<i>        add si,cx                       ; Add byte offset to SI.
+</I>&gt;<i>        mov byte [si],0x0D      ; Add character to buffer.
+</I>&gt;<i>
+</I>&gt;<i>        inc cx                          ; Increment counter.
+</I>&gt;<i>
+</I>&gt;<i>        mov si,filedata         ; Set SI to the buffer address.
+</I>&gt;<i>        add si,cx                       ; Add byte offset to SI.
+</I>&gt;<i>        mov byte [si],0x0A      ; Add character to buffer.
+</I>&gt;<i>
+</I>&gt;<i> You're essentially doing the same thing twice, only with a change to
+</I>&gt;<i> CX. Here's a quicker way:
+</I>&gt;<i>
+</I>&gt;<i>        mov si,filedata         ; Set SI to the buffer address.
+</I>&gt;<i>        add si,cx                       ; Add byte offset to SI.
+</I>&gt;<i>        mov byte [si],0x0D      ; Add character to buffer.
+</I>&gt;<i>        mov byte [si+1], 0x0A
+</I>&gt;<i>
+</I>&gt;<i> And regarding this bit:
+</I>&gt;<i>
+</I>&gt;<i>        mov si,CRLF                             ; Prepare a newline.
+</I>&gt;<i>        call os_print_string    ; Print it out.
+</I>&gt;<i>
+</I>&gt;<i> You could just use 'call os_print_newline' and save a few bytes.
+</I>&gt;<i>
+</I>&gt;<i> Keep at it!
+</I>&gt;<i>
+</I>&gt;<i> M
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Mike Saunders
+</I>&gt;<i> <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080928/0bbd5ca6/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080928/0bbd5ca6/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000185.html">[mikeos-developer] Text Editor 0.1
+</A></li>
+	<LI>Next message: <A HREF="000193.html">[mikeos-developer] Text Editor 0.1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#192">[ date ]</a>
+              <a href="thread.html#192">[ thread ]</a>
+              <a href="subject.html#192">[ subject ]</a>
+              <a href="author.html#192">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

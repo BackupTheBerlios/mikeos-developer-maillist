@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Extending mikeos to 32 bits
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Extending%20mikeos%20to%2032%20bits&In-Reply-To=%3C407194390.20120224101256%40gmx.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002899.html">
+   <LINK REL="Next"  HREF="002901.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Extending mikeos to 32 bits</H1>
+    <B>Dilip</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Extending%20mikeos%20to%2032%20bits&In-Reply-To=%3C407194390.20120224101256%40gmx.net%3E"
+       TITLE="[mikeos-developer] Extending mikeos to 32 bits">dilip2k at gmx.net
+       </A><BR>
+    <I>Fri Feb 24 05:42:56 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002899.html">[mikeos-developer] Extending mikeos to 32 bits
+</A></li>
+        <LI>Next message: <A HREF="002901.html">[mikeos-developer] Extending mikeos to 32 bits
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2900">[ date ]</a>
+              <a href="thread.html#2900">[ thread ]</a>
+              <a href="subject.html#2900">[ subject ]</a>
+              <a href="author.html#2900">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Blake,
+
+Interrupts are very simple(in real mode). At the first 256 memory
+locations,there are 2 byte segment-offset vectors which point to the
+interrupt handlers.Just address the vector you want by using the
+formula (interruptno * 2).Interrupt handlers are just like
+procedures,but instead of a ret,use an iret.Also,you got to save the
+registers(not necessary,but a good convention).Note that this only
+works in real mode.
+
+Friday, February 24, 2012, 9:56:22 AM, you wrote:
+
+BB&gt; I've always wondered this myself. Probably for &quot;simplicity&quot;. It would've
+BB&gt; been a good way to learn how interrupts work had it been implemented that
+BB&gt; way.
+
+BB&gt; -----Original Message----- 
+BB&gt; From: Dilip
+BB&gt; Sent: Thursday, February 23, 2012 11:13 PM
+BB&gt; To: <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+BB&gt; Subject: Re: [mikeos-developer] Extending mikeos to 32 bits
+
+BB&gt; And anyway,why does mikeos not use the interrupt-based syscall
+BB&gt; method?
+
+
+
+
+-- 
+Best regards,
+ Dilip                            mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">dilip2k at gmx.net</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002899.html">[mikeos-developer] Extending mikeos to 32 bits
+</A></li>
+	<LI>Next message: <A HREF="002901.html">[mikeos-developer] Extending mikeos to 32 bits
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2900">[ date ]</a>
+              <a href="thread.html#2900">[ thread ]</a>
+              <a href="subject.html#2900">[ subject ]</a>
+              <a href="author.html#2900">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

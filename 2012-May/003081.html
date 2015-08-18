@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] basic.asm (loop_in) - fixme
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20basic.asm%20%28loop_in%29%20-%20fixme&In-Reply-To=%3CCAEz6_zj%3D98TW4vJRDiPMeVShrTHE5ORJgu-a2kBT_cdkwQDVmg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003080.html">
+   <LINK REL="Next"  HREF="003082.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] basic.asm (loop_in) - fixme</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20basic.asm%20%28loop_in%29%20-%20fixme&In-Reply-To=%3CCAEz6_zj%3D98TW4vJRDiPMeVShrTHE5ORJgu-a2kBT_cdkwQDVmg%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] basic.asm (loop_in) - fixme">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Thu May 24 13:17:47 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003080.html">[mikeos-developer] basic.asm (loop_in) - fixme
+</A></li>
+        <LI>Next message: <A HREF="003082.html">[mikeos-developer] basic.asm (loop_in) - fixme
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3081">[ date ]</a>
+              <a href="thread.html#3081">[ thread ]</a>
+              <a href="subject.html#3081">[ subject ]</a>
+              <a href="author.html#3081">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>I'm upgrading MikeOS32 to 4.3.1 and found some more issues with the
+</I>&gt;<i>&quot;loop_in&quot; variable
+</I>&gt;<i>that I hadn't noticed last time. &quot;loop_in&quot; should be an index yet it is
+</I>&gt;<i>treated
+</I>&gt;<i>as an offset. Also in &quot;do_do&quot; the lodsw and the preceeding instruction are
+</I>&gt;<i>redundant
+</I>&gt;<i>because the following instruction changes AX.
+</I>
+What's with this index problem? It's suppose to be a an offset.
+I don't know what your trying to do, please explain.
+
+However you were right that these two lines are not needed:
+mov si, di
+lodsw
+
+Also in the 'inc' and 'dec' instruction &quot;loop_in&quot; was treated as a word
+that was corrected and I attached the new version.
+I did this update onto of the new commands I added.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: basic.asm
+Type: application/octet-stream
+Size: 63628 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120524/d23b50e1/attachment-0001.obj">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120524/d23b50e1/attachment-0001.obj</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003080.html">[mikeos-developer] basic.asm (loop_in) - fixme
+</A></li>
+	<LI>Next message: <A HREF="003082.html">[mikeos-developer] basic.asm (loop_in) - fixme
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3081">[ date ]</a>
+              <a href="thread.html#3081">[ thread ]</a>
+              <a href="subject.html#3081">[ subject ]</a>
+              <a href="author.html#3081">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

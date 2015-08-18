@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] build-linux.sh
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20build-linux.sh&In-Reply-To=%3C20081213103521.252167f2%40myhost%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000568.html">
+   <LINK REL="Next"  HREF="000570.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] build-linux.sh</H1>
+    <B>Tomasz Gorol</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20build-linux.sh&In-Reply-To=%3C20081213103521.252167f2%40myhost%3E"
+       TITLE="[mikeos-developer] build-linux.sh">gavian at tlen.pl
+       </A><BR>
+    <I>Sat Dec 13 11:35:21 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000568.html">[mikeos-developer]  Development: MikeOS 2.9.5 released
+</A></li>
+        <LI>Next message: <A HREF="000570.html">[mikeos-developer] build-linux.sh
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#569">[ date ]</a>
+              <a href="thread.html#569">[ thread ]</a>
+              <a href="subject.html#569">[ subject ]</a>
+              <a href="author.html#569">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi.
+
+finally I have started writing code for TomOS and I have found small
+issue with the build-linux.sh file.
+
+When you remove everything from disk_images directory MikeOS won't
+compile complaining 'No space left on device'. It is caused by usiing
+dd for creating 'mikeos.flp'.
+
+Can be fixed by using for example mkdosfs to create a floppy image:
+
+mkdosfs -C  disk_images/mikeos.flp 1440  || exit
+
+then afterwards use dd to add bootload.bin as usuall:
+
+dd status=noxfer conv=notrunc if=source/bootload/bootload.bin
+of=disk_images/mikeos.flp || exit
+
+It isn't a big deal and MikeOS can live with that :)
+
+Cheers
+
+Tomasz Gorol
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000568.html">[mikeos-developer]  Development: MikeOS 2.9.5 released
+</A></li>
+	<LI>Next message: <A HREF="000570.html">[mikeos-developer] build-linux.sh
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#569">[ date ]</a>
+              <a href="thread.html#569">[ thread ]</a>
+              <a href="subject.html#569">[ subject ]</a>
+              <a href="author.html#569">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Folder ?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Folder%20%3F&In-Reply-To=%3C3D2930379C5F0C4FB747C84F1F43F9C93ABF0AB0F0%40SBS2K8.bakercomputers.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002200.html">
+   <LINK REL="Next"  HREF="002202.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Folder ?</H1>
+    <B>Justin Tokarchuk</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Folder%20%3F&In-Reply-To=%3C3D2930379C5F0C4FB747C84F1F43F9C93ABF0AB0F0%40SBS2K8.bakercomputers.local%3E"
+       TITLE="[mikeos-developer] Folder ?">Justin at bakercomputers.com
+       </A><BR>
+    <I>Wed Sep 21 17:06:57 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002200.html">[mikeos-developer] Folder ?
+</A></li>
+        <LI>Next message: <A HREF="002202.html">[mikeos-developer] Folder ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2201">[ date ]</a>
+              <a href="thread.html#2201">[ thread ]</a>
+              <a href="subject.html#2201">[ subject ]</a>
+              <a href="author.html#2201">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Quite interesting there. So is this just basically used to poll the monitor for info? Or are there other uses?
+
+From: <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer-bounces at lists.berlios.de</A> [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer-bounces at lists.berlios.de</A>] On Behalf Of Paulo V
+Sent: Wednesday, September 21, 2011 10:05 AM
+To: MikeOS (and similar OS) developers
+Subject: Re: [mikeos-developer] Folder ?
+
+You got it Dan, it's VGA.
+All computers since about 1999 support what is known as DDE/EDID.
+Basically it's I2C on dedicated pins on the vga (see attached pic).
+
+It is normally used for the O.S. (Linux and Windows) to communicate
+with the screen to get features, model number, capabilities, etc etc
+Since MikeOS does not make use of it and it's I2C, we have it at our disposal.
+
+To see more about it:
+
+In Linux run get-edid (normally in /usr/sbin/get-edid)
+In Windows I guess you would use Control panel then system then Hardware
+In MikeOS you would use BIOS (which is what get-edid does):
+
+INT 10 - VESA VBE/DC (Display Data Channel) - INSTALLATION CHECK / CAPABILITIES
+
+ AX = 4F15h
+ BL = 00h
+Return: AL = 4Fh if function supported
+AH = status
+00h successful
+ 01h failed
+
+INT 10 - VESA VBE/DC (Display Data Channel) - READ EDID
+
+ AX = 4F15h
+ BL = 01h
+ CX = 0000h
+ DX = 0000h
+ ES:DI -&gt; 128-byte buffer for EDID record
+Return: AL = 4Fh if function supported
+ AH = status
+ 00h successful
+ ES:DI buffer filled
+ 01h failed (e.g. non-DDC monitor)
+
+A little later I will post a simple pgm and hardware to &quot;use&quot; this port.
+
+Paulo.
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110921/065c5a90/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110921/065c5a90/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002200.html">[mikeos-developer] Folder ?
+</A></li>
+	<LI>Next message: <A HREF="002202.html">[mikeos-developer] Folder ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2201">[ date ]</a>
+              <a href="thread.html#2201">[ thread ]</a>
+              <a href="subject.html#2201">[ subject ]</a>
+              <a href="author.html#2201">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

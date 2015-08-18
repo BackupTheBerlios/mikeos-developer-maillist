@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Extra for MikeOS BASIC
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Extra%20for%20MikeOS%20BASIC&In-Reply-To=%3C19d8b3b01002021121r7ccd013fl746db9145957ecb6%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001044.html">
+   <LINK REL="Next"  HREF="001052.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Extra for MikeOS BASIC</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Extra%20for%20MikeOS%20BASIC&In-Reply-To=%3C19d8b3b01002021121r7ccd013fl746db9145957ecb6%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Extra for MikeOS BASIC">okachi at gmail.com
+       </A><BR>
+    <I>Tue Feb  2 20:21:47 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001044.html">[mikeos-developer] Extra for MikeOS BASIC
+</A></li>
+        <LI>Next message: <A HREF="001052.html">[mikeos-developer] Extra for MikeOS BASIC
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1045">[ date ]</a>
+              <a href="thread.html#1045">[ thread ]</a>
+              <a href="subject.html#1045">[ subject ]</a>
+              <a href="author.html#1045">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> - What OS calls does BASIC /actually need/ and which can be recoded in
+</I>&gt;<i> &#160;basic?
+</I>
+Have a look at source/features/basic.asm and the code beneath each
+BASIC instruction. There are certainly some system calls in MikeOS
+that wouldn't need to be retained. I'm not sure what you mean by
+&quot;recoded in BASIC&quot; though -- right now we have an interpreter written
+in assembly language. We can't just arbitrarily mix BASIC instructions
+in with that.
+
+&gt;<i> - I firmly suggest a move to fasm for a number of reasons (smaller
+</I>&gt;<i> &#160;binaries, better macros, larger OSDev community ...)
+</I>
+How would FASM make binaries smaller? I can't see how that's possible.
+Also, for a simple OS I'm not bothered about heavy use of macros, and
+the OSDev point is moot I reckon -- I don't think we're missing any
+developers because of the choice assembler.
+
+&gt;<i> - Can we design an interface between BASIC and BIOS so that we can have
+</I>&gt;<i> &#160;nearly everything be interpreted in BASIC, incl. char print etc
+</I>
+So you have a BASIC program loaded into RAM, and then a BASIC
+interpreter that goes through the BASIC program? That sounds like
+massive overkill. Besides, as it is such a system would fall back to
+machine code and BIOS interrupts most of the time.
+
+I don't think we need BASIC interpreting another BASIC, or a
+self-modifying BASIC, or anything like that. Right now we have a very
+small and modular OS with a BASIC interpreter that I wrote in bits of
+spare time. From here it's not hard to fork the project, rip out
+unneeded bits and make BASIC the centre of everything.
+
+Then we can go about adding new instructions and features to BASIC --
+there's lots more I'd like to add but I don't have the time! If we had
+a few of us working on it, we could really extend it.
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001044.html">[mikeos-developer] Extra for MikeOS BASIC
+</A></li>
+	<LI>Next message: <A HREF="001052.html">[mikeos-developer] Extra for MikeOS BASIC
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1045">[ date ]</a>
+              <a href="thread.html#1045">[ thread ]</a>
+              <a href="subject.html#1045">[ subject ]</a>
+              <a href="author.html#1045">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

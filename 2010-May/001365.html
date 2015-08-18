@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] OS_PAUSE
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20OS_PAUSE&In-Reply-To=%3CAANLkTikysmDLMCQ1NSSb1IFuJRN9e4Y5MIT_39tX00jX%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001391.html">
+   <LINK REL="Next"  HREF="001374.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] OS_PAUSE</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20OS_PAUSE&In-Reply-To=%3CAANLkTikysmDLMCQ1NSSb1IFuJRN9e4Y5MIT_39tX00jX%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] OS_PAUSE">okachi at gmail.com
+       </A><BR>
+    <I>Tue May 25 23:01:48 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001391.html">[mikeos-developer] OS_PAUSE
+</A></li>
+        <LI>Next message: <A HREF="001374.html">[mikeos-developer] OS_PAUSE
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1365">[ date ]</a>
+              <a href="thread.html#1365">[ thread ]</a>
+              <a href="subject.html#1365">[ subject ]</a>
+              <a href="author.html#1365">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Mike,
+
+Good point, thanks -- I never thought of checking the return values
+from the BIOS. Silly me.
+
+&gt;<i> .loop:
+</I>&gt;<i> int 15h
+</I>&gt;<i>
+</I>&gt;<i> ;&gt;&gt;&gt; at this point this BIOS function returns ah=0 for success
+</I>
+Is that always the case? The docs I've seen are conflicting. Here it
+says that it returns AH=86H if there's no error:
+<A HREF="http://webpages.charter.net/danrollins/techhelp/0221.HTM">http://webpages.charter.net/danrollins/techhelp/0221.HTM</A>
+
+Whereas this page has different statuses:
+<A HREF="http://hdebruijn.soo.dto.tudelft.nl/newpage/interupt/out-1500.htm">http://hdebruijn.soo.dto.tudelft.nl/newpage/interupt/out-1500.htm</A>
+
+And this one doesn't say that AH=0 on success:
+<A HREF="http://bos.asmhackers.net/docs/timer/docs/RealtimeClockFAQ.txt">http://bos.asmhackers.net/docs/timer/docs/RealtimeClockFAQ.txt</A>
+
+But I can see it totally going wrong when AH=83H, as you say! Do you
+know how widely this routine is implemented in BIOSes, or as per
+Paulo's experience, is it something that is often missing?
+
+Cheers,
+Mike
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001391.html">[mikeos-developer] OS_PAUSE
+</A></li>
+	<LI>Next message: <A HREF="001374.html">[mikeos-developer] OS_PAUSE
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1365">[ date ]</a>
+              <a href="thread.html#1365">[ thread ]</a>
+              <a href="subject.html#1365">[ subject ]</a>
+              <a href="author.html#1365">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

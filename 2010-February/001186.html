@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Possible%20addition%20to%20MikeOS%20and%20MikeOS%20BASIC&In-Reply-To=%3C20100209130951.GA1678%40chippy%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001183.html">
+   <LINK REL="Next"  HREF="001187.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC</H1>
+    <B>Tslil Clingman</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Possible%20addition%20to%20MikeOS%20and%20MikeOS%20BASIC&In-Reply-To=%3C20100209130951.GA1678%40chippy%3E"
+       TITLE="[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC">hiato1 at gmail.com
+       </A><BR>
+    <I>Tue Feb  9 14:09:51 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001183.html">[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+</A></li>
+        <LI>Next message: <A HREF="001187.html">[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1186">[ date ]</a>
+              <a href="thread.html#1186">[ thread ]</a>
+              <a href="subject.html#1186">[ subject ]</a>
+              <a href="author.html#1186">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> &gt; Still leaves SIN, COS and TAN though.
+</I>
+Heh, you say that like it's a problem. Seven terms of the taylor series
+is more than enough for an accurate result of sin/cos/tan within, I'd
+say, -pi &lt;-&gt; +pi. The best bit, for those that don't already know, is
+that it uses trivial algebra: factorial (multiplication) exponentation
+(multiplication), division and + and -. In terms of floating point nums,
+with some slight mods to the formula we could calculate the result, say,
+times (2^12-1) and then just interpret it as a floating point number in
+manipulation (ie: for printing we just throw out a . after the the first
+4 bits) - or something to that effect.
+
+In fact, I am aware of some *very* handy routines for such complex
+maths, such as the famous FastInvSqrt with it's magic number that
+requires almost zero calculation effort for good approximations and how
+to sum up the number of ones in a number using only bitwise operations
+and modular addition [which can be done bitwise anyway]. The obscure
+world of digital hardware algorithms awaits :P
+
+Oh, right, when I get a moment later this week, I'll throw together a
+simple maths lib (or just port one) with [some of] the abovementioned
+goodies. Who knows, we may even get a working raycaster in BASIC soon ;)
+
+Tslil
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001183.html">[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+</A></li>
+	<LI>Next message: <A HREF="001187.html">[mikeos-developer] Possible addition to MikeOS and MikeOS BASIC
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1186">[ date ]</a>
+              <a href="thread.html#1186">[ thread ]</a>
+              <a href="subject.html#1186">[ subject ]</a>
+              <a href="author.html#1186">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

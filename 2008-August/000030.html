@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MITOSP implementation design sheet
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MITOSP%20implementation%20design%20sheet&In-Reply-To=%3C77C4246F48F6473B9EE16BA395A26D18%40VistaLaptop%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000029.html">
+   <LINK REL="Next"  HREF="000040.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MITOSP implementation design sheet</H1>
+    <B>Troy Martin (Gmail)</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MITOSP%20implementation%20design%20sheet&In-Reply-To=%3C77C4246F48F6473B9EE16BA395A26D18%40VistaLaptop%3E"
+       TITLE="[mikeos-developer] MITOSP implementation design sheet">blasterman95 at gmail.com
+       </A><BR>
+    <I>Wed Aug 27 20:23:20 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000029.html">[mikeos-developer] Gmail is better..
+</A></li>
+        <LI>Next message: <A HREF="000040.html">[mikeos-developer] MITOSP implementation design sheet
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#30">[ date ]</a>
+              <a href="thread.html#30">[ thread ]</a>
+              <a href="subject.html#30">[ subject ]</a>
+              <a href="author.html#30">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Time for another design sheet!
+
+MITOSP: MIKEOS INFORMATION TRANSFER OVER SERIAL PORTS         implementation 1
+ 
+We're going to need some type of COM polling interrupt or subsystem, like Mike
+said.  If we use Ian's second os_check_serial in combination with a cmp to see
+if we have a message or file or  something else to recieve using a single byte
+(I'm going to define here that 00 means nothing to recieve, 80 means recieve a
+file,  FF means incoming text message,  others can be used in future versions)
+we'd have quite a info transfer system.
+
+A router program would be outlined like so:
+
+loop:
+
+;check for incoming byte on serial port
+;compare to FF
+;if byte is FF goto fflabel
+;compare to 80
+;if byte is 80 goto 80label
+;compare to 00
+;if byte is 00 goto loop
+
+fflabel:
+;get a byte as the target number
+;get another byte as the sender number
+;get bytes until null terminator (that's
+;  ask other connected computers for their number until
+;  recieved byte == byte recieved at beginning of section
+;forward message and name to the target
+;goto loop
+
+80label:
+;get a byte as the target number
+;get another byte as the sender number
+;we'll work on this part when we have file writing :)
+;goto loop
+ 
+ 
+Any suggestions or code is appreciated!
+
+Troy Martin
+www.blasterman.co.nr
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080827/2a2e2278/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080827/2a2e2278/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000029.html">[mikeos-developer] Gmail is better..
+</A></li>
+	<LI>Next message: <A HREF="000040.html">[mikeos-developer] MITOSP implementation design sheet
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#30">[ date ]</a>
+              <a href="thread.html#30">[ thread ]</a>
+              <a href="subject.html#30">[ subject ]</a>
+              <a href="author.html#30">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Development: MikeOS 1.9.3 released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Development%3A%20MikeOS%201.9.3%20released&In-Reply-To=%3C8d87c8a30810031400h77b45657s50caa2a58383fe24%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000266.html">
+   <LINK REL="Next"  HREF="000268.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Development: MikeOS 1.9.3 released</H1>
+    <B>Bob Moss</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Development%3A%20MikeOS%201.9.3%20released&In-Reply-To=%3C8d87c8a30810031400h77b45657s50caa2a58383fe24%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Development: MikeOS 1.9.3 released">bobbyjmoss at googlemail.com
+       </A><BR>
+    <I>Fri Oct  3 23:00:51 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000266.html">[mikeos-developer] Development: MikeOS 1.9.3 released
+</A></li>
+        <LI>Next message: <A HREF="000268.html">[mikeos-developer] Development: MikeOS 1.9.3 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#267">[ date ]</a>
+              <a href="thread.html#267">[ thread ]</a>
+              <a href="subject.html#267">[ subject ]</a>
+              <a href="author.html#267">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>It'd be a chore using 16-bit registers, yep, so 32-bit would make it
+</I>&gt;<i>much simpler. But in fact, FAT32 is easier to work with in many
+</I>&gt;<i>respects because the FAT entries fall neatly on byte boundaries
+</I>&gt;<i>(rather than FAT12, in which you have to keep shifting or masking bits
+</I>&gt;<i>depending on if it's an odd or even cluster).
+</I>
+Yeah, I had noticed that! I just thought I was being wierd because I thought
+the arrangement of FAT32 looked conceptually easier to understand that FAT12
+(I get this a lot, but not usually with an adequate explanation, which may
+explain my ambitious choices of universities...)
+
+&gt;<i>You have to handle varying sectors per cluster (whereas it's always
+</I>&gt;<i>one in FAT12) but that's no biggie. But otherwise it's largely the
+</I>&gt;<i>same and easier to deal with thanks to the FAT entries being
+</I>&gt;<i>double-words!
+</I>
+I'm still using some public domain code to get me started on a FAT driver
+though as I haven't a clue where to start (despite knowing the theory behind
+it)! It will still be mostly unique however as I'll need to tweak it heavily
+to work with the rest of the kernel and also to work with an API which
+MikeOS developers may find vaguely familiar (in terms of function names,
+anyway!).
+
+However, I will still be looking at the MikeOS floppy driver with interest!
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20081003/d5401341/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20081003/d5401341/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000266.html">[mikeos-developer] Development: MikeOS 1.9.3 released
+</A></li>
+	<LI>Next message: <A HREF="000268.html">[mikeos-developer] Development: MikeOS 1.9.3 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#267">[ date ]</a>
+              <a href="thread.html#267">[ thread ]</a>
+              <a href="subject.html#267">[ subject ]</a>
+              <a href="author.html#267">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,400 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Hi. Assembler for mikeOs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Hi.%20Assembler%20for%20mikeOs&In-Reply-To=%3CCACKyyih9Zhud7uzNGArdTBbCAx16UHTPpXHrvheEVqmX1QMugA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002852.html">
+   <LINK REL="Next"  HREF="002858.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Hi. Assembler for mikeOs</H1>
+    <B>Leo Ono</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Hi.%20Assembler%20for%20mikeOs&In-Reply-To=%3CCACKyyih9Zhud7uzNGArdTBbCAx16UHTPpXHrvheEVqmX1QMugA%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Hi. Assembler for mikeOs">ono.leo at gmail.com
+       </A><BR>
+    <I>Tue Feb  7 13:25:25 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002852.html">[mikeos-developer] Hi. Assembler for mikeOs
+</A></li>
+        <LI>Next message: <A HREF="002858.html">[mikeos-developer] Hi. Assembler for mikeOs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2853">[ date ]</a>
+              <a href="thread.html#2853">[ thread ]</a>
+              <a href="subject.html#2853">[ subject ]</a>
+              <a href="author.html#2853">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Mike,
+
+Thanks for reply !
+
+Sorry, i coudn't implement single quotes yet.
+
+About the assembler, it's based on nasm, specifically on this document:
+<A HREF="http://www.posix.nl/linuxassembly/nasmdochtml/nasmdoca.html">http://www.posix.nl/linuxassembly/nasmdochtml/nasmdoca.html</A>
+
+I've extracted just 8086 instruction as follows:
+
+AAA                           ; 37                   [8086]
+AAS                           ; 3F                   [8086]
+AAD                           ; D5 0A                [8086]
+AAD imm                       ; D5 ib                [8086]
+AAM                           ; D4 0A                [8086]
+AAM imm                       ; D4 ib                [8086]
+ADC r/m8,reg8                 ; 10 /r                [8086]
+ADC r/m16,reg16               ; o16 11 /r            [8086]
+ADC reg8,r/m8                 ; 12 /r                [8086]
+ADC reg16,r/m16               ; o16 13 /r            [8086]
+ADC r/m8,imm8                 ; 80 /2 ib             [8086]
+ADC r/m16,imm16               ; o16 81 /2 iw         [8086]
+ADC r/m16,imm8                ; o16 83 /2 ib         [8086]
+ADC AL,imm8                   ; 14 ib                [8086]
+ADC AX,imm16                  ; o16 15 iw            [8086]
+ADD r/m8,reg8                 ; 00 /r                [8086]
+ADD r/m16,reg16               ; o16 01 /r            [8086]
+ADD reg8,r/m8                 ; 02 /r                [8086]
+ADD reg16,r/m16               ; o16 03 /r            [8086]
+ADD r/m8,imm8                 ; 80 /0 ib             [8086]
+ADD r/m16,imm16               ; o16 81 /0 iw         [8086]
+ADD r/m16,imm8                ; o16 83 /0 ib         [8086]
+ADD AL,imm8                   ; 04 ib                [8086]
+ADD AX,imm16                  ; o16 05 iw            [8086]
+AND r/m8,reg8                 ; 20 /r                [8086]
+AND r/m16,reg16               ; o16 21 /r            [8086]
+AND reg8,r/m8                 ; 22 /r                [8086]
+AND reg16,r/m16               ; o16 23 /r            [8086]
+AND r/m8,imm8                 ; 80 /4 ib             [8086]
+AND r/m16,imm16               ; o16 81 /4 iw         [8086]
+AND r/m16,imm8                ; o16 83 /4 ib         [8086]
+AND AL,imm8                   ; 24 ib                [8086]
+AND AX,imm16                  ; o16 25 iw            [8086]
+CALL imm                      ; E8 rw/rd             [8086]
+CALL imm:imm16                ; o16 9A iw iw         [8086]
+CALL FAR mem16                ; o16 FF /3            [8086]
+CALL r/m16                    ; o16 FF /2            [8086]
+CBW                           ; o16 98               [8086]
+CWD                           ; o16 99               [8086]
+CLC                           ; F8                   [8086]
+CLD                           ; FC                   [8086]
+CLI                           ; FA                   [8086]
+CMC                           ; F5                   [8086]
+CMP r/m8,reg8                 ; 38 /r                [8086]
+CMP r/m16,reg16               ; o16 39 /r            [8086]
+CMP reg8,r/m8                 ; 3A /r                [8086]
+CMP reg16,r/m16               ; o16 3B /r            [8086]
+CMP r/m8,imm8                 ; 80 /0 ib             [8086]
+CMP r/m16,imm16               ; o16 81 /7 iw         [8086]
+CMP r/m16,imm8                ; o16 83 /7 ib         [8086]
+CMP AL,imm8                   ; 3C ib                [8086]
+CMP AX,imm16                  ; o16 3D iw            [8086]
+CMPSB                         ; A6                   [8086]
+CMPSW                         ; o16 A7               [8086]
+DAA                           ; 27                   [8086]
+DAS                           ; 2F                   [8086]
+DEC reg16                     ; o16 48+r             [8086]
+DEC r/m8                      ; FE /1                [8086]
+DEC r/m16                     ; o16 FF /1            [8086]
+DIV r/m8                      ; F6 /6                [8086]
+DIV r/m16                     ; o16 F7 /6            [8086]
+HLT                           ; F4                   [8086]
+IDIV r/m8                     ; F6 /7                [8086]
+IDIV r/m16                    ; o16 F7 /7            [8086]
+IMUL r/m8                     ; F6 /5                [8086]
+IMUL r/m16                    ; o16 F7 /5            [8086]
+IN AL,imm8                    ; E4 ib                [8086]
+IN AX,imm8                    ; o16 E5 ib            [8086]
+IN AL,DX                      ; EC                   [8086]
+IN AX,DX                      ; o16 ED               [8086]
+INC reg16                     ; o16 40+r             [8086]
+INC r/m8                      ; FE /0                [8086]
+INC r/m16                     ; o16 FF /0            [8086]
+INT imm8                      ; CD ib                [8086]
+INT3                          ; CC                   [8086]
+INTO                          ; CE                   [8086]
+IRET                          ; CF                   [8086]
+IRETW                         ; o16 CF               [8086]
+JCXZ imm                      ; o16 E3 rb            [8086]
+JMP imm8                      ; E9 rw/rd             [8086]
+JMP imm16                     ; E9 rw/rd             [8086]
+JMP SHORT imm8                ; EB rb                [8086]
+JMP imm:imm16                 ; o16 EA iw iw         [8086]
+JMP FAR mem                   ; o16 FF /5            [8086]
+JMP r/m16                     ; o16 FF /4            [8086]
+# Jcc imm                       ; 70+cc rb             [8086]
+JO imm8                       ; 70 rb                [8086]
+JNO imm8                      ; 71 rb                [8086]
+JB imm8                       ; 72 rb                [8086]
+JC imm8                       ; 72 rb                [8086]
+JNAE imm8                     ; 72 rb                [8086]
+JAE imm8                      ; 73 rb                [8086]
+JNB imm8                      ; 73 rb                [8086]
+JNC imm8                      ; 73 rb                [8086]
+JE imm8                       ; 74 rb                [8086]
+JZ imm8                       ; 74 rb                [8086]
+JNE imm8                      ; 75 rb                [8086]
+JNZ imm8                      ; 75 rb                [8086]
+JBE imm8                      ; 76 rb                [8086]
+JNA imm8                      ; 76 rb                [8086]
+JA imm8                       ; 77 rb                [8086]
+JNBE imm8                     ; 77 rb                [8086]
+JS imm8                       ; 78 rb                [8086]
+JNS imm8                      ; 79 rb                [8086]
+JP imm8                       ; 7A rb                [8086]
+JPE imm8                      ; 7A rb                [8086]
+JNP imm8                      ; 7B rb                [8086]
+JPO imm8                      ; 7B rb                [8086]
+JL imm8                       ; 7C rb                [8086]
+JNGE imm8                     ; 7C rb                [8086]
+JGE imm8                      ; 7D rb                [8086]
+JNL imm8                      ; 7D rb                [8086]
+JLE imm8                      ; 7E rb                [8086]
+JNG imm8                      ; 7E rb                [8086]
+JG imm8                       ; 7F rb                [8086]
+JNLE imm8                     ; 7F rb                [8086]
+LAHF                          ; 9F                   [8086]
+LDS reg16,mem                 ; o16 C5 /r            [8086]
+LDS reg32,mem                 ; o32 C5 /r            [8086]
+LES reg16,mem                 ; o16 C4 /r            [8086]
+LES reg32,mem                 ; o32 C4 /r            [8086]
+LEA reg16,mem                 ; o16 8D /r            [8086]
+LEA reg32,mem                 ; o32 8D /r            [8086]
+LODSB                         ; AC                   [8086]
+LODSW                         ; o16 AD               [8086]
+LOOP imm                      ; E2 rb                [8086]
+LOOP imm,CX                   ; a16 E2 rb            [8086]
+LOOPE imm                     ; E1 rb                [8086]
+LOOPE imm,CX                  ; a16 E1 rb            [8086]
+LOOPZ imm                     ; E1 rb                [8086]
+LOOPZ imm,CX                  ; a16 E1 rb            [8086]
+LOOPNE imm                    ; E0 rb                [8086]
+LOOPNE imm,CX                 ; a16 E0 rb            [8086]
+LOOPNZ imm                    ; E0 rb                [8086]
+LOOPNZ imm,CX                 ; a16 E0 rb            [8086]
+MOV r/m8,reg8                 ; 88 /r                [8086]
+MOV r/m16,reg16               ; o16 89 /r            [8086]
+MOV reg8,r/m8                 ; 8A /r                [8086]
+MOV reg16,r/m16               ; o16 8B /r            [8086]
+MOV reg8,imm8                 ; B0+r ib              [8086]
+MOV reg16,imm16               ; o16 B8+r iw          [8086]
+MOV r/m8,imm8                 ; C6 /0 ib             [8086]
+MOV r/m16,imm16               ; o16 C7 /0 iw         [8086]
+MOV AL,memoffs8               ; A0 ow/od             [8086]
+MOV AX,memoffs16              ; o16 A1 ow/od         [8086]
+MOV memoffs8,AL               ; A2 ow/od             [8086]
+MOV memoffs16,AX              ; o16 A3 ow/od         [8086]
+MOV r/m16,segreg              ; o16 8C /r            [8086]
+MOV segreg,r/m16              ; o16 8E /r            [8086]
+MOVSB                         ; A4                   [8086]
+MOVSW                         ; o16 A5               [8086]
+MUL r/m8                      ; F6 /4                [8086]
+MUL r/m16                     ; o16 F7 /4            [8086]
+NEG r/m8                      ; F6 /3                [8086]
+NEG r/m16                     ; o16 F7 /3            [8086]
+NOT r/m8                      ; F6 /2                [8086]
+NOT r/m16                     ; o16 F7 /2            [8086]
+NOP                           ; 90                   [8086]
+OR r/m8,reg8                  ; 08 /r                [8086]
+OR r/m16,reg16                ; o16 09 /r            [8086]
+OR reg8,r/m8                  ; 0A /r                [8086]
+OR reg16,r/m16                ; o16 0B /r            [8086]
+OR r/m8,imm8                  ; 80 /1 ib             [8086]
+OR r/m16,imm16                ; o16 81 /1 iw         [8086]
+OR r/m16,imm8                 ; o16 83 /1 ib         [8086]
+OR AL,imm8                    ; 0C ib                [8086]
+OR AX,imm16                   ; o16 0D iw            [8086]
+OUT imm8,AL                   ; E6 ib                [8086]
+OUT imm8,AX                   ; o16 E7 ib            [8086]
+OUT DX,AL                     ; EE                   [8086]
+OUT DX,AX                     ; o16 EF               [8086]
+POP reg16                     ; o16 58+r             [8086]
+POP r/m16                     ; o16 8F /0            [8086]
+POP DS                        ; 1F                   [8086]
+POP ES                        ; 07                   [8086]
+POP SS                        ; 17                   [8086]
+PUSH reg16                    ; o16 50+r             [8086]
+PUSH r/m16                    ; o16 FF /6            [8086]
+PUSH CS                       ; 0E                   [8086]
+PUSH DS                       ; 1E                   [8086]
+PUSH ES                       ; 06                   [8086]
+PUSH SS                       ; 16                   [8086]
+RCL r/m8,1                    ; D0 /2                [8086]
+RCL r/m8,CL                   ; D2 /2                [8086]
+RCL r/m16,1                   ; o16 D1 /2            [8086]
+RCL r/m16,CL                  ; o16 D3 /2            [8086]
+RCR r/m8,1                    ; D0 /3                [8086]
+RCR r/m8,CL                   ; D2 /3                [8086]
+RCR r/m16,1                   ; o16 D1 /3            [8086]
+RCR r/m16,CL                  ; o16 D3 /3            [8086]
+RET                           ; C3                   [8086]
+RET imm16                     ; C2 iw                [8086]
+RETF                          ; CB                   [8086]
+RETF imm16                    ; CA iw                [8086]
+RETN                          ; C3                   [8086]
+RETN imm16                    ; C2 iw                [8086]
+ROL r/m8,1                    ; D0 /0                [8086]
+ROL r/m8,CL                   ; D2 /0                [8086]
+ROL r/m16,1                   ; o16 D1 /0            [8086]
+ROL r/m16,CL                  ; o16 D3 /0            [8086]
+ROR r/m8,1                    ; D0 /1                [8086]
+ROR r/m8,CL                   ; D2 /1                [8086]
+ROR r/m16,1                   ; o16 D1 /1            [8086]
+ROR r/m16,CL                  ; o16 D3 /1            [8086]
+SAHF                          ; 9E                   [8086]
+SAL r/m8,1                    ; D0 /4                [8086]
+SAL r/m8,CL                   ; D2 /4                [8086]
+SAL r/m16,1                   ; o16 D1 /4            [8086]
+SAL r/m16,CL                  ; o16 D3 /4            [8086]
+SAR r/m8,1                    ; D0 /0                [8086]
+SAR r/m8,CL                   ; D2 /0                [8086]
+SAR r/m16,1                   ; o16 D1 /0            [8086]
+SAR r/m16,CL                  ; o16 D3 /0            [8086]
+SBB r/m8,reg8                 ; 18 /r                [8086]
+SBB r/m16,reg16               ; o16 19 /r            [8086]
+SBB reg8,r/m8                 ; 1A /r                [8086]
+SBB reg16,r/m16               ; o16 1B /r            [8086]
+SBB r/m8,imm8                 ; 80 /3 ib             [8086]
+SBB r/m16,imm16               ; o16 81 /3 iw         [8086]
+SBB r/m16,imm8                ; o16 83 /3 ib         [8086]
+SBB r/m32,imm8                ; o32 83 /3 ib         [8086]
+SBB AL,imm8                   ; 1C ib                [8086]
+SBB AX,imm16                  ; o16 1D iw            [8086]
+SCASB                         ; AE                   [8086]
+SCASW                         ; o16 AF               [8086]
+SHL r/m8,1                    ; D0 /4                [8086]
+SHL r/m8,CL                   ; D2 /4                [8086]
+SHL r/m16,1                   ; o16 D1 /4            [8086]
+SHL r/m16,CL                  ; o16 D3 /4            [8086]
+SHR r/m8,1                    ; D0 /5                [8086]
+SHR r/m8,CL                   ; D2 /5                [8086]
+SHR r/m16,1                   ; o16 D1 /5            [8086]
+SHR r/m16,CL                  ; o16 D3 /5            [8086]
+STC                           ; F9                   [8086]
+STD                           ; FD                   [8086]
+STI                           ; FB                   [8086]
+STOSB                         ; AA                   [8086]
+STOSW                         ; o16 AB               [8086]
+SUB r/m8,reg8                 ; 28 /r                [8086]
+SUB r/m16,reg16               ; o16 29 /r            [8086]
+SUB reg8,r/m8                 ; 2A /r                [8086]
+SUB reg16,r/m16               ; o16 2B /r            [8086]
+SUB r/m8,imm8                 ; 80 /5 ib             [8086]
+SUB r/m16,imm16               ; o16 81 /5 iw         [8086]
+SUB r/m16,imm8                ; o16 83 /5 ib         [8086]
+SUB AL,imm8                   ; 2C ib                [8086]
+SUB AX,imm16                  ; o16 2D iw            [8086]
+TEST r/m8,reg8                ; 84 /r                [8086]
+TEST r/m16,reg16              ; o16 85 /r            [8086]
+TEST r/m8,imm8                ; F6 /7 ib             [8086]
+TEST r/m16,imm16              ; o16 F7 /7 iw         [8086]
+TEST AL,imm8                  ; A8 ib                [8086]
+TEST AX,imm16                 ; o16 A9 iw            [8086]
+WAIT                          ; 9B                   [8086]
+XCHG reg8,r/m8                ; 86 /r                [8086]
+XCHG reg16,r/m8               ; o16 87 /r            [8086]
+XCHG r/m8,reg8                ; 86 /r                [8086]
+XCHG r/m16,reg16              ; o16 87 /r            [8086]
+XCHG AX,reg16                 ; o16 90+r             [8086]
+XCHG reg16,AX                 ; o16 90+r             [8086]
+XLATB                         ; D7                   [8086]
+XOR r/m8,reg8                 ; 30 /r                [8086]
+XOR r/m16,reg16               ; o16 31 /r            [8086]
+XOR reg8,r/m8                 ; 32 /r                [8086]
+XOR reg16,r/m16               ; o16 33 /r            [8086]
+XOR r/m8,imm8                 ; 80 /6 ib             [8086]
+XOR r/m16,imm16               ; o16 81 /6 iw         [8086]
+XOR r/m16,imm8                ; o16 83 /6 ib         [8086]
+XOR AL,imm8                   ; 34 ib                [8086]
+XOR AX,imm16                  ; o16 35 iw            [8086]
+
+## assembler instructions
+
+DB imm8                       ; ib                   [8086]
+DW imm8                       ; iw                   [8086]
+DW imm16                      ; iw                   [8086]
+
+ORG imm8                      ; \n                  [8086]
+ORG imm16                     ; \n                   [8086] ; default value
+is 32768 for MikeOS / not implemented yet
+
+So, i'd like to implement these instructions but most of them is not still
+working properly (like PUSH / POP / MOV [imm], reg / etc)
+
+I like to release the code, but as i'm not a assembly expert (i'm still
+learning) i don't know if the code is well written.
+
+As soon as possible, i'll try to fix all the bugs, write a simple
+documentation and release the code.
+
+MikeOS is really a wonderful enviroment for learning assembly/programming.
+Thanks for creating it ;) !
+
+Regards
+Leo
+p.s.: sorry about my english
+
+
+
+
+2012/2/6 M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+
+&gt;<i> Hi Leo,
+</I>&gt;<i>
+</I>&gt;<i> I've played around with the assembler some more now. Good work! Can
+</I>&gt;<i> you tell us more about it? Is it based on an existing assembler? What
+</I>&gt;<i> syntax is supported? I just tried to assemble this:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> mov ah, 0Eh
+</I>&gt;<i> mov al, 'M'
+</I>&gt;<i> int 10h
+</I>&gt;<i> ret
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> But I had to switch the 'M' for a number, as it doesn't seem to
+</I>&gt;<i> recognise single quotes. Is there documentation anywhere? This could
+</I>&gt;<i> be a really great addition for MikeOS!
+</I>&gt;<i>
+</I>&gt;<i> Cheers,
+</I>&gt;<i> Mike
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120207/d658e4ac/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120207/d658e4ac/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002852.html">[mikeos-developer] Hi. Assembler for mikeOs
+</A></li>
+	<LI>Next message: <A HREF="002858.html">[mikeos-developer] Hi. Assembler for mikeOs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2853">[ date ]</a>
+              <a href="thread.html#2853">[ thread ]</a>
+              <a href="subject.html#2853">[ subject ]</a>
+              <a href="author.html#2853">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

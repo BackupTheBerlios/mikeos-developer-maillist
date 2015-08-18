@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Some tasks for 3.0 -- any takers?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Some%20tasks%20for%203.0%20--%20any%20takers%3F&In-Reply-To=%3C4f03362c0811201155j2a685f7dtf3909204ea51f90e%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000482.html">
+   <LINK REL="Next"  HREF="000484.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Some tasks for 3.0 -- any takers?</H1>
+    <B>Ian Seyler</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Some%20tasks%20for%203.0%20--%20any%20takers%3F&In-Reply-To=%3C4f03362c0811201155j2a685f7dtf3909204ea51f90e%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Some tasks for 3.0 -- any takers?">iseyler at gmail.com
+       </A><BR>
+    <I>Thu Nov 20 20:55:08 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000482.html">[mikeos-developer] Some tasks for 3.0 -- any takers?
+</A></li>
+        <LI>Next message: <A HREF="000484.html">[mikeos-developer] Some tasks for 3.0 -- any takers?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#483">[ date ]</a>
+              <a href="thread.html#483">[ thread ]</a>
+              <a href="subject.html#483">[ subject ]</a>
+              <a href="author.html#483">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Here is what I have so far:
+
+Instructions for compiling, updating, and running MikeOS under
+Microsoft Windows.
+
+
+------------------------------------------------------------------------------
+
+Step 1) The NASM Assembly Compiler
+The latest version of NASM as of Nov 18, 2008 is 2.05.01
+Click on this link to get the latest:
+<A HREF="http://www.nasm.us/pub/nasm/releasebuilds/2.05.01/nasm-2.05.01-win32.zip">http://www.nasm.us/pub/nasm/releasebuilds/2.05.01/nasm-2.05.01-win32.zip</A>
+
+Extract the nasm.exe file into you Windows folder (or somewhere in the path)
+To test if it is in the path open a Command Prompt window, type nasm
+and hit enter.
+You should see and error saying that no input file was specified.
+
+------------------------------------------------------------------------------
+
+Step 2) Compiling MikeOS
+Double click on build-win.bat or run it from the command line.
+This batch file calls NASM to do the work needed to compile MikeOS and
+its applications.
+
+------------------------------------------------------------------------------
+
+Step 3) The Virtual Disk Driver
+The ImDisk Virtual Disk Driver is needed since Windows does not have a
+built-in mechanism for loopback drives.
+Latest version as of Nov 18, 2008 is 1.0.4
+<A HREF="http://www.ltr-data.se/files/imdiskinst.exe">http://www.ltr-data.se/files/imdiskinst.exe</A>
+After downloading run imdiskinst.exe to install. Follow the default
+prompts during the install.
+
+Run this command to mount the floppy disk image. This will mount the
+disk image as if it were a real disk.
+imdisk -a -f mikeos.flp -s 1440K -m B:
+You can now copy files to the &quot;B:&quot; drive on your computer and it will
+update the disk image.
+
+Run this command to unmount it when you are finished.
+imdisk -d -m B:
+
+------------------------------------------------------------------------------
+
+Step 4) The QEMU PC Emulator
+Download the latest windows binary from here:
+<A HREF="http://www1.interq.or.jp/~t-takeda/qemu/qemu-0.9.1-windows.zip">http://www1.interq.or.jp/~t-takeda/qemu/qemu-0.9.1-windows.zip</A>
+Extract to somewhere on your computer. C:\ is best.
+
+Run the following to run MikeOS under QEMU
+qemu.exe -L . -m 4 -boot a -fda mikeos.flp -soundhw all -localtime
+
+Make sure you put the proper path names in!
+
+------------------------------------------------------------------------------
+
+Subsection 1) Installing an updated bootsector to the diskimage
+Download PartCopy (<A HREF="http://www.osdever.net/downloads/other/pcopy02.zip">http://www.osdever.net/downloads/other/pcopy02.zip</A>)
+Extract partcopy.exe to your Windows folder (or somewhere in the path)
+partcopy bootload.bin 0 200 mikeos.flp 0
+This command means to start reading the file &quot;bootload.bin&quot; at offset
+0 and copy 512 bytes to the start of &quot;mikeos.flp&quot;
+note: 200 is hexadecimal for 512 decimal and a bootsector is 512 bytes.
+
+------------------------------------------------------------------------------
+
+Pretty straightforward to me but I don't write that much good documentation.
+Let me know if you have any comments or concerns.
+
+As for creating an ISO image I would have to look a bit more. There is
+freeware CD burning software for Windows at: <A HREF="http://infrarecorder.org/">http://infrarecorder.org/</A>
+
+-Ian
+
+
+On Mon, Nov 17, 2008 at 11:42 AM, M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt; wrote:
+&gt;<i> On Mon, Nov 17, 2008 at 4:02 PM, Ian Seyler &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">iseyler at gmail.com</A>&gt; wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I'd be willing to write up the docs on building and running MikeOS
+</I>&gt;&gt;<i> under Windows.
+</I>&gt;<i>
+</I>&gt;<i> Great, thanks! If you can use free/open source software where possible
+</I>&gt;<i> for the disc manipulation stuff, that'd be great. I'm thinking of a
+</I>&gt;<i> step-by-step guide showing how to get NASM and install it, then run
+</I>&gt;<i> dosbuild.bat, add the bootloader to the floppy image, copy the kernel
+</I>&gt;<i> and programs onto the floppy, and make a CD-ISO if possible.
+</I>&gt;<i>
+</I>&gt;<i> Ta in advance!
+</I>&gt;<i>
+</I>&gt;<i> M
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Mike Saunders
+</I>&gt;<i> <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000482.html">[mikeos-developer] Some tasks for 3.0 -- any takers?
+</A></li>
+	<LI>Next message: <A HREF="000484.html">[mikeos-developer] Some tasks for 3.0 -- any takers?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#483">[ date ]</a>
+              <a href="thread.html#483">[ thread ]</a>
+              <a href="subject.html#483">[ subject ]</a>
+              <a href="author.html#483">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Planning for MikeOS 4.2
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Planning%20for%20MikeOS%204.2&In-Reply-To=%3C1315517063.27105.YahooMailClassic%40web65907.mail.ac4.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002110.html">
+   <LINK REL="Next"  HREF="002114.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Planning for MikeOS 4.2</H1>
+    <B>Matej Horvat</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Planning%20for%20MikeOS%204.2&In-Reply-To=%3C1315517063.27105.YahooMailClassic%40web65907.mail.ac4.yahoo.com%3E"
+       TITLE="[mikeos-developer] Planning for MikeOS 4.2">redjazz_slo at yahoo.com
+       </A><BR>
+    <I>Thu Sep  8 23:24:23 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002110.html">[mikeos-developer] Planning for MikeOS 4.2
+</A></li>
+        <LI>Next message: <A HREF="002114.html">[mikeos-developer] Planning for MikeOS 4.2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2113">[ date ]</a>
+              <a href="thread.html#2113">[ thread ]</a>
+              <a href="subject.html#2113">[ subject ]</a>
+              <a href="author.html#2113">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Lo folks,
+</I>&gt;<i> 
+</I>&gt;<i> With various projects going on at the moment, I'm thinking
+</I>&gt;<i> about
+</I>&gt;<i> MikeOS 4.2, potentially including:
+</I>&gt;<i> 
+</I>&gt;<i> ...
+</I>
+There's also my os_exponentation, though I admit I only wrote that one as an exercise and you might want not to include it until someone actually needs it (maybe BASIC could use an exponentation operator?).
+
+As for the command line parameter stuff, I submit this routine:
+
+; ------------------------------------------------------------------
+; os_string_tokenize -- Reads tokens seperated by specified
+; character from a string. Returns pointer to next token or 0 if
+; none left.
+; IN: AL = separator character, SI = beginning; OUT: DI = next token
+
+os_string_tokenize:
+	push si
+
+.next_char:
+	cmp byte [si], al		; Is the character a separator?
+	je .return_token
+	cmp byte [si], 0		; Is it the end of a string?
+	jz .no_more
+	inc si
+	jmp .next_char			; Neither; go to next character
+
+.return_token:
+	mov byte [si], 0		; Null-terminate it
+	inc si				; Get pointer to next token
+	mov di, si			; and return it
+	pop si
+	ret
+
+.no_more:
+	mov di, 0			; No more tokens left
+	pop si
+	ret
+
+; ------------------------------------------------------------------
+
+And here's a program to demonstrate its usage (note: only tested under DOS, but should work fine):
+
+	BITS 16
+	%INCLUDE &quot;mikedev.inc&quot;
+	ORG 32768
+
+start:
+	mov al, ' '			; The separator
+	mov si, .the_string		; The string
+.loop:
+	call os_string_tokenize		; Get token
+	call os_print_string		; Print it...
+	call os_print_newline		; ... and a new line
+	cmp di, 0			; Is it the last one?
+	jz .quit			; If yes, quit
+	mov si, di			; Else, continue with next token
+	jmp .loop
+
+.quit:
+	ret
+
+.the_string:
+	db 'TRANS EUROPE EXPRESS', 0
+
+-Matej Horvat
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002110.html">[mikeos-developer] Planning for MikeOS 4.2
+</A></li>
+	<LI>Next message: <A HREF="002114.html">[mikeos-developer] Planning for MikeOS 4.2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2113">[ date ]</a>
+              <a href="thread.html#2113">[ thread ]</a>
+              <a href="subject.html#2113">[ subject ]</a>
+              <a href="author.html#2113">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

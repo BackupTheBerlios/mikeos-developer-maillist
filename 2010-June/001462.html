@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] A new system call: os_exponentation
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-June/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20new%20system%20call%3A%20os_exponentation&In-Reply-To=%3C152988.67205.qm%40web113106.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001459.html">
+   <LINK REL="Next"  HREF="001464.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] A new system call: os_exponentation</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20new%20system%20call%3A%20os_exponentation&In-Reply-To=%3C152988.67205.qm%40web113106.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] A new system call: os_exponentation">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Sun Jun 20 18:31:03 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001459.html">[mikeos-developer] A new system call: os_exponentation
+</A></li>
+        <LI>Next message: <A HREF="001464.html">[mikeos-developer] A new system call: os_exponentation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1462">[ date ]</a>
+              <a href="thread.html#1462">[ thread ]</a>
+              <a href="subject.html#1462">[ subject ]</a>
+              <a href="author.html#1462">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+The solution is quite simple.
+Simply check BX and CX for zero.
+If they both are indeed zero, then simply exit gracefully (if  0 ^ 0 != 1 which is debatable.)
+Else check for CX=0 then simply ignore number in BX and return a 1.
+
+Paulo.
+
+P.S.
+
+Can anyone tell me what the calculator/s in Linux return when 0 ^ 0 is entered?
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001459.html">[mikeos-developer] A new system call: os_exponentation
+</A></li>
+	<LI>Next message: <A HREF="001464.html">[mikeos-developer] A new system call: os_exponentation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1462">[ date ]</a>
+              <a href="thread.html#1462">[ thread ]</a>
+              <a href="subject.html#1462">[ subject ]</a>
+              <a href="author.html#1462">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

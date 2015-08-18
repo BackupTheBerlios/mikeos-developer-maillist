@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Dump file
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Dump%20file&In-Reply-To=%3CAANLkTi%3DoLeYP4HpknnPRkaTTvOXc_%2BnFuXtCsTAeONmC%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001630.html">
+   <LINK REL="Next"  HREF="001632.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Dump file</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Dump%20file&In-Reply-To=%3CAANLkTi%3DoLeYP4HpknnPRkaTTvOXc_%2BnFuXtCsTAeONmC%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Dump file">okachi at gmail.com
+       </A><BR>
+    <I>Tue Dec 14 20:37:02 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001630.html">[mikeos-developer] Dump file
+</A></li>
+        <LI>Next message: <A HREF="001632.html">[mikeos-developer] Dump file
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1631">[ date ]</a>
+              <a href="thread.html#1631">[ thread ]</a>
+              <a href="subject.html#1631">[ subject ]</a>
+              <a href="author.html#1631">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>OK, this is all over the place and full of major errors. I've
+absolutely no idea why you randomly add 10 bytes to the result of an
+empty file, for starters. If it's empty, then there's nothing to print
+-- you can't start pointing to random locations in memory, hoping
+something is there. Next is this:
+
+&gt;<i> &#160; &#160; &#160; &#160;filesize &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;times 12 dw 0
+</I>
+Er, why are you declaring 12 words (ie 24) bytes for the SIZE of the
+file? That is a number, as specified clearly in the MikeOS API. A
+single word would suffice. It looks like you're very confused and
+think that has something to do with the file NAME, but that would be
+12 BYTEs and not 12 WORDs.
+
+Read up on data types. Read the MikeOS API documentation. Back to basics.
+
+&gt;<i> &#160; &#160; &#160; &#160;mov &#160; &#160; &#160; &#160; &#160; &#160; si, [filesize]
+</I>&gt;<i> &#160; &#160; &#160; &#160;call &#160; &#160;os_print_string
+</I>
+This makes no sense. os_print_string, as described in the API
+documentation, takes the location of a zero-terminated string in SI.
+For some reason, you're giving it here the number of bytes in the
+file.
+
+Read handbook-appdev-asm.html very carefully. Then read it again.
+You're making some major mistakes and assumptions here which could be
+very easily avoided if you followed the API guide.
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001630.html">[mikeos-developer] Dump file
+</A></li>
+	<LI>Next message: <A HREF="001632.html">[mikeos-developer] Dump file
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1631">[ date ]</a>
+              <a href="thread.html#1631">[ thread ]</a>
+              <a href="subject.html#1631">[ subject ]</a>
+              <a href="author.html#1631">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,425 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Hi. Assembler for mikeOs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Hi.%20Assembler%20for%20mikeOs&In-Reply-To=%3CCACKyyijC_f280T22JQYKA3Ch1KXy2EYmodNCTUyE8Ot3%3D%3DDoOA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002853.html">
+   <LINK REL="Next"  HREF="002859.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Hi. Assembler for mikeOs</H1>
+    <B>Leo Ono</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Hi.%20Assembler%20for%20mikeOs&In-Reply-To=%3CCACKyyijC_f280T22JQYKA3Ch1KXy2EYmodNCTUyE8Ot3%3D%3DDoOA%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Hi. Assembler for mikeOs">ono.leo at gmail.com
+       </A><BR>
+    <I>Wed Feb  8 02:43:53 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002853.html">[mikeos-developer] Hi. Assembler for mikeOs
+</A></li>
+        <LI>Next message: <A HREF="002859.html">[mikeos-developer] Hi. Assembler for mikeOs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2858">[ date ]</a>
+              <a href="thread.html#2858">[ thread ]</a>
+              <a href="subject.html#2858">[ subject ]</a>
+              <a href="author.html#2858">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Mike,
+
+I've tried to write a simple documentation, but i can't write it very well.
+<A HREF="https://github.com/leonardo-ono/asm4mo/wiki/Handbook">https://github.com/leonardo-ono/asm4mo/wiki/Handbook</A>
+
+Plaase, can someone help me review to write it correctly in english ?
+
+Assembler source code/binary (zip file):
+<A HREF="https://github.com/leonardo-ono/asm4mo/zipball/master">https://github.com/leonardo-ono/asm4mo/zipball/master</A>
+
+I've upped it in a git repository (github):
+<A HREF="https://github.com/leonardo-ono/asm4mo">https://github.com/leonardo-ono/asm4mo</A>
+
+Thanks !
+
+Regards
+Leo
+p.s.: sorry about my english
+
+
+2012/2/7 Leo Ono &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">ono.leo at gmail.com</A>&gt;
+
+&gt;<i> Hi Mike,
+</I>&gt;<i>
+</I>&gt;<i> Thanks for reply !
+</I>&gt;<i>
+</I>&gt;<i> Sorry, i coudn't implement single quotes yet.
+</I>&gt;<i>
+</I>&gt;<i> About the assembler, it's based on nasm, specifically on this document:
+</I>&gt;<i> <A HREF="http://www.posix.nl/linuxassembly/nasmdochtml/nasmdoca.html">http://www.posix.nl/linuxassembly/nasmdochtml/nasmdoca.html</A>
+</I>&gt;<i>
+</I>&gt;<i> I've extracted just 8086 instruction as follows:
+</I>&gt;<i>
+</I>&gt;<i> AAA                           ; 37                   [8086]
+</I>&gt;<i> AAS                           ; 3F                   [8086]
+</I>&gt;<i> AAD                           ; D5 0A                [8086]
+</I>&gt;<i> AAD imm                       ; D5 ib                [8086]
+</I>&gt;<i> AAM                           ; D4 0A                [8086]
+</I>&gt;<i> AAM imm                       ; D4 ib                [8086]
+</I>&gt;<i> ADC r/m8,reg8                 ; 10 /r                [8086]
+</I>&gt;<i> ADC r/m16,reg16               ; o16 11 /r            [8086]
+</I>&gt;<i> ADC reg8,r/m8                 ; 12 /r                [8086]
+</I>&gt;<i> ADC reg16,r/m16               ; o16 13 /r            [8086]
+</I>&gt;<i> ADC r/m8,imm8                 ; 80 /2 ib             [8086]
+</I>&gt;<i> ADC r/m16,imm16               ; o16 81 /2 iw         [8086]
+</I>&gt;<i> ADC r/m16,imm8                ; o16 83 /2 ib         [8086]
+</I>&gt;<i> ADC AL,imm8                   ; 14 ib                [8086]
+</I>&gt;<i> ADC AX,imm16                  ; o16 15 iw            [8086]
+</I>&gt;<i> ADD r/m8,reg8                 ; 00 /r                [8086]
+</I>&gt;<i> ADD r/m16,reg16               ; o16 01 /r            [8086]
+</I>&gt;<i> ADD reg8,r/m8                 ; 02 /r                [8086]
+</I>&gt;<i> ADD reg16,r/m16               ; o16 03 /r            [8086]
+</I>&gt;<i> ADD r/m8,imm8                 ; 80 /0 ib             [8086]
+</I>&gt;<i> ADD r/m16,imm16               ; o16 81 /0 iw         [8086]
+</I>&gt;<i> ADD r/m16,imm8                ; o16 83 /0 ib         [8086]
+</I>&gt;<i> ADD AL,imm8                   ; 04 ib                [8086]
+</I>&gt;<i> ADD AX,imm16                  ; o16 05 iw            [8086]
+</I>&gt;<i> AND r/m8,reg8                 ; 20 /r                [8086]
+</I>&gt;<i> AND r/m16,reg16               ; o16 21 /r            [8086]
+</I>&gt;<i> AND reg8,r/m8                 ; 22 /r                [8086]
+</I>&gt;<i> AND reg16,r/m16               ; o16 23 /r            [8086]
+</I>&gt;<i> AND r/m8,imm8                 ; 80 /4 ib             [8086]
+</I>&gt;<i> AND r/m16,imm16               ; o16 81 /4 iw         [8086]
+</I>&gt;<i> AND r/m16,imm8                ; o16 83 /4 ib         [8086]
+</I>&gt;<i> AND AL,imm8                   ; 24 ib                [8086]
+</I>&gt;<i> AND AX,imm16                  ; o16 25 iw            [8086]
+</I>&gt;<i> CALL imm                      ; E8 rw/rd             [8086]
+</I>&gt;<i> CALL imm:imm16                ; o16 9A iw iw         [8086]
+</I>&gt;<i> CALL FAR mem16                ; o16 FF /3            [8086]
+</I>&gt;<i> CALL r/m16                    ; o16 FF /2            [8086]
+</I>&gt;<i> CBW                           ; o16 98               [8086]
+</I>&gt;<i> CWD                           ; o16 99               [8086]
+</I>&gt;<i> CLC                           ; F8                   [8086]
+</I>&gt;<i> CLD                           ; FC                   [8086]
+</I>&gt;<i> CLI                           ; FA                   [8086]
+</I>&gt;<i> CMC                           ; F5                   [8086]
+</I>&gt;<i> CMP r/m8,reg8                 ; 38 /r                [8086]
+</I>&gt;<i> CMP r/m16,reg16               ; o16 39 /r            [8086]
+</I>&gt;<i> CMP reg8,r/m8                 ; 3A /r                [8086]
+</I>&gt;<i> CMP reg16,r/m16               ; o16 3B /r            [8086]
+</I>&gt;<i> CMP r/m8,imm8                 ; 80 /0 ib             [8086]
+</I>&gt;<i> CMP r/m16,imm16               ; o16 81 /7 iw         [8086]
+</I>&gt;<i> CMP r/m16,imm8                ; o16 83 /7 ib         [8086]
+</I>&gt;<i> CMP AL,imm8                   ; 3C ib                [8086]
+</I>&gt;<i> CMP AX,imm16                  ; o16 3D iw            [8086]
+</I>&gt;<i> CMPSB                         ; A6                   [8086]
+</I>&gt;<i> CMPSW                         ; o16 A7               [8086]
+</I>&gt;<i> DAA                           ; 27                   [8086]
+</I>&gt;<i> DAS                           ; 2F                   [8086]
+</I>&gt;<i> DEC reg16                     ; o16 48+r             [8086]
+</I>&gt;<i> DEC r/m8                      ; FE /1                [8086]
+</I>&gt;<i> DEC r/m16                     ; o16 FF /1            [8086]
+</I>&gt;<i> DIV r/m8                      ; F6 /6                [8086]
+</I>&gt;<i> DIV r/m16                     ; o16 F7 /6            [8086]
+</I>&gt;<i> HLT                           ; F4                   [8086]
+</I>&gt;<i> IDIV r/m8                     ; F6 /7                [8086]
+</I>&gt;<i> IDIV r/m16                    ; o16 F7 /7            [8086]
+</I>&gt;<i> IMUL r/m8                     ; F6 /5                [8086]
+</I>&gt;<i> IMUL r/m16                    ; o16 F7 /5            [8086]
+</I>&gt;<i> IN AL,imm8                    ; E4 ib                [8086]
+</I>&gt;<i> IN AX,imm8                    ; o16 E5 ib            [8086]
+</I>&gt;<i> IN AL,DX                      ; EC                   [8086]
+</I>&gt;<i> IN AX,DX                      ; o16 ED               [8086]
+</I>&gt;<i> INC reg16                     ; o16 40+r             [8086]
+</I>&gt;<i> INC r/m8                      ; FE /0                [8086]
+</I>&gt;<i> INC r/m16                     ; o16 FF /0            [8086]
+</I>&gt;<i> INT imm8                      ; CD ib                [8086]
+</I>&gt;<i> INT3                          ; CC                   [8086]
+</I>&gt;<i> INTO                          ; CE                   [8086]
+</I>&gt;<i> IRET                          ; CF                   [8086]
+</I>&gt;<i> IRETW                         ; o16 CF               [8086]
+</I>&gt;<i> JCXZ imm                      ; o16 E3 rb            [8086]
+</I>&gt;<i> JMP imm8                      ; E9 rw/rd             [8086]
+</I>&gt;<i> JMP imm16                     ; E9 rw/rd             [8086]
+</I>&gt;<i> JMP SHORT imm8                ; EB rb                [8086]
+</I>&gt;<i> JMP imm:imm16                 ; o16 EA iw iw         [8086]
+</I>&gt;<i> JMP FAR mem                   ; o16 FF /5            [8086]
+</I>&gt;<i> JMP r/m16                     ; o16 FF /4            [8086]
+</I>&gt;<i> # Jcc imm                       ; 70+cc rb             [8086]
+</I>&gt;<i> JO imm8                       ; 70 rb                [8086]
+</I>&gt;<i> JNO imm8                      ; 71 rb                [8086]
+</I>&gt;<i> JB imm8                       ; 72 rb                [8086]
+</I>&gt;<i> JC imm8                       ; 72 rb                [8086]
+</I>&gt;<i> JNAE imm8                     ; 72 rb                [8086]
+</I>&gt;<i> JAE imm8                      ; 73 rb                [8086]
+</I>&gt;<i> JNB imm8                      ; 73 rb                [8086]
+</I>&gt;<i> JNC imm8                      ; 73 rb                [8086]
+</I>&gt;<i> JE imm8                       ; 74 rb                [8086]
+</I>&gt;<i> JZ imm8                       ; 74 rb                [8086]
+</I>&gt;<i> JNE imm8                      ; 75 rb                [8086]
+</I>&gt;<i> JNZ imm8                      ; 75 rb                [8086]
+</I>&gt;<i> JBE imm8                      ; 76 rb                [8086]
+</I>&gt;<i> JNA imm8                      ; 76 rb                [8086]
+</I>&gt;<i> JA imm8                       ; 77 rb                [8086]
+</I>&gt;<i> JNBE imm8                     ; 77 rb                [8086]
+</I>&gt;<i> JS imm8                       ; 78 rb                [8086]
+</I>&gt;<i> JNS imm8                      ; 79 rb                [8086]
+</I>&gt;<i> JP imm8                       ; 7A rb                [8086]
+</I>&gt;<i> JPE imm8                      ; 7A rb                [8086]
+</I>&gt;<i> JNP imm8                      ; 7B rb                [8086]
+</I>&gt;<i> JPO imm8                      ; 7B rb                [8086]
+</I>&gt;<i> JL imm8                       ; 7C rb                [8086]
+</I>&gt;<i> JNGE imm8                     ; 7C rb                [8086]
+</I>&gt;<i> JGE imm8                      ; 7D rb                [8086]
+</I>&gt;<i> JNL imm8                      ; 7D rb                [8086]
+</I>&gt;<i> JLE imm8                      ; 7E rb                [8086]
+</I>&gt;<i> JNG imm8                      ; 7E rb                [8086]
+</I>&gt;<i> JG imm8                       ; 7F rb                [8086]
+</I>&gt;<i> JNLE imm8                     ; 7F rb                [8086]
+</I>&gt;<i> LAHF                          ; 9F                   [8086]
+</I>&gt;<i> LDS reg16,mem                 ; o16 C5 /r            [8086]
+</I>&gt;<i> LDS reg32,mem                 ; o32 C5 /r            [8086]
+</I>&gt;<i> LES reg16,mem                 ; o16 C4 /r            [8086]
+</I>&gt;<i> LES reg32,mem                 ; o32 C4 /r            [8086]
+</I>&gt;<i> LEA reg16,mem                 ; o16 8D /r            [8086]
+</I>&gt;<i> LEA reg32,mem                 ; o32 8D /r            [8086]
+</I>&gt;<i> LODSB                         ; AC                   [8086]
+</I>&gt;<i> LODSW                         ; o16 AD               [8086]
+</I>&gt;<i> LOOP imm                      ; E2 rb                [8086]
+</I>&gt;<i> LOOP imm,CX                   ; a16 E2 rb            [8086]
+</I>&gt;<i> LOOPE imm                     ; E1 rb                [8086]
+</I>&gt;<i> LOOPE imm,CX                  ; a16 E1 rb            [8086]
+</I>&gt;<i> LOOPZ imm                     ; E1 rb                [8086]
+</I>&gt;<i> LOOPZ imm,CX                  ; a16 E1 rb            [8086]
+</I>&gt;<i> LOOPNE imm                    ; E0 rb                [8086]
+</I>&gt;<i> LOOPNE imm,CX                 ; a16 E0 rb            [8086]
+</I>&gt;<i> LOOPNZ imm                    ; E0 rb                [8086]
+</I>&gt;<i> LOOPNZ imm,CX                 ; a16 E0 rb            [8086]
+</I>&gt;<i> MOV r/m8,reg8                 ; 88 /r                [8086]
+</I>&gt;<i> MOV r/m16,reg16               ; o16 89 /r            [8086]
+</I>&gt;<i> MOV reg8,r/m8                 ; 8A /r                [8086]
+</I>&gt;<i> MOV reg16,r/m16               ; o16 8B /r            [8086]
+</I>&gt;<i> MOV reg8,imm8                 ; B0+r ib              [8086]
+</I>&gt;<i> MOV reg16,imm16               ; o16 B8+r iw          [8086]
+</I>&gt;<i> MOV r/m8,imm8                 ; C6 /0 ib             [8086]
+</I>&gt;<i> MOV r/m16,imm16               ; o16 C7 /0 iw         [8086]
+</I>&gt;<i> MOV AL,memoffs8               ; A0 ow/od             [8086]
+</I>&gt;<i> MOV AX,memoffs16              ; o16 A1 ow/od         [8086]
+</I>&gt;<i> MOV memoffs8,AL               ; A2 ow/od             [8086]
+</I>&gt;<i> MOV memoffs16,AX              ; o16 A3 ow/od         [8086]
+</I>&gt;<i> MOV r/m16,segreg              ; o16 8C /r            [8086]
+</I>&gt;<i> MOV segreg,r/m16              ; o16 8E /r            [8086]
+</I>&gt;<i> MOVSB                         ; A4                   [8086]
+</I>&gt;<i> MOVSW                         ; o16 A5               [8086]
+</I>&gt;<i> MUL r/m8                      ; F6 /4                [8086]
+</I>&gt;<i> MUL r/m16                     ; o16 F7 /4            [8086]
+</I>&gt;<i> NEG r/m8                      ; F6 /3                [8086]
+</I>&gt;<i> NEG r/m16                     ; o16 F7 /3            [8086]
+</I>&gt;<i> NOT r/m8                      ; F6 /2                [8086]
+</I>&gt;<i> NOT r/m16                     ; o16 F7 /2            [8086]
+</I>&gt;<i> NOP                           ; 90                   [8086]
+</I>&gt;<i> OR r/m8,reg8                  ; 08 /r                [8086]
+</I>&gt;<i> OR r/m16,reg16                ; o16 09 /r            [8086]
+</I>&gt;<i> OR reg8,r/m8                  ; 0A /r                [8086]
+</I>&gt;<i> OR reg16,r/m16                ; o16 0B /r            [8086]
+</I>&gt;<i> OR r/m8,imm8                  ; 80 /1 ib             [8086]
+</I>&gt;<i> OR r/m16,imm16                ; o16 81 /1 iw         [8086]
+</I>&gt;<i> OR r/m16,imm8                 ; o16 83 /1 ib         [8086]
+</I>&gt;<i> OR AL,imm8                    ; 0C ib                [8086]
+</I>&gt;<i> OR AX,imm16                   ; o16 0D iw            [8086]
+</I>&gt;<i> OUT imm8,AL                   ; E6 ib                [8086]
+</I>&gt;<i> OUT imm8,AX                   ; o16 E7 ib            [8086]
+</I>&gt;<i> OUT DX,AL                     ; EE                   [8086]
+</I>&gt;<i> OUT DX,AX                     ; o16 EF               [8086]
+</I>&gt;<i> POP reg16                     ; o16 58+r             [8086]
+</I>&gt;<i> POP r/m16                     ; o16 8F /0            [8086]
+</I>&gt;<i> POP DS                        ; 1F                   [8086]
+</I>&gt;<i> POP ES                        ; 07                   [8086]
+</I>&gt;<i> POP SS                        ; 17                   [8086]
+</I>&gt;<i> PUSH reg16                    ; o16 50+r             [8086]
+</I>&gt;<i> PUSH r/m16                    ; o16 FF /6            [8086]
+</I>&gt;<i> PUSH CS                       ; 0E                   [8086]
+</I>&gt;<i> PUSH DS                       ; 1E                   [8086]
+</I>&gt;<i> PUSH ES                       ; 06                   [8086]
+</I>&gt;<i> PUSH SS                       ; 16                   [8086]
+</I>&gt;<i> RCL r/m8,1                    ; D0 /2                [8086]
+</I>&gt;<i> RCL r/m8,CL                   ; D2 /2                [8086]
+</I>&gt;<i> RCL r/m16,1                   ; o16 D1 /2            [8086]
+</I>&gt;<i> RCL r/m16,CL                  ; o16 D3 /2            [8086]
+</I>&gt;<i> RCR r/m8,1                    ; D0 /3                [8086]
+</I>&gt;<i> RCR r/m8,CL                   ; D2 /3                [8086]
+</I>&gt;<i> RCR r/m16,1                   ; o16 D1 /3            [8086]
+</I>&gt;<i> RCR r/m16,CL                  ; o16 D3 /3            [8086]
+</I>&gt;<i> RET                           ; C3                   [8086]
+</I>&gt;<i> RET imm16                     ; C2 iw                [8086]
+</I>&gt;<i> RETF                          ; CB                   [8086]
+</I>&gt;<i> RETF imm16                    ; CA iw                [8086]
+</I>&gt;<i> RETN                          ; C3                   [8086]
+</I>&gt;<i> RETN imm16                    ; C2 iw                [8086]
+</I>&gt;<i> ROL r/m8,1                    ; D0 /0                [8086]
+</I>&gt;<i> ROL r/m8,CL                   ; D2 /0                [8086]
+</I>&gt;<i> ROL r/m16,1                   ; o16 D1 /0            [8086]
+</I>&gt;<i> ROL r/m16,CL                  ; o16 D3 /0            [8086]
+</I>&gt;<i> ROR r/m8,1                    ; D0 /1                [8086]
+</I>&gt;<i> ROR r/m8,CL                   ; D2 /1                [8086]
+</I>&gt;<i> ROR r/m16,1                   ; o16 D1 /1            [8086]
+</I>&gt;<i> ROR r/m16,CL                  ; o16 D3 /1            [8086]
+</I>&gt;<i> SAHF                          ; 9E                   [8086]
+</I>&gt;<i> SAL r/m8,1                    ; D0 /4                [8086]
+</I>&gt;<i> SAL r/m8,CL                   ; D2 /4                [8086]
+</I>&gt;<i> SAL r/m16,1                   ; o16 D1 /4            [8086]
+</I>&gt;<i> SAL r/m16,CL                  ; o16 D3 /4            [8086]
+</I>&gt;<i> SAR r/m8,1                    ; D0 /0                [8086]
+</I>&gt;<i> SAR r/m8,CL                   ; D2 /0                [8086]
+</I>&gt;<i> SAR r/m16,1                   ; o16 D1 /0            [8086]
+</I>&gt;<i> SAR r/m16,CL                  ; o16 D3 /0            [8086]
+</I>&gt;<i> SBB r/m8,reg8                 ; 18 /r                [8086]
+</I>&gt;<i> SBB r/m16,reg16               ; o16 19 /r            [8086]
+</I>&gt;<i> SBB reg8,r/m8                 ; 1A /r                [8086]
+</I>&gt;<i> SBB reg16,r/m16               ; o16 1B /r            [8086]
+</I>&gt;<i> SBB r/m8,imm8                 ; 80 /3 ib             [8086]
+</I>&gt;<i> SBB r/m16,imm16               ; o16 81 /3 iw         [8086]
+</I>&gt;<i> SBB r/m16,imm8                ; o16 83 /3 ib         [8086]
+</I>&gt;<i> SBB r/m32,imm8                ; o32 83 /3 ib         [8086]
+</I>&gt;<i> SBB AL,imm8                   ; 1C ib                [8086]
+</I>&gt;<i> SBB AX,imm16                  ; o16 1D iw            [8086]
+</I>&gt;<i> SCASB                         ; AE                   [8086]
+</I>&gt;<i> SCASW                         ; o16 AF               [8086]
+</I>&gt;<i> SHL r/m8,1                    ; D0 /4                [8086]
+</I>&gt;<i> SHL r/m8,CL                   ; D2 /4                [8086]
+</I>&gt;<i> SHL r/m16,1                   ; o16 D1 /4            [8086]
+</I>&gt;<i> SHL r/m16,CL                  ; o16 D3 /4            [8086]
+</I>&gt;<i> SHR r/m8,1                    ; D0 /5                [8086]
+</I>&gt;<i> SHR r/m8,CL                   ; D2 /5                [8086]
+</I>&gt;<i> SHR r/m16,1                   ; o16 D1 /5            [8086]
+</I>&gt;<i> SHR r/m16,CL                  ; o16 D3 /5            [8086]
+</I>&gt;<i> STC                           ; F9                   [8086]
+</I>&gt;<i> STD                           ; FD                   [8086]
+</I>&gt;<i> STI                           ; FB                   [8086]
+</I>&gt;<i> STOSB                         ; AA                   [8086]
+</I>&gt;<i> STOSW                         ; o16 AB               [8086]
+</I>&gt;<i> SUB r/m8,reg8                 ; 28 /r                [8086]
+</I>&gt;<i> SUB r/m16,reg16               ; o16 29 /r            [8086]
+</I>&gt;<i> SUB reg8,r/m8                 ; 2A /r                [8086]
+</I>&gt;<i> SUB reg16,r/m16               ; o16 2B /r            [8086]
+</I>&gt;<i> SUB r/m8,imm8                 ; 80 /5 ib             [8086]
+</I>&gt;<i> SUB r/m16,imm16               ; o16 81 /5 iw         [8086]
+</I>&gt;<i> SUB r/m16,imm8                ; o16 83 /5 ib         [8086]
+</I>&gt;<i> SUB AL,imm8                   ; 2C ib                [8086]
+</I>&gt;<i> SUB AX,imm16                  ; o16 2D iw            [8086]
+</I>&gt;<i> TEST r/m8,reg8                ; 84 /r                [8086]
+</I>&gt;<i> TEST r/m16,reg16              ; o16 85 /r            [8086]
+</I>&gt;<i> TEST r/m8,imm8                ; F6 /7 ib             [8086]
+</I>&gt;<i> TEST r/m16,imm16              ; o16 F7 /7 iw         [8086]
+</I>&gt;<i> TEST AL,imm8                  ; A8 ib                [8086]
+</I>&gt;<i> TEST AX,imm16                 ; o16 A9 iw            [8086]
+</I>&gt;<i> WAIT                          ; 9B                   [8086]
+</I>&gt;<i> XCHG reg8,r/m8                ; 86 /r                [8086]
+</I>&gt;<i> XCHG reg16,r/m8               ; o16 87 /r            [8086]
+</I>&gt;<i> XCHG r/m8,reg8                ; 86 /r                [8086]
+</I>&gt;<i> XCHG r/m16,reg16              ; o16 87 /r            [8086]
+</I>&gt;<i> XCHG AX,reg16                 ; o16 90+r             [8086]
+</I>&gt;<i> XCHG reg16,AX                 ; o16 90+r             [8086]
+</I>&gt;<i> XLATB                         ; D7                   [8086]
+</I>&gt;<i> XOR r/m8,reg8                 ; 30 /r                [8086]
+</I>&gt;<i> XOR r/m16,reg16               ; o16 31 /r            [8086]
+</I>&gt;<i> XOR reg8,r/m8                 ; 32 /r                [8086]
+</I>&gt;<i> XOR reg16,r/m16               ; o16 33 /r            [8086]
+</I>&gt;<i> XOR r/m8,imm8                 ; 80 /6 ib             [8086]
+</I>&gt;<i> XOR r/m16,imm16               ; o16 81 /6 iw         [8086]
+</I>&gt;<i> XOR r/m16,imm8                ; o16 83 /6 ib         [8086]
+</I>&gt;<i> XOR AL,imm8                   ; 34 ib                [8086]
+</I>&gt;<i> XOR AX,imm16                  ; o16 35 iw            [8086]
+</I>&gt;<i>
+</I>&gt;<i> ## assembler instructions
+</I>&gt;<i>
+</I>&gt;<i> DB imm8                       ; ib                   [8086]
+</I>&gt;<i> DW imm8                       ; iw                   [8086]
+</I>&gt;<i> DW imm16                      ; iw                   [8086]
+</I>&gt;<i>
+</I>&gt;<i> ORG imm8                      ; \n                  [8086]
+</I>&gt;<i> ORG imm16                     ; \n                   [8086] ; default
+</I>&gt;<i> value is 32768 for MikeOS / not implemented yet
+</I>&gt;<i>
+</I>&gt;<i> So, i'd like to implement these instructions but most of them is not still
+</I>&gt;<i> working properly (like PUSH / POP / MOV [imm], reg / etc)
+</I>&gt;<i>
+</I>&gt;<i> I like to release the code, but as i'm not a assembly expert (i'm still
+</I>&gt;<i> learning) i don't know if the code is well written.
+</I>&gt;<i>
+</I>&gt;<i> As soon as possible, i'll try to fix all the bugs, write a simple
+</I>&gt;<i> documentation and release the code.
+</I>&gt;<i>
+</I>&gt;<i> MikeOS is really a wonderful enviroment for learning assembly/programming.
+</I>&gt;<i> Thanks for creating it ;) !
+</I>&gt;<i>
+</I>&gt;<i> Regards
+</I>&gt;<i> Leo
+</I>&gt;<i> p.s.: sorry about my english
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> 2012/2/6 M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+</I>&gt;<i>
+</I>&gt;&gt;<i> Hi Leo,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I've played around with the assembler some more now. Good work! Can
+</I>&gt;&gt;<i> you tell us more about it? Is it based on an existing assembler? What
+</I>&gt;&gt;<i> syntax is supported? I just tried to assemble this:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> mov ah, 0Eh
+</I>&gt;&gt;<i> mov al, 'M'
+</I>&gt;&gt;<i> int 10h
+</I>&gt;&gt;<i> ret
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> But I had to switch the 'M' for a number, as it doesn't seem to
+</I>&gt;&gt;<i> recognise single quotes. Is there documentation anywhere? This could
+</I>&gt;&gt;<i> be a really great addition for MikeOS!
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Cheers,
+</I>&gt;&gt;<i> Mike
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> mikeos-developer mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120207/f29322f1/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120207/f29322f1/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002853.html">[mikeos-developer] Hi. Assembler for mikeOs
+</A></li>
+	<LI>Next message: <A HREF="002859.html">[mikeos-developer] Hi. Assembler for mikeOs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2858">[ date ]</a>
+              <a href="thread.html#2858">[ thread ]</a>
+              <a href="subject.html#2858">[ subject ]</a>
+              <a href="author.html#2858">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

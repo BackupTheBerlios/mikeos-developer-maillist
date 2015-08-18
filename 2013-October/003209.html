@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] [tachyon-os] Mouse API Test crashes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2013-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20%5Btachyon-os%5D%20Mouse%20API%20Test%20crashes&In-Reply-To=%3CDUB113-W3749C2525C9ED729C096F8830F0%40phx.gbl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003208.html">
+   <LINK REL="Next"  HREF="003211.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] [tachyon-os] Mouse API Test crashes</H1>
+    <B>Dan Barry</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20%5Btachyon-os%5D%20Mouse%20API%20Test%20crashes&In-Reply-To=%3CDUB113-W3749C2525C9ED729C096F8830F0%40phx.gbl%3E"
+       TITLE="[mikeos-developer] [tachyon-os] Mouse API Test crashes">danbarry at hotmail.co.uk
+       </A><BR>
+    <I>Sun Oct 27 10:23:54 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003208.html">[mikeos-developer] [tachyon-os] Mouse API Test crashes
+</A></li>
+        <LI>Next message: <A HREF="003211.html">[mikeos-developer] GUI Mouse Driver Repair (Maybe?)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3209">[ date ]</a>
+              <a href="thread.html#3209">[ thread ]</a>
+              <a href="subject.html#3209">[ subject ]</a>
+              <a href="author.html#3209">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Rob,
+
+Don't quote me on this as I haven't looked at the code and could be completely wrong but...
+
+&gt;<i> When I try the programme Mouse API Test, moving my wireless mouse
+</I>&gt;<i> doesn't work, and moving my touchpad seems to crash the system (cannot
+</I>&gt;<i> exit the application, cannot use Control-Alt-Delete to restart).
+</I>
+If I'm not mistaken it will because of the protocol being used and legacy support. I think these are PS/2 mice drivers and you're trying to use this through USB or some other method of attaching your wireless mouse.
+
+The reason for it crashing is probably the fact that it doesn't handle the mouse not being found very well and proceeds to keep searching for it until it works which in this case it wouldn't.
+
+Due to you using a touchpad, I'm assuming you are running a laptop where it's going to be reasonably likely that the hobby OS doesn't have drivers for your hardware in any case. (Your main stream OS, be it Windows, Mac, Linux or whatever does a lot in the background to help get you going in terms of drivers).
+
+Your best bet will be to look through the BIOS and see if there is a switch for legacy mode to be turned on. The only other way of getting around this if it is the problem is using a Virtual Machine where there will almost certainly be a way you can set it up to emulate your mouse as a PS/2 mouse.
+
+Hope that helps, Dan
+ 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131027/61246c44/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131027/61246c44/attachment.html</A>&gt;
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003208.html">[mikeos-developer] [tachyon-os] Mouse API Test crashes
+</A></li>
+	<LI>Next message: <A HREF="003211.html">[mikeos-developer] GUI Mouse Driver Repair (Maybe?)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3209">[ date ]</a>
+              <a href="thread.html#3209">[ thread ]</a>
+              <a href="subject.html#3209">[ subject ]</a>
+              <a href="author.html#3209">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

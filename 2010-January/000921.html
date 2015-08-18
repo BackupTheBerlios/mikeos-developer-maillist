@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.1 released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.1%20released&In-Reply-To=%3C540940.81871.qm%40web113104.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000919.html">
+   <LINK REL="Next"  HREF="000938.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.1 released</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.1%20released&In-Reply-To=%3C540940.81871.qm%40web113104.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] MikeOS 4.1 released">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Thu Jan 21 20:42:00 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000919.html">[mikeos-developer] MikeOS 4.1 released
+</A></li>
+        <LI>Next message: <A HREF="000938.html">[mikeos-developer] MikeOS 4.1 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#921">[ date ]</a>
+              <a href="thread.html#921">[ thread ]</a>
+              <a href="subject.html#921">[ subject ]</a>
+              <a href="author.html#921">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Guten Abend herr Saunders,
+Verspotten sie Deutsche zeit?
+
+Seriously though, I agree with you Mike that the more projects there
+are for MikeOS the better.
+For example, myself and Bazza were discussing a few things off line yesterday
+and he posed a very interesting question, how does one get real world data in and out
+of a new netbook/laptop which has only USB with MikeOS?
+
+I've never really given this much thought as normally I would just use USB or even Ethernet
+and problem solved, but on MikeOS this would be unfeasible.
+
+So after some head scratching I think I've come up with a solution....IrDA!!
+For those who don't know, Irda is a bi-directional infra-red port found on many laptops, netbooks
+and smartphones.
+On PC's, it can be enabled in BIOS by mapping COM2 to the IrDA port.
+
+IrDA uses some strange protocols but only when taking advantage of the maximum speed which is 4MB/sec.
+At lower speeds, 2400 to 115K baud, we can dispense with all the protocol overhead and simply 
+transmit and receive raw bytes very much like when using the serial port.
+The IrDA port uses a slightly different physical layer to RS232 (serial ports) but should be easy to implement
+using very basic (no pun intended) interface circuitry and I suspect many of the serial port routines can be re-used for the IrDA port.
+
+So I have decided to look further into this and make a IrDA interface for MikeOS.
+Will keep you posted.
+
+Paulo.
+
+
+
+
+
+----- Original Message ----
+From: M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+To: MikeOS (and similar OS) developers &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+Sent: Thu, January 21, 2010 8:35:26 PM
+Subject: Re: [mikeos-developer] MikeOS 4.1 released
+
+Hi all,
+
+Paulo: yes, that's the total downloads since the day the file was
+uploaded. BerliOS seems to update the stats every midnight at German
+time (GMT+1). Prima!
+
+Bazza: I reckon people who delve deep enough to explore MikeOS will
+also want to try equally geeky/techie/esoteric projects. It's great!
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+_______________________________________________
+mikeos-developer mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000919.html">[mikeos-developer] MikeOS 4.1 released
+</A></li>
+	<LI>Next message: <A HREF="000938.html">[mikeos-developer] MikeOS 4.1 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#921">[ date ]</a>
+              <a href="thread.html#921">[ thread ]</a>
+              <a href="subject.html#921">[ subject ]</a>
+              <a href="author.html#921">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

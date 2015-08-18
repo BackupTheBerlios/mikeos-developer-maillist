@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] libmikeos-0.1.0 is released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20libmikeos-0.1.0%20is%20released&In-Reply-To=%3C19d8b3b00810100711i267cc7e1if3d41c3cc4e33128%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000299.html">
+   <LINK REL="Next"  HREF="000301.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] libmikeos-0.1.0 is released</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20libmikeos-0.1.0%20is%20released&In-Reply-To=%3C19d8b3b00810100711i267cc7e1if3d41c3cc4e33128%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] libmikeos-0.1.0 is released">okachi at gmail.com
+       </A><BR>
+    <I>Fri Oct 10 16:11:31 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000299.html">[mikeos-developer] libmikeos-0.1.0 is released
+</A></li>
+        <LI>Next message: <A HREF="000301.html">[mikeos-developer] libmikeos-0.1.0 is released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#300">[ date ]</a>
+              <a href="thread.html#300">[ thread ]</a>
+              <a href="subject.html#300">[ subject ]</a>
+              <a href="author.html#300">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+On Fri, Oct 10, 2008 at 2:47 PM, SASANO Takayoshi &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">uaa at mx5.nisiq.net</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Well, testing API wrapper takes time...
+</I>&gt;<i> Even if I do my best, there might be some unchecked glue in 1.0 release.
+</I>
+That's fine -- we can mark it as a work-in-progress and keep updating it.
+
+Given the amount of changes in MikeOS 2.0, there will undoubtedly be
+some bugs when we release it. But hopefully we'll have many more
+people testing it, thereby making it easier to find problems and fix
+them.
+
+&gt;<i>        os_disk_reset_floppy
+</I>&gt;<i>        os_disk_convert_l2hts
+</I>&gt;<i>
+</I>&gt;<i> I think these APIs for some special applications,
+</I>&gt;<i> not for generic applications. Is this correct?
+</I>
+Yes, you are right! Normally, programs will use the os_write_file,
+os_rename_file etc. routines that you mentioned. However, I think we
+should expose the os_disk_* calls to userland programs in case a
+developer wants to use them -- for example, to implement a new disk
+management system call.
+
+So it's up to you -- for 2.0 it'd be great to have the os_wrte,
+os_get_file_size etc. and then maybe implement the 'internal' calls
+later.
+
+Cheers,
+Mike
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000299.html">[mikeos-developer] libmikeos-0.1.0 is released
+</A></li>
+	<LI>Next message: <A HREF="000301.html">[mikeos-developer] libmikeos-0.1.0 is released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#300">[ date ]</a>
+              <a href="thread.html#300">[ thread ]</a>
+              <a href="subject.html#300">[ subject ]</a>
+              <a href="author.html#300">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

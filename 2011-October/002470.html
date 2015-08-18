@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] New MikeOS 4.3b2 Patch
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20MikeOS%204.3b2%20Patch&In-Reply-To=%3CCADY6QCmJzLHWpNGpE_cOAtuOEwBduoQfzFaBXQEDu2MRSnve%2BQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002469.html">
+   <LINK REL="Next"  HREF="002471.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] New MikeOS 4.3b2 Patch</H1>
+    <B>Robert Looney</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20MikeOS%204.3b2%20Patch&In-Reply-To=%3CCADY6QCmJzLHWpNGpE_cOAtuOEwBduoQfzFaBXQEDu2MRSnve%2BQ%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] New MikeOS 4.3b2 Patch">rli1223 at gmail.com
+       </A><BR>
+    <I>Sat Oct  1 17:54:04 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002469.html">[mikeos-developer] mikeos-developer Digest, Vol 37, Issue 6
+</A></li>
+        <LI>Next message: <A HREF="002471.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2470">[ date ]</a>
+              <a href="thread.html#2470">[ thread ]</a>
+              <a href="subject.html#2470">[ subject ]</a>
+              <a href="author.html#2470">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I attacked this new patch for 4.3b2. This time I added the bright and not
+blinking code right after the BASIC program exits and before the
+app_selector and get_cmd. This worked for me.
+Please let me know if there is more blinking text!
+
+MENU INTERFACE:
+mov ax, 32768
+mov si, 0 ; No params to pass
+call os_run_basic ; And run our BASIC interpreter on the code!
+
+mov si, basic_finished_msg
+call os_print_string
+call os_wait_for_key
+
+call os_clear_screen
+
+mov ax, 1003h ; Set text output with certain attributes
+mov bx, 0 ; to be bright, and not blinking
+int 10h
+
+jmp app_selector ; and go back to the program list
+
+CLI:
+bas_file:
+mov ax, command ; If not, try to load specified program
+mov bx, 0
+mov cx, 32768
+call os_load_file
+jc total_fail
+
+mov ax, 32768
+mov word si, [param_list]
+call os_run_basic
+
+mov ax, 1003h ; Set text output with certain attributes
+mov bx, 0 ; to be bright, and not blinking
+int 10h
+
+jmp get_cmd
+
+-- 
+Robert Looney
+<A HREF="http://code.google.com/p/blue-jay-project/">http://code.google.com/p/blue-jay-project/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111001/8d12c2f0/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111001/8d12c2f0/attachment.html</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: kernel.asm
+Type: application/octet-stream
+Size: 11431 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111001/8d12c2f0/attachment.obj">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111001/8d12c2f0/attachment.obj</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: cli.asm
+Type: application/octet-stream
+Size: 11637 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111001/8d12c2f0/attachment-0001.obj">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111001/8d12c2f0/attachment-0001.obj</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002469.html">[mikeos-developer] mikeos-developer Digest, Vol 37, Issue 6
+</A></li>
+	<LI>Next message: <A HREF="002471.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2470">[ date ]</a>
+              <a href="thread.html#2470">[ thread ]</a>
+              <a href="subject.html#2470">[ subject ]</a>
+              <a href="author.html#2470">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

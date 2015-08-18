@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 3.4 alpha -- including MikeOS BASIC!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%203.4%20alpha%20--%20including%20MikeOS%20BASIC%21&In-Reply-To=%3C19d8b3b00906161341u30d7df6fif3f8e09ceaf4b83%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000699.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 3.4 alpha -- including MikeOS BASIC!</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%203.4%20alpha%20--%20including%20MikeOS%20BASIC%21&In-Reply-To=%3C19d8b3b00906161341u30d7df6fif3f8e09ceaf4b83%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 3.4 alpha -- including MikeOS BASIC!">okachi at gmail.com
+       </A><BR>
+    <I>Tue Jun 16 22:41:08 CEST 2009</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000699.html">[mikeos-developer] MikeOS 3.4 alpha -- including MikeOS BASIC!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#698">[ date ]</a>
+              <a href="thread.html#698">[ thread ]</a>
+              <a href="subject.html#698">[ subject ]</a>
+              <a href="author.html#698">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+I've started work on a BASIC interpreter for MikeOS. So far it
+supports these commands:
+
+PRINT LET ALERT INPUT GOTO GOSUB
+RETURN CLS CURSOR REM END
+
+Along with variable arithmetic, nested gosubs etc. Numeric variables
+are A to Z. See the end of this message for an example MikeOS BASIC
+program using these features. To try it out, download the OS from
+here:
+
+<A HREF="http://prdownload.berlios.de/mikeos/mikeos-3.4a.zip">http://prdownload.berlios.de/mikeos/mikeos-3.4a.zip</A>
+
+Run mikeos.flp as per usual, and go to the command line. Enter 'basic'
+to run the BASIC interpreter, which loads TEST.BAS and steps through
+it. You can edit the program by entering 'edit', choosing TEST.BAS at
+the menu, making your changes and hitting Esc to save.
+
+See programs/basic.asm for the source code -- it's a bit messy and
+wasteful in places, but I'll clean it up later. In the meantime, I'd
+like to know what BASIC commands I should implement next! I'm going to
+add MOVE, SOUND and GETKEY which should facilitate in writing simple
+games, and I'll also add some simple string routines too.
+
+Any other ideas for BASIC commands (within reason -- I don't have a
+great deal of time to spend on it!)
+
+Cheers,
+Mike
+
+
+REM *** MikeOS BASIC test program ***
+
+ALERT &quot;About to start the BASIC demo...&quot;
+CLS
+
+PRINT &quot;Enter a number for variable A:&quot;
+INPUT A
+PRINT &quot;&quot;
+PRINT &quot;Enter a number for variable B:&quot;
+INPUT B
+PRINT &quot;&quot;
+
+IF A = B THEN PRINT &quot;A is equal to B&quot;
+IF A &gt; B THEN PRINT &quot;A is larger than B&quot;
+IF A &lt; B THEN PRINT &quot;A is smaller than B&quot;
+
+LET C = A + B
+
+PRINT &quot;A and B added together are...&quot;
+PRINT C
+PRINT &quot;&quot;
+
+GOTO 50
+
+PRINT &quot;This line will not be executed&quot;
+
+50 GOSUB 100
+
+PRINT &quot;About to end now&quot;
+END
+
+100 PRINT &quot;Inside the GOSUB here!&quot;
+RETURN
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000699.html">[mikeos-developer] MikeOS 3.4 alpha -- including MikeOS BASIC!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#698">[ date ]</a>
+              <a href="thread.html#698">[ thread ]</a>
+              <a href="subject.html#698">[ subject ]</a>
+              <a href="author.html#698">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

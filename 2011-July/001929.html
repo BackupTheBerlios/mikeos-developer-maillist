@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Hello!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-July/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Hello%21&In-Reply-To=%3CCANsCSofaAo_bX5kmOToiHZEsnzFaO9dJGQW8JKGdF4sWmsBc%3Dg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001928.html">
+   <LINK REL="Next"  HREF="001930.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Hello!</H1>
+    <B>Christian Banks</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Hello%21&In-Reply-To=%3CCANsCSofaAo_bX5kmOToiHZEsnzFaO9dJGQW8JKGdF4sWmsBc%3Dg%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Hello!">levonepure at gmail.com
+       </A><BR>
+    <I>Thu Jul 14 03:32:12 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001928.html">[mikeos-developer] Updated CLI.ASM
+</A></li>
+        <LI>Next message: <A HREF="001930.html">[mikeos-developer] Hello!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1929">[ date ]</a>
+              <a href="thread.html#1929">[ thread ]</a>
+              <a href="subject.html#1929">[ subject ]</a>
+              <a href="author.html#1929">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello, my name is Christian and I've been following this mailing list for a
+bit now.
+I have decided that I am going to get more serious about furthering my
+programming knowledge so I wanted to write in and see what kinds of
+questions are welcome here.
+
+First, this is my first time ever writing to a mailing list so I'm sorry if
+I do something wrong.
+
+Now may I ask questions about x86 asm in general? And if so I was wondering
+about clearing the interrupt flag before setting up the stack.
+
+Specifically,
+
+    mov ax, 07C0h            ; Set up 4K of stack space above buffer
+&gt;<i>     add ax, 544            ; 8k buffer = 512 paragraphs + 32 paragraphs
+</I>&gt;<i> (loader)
+</I>&gt;<i>     cli                ; Disable interrupts while changing stack
+</I>&gt;<i>     mov ss, ax
+</I>&gt;<i>     mov sp, 4096
+</I>&gt;<i>     sti                ; Restore interrupts
+</I>&gt;<i>
+</I>
+If I'm understanding correctly, &quot;cli&quot; disables the &quot;int&quot; instruction?
+If that's correct, why is that done?
+
+
+Also, more on the topic of MikeOS, I was thinking about writing a simple
+executable format for the OS rather than just loading raw binaries. However
+this will come secondary to getting a deeper understanding of x86 ASM and
+how OS's work in general.
+
+Thank you for your time.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110713/9e140a72/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110713/9e140a72/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001928.html">[mikeos-developer] Updated CLI.ASM
+</A></li>
+	<LI>Next message: <A HREF="001930.html">[mikeos-developer] Hello!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1929">[ date ]</a>
+              <a href="thread.html#1929">[ thread ]</a>
+              <a href="subject.html#1929">[ subject ]</a>
+              <a href="author.html#1929">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

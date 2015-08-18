@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.2 released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.2%20released&In-Reply-To=%3CCACtjVkFYinetwYjWxAL4_zFVw7ie3doCuDyfL-Qow-dEtM-3Kg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002391.html">
+   <LINK REL="Next"  HREF="002412.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.2 released</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.2%20released&In-Reply-To=%3CCACtjVkFYinetwYjWxAL4_zFVw7ie3doCuDyfL-Qow-dEtM-3Kg%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 4.2 released">okachi at gmail.com
+       </A><BR>
+    <I>Fri Sep 30 12:09:41 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002391.html">[mikeos-developer] The floppy disk is dead - long live	thefloppy disk.
+</A></li>
+        <LI>Next message: <A HREF="002412.html">[mikeos-developer] MikeOS 4.2 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2388">[ date ]</a>
+              <a href="thread.html#2388">[ thread ]</a>
+              <a href="subject.html#2388">[ subject ]</a>
+              <a href="author.html#2388">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi folks,
+
+Download here: <A HREF="http://prdownload.berlios.de/mikeos/mikeos-4.2.zip">http://prdownload.berlios.de/mikeos/mikeos-4.2.zip</A>
+
+Full changelog below. The biggest changes since 4.1 are the new BASIC
+programs, CLI file management commands, EDIT.BIN enhancements and CLI
+parameter passing. Thanks to Joshua and Matej for their contributions,
+and everyone who tested the betas. This is a really good release, and
+sets us on a solid path for 4.3. I'll post the release on Freshmeat
+and OSDev.org now.
+
+Cheers,
+Mike
+
+
+# New program: Memory Manipulator (MEMEDIT.BAS) from Joshua Beck: a
+colourful program for editing bytes in memory, written in BASIC
+
+# New program: ASCII Artist (DRAW.BAS) from Joshua Beck: lets you
+draw, load and save images created with ASCII characters
+
+# New program: MikeTron Reloaded (MIKETRON.BAS) from Joshua Beck: new
+features, bonuses and explosion effects
+
+# New program: Calculator (CALC.BAS) from Joshua Beck
+
+# CLI has new file management operations to complement FILEMAN
+program: COPY, REN, DEL and SIZE
+
+# EDIT now supports the facility to make a new file with the F3 key
+
+# EDIT can take an existing file as a parameter at the command line:
+eg &quot;edit myfile.txt&quot;
+
+# EDIT will no longer let you run BASIC on an empty file
+
+# CLI supports argument passing: program receives the string of
+parameters in SI, or SI = 0 if no parameters are specified
+
+# os_run_basic now takes a parameter string in SI and copies it into
+the first BASIC string ($1), unless SI = 0
+
+# New system call: os_string_tokenize from Matej Horvat -- reads
+tokens separated by a specified character from a string
+
+# os_file_remove now restores all registers to previous state after use
+
+# SERIAL program offers to quit out before activating serial ports
+
+# TEST.PCX updated and renamed to SAMPLE.PCX
+
+# Bugfix: os_get_time_string vector is 0054h, not 0055h
+
+# Reordered code inclusion: source/features/basic.asm is now last in kernel
+
+# Bump API to version 14
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002391.html">[mikeos-developer] The floppy disk is dead - long live	thefloppy disk.
+</A></li>
+	<LI>Next message: <A HREF="002412.html">[mikeos-developer] MikeOS 4.2 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2388">[ date ]</a>
+              <a href="thread.html#2388">[ thread ]</a>
+              <a href="subject.html#2388">[ subject ]</a>
+              <a href="author.html#2388">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

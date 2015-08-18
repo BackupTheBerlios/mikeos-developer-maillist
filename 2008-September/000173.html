@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Text Editor 0.1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Text%20Editor%200.1&In-Reply-To=%3CB7B7FF377D2F4544902CC857A261C74D%40VistaLaptop%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000177.html">
+   <LINK REL="Next"  HREF="000175.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Text Editor 0.1</H1>
+    <B>Troy Martin</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Text%20Editor%200.1&In-Reply-To=%3CB7B7FF377D2F4544902CC857A261C74D%40VistaLaptop%3E"
+       TITLE="[mikeos-developer] Text Editor 0.1">blasterman95 at gmail.com
+       </A><BR>
+    <I>Sun Sep 28 02:35:52 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000177.html">[mikeos-developer] Development: MikeOS 1.9.1 released
+</A></li>
+        <LI>Next message: <A HREF="000175.html">[mikeos-developer] Text Editor 0.1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#173">[ date ]</a>
+              <a href="thread.html#173">[ thread ]</a>
+              <a href="subject.html#173">[ subject ]</a>
+              <a href="author.html#173">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It's edlin-like (with even less features, yuck) but it's still a text
+editor! It's basically a modified file.asm (same routines, added in the
+interface myself) so it can only save up to 511 bytes (yes Mike, it's 511,
+something's not saving the last byte, but it will save the last null byte if
+the file is supposed to be 511 bytes O.o)
+
+It's a great start, though. All keyboard-produced ASCII characters work,
+save enter (have a handler, but it's broken) and backspace (haven't written 
+the
+handler yet.)
+
+But it's good enough to release! It's stable too!
+
+PS: Mike, your file.asm also had missing colons on labels (lines 523, 571,
+620, and 669) :-) I fixed them, even though they didn't affect assembling
+and running.
+
+Troy Martin
+www.blasterman.co.nr
+
+PS: I had originally accidentally sent this as a reply under the name of 
+&quot;Our own edlin!&quot; but I resent it under this name on purpose. Hopefully it 
+all works perfectly this time :-) 
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: edit.txt
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080927/24afc34c/attachment.txt">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080927/24afc34c/attachment.txt</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000177.html">[mikeos-developer] Development: MikeOS 1.9.1 released
+</A></li>
+	<LI>Next message: <A HREF="000175.html">[mikeos-developer] Text Editor 0.1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#173">[ date ]</a>
+              <a href="thread.html#173">[ thread ]</a>
+              <a href="subject.html#173">[ subject ]</a>
+              <a href="author.html#173">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

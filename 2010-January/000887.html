@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] major upgrade for mikeos?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20major%20upgrade%20for%20mikeos%3F&In-Reply-To=%3C42916.70926.qm%40web113116.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000918.html">
+   <LINK REL="Next"  HREF="000889.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] major upgrade for mikeos?</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20major%20upgrade%20for%20mikeos%3F&In-Reply-To=%3C42916.70926.qm%40web113116.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] major upgrade for mikeos?">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Tue Jan 19 20:32:21 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000918.html">[mikeos-developer] libmikeos-4.1 released
+</A></li>
+        <LI>Next message: <A HREF="000889.html">[mikeos-developer] major upgrade for mikeos?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#887">[ date ]</a>
+              <a href="thread.html#887">[ thread ]</a>
+              <a href="subject.html#887">[ subject ]</a>
+              <a href="author.html#887">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+Mike, have you ever considered using unreal mode for MikeOS?
+Since most computers these days (and even of several years ago) probably
+have at least 128MB of RAM or more, it seems a shame to be limited to 640KB and
+the horrible sector:offset arrangement with all those overlapping segments.
+
+Now using protected mode is a real pain since BIOS functions are no longer accessible
+and writing a whole lot of drivers ain't too much fun, not to mention all that Ring 0, Ring 1 nonsense.
+
+Enter Unreal mode....basically switch to protected mode, set just one GDT, enable the A20 line
+then switch back to real mode.
+What this does is allow 32 bit addressing and hence access up to 4GB of RAM (assuming that much is actually installed on a pc)
+but since we switch back to real mode, the BIOS functions are available again.
+This is a well known and unofficially documented bug/feature of the x86 family since the 386.
+
+The stack segment and code segment are still limited to 64KB but the data segment is now one large linear chunk of up to 4GB.
+What do you reckon Mike? up to it for MikeOS 4.5?
+
+Paulo.
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000918.html">[mikeos-developer] libmikeos-4.1 released
+</A></li>
+	<LI>Next message: <A HREF="000889.html">[mikeos-developer] major upgrade for mikeos?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#887">[ date ]</a>
+              <a href="thread.html#887">[ thread ]</a>
+              <a href="subject.html#887">[ subject ]</a>
+              <a href="author.html#887">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

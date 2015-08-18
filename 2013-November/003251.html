@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] How to convert all OS files into one ISO/FLP?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2013-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20How%20to%20convert%20all%20OS%20files%20into%20one%20ISO/FLP%3F&In-Reply-To=%3CCACtjVkGzyf6HPvfbbzsCYjPibBnM-NXANPeKU_6%2BPtipK-EXNA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003250.html">
+   <LINK REL="Next"  HREF="003252.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] How to convert all OS files into one ISO/FLP?</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20How%20to%20convert%20all%20OS%20files%20into%20one%20ISO/FLP%3F&In-Reply-To=%3CCACtjVkGzyf6HPvfbbzsCYjPibBnM-NXANPeKU_6%2BPtipK-EXNA%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] How to convert all OS files into one ISO/FLP?">okachi at gmail.com
+       </A><BR>
+    <I>Sun Nov 17 19:43:45 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003250.html">[mikeos-developer] How to convert all OS files into one ISO/FLP?
+</A></li>
+        <LI>Next message: <A HREF="003252.html">[mikeos-developer] How to convert all OS files into one ISO/FLP?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3251">[ date ]</a>
+              <a href="thread.html#3251">[ thread ]</a>
+              <a href="subject.html#3251">[ subject ]</a>
+              <a href="author.html#3251">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>A lot of the time, it's easier just to put Xubuntu in VirtualBox and
+go from there. Only takes 10 minutes, and then you have very easy
+access to all sorts of tools for mounting and manipulating disk
+images. Windows is pretty awful for things like this, requiring all
+sorts of strange bolt-on programs, and Linux does it miles better.
+
+
+
+On Sun, Nov 17, 2013 at 7:40 PM, Bart H. &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">bartenilja11 at hotmail.com</A>&gt; wrote:
+&gt;<i> But how would I make an image of the OS?
+</I>&gt;<i>
+</I>&gt;<i> I mean, I have only the bootloader.asm, kernel.asm and other .asm or .bas
+</I>&gt;<i> programs. How would I convert them all to one bin file or one flp file?
+</I>&gt;<i>
+</I>&gt;<i> Bart
+</I>&gt;<i>
+</I>&gt;<i> ________________________________
+</I>&gt;<i> Date: Sun, 17 Nov 2013 13:17:50 -0500
+</I>&gt;<i> From: <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">blakeburgess at gamenetstudios.com</A>
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> Subject: Re: [mikeos-developer] How to convert all OS files into one
+</I>&gt;<i> ISO/FLP?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> The option that works the best for me, after trying a few floppy image
+</I>&gt;<i> programs, is to use a virtual machine installation of either WinXP or 2000.
+</I>&gt;<i> Share my dev folder as a network drive on the virtual machine, drag the
+</I>&gt;<i> files into the A drive, which is loaded with a copy of a MikeOS image, and
+</I>&gt;<i> then go into a program such as MagicISO (I think?) and specify the boot
+</I>&gt;<i> image as that same floppy image.
+</I>&gt;<i>
+</I>&gt;<i> The reason why I do this is because Windows 7 and all of the image
+</I>&gt;<i> manipulators I've tried do not handle MikeOS's FAT12 correctly. The usually
+</I>&gt;<i> end up changing it into some sort of FAT16 hybrid or something, I dunno.
+</I>&gt;<i> It's very strange.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &quot;Bart H.&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">bartenilja11 at hotmail.com</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> After having learned a bit about assembly, I searched for making OSes, and
+</I>&gt;<i> found MikeOS.
+</I>&gt;<i>
+</I>&gt;<i> I have a problem though: Let's say I made my own OS, just like MikeOS
+</I>&gt;<i> So it has multiple files: kernel.asm, bootloader.asm, the features like
+</I>&gt;<i> keyboard.asm and basic.asm , and the programs like hangman.asm and
+</I>&gt;<i> advnture.bas
+</I>&gt;<i> My question is: How would I put ALL of these files into just ONE iso file?
+</I>&gt;<i>
+</I>&gt;<i> Because it is a bit hard to explain, I made a picture of it:
+</I>&gt;<i> <A HREF="http://oi41.tinypic.com/sq1ao0.jpg">http://oi41.tinypic.com/sq1ao0.jpg</A>
+</I>&gt;<i> I am working with windows.
+</I>&gt;<i>
+</I>&gt;<i> I hope anyone here can tell me how to convert all of the MikeOS files to
+</I>&gt;<i> just one ISO file or even just one .flp file!
+</I>&gt;<i> I currently have NASM and CDRTools installed.
+</I>&gt;<i>
+</I>&gt;<i> Thanks in advance,
+</I>&gt;<i>
+</I>&gt;<i> Bart
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________ mikeos-developer mailing
+</I>&gt;<i> list <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I></PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003250.html">[mikeos-developer] How to convert all OS files into one ISO/FLP?
+</A></li>
+	<LI>Next message: <A HREF="003252.html">[mikeos-developer] How to convert all OS files into one ISO/FLP?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3251">[ date ]</a>
+              <a href="thread.html#3251">[ thread ]</a>
+              <a href="subject.html#3251">[ subject ]</a>
+              <a href="author.html#3251">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] On the cho(m)p functions
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20On%20the%20cho%28m%29p%20functions&In-Reply-To=%3C19d8b3b00901121314x301ad50qa44bcb6125fad269%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000621.html">
+   <LINK REL="Next"  HREF="000623.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] On the cho(m)p functions</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20On%20the%20cho%28m%29p%20functions&In-Reply-To=%3C19d8b3b00901121314x301ad50qa44bcb6125fad269%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] On the cho(m)p functions">okachi at gmail.com
+       </A><BR>
+    <I>Mon Jan 12 22:14:15 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000621.html">[mikeos-developer] On the cho(m)p functions
+</A></li>
+        <LI>Next message: <A HREF="000623.html">[mikeos-developer] On the the use of int xx
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#619">[ date ]</a>
+              <a href="thread.html#619">[ thread ]</a>
+              <a href="subject.html#619">[ subject ]</a>
+              <a href="author.html#619">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>[ From Tslil; was't sent to the list due to Gmail being odd ]
+
+
+Ok, let's start from scratch here (I have solved the problem and simply)
+
+ A number in NASM/ASM is not signed until we test for it. If it is
+ greater than 0x7FFF, then it will sign it as negative, less and it
+ will be positive. Thing is, if we don't test, it's always positive.
+ So, now I can understand why some versions of my function worked with
+ mov ax,0xFFFE and some didn't. Here is the completed function, it only
+ took +-4 lines to solve this (I'm sure it can be optimised)
+
+ ;================================================================================================
+ ;Created by Tslil Clingman, 2009
+ ;Here you can find all integer related kernel functions
+ ;================================================================================================
+
+ ;IN AX=integer (interpreted as unsigned) DX=Signed
+ ;OUT AX=String
+ k_int_tostrsi:
+        pusha
+        xor cx,cx                       ;set cx=0
+        mov bx,10                       ;set bx=10, for division and mod
+        mov di,.t                       ;get our pointer ready
+        test dx,dx                      ;AND dx with itself
+        jnz .sig                        ;to see if we want to work
+with 2's compliment
+        jmp .push
+ .sig:
+        test ax,ax                      ;AND ax with itself, find out
+if&gt;0 or not, force a sign
+        js .neg                         ;so it is &lt;0
+        jmp .push                       ;on second though, no, it wasn't
+ .neg:
+        neg ax                          ;make ax positive
+        mov byte [.t],'-'       ;add a minus sign to our string
+        inc di                          ; update the index
+ .push:
+        xor dx,dx
+        div     bx                          ;remainder in DX, quotient in AX
+        inc     cx                          ;increase pop loop counter
+        push dx                     ;push remainder, so as to reverse
+order when popping
+        test ax,ax                      ;is quotient zero
+        jnz     .push               ;if not, loop again
+ .pop:
+        pop dx                          ;pop off values in reverse
+order, add 48 to make them digits
+        add dl,'0'                      ;and save them in their index,
+increasing the pointer each time
+        mov [di],dl
+
+        inc di
+        dec cx
+        jnz .pop
+
+        mov byte [di], 0
+        popa
+        mov ax,.t                       ;finally return our hard work
+        ret
+        .t times 5 db 0
+
+ What a right mess this made. The whole thing boiled down to this
+ single call     &quot;test ax,ax&quot; - how absurd. Anyway, solved
+
+ Tslil
+
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000621.html">[mikeos-developer] On the cho(m)p functions
+</A></li>
+	<LI>Next message: <A HREF="000623.html">[mikeos-developer] On the the use of int xx
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#619">[ date ]</a>
+              <a href="thread.html#619">[ thread ]</a>
+              <a href="subject.html#619">[ subject ]</a>
+              <a href="author.html#619">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

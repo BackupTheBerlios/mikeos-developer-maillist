@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.0rc ready for testing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.0rc%20ready%20for%20testing&In-Reply-To=%3C19d8b3b00911161303q75120d4anbfc234347f8d5384%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000725.html">
+   <LINK REL="Next"  HREF="000730.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.0rc ready for testing</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.0rc%20ready%20for%20testing&In-Reply-To=%3C19d8b3b00911161303q75120d4anbfc234347f8d5384%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 4.0rc ready for testing">okachi at gmail.com
+       </A><BR>
+    <I>Mon Nov 16 22:03:14 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000725.html">[mikeos-developer] BareMetal OS is multi-processor aware!
+</A></li>
+        <LI>Next message: <A HREF="000730.html">[mikeos-developer] MikeOS 4.0rc ready for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#726">[ date ]</a>
+              <a href="thread.html#726">[ thread ]</a>
+              <a href="subject.html#726">[ subject ]</a>
+              <a href="author.html#726">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi to those still lurking on this list!
+
+<A HREF="http://prdownload.berlios.de/mikeos/mikeos-4.0rc.zip">http://prdownload.berlios.de/mikeos/mikeos-4.0rc.zip</A>
+
+It's been a while, but in the last week I've done a lot of work on the
+BASIC interpreter. It has now 23 commands, including string handling,
+loading/saving files, moving the cursor around (and turning it off),
+PC speaker sound, and nested FOR... NEXT loops. Oh, and no longer do
+you have to use numbers as labels -- you can use 'foo:' etc.
+
+Here's the full manual -- see the end for some sample programs
+demonstrating various features:
+
+<A HREF="http://mikeos.berlios.de/handbook-appdev-basic.html">http://mikeos.berlios.de/handbook-appdev-basic.html</A>
+
+In other news, the EDIT.BIN editor has been improved. Backspace now
+works (Delete still required to erase newlines), while the keybindings
+have been changed:
+
+* Esc = quit without saving
+* F2 = save file
+* F5 = remove current line (good for quickly removing chunks of a file)
+* F8 = execute edited code in the BASIC interpreter
+
+Yes, you can run your code as you're editing it! Welcome to the MikeOS
+IDE :-) This is thanks to a new system call, os_run_basic. See
+doc/CHANGES.TXT for more info on this and other updates.
+
+I just need to update some of the docs; otherwise this'll be good to
+go at the weekend. Please test it out, and if anyone wants to write
+some BASIC programs to test the interpreter and include in the Samples
+section of the handbook, that'd be brilliant! The more examples the
+better.
+
+Any questions, just ask here on the list and I'll reply ASAP.
+
+Cheers!
+Mike
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000725.html">[mikeos-developer] BareMetal OS is multi-processor aware!
+</A></li>
+	<LI>Next message: <A HREF="000730.html">[mikeos-developer] MikeOS 4.0rc ready for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#726">[ date ]</a>
+              <a href="thread.html#726">[ thread ]</a>
+              <a href="subject.html#726">[ subject ]</a>
+              <a href="author.html#726">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

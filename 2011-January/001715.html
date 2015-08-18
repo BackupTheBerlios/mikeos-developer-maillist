@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Implementing API Calls (SOLVED)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Implementing%20API%20Calls%20%28SOLVED%29&In-Reply-To=%3CAAF19480EA184897A64CCE91A6300256%40userfe6b65a555%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001714.html">
+   <LINK REL="Next"  HREF="001716.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Implementing API Calls (SOLVED)</H1>
+    <B>Mike Gonta</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Implementing%20API%20Calls%20%28SOLVED%29&In-Reply-To=%3CAAF19480EA184897A64CCE91A6300256%40userfe6b65a555%3E"
+       TITLE="[mikeos-developer] Implementing API Calls (SOLVED)">mikegonta at gmail.com
+       </A><BR>
+    <I>Mon Jan  3 14:37:49 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001714.html">[mikeos-developer] Implementing API Calls (SOLVED)
+</A></li>
+        <LI>Next message: <A HREF="001716.html">[mikeos-developer] Implementing API Calls (SOLVED)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1715">[ date ]</a>
+              <a href="thread.html#1715">[ thread ]</a>
+              <a href="subject.html#1715">[ subject ]</a>
+              <a href="author.html#1715">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> ----- Original Message ----- 
+</I>&gt;<i> From: Muzaffar Auhammud 
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A> 
+</I>&gt;<i> Sent: Monday, January 03, 2011 3:11 AM
+</I>&gt;<i> Subject: Re: [mikeos-developer] Implementing API Calls (SOLVED)
+</I>
+&gt;<i> &gt; org 0
+</I>&gt;<i> &gt; jmp System.Initialize ;0000h
+</I>&gt;<i> &gt; align 3
+</I>&gt;<i> &gt; jmp System.IO.Screen.DisplayString ;0003h
+</I>&gt;<i> &gt; align 3
+</I>&gt;<i>
+</I>&gt;<i> When I use align 3, i get the following errors in nasm:
+</I>&gt;<i>
+</I>&gt;<i> segment alignment '3' is not power of two
+</I>&gt;<i>
+</I>
+I wasn't thinking about that.
+In real mode there are &quot;short&quot; 2 byte jumps and &quot;near&quot; 3 byte jumps
+depending on the distance from the jump instruction to the label.
+If the jump table is less than 128 bytes the first jump will be
+2 bytes and that will throw off the equ's. Simply force the first
+jump to be 3 bytes (the others should be ok)
+
+  jmp NEAR System.Initialize      ;0000h
+
+&gt;&gt;<i> What does align means and why MikeOS don't use align and org 0?
+</I>
+&quot;align&quot; is used to locate the instructions on a boundary (by padding
+with nop instructions) for efficient code execution.
+MikeOS doesn't use it.
+&quot;org 0&quot; is the default and is not required.
+
+
+Mike Gonta
+look and see - many look but few see
+
+<A HREF="http://aeBIOS.com">http://aeBIOS.com</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001714.html">[mikeos-developer] Implementing API Calls (SOLVED)
+</A></li>
+	<LI>Next message: <A HREF="001716.html">[mikeos-developer] Implementing API Calls (SOLVED)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1715">[ date ]</a>
+              <a href="thread.html#1715">[ thread ]</a>
+              <a href="subject.html#1715">[ subject ]</a>
+              <a href="author.html#1715">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

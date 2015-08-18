@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Real mode nooberisms
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Real%20mode%20nooberisms&In-Reply-To=%3CCAACZMPYrY2E8y68eBcEdWLotneLvuH1t0neMW2xgw%3D2LhQFF2Q%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="002837.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Real mode nooberisms</H1>
+    <B>Dan Dart</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Real%20mode%20nooberisms&In-Reply-To=%3CCAACZMPYrY2E8y68eBcEdWLotneLvuH1t0neMW2xgw%3D2LhQFF2Q%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Real mode nooberisms">dandart at googlemail.com
+       </A><BR>
+    <I>Fri Jan 13 01:30:50 CET 2012</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="002837.html">[mikeos-developer] Real mode nooberisms
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2836">[ date ]</a>
+              <a href="thread.html#2836">[ thread ]</a>
+              <a href="subject.html#2836">[ subject ]</a>
+              <a href="author.html#2836">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+Just starting to learn asm (Thanks Mike for your article!) - but this
+time for x86.
+I'm starting out on a little real mode.
+
+I'm trying to write a simple hex printer for practice.
+
+I want to be able to call it by poking a db location into si, and then
+calling my subroutine, which looks like this:
+
+write_hex:
+    .write:
+    lodsb ; byte now in al
+    mov bl, al ; bl now 0x41 for example
+    shr bl, 4 ; bl now 0x04
+
+    or bl, 0x0f ; make sure!!!
+
+    cmp bl, 0x0a ; Is the nybble less than 10?
+    jl .isless
+
+    .isge:
+    add bl, 0x37 ; for instance 0x0b + 0x37 = &quot;B&quot;
+    jmp .cont
+
+    .isless: ; it is less than 0xa so add 0x30
+    add bl, 0x30 ; e.g. 0x04 + 0x30 = 0x34 = ascii &quot;4&quot;
+        jmp .cont
+
+    .cont:
+    ; bl now correct
+    ; bh can now be the higher byte
+    mov bh, al ; bl now 0xba
+    or bh, 0x0f ; strip off the first nybble: bl now 0x0a
+
+    cmp bh, 0x0a
+    jl .islesst
+
+    .isget:
+
+    add bh, 0x37 ; same as last time
+    jmp .contt
+
+    .islesst:
+    add bh, 0x30 ; same as last time
+    jmp .contt
+
+    .contt:
+    ; whole of bx now correct
+
+    ; print everything out
+    mov al, bh
+    mov ah, 0x0e; print
+    int 0x10
+
+    mov al, bl
+    int 0x10
+
+    .end:
+    ret
+
+Unfortunately whilst [si] contains 0x41,
+it prints out chars 0x86 and 0x46 instead of 0x34 0x31 like I want.
+Maybe I fail at maths, maybe I fail at ASM.
+
+Anyone got any tips? (Yes, I'll merge the two comparisons in together later).
+
+Regards
+Dan
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="002837.html">[mikeos-developer] Real mode nooberisms
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2836">[ date ]</a>
+              <a href="thread.html#2836">[ thread ]</a>
+              <a href="subject.html#2836">[ subject ]</a>
+              <a href="author.html#2836">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

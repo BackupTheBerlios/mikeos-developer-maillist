@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.1 released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.1%20released&In-Reply-To=%3C627942.28100.qm%40web113109.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000922.html">
+   <LINK REL="Next"  HREF="000924.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.1 released</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.1%20released&In-Reply-To=%3C627942.28100.qm%40web113109.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] MikeOS 4.1 released">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Thu Jan 21 21:22:17 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000922.html">[mikeos-developer] MikeOS 4.1 released
+</A></li>
+        <LI>Next message: <A HREF="000924.html">[mikeos-developer] MikeOS 4.1 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#923">[ date ]</a>
+              <a href="thread.html#923">[ thread ]</a>
+              <a href="subject.html#923">[ subject ]</a>
+              <a href="author.html#923">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Bazza,
+
+I guess not all pc's/netbooks/laptops have IrDA, but like you said it's another doorway.
+Have you tried a USB keyboard ?
+Since a keyboard is part of the HID class, I suspect that BIOS has support for it and should work
+straight &quot;out the box&quot;.
+If this is so, then you could always &quot;hack&quot; the keyboard and connect your inputs to certain keys
+via adequate isolation and presto, crude input port.
+If you needed output then you could always write to the keyboard controller to switch on and off the CAPS LOCK and NUM LOCK leds.
+This could emulate the serial clock and chip select for your ADC chips.
+
+Paulo.
+
+
+
+
+----- Original Message ----
+From: &quot;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">wisecracker at tesco.net</A>&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">wisecracker at tesco.net</A>&gt;
+To: MikeOS (and similar OS) developers &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+Sent: Thu, January 21, 2010 10:10:15 PM
+Subject: Re: [mikeos-developer] MikeOS 4.1 released
+
+Hi Paulo...
+
+&gt;<i> For example, myself and Bazza were discussing a few things off line yesterday
+</I>&gt;<i> and he posed a very interesting question, how does one get real world data in
+</I>&gt;<i> and out of a new netbook/laptop which has only USB with MikeOS?
+</I>
+&gt;<i> I've never really given this much thought as normally I would just use USB or
+</I>&gt;<i> even Ethernet and problem solved, but on MikeOS this would be unfeasible.
+</I>
+&gt;<i> So after some head scratching I think I've come up with a solution....IrDA!!
+</I>&gt;<i> For those who don't know, Irda is a bi-directional infra-red port found on
+</I>&gt;<i> many laptops, netbooks and smartphones.
+</I>&gt;<i> On PC's, it can be enabled in BIOS by mapping COM2 to the IrDA port.
+</I>
+Nice idea matey, except BEWARE!...
+
+This HP notebook does NOT have IrDA facilities at BIOS level.
+My HP laptop doesn`t either.
+
+My quad core desktop does but my other older P IV doesn`t.
+
+So this does not fill my criteria for ALL current home computing machines.
+
+However it would give another doorway for some machines... :)
+
+&gt;<i> So I have decided to look further into this and make a IrDA interface for MikeOS.
+</I>&gt;<i> Will keep you posted.
+</I>
+I`m still looking for a universal method...
+
+I was thinking of the possibility of hacking a USB Floppy drive, but they will soon
+become as rare as rocking horse sh1t, and I suspect it would it be impossible
+to force it to do external data I/O, AND, normal I/O anyhow.
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+_______________________________________________
+mikeos-developer mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+
+
+
+      
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000922.html">[mikeos-developer] MikeOS 4.1 released
+</A></li>
+	<LI>Next message: <A HREF="000924.html">[mikeos-developer] MikeOS 4.1 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#923">[ date ]</a>
+              <a href="thread.html#923">[ thread ]</a>
+              <a href="subject.html#923">[ subject ]</a>
+              <a href="author.html#923">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

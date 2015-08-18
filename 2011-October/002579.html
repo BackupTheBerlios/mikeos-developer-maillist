@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] FAT16 bootloader
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT16%20bootloader&In-Reply-To=%3CCAPRjAGjgp%3DhnOBVwrbyq%3D66uLhsOUZdN65iqD6nAGf_PViRvWA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002578.html">
+   <LINK REL="Next"  HREF="002560.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] FAT16 bootloader</H1>
+    <B>Paulo V</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT16%20bootloader&In-Reply-To=%3CCAPRjAGjgp%3DhnOBVwrbyq%3D66uLhsOUZdN65iqD6nAGf_PViRvWA%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] FAT16 bootloader">paulomobilemail at gmail.com
+       </A><BR>
+    <I>Wed Oct  5 19:25:57 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002578.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+        <LI>Next message: <A HREF="002560.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2579">[ date ]</a>
+              <a href="thread.html#2579">[ thread ]</a>
+              <a href="subject.html#2579">[ subject ]</a>
+              <a href="author.html#2579">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Mike,
+
+I know you most likely won't be able
+to read this for a few days but,
+I think I'm getting closer to solving
+the mystery about images and isos
+working on some machines and not others.
+
+I suspect it has something to do with CHS versus
+LBA disk access.
+Once we use FAT16 with bigger &quot;disks&quot;
+then one has to use INT13h extended functions
+which make use of LBA.
+How &quot;strict&quot; a specific machine is about this is
+controlled by it's BIOS.
+
+The reason the iso worked for both of us could be down
+to the BIOS implementation of our VMs
+
+I also notice that the BPB on the iso
+is different to the original one in the ima.
+This could have something with compensating for the
+fact that it's running on a CD and is modified by
+iso making app.
+See attached ScreenShot.
+
+Mike Gonta what do you say?
+
+Paulo.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111005/37d18d32/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111005/37d18d32/attachment.html</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: ScreenShot3.png
+Type: image/png
+Size: 24253 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111005/37d18d32/attachment.png">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111005/37d18d32/attachment.png</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002578.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+	<LI>Next message: <A HREF="002560.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2579">[ date ]</a>
+              <a href="thread.html#2579">[ thread ]</a>
+              <a href="subject.html#2579">[ subject ]</a>
+              <a href="author.html#2579">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] os_write_file
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20os_write_file&In-Reply-To=%3CAANLkTimjtqN0TB0rYKA53HKf%3DXVPyc1F4uMyKEDCukbM%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001614.html">
+   <LINK REL="Next"  HREF="001616.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] os_write_file</H1>
+    <B>Matthew Caswell</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20os_write_file&In-Reply-To=%3CAANLkTimjtqN0TB0rYKA53HKf%3DXVPyc1F4uMyKEDCukbM%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] os_write_file">caswellrienzo at gmail.com
+       </A><BR>
+    <I>Sun Dec 12 04:02:24 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001614.html">[mikeos-developer] os_write_file
+</A></li>
+        <LI>Next message: <A HREF="001616.html">[mikeos-developer] os_write_file
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1615">[ date ]</a>
+              <a href="thread.html#1615">[ thread ]</a>
+              <a href="subject.html#1615">[ subject ]</a>
+              <a href="author.html#1615">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>nor did I realize that the examples were snippets, not stand alone (or
+close to). Again, this comes from C.
+
+On Sat, Dec 11, 2010 at 9:01 PM, Matthew Caswell
+&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">caswellrienzo at gmail.com</A>&gt; wrote:
+&gt;<i> ...yeah...I figured this out a few minutes after asking this.
+</I>&gt;<i>
+</I>&gt;<i> start:
+</I>&gt;<i> &#160; &#160; mov ax, filename
+</I>&gt;<i> &#160; &#160; mov bx, data
+</I>&gt;<i> &#160; &#160; mov cx, 4192
+</I>&gt;<i> &#160; &#160; call os_write_file
+</I>&gt;<i>
+</I>&gt;<i> &#160; &#160; filename db &quot;file.txt&quot;,0
+</I>&gt;<i> &#160; &#160; data db &quot;Hello, World!&quot;,0
+</I>&gt;<i>
+</I>&gt;<i> The string 'data' just gets terminated by more than one zero. &#160;I'm
+</I>&gt;<i> assuming that MikeOS uses ASCII, so &quot;Hello,World!&quot;,0 would be 14
+</I>&gt;<i> bytes?
+</I>&gt;<i>
+</I>&gt;<i> I'm spending a lot of time learning assembly, and I just
+</I>&gt;<i> learned/figured out that 'times' is multiply (pretty obvious, but
+</I>&gt;<i> still different than a compiled language).
+</I>&gt;<i>
+</I>&gt;<i> On Sat, Dec 11, 2010 at 5:51 PM, M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt; wrote:
+</I>&gt;&gt;<i> Read the comment at the beginning of the example:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> ; For this example, there's some text stored in .data
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> The examples are not standalone programs; they are code snippets. It
+</I>&gt;&gt;<i> says that .data has been populated with some text.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> os_write_file is very simple: you point AX to a zero-terminated
+</I>&gt;&gt;<i> filename string; BX to a location in the MikeOS 64K of RAM; CX for the
+</I>&gt;&gt;<i> amount of bytes you want to write (starting from the BX location) and
+</I>&gt;&gt;<i> then call the routine.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> So where, if in an application, would you write the text to the file, or would
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> &#160; &#160; &#160; &#160;.data &#160; &#160; &#160; &#160; &quot;Hello, World!&quot;,0
+</I>&gt;&gt;&gt;<i> work?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Yes, but you'd have to change CX for the appropriate number of bytes.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i> Mike Saunders
+</I>&gt;&gt;<i> <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> mikeos-developer mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001614.html">[mikeos-developer] os_write_file
+</A></li>
+	<LI>Next message: <A HREF="001616.html">[mikeos-developer] os_write_file
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1615">[ date ]</a>
+              <a href="thread.html#1615">[ thread ]</a>
+              <a href="subject.html#1615">[ subject ]</a>
+              <a href="author.html#1615">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Running MikeOS on an 8086 emulator
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-June/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Running%20MikeOS%20on%20an%208086%20emulator&In-Reply-To=%3C20110617202324.13FCU.677470.root%40web10-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001884.html">
+   <LINK REL="Next"  HREF="001888.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Running MikeOS on an 8086 emulator</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Running%20MikeOS%20on%20an%208086%20emulator&In-Reply-To=%3C20110617202324.13FCU.677470.root%40web10-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] Running MikeOS on an 8086 emulator">wisecracker at tesco.net
+       </A><BR>
+    <I>Fri Jun 17 21:23:24 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001884.html">[mikeos-developer] Running MikeOS on an 8086 emulator
+</A></li>
+        <LI>Next message: <A HREF="001888.html">[mikeos-developer] Manuals...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1887">[ date ]</a>
+              <a href="thread.html#1887">[ thread ]</a>
+              <a href="subject.html#1887">[ subject ]</a>
+              <a href="author.html#1887">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Mike...
+
+Finally home...
+
+&gt;<i> Yes, that got further. Thanks Mario. It now gets to the app selector
+</I>&gt;<i> dialog box -- random flickering then and no interaction, but it's
+</I>&gt;<i> progress. I'm not really fussed about getting it working in that
+</I>&gt;<i> emulator, as it's still early in development. I was just curious!
+</I>
+Don't forget to remove the fs: and gs: segments in the kernel startup.
+Also remember that the original 8088/8086 does not recognise PUSHA and POPA
+so the stack will not be populated/unpopulated correctly.
+
+Also remember that these opcodes are valid for the 80386, (80286?), and above CPUs and
+it was you compiled the kernel for a(n) 80386 in REAL mode.
+
+I think I mentioned them sometime ago in that the kernel would not work in
+an 8088 environment.
+
+Now for 0x0F...
+This is a prefix for further instructions using two byte opcodes where 0x0F is the first
+byte, usually used for extensions of existing single byte opcodes. I once read somewhere
+that it was used originally used as POP CS which gives a compiler error on modern
+assemblers and was switched to the prefix for PM x86 CPUs, dunno how true this is though.
+
+JNZ in true 16 bit is not the same as in 32 or 64 bit you are only allowed a SHORT
+jump on 16 bit but in the other modes you are allowed a NEAR inside a segment in
+REAL mode.
+
+The prefix 0x0F instructs your JNZ to go outside the 7, (8), bit relative offset and is
+valid beyond the true 16 bit CPUs.
+
+That is all I can remember ATM...
+
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+<A HREF="http://homepages.tesco.net/wisecracker/">http://homepages.tesco.net/wisecracker/</A>
+
+<A HREF="http://main.aminet.net/search?readme=wisecracker">http://main.aminet.net/search?readme=wisecracker</A>
+
+<A HREF="http://mikeos.berlios.de/">http://mikeos.berlios.de/</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001884.html">[mikeos-developer] Running MikeOS on an 8086 emulator
+</A></li>
+	<LI>Next message: <A HREF="001888.html">[mikeos-developer] Manuals...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1887">[ date ]</a>
+              <a href="thread.html#1887">[ thread ]</a>
+              <a href="subject.html#1887">[ subject ]</a>
+              <a href="author.html#1887">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

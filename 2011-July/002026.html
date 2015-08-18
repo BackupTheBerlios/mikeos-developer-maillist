@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] stuff
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-July/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20stuff&In-Reply-To=%3C20110724153443.1EYBQ.828561.root%40web09-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002025.html">
+   <LINK REL="Next"  HREF="002027.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] stuff</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20stuff&In-Reply-To=%3C20110724153443.1EYBQ.828561.root%40web09-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] stuff">wisecracker at tesco.net
+       </A><BR>
+    <I>Sun Jul 24 16:34:43 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002025.html">[mikeos-developer] stuff
+</A></li>
+        <LI>Next message: <A HREF="002027.html">[mikeos-developer] Blue Jay OS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2026">[ date ]</a>
+              <a href="thread.html#2026">[ thread ]</a>
+              <a href="subject.html#2026">[ subject ]</a>
+              <a href="author.html#2026">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Joshua...
+
+&gt;<i> Looking though MikeOS with my memory viewer there's so much empty memory
+</I>&gt;<i> in the first 32k. Maybe I could add a section to the framework that places your
+</I>&gt;<i> data in free RAM in the first 32k. It would be dangerous do, but there isn't going
+</I>&gt;<i> to be permanent damage if I get it wrong.
+</I>
+Don't even consider it!!!
+
+Read the docs first...
+
+MikeOS uses two segments, 0x0000:0000 and 0x2000:0000, (PLUS, if you include
+the half segment 0xB800:0000), that is all you have to play with.
+
+Segment 0x0000 is used for the SP, half segment 0xB800 is CGA DMA video ram
+and 0x2000 is split between lower 32KB, mikeOS &quot;ROM&quot;, and user space in the top
+32KB...
+
+I've already uploaded ideas how to exploit these in assembly code but don't attempt
+under MikeBASIC; system crashes will undoubtedly occur as it is difficult to cross
+pollinate between segments, especially CS and SS, DS and ES are a possibility but
+would be tricky under BASIC without serious HW knowledge...
+
+I've also suggested how to re-vector the - now - none existent ROM BASIC INT 18H
+for your own usage...
+
+Search back through this list for the stuff...
+
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+<A HREF="http://homepages.tesco.net/wisecracker/">http://homepages.tesco.net/wisecracker/</A>
+
+<A HREF="http://main.aminet.net/search?readme=wisecracker">http://main.aminet.net/search?readme=wisecracker</A>
+
+<A HREF="http://mikeos.berlios.de/">http://mikeos.berlios.de/</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002025.html">[mikeos-developer] stuff
+</A></li>
+	<LI>Next message: <A HREF="002027.html">[mikeos-developer] Blue Jay OS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2026">[ date ]</a>
+              <a href="thread.html#2026">[ thread ]</a>
+              <a href="subject.html#2026">[ subject ]</a>
+              <a href="author.html#2026">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,935 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Bits 'n bobs for 3.2.1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Bits%20%27n%20bobs%20for%203.2.1&In-Reply-To=%3Cb5aca8070901280556m5983de40rc2f3cc97653c614e%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000663.html">
+   <LINK REL="Next"  HREF="000665.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Bits 'n bobs for 3.2.1</H1>
+    <B>Hiato</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Bits%20%27n%20bobs%20for%203.2.1&In-Reply-To=%3Cb5aca8070901280556m5983de40rc2f3cc97653c614e%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Bits 'n bobs for 3.2.1">hiato1 at gmail.com
+       </A><BR>
+    <I>Wed Jan 28 14:56:34 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000663.html">[mikeos-developer] Bits 'n bobs for 3.2.1
+</A></li>
+        <LI>Next message: <A HREF="000665.html">[mikeos-developer] Bits 'n bobs for 3.2.1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#664">[ date ]</a>
+              <a href="thread.html#664">[ thread ]</a>
+              <a href="subject.html#664">[ subject ]</a>
+              <a href="author.html#664">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>OK, this is probably the best place to put all of this:
+
+Firstly, line 572 and 616, string.asm &quot;	add dl, '0'	; Snd ...&quot; Snd
+should be And :P This is mostly my doing.
+
+Secondly, attached are a few procedures (for strings) that may or may
+not be vaguely useful (I'm pretty sure that they are easier to
+understand/simpler than the MikeOS equivalent commands - perhaps not
+though)
+
+Thirdly, I recently changed the syscall system in COS to something
+rather ingenious, if I may say so myself. One used to have to call int
+0xFE with the corresponding command in DI, but now I have created a
+nifty little python script that scans all of the files beginning
+matching &quot;k_*.asm&quot; (that are not in the exclusion list) and then finds
+all the calls beginning with &quot;k_&quot;. It then automatically creates the
+software interrupt file and the appropriate k_sys.inc (which allows
+calling by name, as it automatically fills DI with the correct command
+and calls int 0xFE). This way, all I have to do after adding more core
+kernel functions is double click and the rest is all fine and dandy.
+No need to find the memory locations or change the interrupt table
+again. Personally, I believe this system combines the best of both
+worlds. Let me know what you think about such a system (it greatly
+eased development for me). I have attached the script and the sample
+k_sit.asm and k_sys.inc files.
+
+Tslil
+
+PS: I know it's ambitious, but I decided seeing as the MikeOS FAT12
+code hates me, and I can't seem to get it to work, I am creating my
+own file system ;) More on this later.
+-------------- next part --------------
+#(C) Tslil Clingman, 2009
+
+#This script auto assembles the software interrupts module:
+    #It takes in all files matching 'k_*.asm' and that are not in 'disallowed' group
+    #It also excludes all calls mentioned in the 'badfood' group
+    #It lists the rest in alphabetical order (module) and then order of appearance (code)
+
+#It then auto assembles the include file:
+    #It takes all the calls from the software interrupts module and removes the 'k_' prefix
+    #It automatically creates all the required interrupt calls excluding functions in the 'deadfad' group
+    #It lists them in the order found in the software interrupts module
+
+import glob
+import string
+
+def DecToHex(n):
+    s=''
+    while n&gt;0:
+            if n%16&gt;9: s=chr((n%16)+55)+s
+            else: s=str(n%16)+s
+            n/=16
+    if s=='': s='0'
+    while len(s)%2&gt;0: s = '0' + s
+    return s
+
+def GetCalls(f):
+    n=[]
+    t=open(f,'r')
+    q=''
+    while True:
+        q=t.readline()
+        if not q: break
+        if (q.find('k_')==0) and (q[:q.find(':')] not in badfood): n.append(q[:q.find(':')])
+    t.close()
+    return n
+
+top=&quot;;================================================================================================\n;Created by Tslil Clingman, 2009\n;Here you can find all the interrupts software can call to perform kernel functions\n;System interrupt int 0xFE with DI=command number\n;Supress unhandled exception DL=1\n;================================================================================================\n\nk_intvector:\n&quot;
+lastones='.ver:\n\tmov si,.v\n\tmov ax,.a\n\tiret\n\t\n\t.v db K_VER,0\n\t.a db K_API\n\t\n.nop:\n\tnop\n\tmov di,0xFEBE\t;NOP executed\n\tiret\n\t\n.ohwell:\n\ttest dl,dl\n\tjz .panic\n\tmov di,0xBAD0\t;Unhandled exception notice\n\tiret\n\t\n.panic:\n\tcall k_mem_motdf\n\tiret\n\n'
+disallowed=['k_kern.asm','k_sit.asm','k_but.asm']
+badfood=['k_mem_motdf','k_rfol']
+fs=glob.glob('k_*.asm')
+sit=open('k_sit.asm','w')
+calls=[]
+
+for j in range(len(fs)):
+    if fs[j] not in disallowed:
+        calls+=GetCalls(fs[j])        
+
+sit.write(top)
+for k in range(len(calls)): sit.write('\tcmp di,0x'+DecToHex(k)+'\n\tje .'+calls[k][2:]+'\n'*2)
+sit.write('\tcmp di,0x'+DecToHex(k+1)+'\n\tje .ver\n\n\tcmp di,0x'+DecToHex(k+2)+'\n\tje .nop\n\n\tjmp .ohwell\n\n')
+for k in range(len(calls)): sit.write('.'+calls[k][2:]+':\n\tcall '+calls[k]+'\n\tiret'+'\n'*2)
+sit.write(lastones)
+sit.write('%DEFINE K_NOP 0x'+DecToHex(len(calls)+1))
+sit.close()
+
+top=&quot;;================================================================================================\n;Created by Tslil Clingman, 2009\n;Here you can find all the friendly names software can call to perform kernel functions\n;Supress unhandled exception DL=1\n;================================================================================================\n\n&quot;
+inc=open('k_sys.inc','w')
+
+inc.write(top)
+for k in range(len(calls)): inc.write(calls[k][2:]+':\n\tmov di,0x'+DecToHex(k)+'\n\tint 0xFE\n\n')
+inc.write('k_ver:\n\tmov di,0x'+DecToHex(k+1)+'\n\tint 0xFE\n\nk_nop:\n\tmov di,0x'+DecToHex(k+2)+'\n\tint 0xFE\n\nk_panic:\n\tmov di,0x'+DecToHex((k+3)*3)+'\n\tint 0xFE')
+inc.write('\n\n%DEFINE K_NOP 0x'+DecToHex(len(calls)+1))
+inc.close()
+-------------- next part --------------
+;================================================================================================
+;Created by Tslil Clingman, 2009
+;Here you can find all the friendly names software can call to perform kernel functions
+;Supress unhandled exception DL=1
+;================================================================================================
+
+flp_getfiles:
+	mov di,0x00
+	int 0xFE
+
+flp_fnconv:
+	mov di,0x01
+	int 0xFE
+
+flp_read:
+	mov di,0x02
+	int 0xFE
+
+flp_write:
+	mov di,0x03
+	int 0xFE
+
+flp_exist:
+	mov di,0x04
+	int 0xFE
+
+flp_newf:
+	mov di,0x05
+	int 0xFE
+
+flp_delf:
+	mov di,0x06
+	int 0xFE
+
+flp_renf:
+	mov di,0x07
+	int 0xFE
+
+flp_fsize:
+	mov di,0x08
+	int 0xFE
+
+inp_knowait:
+	mov di,0x09
+	int 0xFE
+
+inp_kwait:
+	mov di,0x0A
+	int 0xFE
+
+inp_getstring:
+	mov di,0x0B
+	int 0xFE
+
+int_tostr:
+	mov di,0x0C
+	int 0xFE
+
+int_randw:
+	mov di,0x0D
+	int 0xFE
+
+int_randb:
+	mov di,0x0E
+	int 0xFE
+
+mem_modivt:
+	mov di,0x0F
+	int 0xFE
+
+mem_sleep:
+	mov di,0x10
+	int 0xFE
+
+mem_dumpregs:
+	mov di,0x11
+	int 0xFE
+
+scr_setvidmd_c:
+	mov di,0x12
+	int 0xFE
+
+scr_setvidmd_bw:
+	mov di,0x13
+	int 0xFE
+
+scr_cprint:
+	mov di,0x14
+	int 0xFE
+
+scr_cprint_w:
+	mov di,0x15
+	int 0xFE
+
+scr_sprint:
+	mov di,0x16
+	int 0xFE
+
+scr_sprint_w:
+	mov di,0x17
+	int 0xFE
+
+scr_sprint_s:
+	mov di,0x18
+	int 0xFE
+
+scr_dprint:
+	mov di,0x19
+	int 0xFE
+
+scr_h1print:
+	mov di,0x1A
+	int 0xFE
+
+scr_h2print:
+	mov di,0x1B
+	int 0xFE
+
+scr_h4print:
+	mov di,0x1C
+	int 0xFE
+
+scr_iprint:
+	mov di,0x1D
+	int 0xFE
+
+scr_mvcrsr:
+	mov di,0x1E
+	int 0xFE
+
+scr_getcpos:
+	mov di,0x1F
+	int 0xFE
+
+scr_crsrhide:
+	mov di,0x20
+	int 0xFE
+
+scr_crsrshow:
+	mov di,0x21
+	int 0xFE
+
+scr_newline:
+	mov di,0x22
+	int 0xFE
+
+scr_clr:
+	mov di,0x23
+	int 0xFE
+
+scr_horizln:
+	mov di,0x24
+	int 0xFE
+
+stm_bcdtoint:
+	mov di,0x25
+	int 0xFE
+
+stm_date:
+	mov di,0x26
+	int 0xFE
+
+stm_time:
+	mov di,0x27
+	int 0xFE
+
+str_len:
+	mov di,0x28
+	int 0xFE
+
+str_cmp:
+	mov di,0x29
+	int 0xFE
+
+str_cmpn:
+	mov di,0x2A
+	int 0xFE
+
+str_copy:
+	mov di,0x2B
+	int 0xFE
+
+str_toint:
+	mov di,0x2C
+	int 0xFE
+
+str_term:
+	mov di,0x2D
+	int 0xFE
+
+str_upcase:
+	mov di,0x2E
+	int 0xFE
+
+str_lowcase:
+	mov di,0x2F
+	int 0xFE
+
+str_find:
+	mov di,0x30
+	int 0xFE
+
+str_replace:
+	mov di,0x31
+	int 0xFE
+
+str_replacen:
+	mov di,0x32
+	int 0xFE
+
+str_split:
+	mov di,0x33
+	int 0xFE
+
+str_divs:
+	mov di,0x34
+	int 0xFE
+
+str_rev:
+	mov di,0x35
+	int 0xFE
+
+str_chopr:
+	mov di,0x36
+	int 0xFE
+
+str_chopl:
+	mov di,0x37
+	int 0xFE
+
+str_chopa:
+	mov di,0x38
+	int 0xFE
+
+k_ver:
+	mov di,0x39
+	int 0xFE
+
+k_nop:
+	mov di,0x3A
+	int 0xFE
+
+k_panic:
+	mov di,0xB1
+	int 0xFE
+
+%DEFINE K_NOP 0x3A
+-------------- next part --------------
+;================================================================================================
+;Created by Tslil Clingman, 2009
+;Here you can find all the interrupts software can call to perform kernel functions
+;System interrupt int 0xFE with DI=command number
+;Supress unhandled exception DL=1
+;================================================================================================
+
+k_intvector:
+	cmp di,0x00
+	je .flp_getfiles
+
+	cmp di,0x01
+	je .flp_fnconv
+
+	cmp di,0x02
+	je .flp_read
+
+	cmp di,0x03
+	je .flp_write
+
+	cmp di,0x04
+	je .flp_exist
+
+	cmp di,0x05
+	je .flp_newf
+
+	cmp di,0x06
+	je .flp_delf
+
+	cmp di,0x07
+	je .flp_renf
+
+	cmp di,0x08
+	je .flp_fsize
+
+	cmp di,0x09
+	je .inp_knowait
+
+	cmp di,0x0A
+	je .inp_kwait
+
+	cmp di,0x0B
+	je .inp_getstring
+
+	cmp di,0x0C
+	je .int_tostr
+
+	cmp di,0x0D
+	je .int_randw
+
+	cmp di,0x0E
+	je .int_randb
+
+	cmp di,0x0F
+	je .mem_modivt
+
+	cmp di,0x10
+	je .mem_sleep
+
+	cmp di,0x11
+	je .mem_dumpregs
+
+	cmp di,0x12
+	je .scr_setvidmd_c
+
+	cmp di,0x13
+	je .scr_setvidmd_bw
+
+	cmp di,0x14
+	je .scr_cprint
+
+	cmp di,0x15
+	je .scr_cprint_w
+
+	cmp di,0x16
+	je .scr_sprint
+
+	cmp di,0x17
+	je .scr_sprint_w
+
+	cmp di,0x18
+	je .scr_sprint_s
+
+	cmp di,0x19
+	je .scr_dprint
+
+	cmp di,0x1A
+	je .scr_h1print
+
+	cmp di,0x1B
+	je .scr_h2print
+
+	cmp di,0x1C
+	je .scr_h4print
+
+	cmp di,0x1D
+	je .scr_iprint
+
+	cmp di,0x1E
+	je .scr_mvcrsr
+
+	cmp di,0x1F
+	je .scr_getcpos
+
+	cmp di,0x20
+	je .scr_crsrhide
+
+	cmp di,0x21
+	je .scr_crsrshow
+
+	cmp di,0x22
+	je .scr_newline
+
+	cmp di,0x23
+	je .scr_clr
+
+	cmp di,0x24
+	je .scr_horizln
+
+	cmp di,0x25
+	je .stm_bcdtoint
+
+	cmp di,0x26
+	je .stm_date
+
+	cmp di,0x27
+	je .stm_time
+
+	cmp di,0x28
+	je .str_len
+
+	cmp di,0x29
+	je .str_cmp
+
+	cmp di,0x2A
+	je .str_cmpn
+
+	cmp di,0x2B
+	je .str_copy
+
+	cmp di,0x2C
+	je .str_toint
+
+	cmp di,0x2D
+	je .str_term
+
+	cmp di,0x2E
+	je .str_upcase
+
+	cmp di,0x2F
+	je .str_lowcase
+
+	cmp di,0x30
+	je .str_find
+
+	cmp di,0x31
+	je .str_replace
+
+	cmp di,0x32
+	je .str_replacen
+
+	cmp di,0x33
+	je .str_split
+
+	cmp di,0x34
+	je .str_divs
+
+	cmp di,0x35
+	je .str_rev
+
+	cmp di,0x36
+	je .str_chopr
+
+	cmp di,0x37
+	je .str_chopl
+
+	cmp di,0x38
+	je .str_chopa
+
+	cmp di,0x39
+	je .ver
+
+	cmp di,0x3A
+	je .nop
+
+	jmp .ohwell
+
+.flp_getfiles:
+	call k_flp_getfiles
+	iret
+
+.flp_fnconv:
+	call k_flp_fnconv
+	iret
+
+.flp_read:
+	call k_flp_read
+	iret
+
+.flp_write:
+	call k_flp_write
+	iret
+
+.flp_exist:
+	call k_flp_exist
+	iret
+
+.flp_newf:
+	call k_flp_newf
+	iret
+
+.flp_delf:
+	call k_flp_delf
+	iret
+
+.flp_renf:
+	call k_flp_renf
+	iret
+
+.flp_fsize:
+	call k_flp_fsize
+	iret
+
+.inp_knowait:
+	call k_inp_knowait
+	iret
+
+.inp_kwait:
+	call k_inp_kwait
+	iret
+
+.inp_getstring:
+	call k_inp_getstring
+	iret
+
+.int_tostr:
+	call k_int_tostr
+	iret
+
+.int_randw:
+	call k_int_randw
+	iret
+
+.int_randb:
+	call k_int_randb
+	iret
+
+.mem_modivt:
+	call k_mem_modivt
+	iret
+
+.mem_sleep:
+	call k_mem_sleep
+	iret
+
+.mem_dumpregs:
+	call k_mem_dumpregs
+	iret
+
+.scr_setvidmd_c:
+	call k_scr_setvidmd_c
+	iret
+
+.scr_setvidmd_bw:
+	call k_scr_setvidmd_bw
+	iret
+
+.scr_cprint:
+	call k_scr_cprint
+	iret
+
+.scr_cprint_w:
+	call k_scr_cprint_w
+	iret
+
+.scr_sprint:
+	call k_scr_sprint
+	iret
+
+.scr_sprint_w:
+	call k_scr_sprint_w
+	iret
+
+.scr_sprint_s:
+	call k_scr_sprint_s
+	iret
+
+.scr_dprint:
+	call k_scr_dprint
+	iret
+
+.scr_h1print:
+	call k_scr_h1print
+	iret
+
+.scr_h2print:
+	call k_scr_h2print
+	iret
+
+.scr_h4print:
+	call k_scr_h4print
+	iret
+
+.scr_iprint:
+	call k_scr_iprint
+	iret
+
+.scr_mvcrsr:
+	call k_scr_mvcrsr
+	iret
+
+.scr_getcpos:
+	call k_scr_getcpos
+	iret
+
+.scr_crsrhide:
+	call k_scr_crsrhide
+	iret
+
+.scr_crsrshow:
+	call k_scr_crsrshow
+	iret
+
+.scr_newline:
+	call k_scr_newline
+	iret
+
+.scr_clr:
+	call k_scr_clr
+	iret
+
+.scr_horizln:
+	call k_scr_horizln
+	iret
+
+.stm_bcdtoint:
+	call k_stm_bcdtoint
+	iret
+
+.stm_date:
+	call k_stm_date
+	iret
+
+.stm_time:
+	call k_stm_time
+	iret
+
+.str_len:
+	call k_str_len
+	iret
+
+.str_cmp:
+	call k_str_cmp
+	iret
+
+.str_cmpn:
+	call k_str_cmpn
+	iret
+
+.str_copy:
+	call k_str_copy
+	iret
+
+.str_toint:
+	call k_str_toint
+	iret
+
+.str_term:
+	call k_str_term
+	iret
+
+.str_upcase:
+	call k_str_upcase
+	iret
+
+.str_lowcase:
+	call k_str_lowcase
+	iret
+
+.str_find:
+	call k_str_find
+	iret
+
+.str_replace:
+	call k_str_replace
+	iret
+
+.str_replacen:
+	call k_str_replacen
+	iret
+
+.str_split:
+	call k_str_split
+	iret
+
+.str_divs:
+	call k_str_divs
+	iret
+
+.str_rev:
+	call k_str_rev
+	iret
+
+.str_chopr:
+	call k_str_chopr
+	iret
+
+.str_chopl:
+	call k_str_chopl
+	iret
+
+.str_chopa:
+	call k_str_chopa
+	iret
+
+.ver:
+	mov si,.v
+	mov ax,.a
+	iret
+	
+	.v db K_VER,0
+	.a db K_API
+	
+.nop:
+	nop
+	mov di,0xFEBE	;NOP executed
+	iret
+	
+.ohwell:
+	test dl,dl
+	jz .panic
+	mov di,0xBAD0	;Unhandled exception notice
+	iret
+	
+.panic:
+	call k_mem_motdf
+	iret
+
+%DEFINE K_NOP 0x3A
+-------------- next part --------------
+;================================================================================================
+;Created by Tslil Clingman, 2009
+;Here you can find all string related kernel functions
+;================================================================================================
+
+;IN AX=String CX=Index
+;OUT AX=String BX=String
+k_str_split:
+	add si,cx
+	mov byte [si],0
+	inc si
+	mov bx,si
+	dec si
+	sub si,cx
+	mov ax,si
+	ret
+	
+;IN AX=String
+;OUT AX,BX,CX,DX=Strings
+k_str_divs:
+	mov si,ax			;Store it
+	mov al,' '
+	call k_str_find		;Find the index of the space
+	dec ax
+	mov cx,ax			;Move stuff for split
+	mov ax,si
+	call k_str_split	;Seperate AX into AX, BX along the space
+	push ax				;Store it
+	
+	mov si,bx
+	mov al,' '
+	call k_str_find
+	dec ax
+	mov cx,ax
+	mov ax,si
+	call k_str_split
+	push ax
+	
+	mov si,bx
+	mov al,' '
+	call k_str_find
+	dec ax
+	mov cx,ax
+	mov ax,si
+	call k_str_split
+	
+	mov cx,ax
+	mov dx,bx
+	pop bx
+	pop ax
+	ret
+	
+;IN AX=String
+;OUT AX=String
+k_str_chopr:
+	pusha
+	mov si,ax
+	call k_str_len
+	dec ax
+	add si,ax
+.loop:
+	cmp byte [si],32	;Cycle backwards through string, if we find ASCII&lt;33, cut of from end to here
+	jg .edge
+	dec si
+	test si,si
+	jz .done			;Whoops, gone too far, we're done - no whitespace found
+	jmp .loop
+.edge:
+	inc si
+	mov byte [si],0 	;Cut off string after last non whitespace ASCII
+.done:
+	popa
+	ret
+
+;IN AX=String
+;OUT AX=String
+k_str_chopl:
+	call k_str_rev		;Flip it
+	call k_str_chopr	;Chop right
+	call k_str_rev		;Flip it
+	ret					;Cheeky little fix :P
+
+;IN AX=String
+;OUT AX=String
+k_str_chopa:
+	pusha
+	call k_str_chopl
+	call k_str_chopr
+	popa
+	ret
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000663.html">[mikeos-developer] Bits 'n bobs for 3.2.1
+</A></li>
+	<LI>Next message: <A HREF="000665.html">[mikeos-developer] Bits 'n bobs for 3.2.1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#664">[ date ]</a>
+              <a href="thread.html#664">[ thread ]</a>
+              <a href="subject.html#664">[ subject ]</a>
+              <a href="author.html#664">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

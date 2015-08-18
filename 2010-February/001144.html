@@ -1,0 +1,239 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Regarding clearing interrupts while changing	stack.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Regarding%20clearing%20interrupts%20while%20changing%0A%09stack.&In-Reply-To=%3C822197.64520.qm%40web113114.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001141.html">
+   <LINK REL="Next"  HREF="001145.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Regarding clearing interrupts while changing	stack.</H1>
+    <B>Paulo Valongo</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Regarding%20clearing%20interrupts%20while%20changing%0A%09stack.&In-Reply-To=%3C822197.64520.qm%40web113114.mail.gq1.yahoo.com%3E"
+       TITLE="[mikeos-developer] Regarding clearing interrupts while changing	stack.">paulovalongo at rocketmail.com
+       </A><BR>
+    <I>Sat Feb  6 19:42:23 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001141.html">[mikeos-developer] Regarding clearing interrupts while changing	stack.
+</A></li>
+        <LI>Next message: <A HREF="001145.html">[mikeos-developer] Regarding clearing interrupts while changing	stack.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1144">[ date ]</a>
+              <a href="thread.html#1144">[ thread ]</a>
+              <a href="subject.html#1144">[ subject ]</a>
+              <a href="author.html#1144">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I want you to try something.
+Rerun that exe but add the following commandline switch    -writeromfile
+
+One of two things should happen:
+1) You get an error
+2) you should get a xxxx.rom file.
+
+Phoenix used to write the bios for dell machines.
+These were always a .rom 
+Dell has also tried it's hand at a couple of &quot;mods&quot; to the bios and they use compressed bin files.
+Let's find out which type you have.
+
+Paulo.
+
+
+
+
+
+
+________________________________
+From: nascent mind &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">nascent.mind at gmail.com</A>&gt;
+To: MikeOS (and similar OS) developers &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+Sent: Sat, February 6, 2010 6:34:56 PM
+Subject: Re: [mikeos-developer] Regarding clearing interrupts while changing stack.
+
+Strange I am not able to find the address in the whole file. The file itself becomes 24 MB in size after disassembling. Searched all the &quot;jmp word&quot; also.
+
+Bazza,
+       Any more ideas?
+
+
+On Sat, Feb 6, 2010 at 12:33 AM, Paulo Valongo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">paulovalongo at rocketmail.com</A>&gt; wrote:
+
+Hi nascent mind,
+&gt;<i>
+</I>&gt;<i>That is strange being all in an exe.
+</I>&gt;<i>I did a quick google around and most of the manufactures supply the exe which is
+</I>&gt;&gt;<i>actually the flashing utility but they also provide the bios contents in a separate file
+</I>&gt;<i>which normally has a .rom or .bin extension.
+</I>&gt;<i>
+</I>&gt;<i>I quickly downloaded an arbitrary bin file for some Asus motherboard and ran the bios bin file thru ndisasm (part of nasm)
+</I>&gt;&gt;<i>and I got the code.
+</I>&gt;<i>The most interesting is:
+</I>&gt;<i>
+</I>&gt;<i>000FFFF0  EA5BE000F0        jmp word 0xf000:0xe05b
+</I>&gt;<i>
+</I>&gt;<i>Just like Bazza said a few posts ago.
+</I>&gt;<i>
+</I>&gt;<i>Why exactly do you want to &quot;look&quot; at the bios code?
+</I>&gt;&gt;<i>Do you have a problem with yours, in which case I suspect you've come to the wrong place
+</I>&gt;<i>or do you just want to use the code for
+</I>&gt;<i> learning purposes in which case grab any old one from the net.
+</I>&gt;<i>
+</I>&gt;<i>Paulo.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>________________________________
+From: nascent mind &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">nascent.mind at gmail.com</A>&gt;
+&gt;<i>To: MikeOS (and similar OS) developers &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+</I>&gt;<i>Sent: Fri, February 5, 2010 8:36:17 PM
+</I>&gt;<i>
+</I>&gt;<i>Subject: Re: [mikeos-developer] Regarding clearing interrupts while changing stack.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Its embedded in the main executable. Its one single setup file. I have a dell. Also just out of curiosity I was reading about coreboot. Looks very
+</I>&gt;<i> promising. Wondering whether I can integrate mikeos as a payload :)
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>On Fri, Feb 5, 2010 at 11:16 PM, Paulo Valongo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">paulovalongo at rocketmail.com</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;<i>Hi nascent mind,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>A good place to start for anything bios related is:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i><A HREF="http://www.bioscentral.com">http://www.bioscentral.com</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Also look in the downloads section, always handy stuff there.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>When you say the installer comes with the bios code in it, do you mean that
+</I>&gt;&gt;<i>it is embedded in the main executable or is it in an external file?
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;<i>My guess it's an external file and if so why not run it thru a hex editor and a disassembler to
+</I>&gt;&gt;<i>see if the output makes any sense (i.e. it contains valid opcodes).
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Paulo.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>________________________________
+From: nascent mind &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">nascent.mind at gmail.com</A>&gt;
+&gt;&gt;<i>To: MikeOS (and similar OS) developers &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>&gt;
+</I>&gt;&gt;<i>Sent: Fri, February 5, 2010 7:05:14 PM
+</I>&gt;&gt;<i>Subject: Re: [mikeos-developer] Regarding clearing interrupts while changing stack.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>I meant the BIOS code. Is there any way I can extract it out from the ROM? My machine's flasher comes with an installer and the bios is embedded in it.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>On Fri, Feb 5, 2010 at 2:34 AM, &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">wisecracker at tesco.net</A>&gt; wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Hi nascent mind...
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> Awesome. This is exactly what I wanted. I want to see the code though.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>I`m not sure what you mean here........
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>If you mean MikeOS then his source is issued as part of the archive download.
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>If however you mean the BIOS then I`m afraid you`ll have to do what I do
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>even today and use MS-DOS, (say MS-DOS 5.xx for example), and use MS-DOSs
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>DEBUG.EXE to &quot;unassemble&quot; it MANUALLY, (note I mentioned DEBUG.EXE as it IS
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>part of ANY MS OS). You can do it through Windies using the Command Prompt
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>and running DEBUG from the prompt but sometimes &quot;NT&quot; gets in the way.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> Is it a good idea to disassemble the bios?
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>I`ve been looking at it for years and always find something new... :)
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> I am not sure how I can proceed to do that.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>See above.
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>If you try DEBUG.EXE and want help in using it just shout; it is a little convoluted,
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>BUT, it is also FREE and still true 16 bit - woohoo... ;o)
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> Also is it by any chance documented somewhere?
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>The BIOS?
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>I doubt anyone will have the source code for ANY ONE BIOS as it/they is/are
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>proprietary code but there is some information about BIOS coding in the internet
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>ether. BIOS interrupts and related stuff is in great abundance however.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>--
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>73...
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>Bazza, G0LCU...
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>Team AMIGA...
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>_______________________________________________
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>mikeos-developer mailing list
+</I>&gt;&gt;&gt;<i><A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;&gt;&gt;<i><A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>_______________________________________________
+</I>&gt;&gt;&gt;&gt;<i>mikeos-developer mailing list
+</I>&gt;&gt;<i><A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;&gt;<i><A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>_______________________________________________
+</I>&gt;&gt;<i>mikeos-developer mailing list
+</I>&gt;<i><A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i><A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+
+      
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100206/598a6366/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20100206/598a6366/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001141.html">[mikeos-developer] Regarding clearing interrupts while changing	stack.
+</A></li>
+	<LI>Next message: <A HREF="001145.html">[mikeos-developer] Regarding clearing interrupts while changing	stack.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1144">[ date ]</a>
+              <a href="thread.html#1144">[ thread ]</a>
+              <a href="subject.html#1144">[ subject ]</a>
+              <a href="author.html#1144">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

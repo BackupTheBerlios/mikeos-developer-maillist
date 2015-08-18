@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] A quick question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2009-November/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20quick%20question&In-Reply-To=%3Cb5aca8070911190243hf6f3f9ct69cf0253989af62d%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000747.html">
+   <LINK REL="Next"  HREF="000749.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] A quick question</H1>
+    <B>Tslil Clingman</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20A%20quick%20question&In-Reply-To=%3Cb5aca8070911190243hf6f3f9ct69cf0253989af62d%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] A quick question">hiato1 at gmail.com
+       </A><BR>
+    <I>Thu Nov 19 11:43:15 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000747.html">[mikeos-developer] A quick question
+</A></li>
+        <LI>Next message: <A HREF="000749.html">[mikeos-developer] A quick question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#748">[ date ]</a>
+              <a href="thread.html#748">[ thread ]</a>
+              <a href="subject.html#748">[ subject ]</a>
+              <a href="author.html#748">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Hrm, I'm not sure (it's been ages since I dealt with segments). Paste
+</I>&gt;<i> the file into <A HREF="http://pastebin.org">http://pastebin.org</A> and put the link and lines in
+</I>&gt;<i> question here, and I'll see if I can spot any potential problems.
+</I>
+<A HREF="http://pastebin.org/55136">http://pastebin.org/55136</A> Here it is, thanks. The routine is properly called
+and previously functioned without the mods of he highlighted (5-7 and 91-92)
+lines. Setting es befor calling it also seems to have no effect. somewhere
+this just enters an infinite loop OR causes a reboot. My guess for the
+various actions is because somewhere CS starts to point to garbage even
+though no far call or retf's have been made.
+In context:
+
+    mov cx,[ocli]        ; Store BUT in its allocated place. These values
+are correct. CX=Offset and BX=Segment
+    mov bx,[scli]
+    mov ax,.cli        ; Make sure we're loading the right thing
+    xor bx,bx
+    call k_flp_read        ; Let's put it into RAM
+
+ . . .
+
+    .cli    db 'BUT     BIN',0   ; Also correct as the get size routine
+functions with this input
+
+. . .
+. . .
+  mov bx, [.load_seg]             ; Set es:bx to where it needs to be
+  mov es,bx                     ; The question is does it need to be set
+back?
+  mov bx, [.load_ofs]
+  mov ah, 02
+  mov al, 01
+  stc
+  int 13h
+
+
+Any help would be much appreciated :)
+
+Tslil
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20091119/952b2297/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20091119/952b2297/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000747.html">[mikeos-developer] A quick question
+</A></li>
+	<LI>Next message: <A HREF="000749.html">[mikeos-developer] A quick question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#748">[ date ]</a>
+              <a href="thread.html#748">[ thread ]</a>
+              <a href="subject.html#748">[ subject ]</a>
+              <a href="author.html#748">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

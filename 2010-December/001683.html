@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] MikeOS 4.1.1-test2 - dialog box now scrollable!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.1.1-test2%20-%20dialog%20box%20now%20scrollable%21&In-Reply-To=%3CAANLkTinZrzQN-dtD55WS8WhQwPkp5d3NvbHjMq%2BhRKfz%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001682.html">
+   <LINK REL="Next"  HREF="001684.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] MikeOS 4.1.1-test2 - dialog box now scrollable!</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20MikeOS%204.1.1-test2%20-%20dialog%20box%20now%20scrollable%21&In-Reply-To=%3CAANLkTinZrzQN-dtD55WS8WhQwPkp5d3NvbHjMq%2BhRKfz%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] MikeOS 4.1.1-test2 - dialog box now scrollable!">okachi at gmail.com
+       </A><BR>
+    <I>Mon Dec 20 17:41:57 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001682.html">[mikeos-developer] Booting from USB flash ?
+</A></li>
+        <LI>Next message: <A HREF="001684.html">[mikeos-developer] MikeOS 4.1.1-test2 - dialog box now	scrollable!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1683">[ date ]</a>
+              <a href="thread.html#1683">[ thread ]</a>
+              <a href="subject.html#1683">[ subject ]</a>
+              <a href="author.html#1683">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi folks,
+
+It's here: <A HREF="http://prdownload.berlios.de/mikeos/mikeos-4.1.1-test2.zip">http://prdownload.berlios.de/mikeos/mikeos-4.1.1-test2.zip</A>
+
+
+Changes since 4.1.1-test1 are:
+
+# source/features/screen.asm: os_list_dialog now scrollable for more
+entries than can fit into the dialog box
+
+# source/features/cli.asm: dirlist expanded from 255 to 1024 bytes
+
+# source/features/screen.asm: os_file_selector: buffer expanded to 1024 bytes
+
+So the main change is that the dialog box is now scrollable. I've
+tried this out by putting 25 files on the floppy disk and the menu
+scrolls (using the cursor keys) through them. Please test and report
+any bugs!
+
+
+And the changes since 4.1 (for those just joining in) are:
+
+# Build scripts now copy all .bas files in programs/ to the floppy
+disk image (and not just example.bas)
+
+# source/features/misc.asm: os_pause rewritten by Paulo Valongo to
+work with more BIOSes; now takes 110ms chunks in AX
+
+# source/features/disk.asm fixes from Mike Gonta: os_get_file_list now
+checks for directory entries AND volume label; os_write_file routine
+now properly zeroes out the .free_clusters list
+
+# Documentation and comment fixes
+
+
+That should be everything for 4.1.1 now. I'll leave it up over
+Christmas, and if nobody finds any problems, we can release it as
+4.1.1 final in the new year. Thanks in advance for any testing and
+feedback!
+
+Cheers,
+Mike
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001682.html">[mikeos-developer] Booting from USB flash ?
+</A></li>
+	<LI>Next message: <A HREF="001684.html">[mikeos-developer] MikeOS 4.1.1-test2 - dialog box now	scrollable!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1683">[ date ]</a>
+              <a href="thread.html#1683">[ thread ]</a>
+              <a href="subject.html#1683">[ subject ]</a>
+              <a href="author.html#1683">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

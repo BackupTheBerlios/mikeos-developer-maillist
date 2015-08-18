@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] BFM 1.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20BFM%201.0&In-Reply-To=%3CAANLkTimbMOEhYbLW7t_QzG34%3DN_o%3Dh9OLG%2B4J9X0KNjO%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001827.html">
+   <LINK REL="Next"  HREF="001829.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] BFM 1.0</H1>
+    <B>Ondrej &#268;erman</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20BFM%201.0&In-Reply-To=%3CAANLkTimbMOEhYbLW7t_QzG34%3DN_o%3Dh9OLG%2B4J9X0KNjO%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] BFM 1.0">blacksvk at gmail.com
+       </A><BR>
+    <I>Wed Feb 16 12:24:49 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001827.html">[mikeos-developer] BFM 1.0
+</A></li>
+        <LI>Next message: <A HREF="001829.html">[mikeos-developer] BFM 1.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1828">[ date ]</a>
+              <a href="thread.html#1828">[ thread ]</a>
+              <a href="subject.html#1828">[ subject ]</a>
+              <a href="author.html#1828">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Cool, thanks. I'll try it out in the next couple of days and upload it
+&gt;<i> to the MikeOS website!
+</I>&gt;<i>
+</I>Great :)
+
+What method did you use for loading .BIN
+&gt;<i> programs, given that they're ORGed to run at the location in RAM your
+</I>&gt;<i> file manager is also loaded?
+</I>&gt;<i>
+</I>No, ... (see code)
+
+I use MikeOS Basic for loading .BIN files.
+
+Here's my code:
+
+LOAD &quot;file&quot; 32768     // According to Memorymap from sysdev handbook
+CALL 32768            // Run file
+LOAD &quot;BFM.BIN&quot; 32768  // Re-load BFM
+CALL 32768            // Run BFM
+
+And: When I want to close BFM, system will freeze (black screen), so I jump
+back to 0.
+
+CALL 0                // Jump back to MikeOS
+
+This is the best solution that I found. If anyone know better, please share
+it.
+
+BlackSVK
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110216/db0e0184/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110216/db0e0184/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001827.html">[mikeos-developer] BFM 1.0
+</A></li>
+	<LI>Next message: <A HREF="001829.html">[mikeos-developer] BFM 1.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1828">[ date ]</a>
+              <a href="thread.html#1828">[ thread ]</a>
+              <a href="subject.html#1828">[ subject ]</a>
+              <a href="author.html#1828">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Planning for MikeOS 4.2
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Planning%20for%20MikeOS%204.2&In-Reply-To=%3C0516e4ee44302e54739e3d4aeaf06cc3%40cordilon.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002116.html">
+   <LINK REL="Next"  HREF="002118.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Planning for MikeOS 4.2</H1>
+    <B>Blacklight</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Planning%20for%20MikeOS%204.2&In-Reply-To=%3C0516e4ee44302e54739e3d4aeaf06cc3%40cordilon.net%3E"
+       TITLE="[mikeos-developer] Planning for MikeOS 4.2">blacklight at cordilon.net
+       </A><BR>
+    <I>Fri Sep  9 01:28:12 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002116.html">[mikeos-developer] Planning for MikeOS 4.2
+</A></li>
+        <LI>Next message: <A HREF="002118.html">[mikeos-developer] Planning for MikeOS 4.2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2117">[ date ]</a>
+              <a href="thread.html#2117">[ thread ]</a>
+              <a href="subject.html#2117">[ subject ]</a>
+              <a href="author.html#2117">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, 9 Sep 2011 00:10:04 +0100, M Saunders wrote:
+&gt;<i> Give it a go with Matej's tokenize routine (thanks Matej!) and see 
+</I>&gt;<i> how
+</I>&gt;<i> you get on. If you have problems, I'll take a look. I'm not sure what
+</I>&gt;<i> the best approach is yet -- apps need some way to find the command
+</I>&gt;<i> line string in RAM and parse it.
+</I>My current approach is by having the CLI tokenize the input buffer when 
+the user hits enter. It counts the number of tokens and stores it to be 
+passed to the program.
+
+&gt;<i> They also need a way to get a parameter count, so that programs
+</I>&gt;<i> launched via the menu know that there aren't any extra params to
+</I>&gt;<i> check. In Unix style, there's always at least one parameter/argument
+</I>&gt;<i> which is the program's executable.
+</I>I was thinking that the tokenized parameter &quot;array&quot; should be passed in 
+SI and the parameter count in DX. Or something of that form.
+
+&gt;<i> Good luck!
+</I>Thanks!
+
+-- 
+Blacklight
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002116.html">[mikeos-developer] Planning for MikeOS 4.2
+</A></li>
+	<LI>Next message: <A HREF="002118.html">[mikeos-developer] Planning for MikeOS 4.2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2117">[ date ]</a>
+              <a href="thread.html#2117">[ thread ]</a>
+              <a href="subject.html#2117">[ subject ]</a>
+              <a href="author.html#2117">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

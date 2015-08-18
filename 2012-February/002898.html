@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Extending mikeos to 32 bits
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-February/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Extending%20mikeos%20to%2032%20bits&In-Reply-To=%3C1093728612.20120224094340%40gmx.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002889.html">
+   <LINK REL="Next"  HREF="002899.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Extending mikeos to 32 bits</H1>
+    <B>Dilip</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Extending%20mikeos%20to%2032%20bits&In-Reply-To=%3C1093728612.20120224094340%40gmx.net%3E"
+       TITLE="[mikeos-developer] Extending mikeos to 32 bits">dilip2k at gmx.net
+       </A><BR>
+    <I>Fri Feb 24 05:13:40 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002889.html">[mikeos-developer] Extending mikeos to 32 bits
+</A></li>
+        <LI>Next message: <A HREF="002899.html">[mikeos-developer] Extending mikeos to 32 bits
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2898">[ date ]</a>
+              <a href="thread.html#2898">[ thread ]</a>
+              <a href="subject.html#2898">[ subject ]</a>
+              <a href="author.html#2898">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello ,
+
+By extender I mean,we can use a v8086 interface to BIOS routines,and
+implement fully 32bit drivers also(but quite slowly,AFAIK even writing
+a harddisk driver with DMA requires a considerable amount of
+time!).And it would be good if the mikeos interface was changed to use
+interrupts.If I remember correctly,I have a lot of drivers(pretty good
+ones) lying around which were written by me.They are very low level,so
+no change should be needed to port it to mikeos.List of drivers: LBA
+PIO harddisk drivers,80*25 VGA text mode drivers, and 256 color VGA
+graphics drivers.
+
+And anyway,why does mikeos not use the interrupt-based syscall
+method?
+
+-- 
+Best regards,
+ Dilip                          mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">dilip2k at gmx.net</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002889.html">[mikeos-developer] Extending mikeos to 32 bits
+</A></li>
+	<LI>Next message: <A HREF="002899.html">[mikeos-developer] Extending mikeos to 32 bits
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2898">[ date ]</a>
+              <a href="thread.html#2898">[ thread ]</a>
+              <a href="subject.html#2898">[ subject ]</a>
+              <a href="author.html#2898">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

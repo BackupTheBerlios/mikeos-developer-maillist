@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Looking ahead to 2.0: segments and DOS	compatibility
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Looking%20ahead%20to%202.0%3A%20segments%20and%20DOS%0A%09compatibility&In-Reply-To=%3C19d8b3b00809020459x9486ae7h52dc0d4f66eabed0%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000114.html">
+   <LINK REL="Next"  HREF="000104.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Looking ahead to 2.0: segments and DOS	compatibility</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Looking%20ahead%20to%202.0%3A%20segments%20and%20DOS%0A%09compatibility&In-Reply-To=%3C19d8b3b00809020459x9486ae7h52dc0d4f66eabed0%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Looking ahead to 2.0: segments and DOS	compatibility">okachi at gmail.com
+       </A><BR>
+    <I>Tue Sep  2 13:59:54 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000114.html">[mikeos-developer] Looking ahead to	2.0:segmentsandDOScompatibility
+</A></li>
+        <LI>Next message: <A HREF="000104.html">[mikeos-developer] 40 kb of text!? wow.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#106">[ date ]</a>
+              <a href="thread.html#106">[ thread ]</a>
+              <a href="subject.html#106">[ subject ]</a>
+              <a href="author.html#106">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+Thanks for the feedback. I'm currently umming-and-ahhing about having
+a four segment design for 2.0:
+
+1) Kernel
+2) External program
+3) External program extra RAM
+4) External program space to load files
+
+If MikeOS handles all this fairly transparently, the user/developer
+need not worry too much about segments and offsets -- just accept that
+there are four different places to do things. It'll make the OS much
+more flexible.
+
+On Mon, Sep 1, 2008 at 12:14 AM, Bob Moss &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">bobbyjmoss at googlemail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> If you are planning to head to a protected mode OS, then using grub as a
+</I>&gt;<i> bootloader would take far less effort - but you would unfortunately lose
+</I>&gt;<i> your access to BIOS calls, so you would then need interrupt handling
+</I>
+Yeah, it's a dilly of a pickle as Ned Flanders would say. But I think
+protected mode is still a no-go area for MikeOS. Ultimately, I'd like
+the majority of code to be genuinely useful stuff about OS
+construction -- how interrupts work, how a program can interface with
+system calls, and so forth.
+
+Right now, there's a chunk of code in MikeOS that's more 'separate'
+from this ideal (the FAT12 stuff), and with PM, the amount of code for
+handling the keyboard, floppy and screen etc. would just become too
+cumbersome. As you say, MikeOS will never be portable in its current
+incarnation and I can see why you're heading the PM route -- but for
+simplicity's sake I'll stick with real mode for now.
+
+Troy Martin wrote:
+&gt;<i>
+</I>&gt;<i> But if we go for an interrupt, it shouldn't be from 20 to 2F, since DOS
+</I>&gt;<i> takes up all those. 0x25 is absolute disk read.
+</I>
+Um, that doesn't make sense, especially if I drop DOS compatibility!
+DOS isn't running so we're free to choose nigh-on any interrupt :-)
+
+Bob Moss wrote:
+&gt;<i>
+</I>&gt;<i> So, do we still want a grub bootloader that boots MikeOS in real mode?
+</I>&gt;<i> In view of V.2.0 it would probably be better just to use pmode (but as I
+</I>&gt;<i> said, you'd need to some interrupt handlers!).
+</I>
+Yep, GRUB booting in real mode would be tops (as mentioned, I think
+there are still far too many downsides in protected mode for a largely
+educational project like MikeOS). I haven't looked at interrupt
+handling in protected mode but it looks a lot more complex and
+involved than in real mode, where you can just poke location into the
+interrupt table at the bottom of RAM! Good luck with all the LIDTs and
+co. -- sounds like fun :-)
+
+Right now, I think the first thing to consider is hard drive support.
+I'm not doing anything with that, but if Ian makes some progress,
+that's when an alternative bootloader will have to factor into the
+equation.
+
+M
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000114.html">[mikeos-developer] Looking ahead to	2.0:segmentsandDOScompatibility
+</A></li>
+	<LI>Next message: <A HREF="000104.html">[mikeos-developer] 40 kb of text!? wow.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#106">[ date ]</a>
+              <a href="thread.html#106">[ thread ]</a>
+              <a href="subject.html#106">[ subject ]</a>
+              <a href="author.html#106">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

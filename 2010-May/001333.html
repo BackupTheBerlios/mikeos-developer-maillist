@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] OS_PAUSE
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20OS_PAUSE&In-Reply-To=%3CAANLkTimwMTgJqgW09Chkem1MF-FOBESJw5VCVvAqVcad%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001332.html">
+   <LINK REL="Next"  HREF="001334.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] OS_PAUSE</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20OS_PAUSE&In-Reply-To=%3CAANLkTimwMTgJqgW09Chkem1MF-FOBESJw5VCVvAqVcad%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] OS_PAUSE">okachi at gmail.com
+       </A><BR>
+    <I>Fri May 21 19:41:33 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001332.html">[mikeos-developer] OS_PAUSE
+</A></li>
+        <LI>Next message: <A HREF="001334.html">[mikeos-developer] OS_PAUSE
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1333">[ date ]</a>
+              <a href="thread.html#1333">[ thread ]</a>
+              <a href="subject.html#1333">[ subject ]</a>
+              <a href="author.html#1333">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Paulo,
+
+Interesting proposal, but I'd rather not go down that route. Lemme explain:
+
+&gt;<i> I was thinking about doing a zero check on the BX register.
+</I>&gt;<i> So if BX=0 when the call is made, then make os_wait_secs delay by half a second (actually 0.55sec)
+</I>&gt;<i> and put a max limit of BX=3600 &#160; (i.e. 3600 X 18 ticks/sec = 60 minutes)
+</I>
+I don't think it's a good idea for system calls to second-guess what
+the user is doing. They should do exactly what they say, and not try
+to fiddle around with things behind the scenes. Anyone using os_pause
+is coding in assembly language for a very niche OS, so I don't think
+we need to protect them from anything.
+
+Additionally, it makes documentation more complex. Instead of
+&quot;os_pause - waits for X ticks&quot; you have to say &quot;os_pause - waits for X
+ticks unless condition A in which case B happens, or condition C in
+which case D happens&quot;.
+
+os_pause with BX = 0 might have no purpose, but someone may be be
+calling it in a downward-counting loop. Changing the routine's
+behaviour to do something arbitrary at a certain point makes matters
+very confusing.
+
+So yes, routines should be as black-box as possible and protect
+registers, but they shouldn't make guesses about what the calling
+program intended.
+
+Cheers,
+Mike
+
+-- 
+Mike Saunders
+<A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001332.html">[mikeos-developer] OS_PAUSE
+</A></li>
+	<LI>Next message: <A HREF="001334.html">[mikeos-developer] OS_PAUSE
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1333">[ date ]</a>
+              <a href="thread.html#1333">[ thread ]</a>
+              <a href="subject.html#1333">[ subject ]</a>
+              <a href="author.html#1333">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

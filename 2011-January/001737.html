@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] ORG
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-January/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20ORG&In-Reply-To=%3C20110109211423.A8FNW.417230.root%40web10-winn.ispmail.private.ntl.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001738.html">
+   <LINK REL="Next"  HREF="001742.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] ORG</H1>
+    <B>wisecracker at tesco.net</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20ORG&In-Reply-To=%3C20110109211423.A8FNW.417230.root%40web10-winn.ispmail.private.ntl.com%3E"
+       TITLE="[mikeos-developer] ORG">wisecracker at tesco.net
+       </A><BR>
+    <I>Sun Jan  9 22:14:23 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001738.html">[mikeos-developer] Switching to protected mode
+</A></li>
+        <LI>Next message: <A HREF="001742.html">[mikeos-developer] Getting more memory for MikeOS usage.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1737">[ date ]</a>
+              <a href="thread.html#1737">[ thread ]</a>
+              <a href="subject.html#1737">[ subject ]</a>
+              <a href="author.html#1737">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Muzaffer...
+
+&gt;<i> What does the ORG instruction actually means?
+</I>
+1) It is not an instruction. It is a compiler directive.
+2) ORG is short for Origin, that point at which the code will ONLY run.
+It tells the compiler where to apply the correct offsets to your code.
+
+Consider these two snippets:-
+
+; A) This DOES require an ORG!
+	mov ax, 1234h
+	mov word [store], ax
+	mov ax, 4321h
+	nop
+	nop
+	mov word ax, [store]
+	ret
+
+; B) This IS position independant, ORG NOT required.
+	mov ax, 1234h
+	push ax
+	mov ax, 4321h
+	nop
+	nop
+	pop ax
+	ret
+
+Both do exactly the same thing. The NOPs represent ANY other code of yours.
+
+A) uses a fixed memory location so does require an ORIGIN so that the
+code, when executing, knows where to find it.
+
+B) uses the stack and does NOT require an ORIGIN so therefore is position
+independant.
+
+It IS INDEED possible to write MikeOS code to be totally position independant
+by VERY CAREFUL manupilation of the stack.
+
+It takes some serious getting your head around to do it though.
+
+
+
+--
+73...
+
+Bazza, G0LCU...
+
+Team AMIGA...
+
+<A HREF="http://homepages.tesco.net/wisecracker/">http://homepages.tesco.net/wisecracker/</A>
+
+<A HREF="http://main.aminet.net/search?readme=wisecracker">http://main.aminet.net/search?readme=wisecracker</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001738.html">[mikeos-developer] Switching to protected mode
+</A></li>
+	<LI>Next message: <A HREF="001742.html">[mikeos-developer] Getting more memory for MikeOS usage.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1737">[ date ]</a>
+              <a href="thread.html#1737">[ thread ]</a>
+              <a href="subject.html#1737">[ subject ]</a>
+              <a href="author.html#1737">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

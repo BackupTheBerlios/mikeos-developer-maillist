@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Blue Jay 0.20 Write Support Question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-May/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Blue%20Jay%200.20%20Write%20Support%20Question&In-Reply-To=%3CBANLkTindvBaCCjJQH8un6XDz_n2XPC989w%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001871.html">
+   <LINK REL="Next"  HREF="001870.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Blue Jay 0.20 Write Support Question</H1>
+    <B>Robert Looney</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Blue%20Jay%200.20%20Write%20Support%20Question&In-Reply-To=%3CBANLkTindvBaCCjJQH8un6XDz_n2XPC989w%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Blue Jay 0.20 Write Support Question">rli1223 at gmail.com
+       </A><BR>
+    <I>Thu May  5 03:41:41 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001871.html">[mikeos-developer] BFM 1.2
+</A></li>
+        <LI>Next message: <A HREF="001870.html">[mikeos-developer] Blue Jay 0.20 Write Support Question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1869">[ date ]</a>
+              <a href="thread.html#1869">[ thread ]</a>
+              <a href="subject.html#1869">[ subject ]</a>
+              <a href="author.html#1869">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Blue Jay 0.20 I am working in the FAT12_WRITE.ASM from TomOS 0.1 (like
+you all said). When I went to put in the system calls I read the handbook
+(which I have attached) and couldn't figure out how to assign call vectors
+to the system calls I just put in. If you could tell me what vectors to put
+into these calls, and how to assign them in the future it would be greatly
+appreciated. ( I think it would go 0x8099, 0x8102, 0x8105, 0x8108, 0x8111,
+0x8114)
+
+jmp os_hide_cursor         ; 0x8093
+
+jmp os_dump_registers ; 0x8096
+
+jmp os_write_file
+
+jmp os_file_exists
+ jmp os_create_file
+
+jmp os_remove_file
+
+jmp os_rename_file
+
+jmp os_get_file_size
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110504/dd957910/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110504/dd957910/attachment.html</A>&gt;
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110504/dd957910/attachment-0001.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110504/dd957910/attachment-0001.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001871.html">[mikeos-developer] BFM 1.2
+</A></li>
+	<LI>Next message: <A HREF="001870.html">[mikeos-developer] Blue Jay 0.20 Write Support Question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1869">[ date ]</a>
+              <a href="thread.html#1869">[ thread ]</a>
+              <a href="subject.html#1869">[ subject ]</a>
+              <a href="author.html#1869">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

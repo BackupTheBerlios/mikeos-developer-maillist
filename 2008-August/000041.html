@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] New mouse support for testing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2008-August/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20mouse%20support%20for%20testing&In-Reply-To=%3C8d87c8a30808280348g5733f190jee881680b0af01a1%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000039.html">
+   <LINK REL="Next"  HREF="000042.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] New mouse support for testing</H1>
+    <B>Bob Moss</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20mouse%20support%20for%20testing&In-Reply-To=%3C8d87c8a30808280348g5733f190jee881680b0af01a1%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] New mouse support for testing">bobbyjmoss at googlemail.com
+       </A><BR>
+    <I>Thu Aug 28 12:48:31 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000039.html">[mikeos-developer] New mouse support for testing
+</A></li>
+        <LI>Next message: <A HREF="000042.html">[mikeos-developer] New mouse support for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#41">[ date ]</a>
+              <a href="thread.html#41">[ thread ]</a>
+              <a href="subject.html#41">[ subject ]</a>
+              <a href="author.html#41">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hmm... I've tried it on a few physical devices.
+
+On an Eee PC 900 (USB floppy drive) - Most of the OS works but you can get
+sluggish performance. The 'mouse.bin' module loads but then terminates
+straight away (you don't get the chance to see if the touchpad works) -
+perhaps this is a debugging measure, as it wasn't designed for trackpad
+mice!
+
+Likewise a similar thing happens on an old Toshiba satellite (You know the
+old grey ones with the green sponge in the middle of the keyboard as a
+mouse?). The mouse.bin module mostly works, but I do sometimes get some
+bizarre co-ordinate addresses in the bottom-left.
+
+It seems to work perfectly with my desktop machine though (with a PS/2
+mouse). though USB  mouse performance tends to be a bit more erratic...!
+
+2008/8/28 M Saunders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">okachi at gmail.com</A>&gt;
+
+&gt;<i> Lo all,
+</I>&gt;<i>
+</I>&gt;<i> Tomasz Gorol has contributed a complete mouse driver for MikeOS.
+</I>&gt;<i> Here's the patch against 1.4.2 (it's a whopper!):
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://mikeos.berlios.de/mouse/mouse.txt">http://mikeos.berlios.de/mouse/mouse.txt</A>
+</I>&gt;<i>
+</I>&gt;<i> This implements native system calls, some DOS compatibility, and an
+</I>&gt;<i> example program. I've uploaded disk images (floppy and CD-ROM) here,
+</I>&gt;<i> with the build name 1.4.2M:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://mikeos.berlios.de/mouse/disk_images.zip">http://mikeos.berlios.de/mouse/disk_images.zip</A>
+</I>&gt;<i>
+</I>&gt;<i> So far we've tested it in QEMU and VirtualBox -- I'm going to try some
+</I>&gt;<i> real hardware tonight. Any other testing muchly appreciated!
+</I>&gt;<i>
+</I>&gt;<i> M
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Mike Saunders
+</I>&gt;<i> <A HREF="http://okachi.googlepages.com">http://okachi.googlepages.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+This email is not intended to offend, annoy or inconvenience anyone. If it
+has, email me and state that it has, and we'll sort out the problem in an
+amicable way. Thank you for reading this message, I hope for a reply from
+you soon!
+
+Why not visit my tech site?: <A HREF="http://bjm1904.741.com/">http://bjm1904.741.com/</A>
+or Apollo OS?:
+<A HREF="http://apolloopsys.sourceforge.net/">http://apolloopsys.sourceforge.net/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080828/2b92d024/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20080828/2b92d024/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000039.html">[mikeos-developer] New mouse support for testing
+</A></li>
+	<LI>Next message: <A HREF="000042.html">[mikeos-developer] New mouse support for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#41">[ date ]</a>
+              <a href="thread.html#41">[ thread ]</a>
+              <a href="subject.html#41">[ subject ]</a>
+              <a href="author.html#41">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

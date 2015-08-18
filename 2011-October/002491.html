@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] FAT16 bootloader
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT16%20bootloader&In-Reply-To=%3CCACtjVkHF3CJ8CiKB4iW8RT7dCYwJAqe4RzRf2_u%3DzFoN5oxJug%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002482.html">
+   <LINK REL="Next"  HREF="002500.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] FAT16 bootloader</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20FAT16%20bootloader&In-Reply-To=%3CCACtjVkHF3CJ8CiKB4iW8RT7dCYwJAqe4RzRf2_u%3DzFoN5oxJug%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] FAT16 bootloader">okachi at gmail.com
+       </A><BR>
+    <I>Mon Oct  3 11:13:09 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002482.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+        <LI>Next message: <A HREF="002500.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2491">[ date ]</a>
+              <a href="thread.html#2491">[ thread ]</a>
+              <a href="subject.html#2491">[ subject ]</a>
+              <a href="author.html#2491">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Oct 2, 2011 at 11:40 PM, Paulo V &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">paulomobilemail at gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Documentation as promised.
+</I>&gt;<i> See attached zip file.
+</I>
+This is looking good -- thanks for all the work Paulo. It's great that
+you've documented what you've done so far, so that others can help. If
+anyone else is interested in having MikeOS on hard drives on day, it's
+well worth checking out the .zip!
+
+Now, the bit of copying bytes from one BPB to another is complex, and
+I can see that introducing difficulties in the future. This is why I
+think we should just have a single 16MB drive image with the relevant
+data hard-coded into the bootloader BPB and MikeOS disk.asm routines.
+Then running MikeOS 5 (or whatever) will be as simple as:
+
+1) Plug in USB key
+2) Run &quot;dd if=mikeos.img of=/dev/usbkey&quot; (or the Windows equivalent)
+
+Sure, this wipes the USB key and leaves just 16MB of room, but for
+MikeOS that's still enormous. Besides, any dedicated OS hacker should
+have a spare USB key lying around, and you can pick up low capacity
+ones for pennies now.
+
+IMO, that's much simpler than telling people to format the key as
+FAT16, then run some program to insert a bootloader which also
+replaces bytes in the BPB with relevant info for that specific drive,
+then run another script to copy the kernel and programs onto the drive
+etc.
+
+Let's go with the simple, always-the-same 16MB disk image approach,
+which'll make it dead easy for people to try MikeOS. Paulo, if you get
+the bootloader working on that disk image, I'll buy you a pint!
+Somehow...
+
+M
+
+
+
+
+&gt;<i>
+</I>&gt;<i> Paulo.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002482.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+	<LI>Next message: <A HREF="002500.html">[mikeos-developer] FAT16 bootloader
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2491">[ date ]</a>
+              <a href="thread.html#2491">[ thread ]</a>
+              <a href="subject.html#2491">[ subject ]</a>
+              <a href="author.html#2491">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

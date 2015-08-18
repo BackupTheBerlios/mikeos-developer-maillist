@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Using string variables (esp for Joshua)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Using%20string%20variables%20%28esp%20for%20Joshua%29&In-Reply-To=%3CCACtjVkGOafV6VuuZP_ZntkXiyw6SUS8WV-U0k67fO9Fsd%3Dqy%3Dg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002169.html">
+   <LINK REL="Next"  HREF="002171.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Using string variables (esp for Joshua)</H1>
+    <B>M Saunders</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Using%20string%20variables%20%28esp%20for%20Joshua%29&In-Reply-To=%3CCACtjVkGOafV6VuuZP_ZntkXiyw6SUS8WV-U0k67fO9Fsd%3Dqy%3Dg%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Using string variables (esp for Joshua)">okachi at gmail.com
+       </A><BR>
+    <I>Sun Sep 18 19:59:30 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002169.html">[mikeos-developer] Using string variables (esp for Joshua)
+</A></li>
+        <LI>Next message: <A HREF="002171.html">[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 28
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2170">[ date ]</a>
+              <a href="thread.html#2170">[ thread ]</a>
+              <a href="subject.html#2170">[ subject ]</a>
+              <a href="author.html#2170">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Oh! And so basically with the rearrangement, the BASIC string $9
+becomes the starting point of the &quot;free&quot; RAM from the end of the
+kernel until 24,576, the disk buffer. So if you want to do stuff in
+that space -- although bear in mind it could disappear one day -- then
+you should be able to get its location with:
+
+X = &amp; $9
+
+M
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002169.html">[mikeos-developer] Using string variables (esp for Joshua)
+</A></li>
+	<LI>Next message: <A HREF="002171.html">[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 28
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2170">[ date ]</a>
+              <a href="thread.html#2170">[ thread ]</a>
+              <a href="subject.html#2170">[ subject ]</a>
+              <a href="author.html#2170">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

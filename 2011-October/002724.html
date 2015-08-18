@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] New BASIC commands
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20BASIC%20commands&In-Reply-To=%3CCAEz6_zjTSr8U217atH8vyaC0rqD6oO%3D%3DEYCzfvoE2maU1xt4vw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002723.html">
+   <LINK REL="Next"  HREF="002725.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] New BASIC commands</H1>
+    <B>Joshua Beck</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20New%20BASIC%20commands&In-Reply-To=%3CCAEz6_zjTSr8U217atH8vyaC0rqD6oO%3D%3DEYCzfvoE2maU1xt4vw%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] New BASIC commands">mikeosdeveloper at gmail.com
+       </A><BR>
+    <I>Fri Oct 28 13:10:24 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002723.html">[mikeos-developer] MUNCHER &amp; DRAW Bugs
+</A></li>
+        <LI>Next message: <A HREF="002725.html">[mikeos-developer] New BASIC commands
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2724">[ date ]</a>
+              <a href="thread.html#2724">[ thread ]</a>
+              <a href="subject.html#2724">[ subject ]</a>
+              <a href="author.html#2724">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>-&gt; Added the ability for FOR/NEXT loops to include variables.
+FOR X = A TO B
+I have found myself needing this multiple times, which I have
+to do a LABEL/GOTO loop.
+
+-&gt; Added beep command.
+BEEP
+Just a simple sound for those who just want a standard beep.
+
+-&gt; Added number to string and string to number converter.
+NUMBER $1 X
+NUMBER X $1
+
+-&gt; Added size command.
+SIZE $1
+SIZE &quot;FOO.BAR&quot;
+Get the size of a file before you load it. You can make sure
+that you have enough space for the file.
+
+-&gt; Added rename command.
+RENAME $1 $2
+RENAME $1 &quot;FOO.VAR&quot;
+RENAME &quot;FOO.BAR&quot; &quot;FOO.VAR&quot;
+The missing file command. You can use strings or quotes.
+
+
+-&gt; Fixed my PRINT CHR bug
+The cursor will now move for &quot;PRINT CHR X ;&quot; except if it's
+at 79,24 then it will stay. New lines will still be printed
+without the semi-colon.
+Should fix Muncher and make full screen borders possible.
+
+PS Can people call my applications by their proper names
+instead of capitalize 8.3 file-names without extensions?
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: basic.asm
+Type: application/octet-stream
+Size: 53813 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111028/995ff7e3/attachment.obj">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20111028/995ff7e3/attachment.obj</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002723.html">[mikeos-developer] MUNCHER &amp; DRAW Bugs
+</A></li>
+	<LI>Next message: <A HREF="002725.html">[mikeos-developer] New BASIC commands
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2724">[ date ]</a>
+              <a href="thread.html#2724">[ thread ]</a>
+              <a href="subject.html#2724">[ subject ]</a>
+              <a href="author.html#2724">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

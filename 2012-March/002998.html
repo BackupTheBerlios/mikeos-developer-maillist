@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] GUI layer for applications
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2012-March/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20GUI%20layer%20for%20applications&In-Reply-To=%3C0718FF80B3A2481F8F549B8A2DE2854C%40BlakeBurgessPC%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002995.html">
+   <LINK REL="Next"  HREF="003001.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] GUI layer for applications</H1>
+    <B>Blake Burgess</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20GUI%20layer%20for%20applications&In-Reply-To=%3C0718FF80B3A2481F8F549B8A2DE2854C%40BlakeBurgessPC%3E"
+       TITLE="[mikeos-developer] GUI layer for applications">blakeburgess at gamenetstudios.com
+       </A><BR>
+    <I>Sun Mar 25 05:38:38 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002995.html">[mikeos-developer] GUI layer for applications
+</A></li>
+        <LI>Next message: <A HREF="003001.html">[mikeos-developer] GUI layer for applications
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2998">[ date ]</a>
+              <a href="thread.html#2998">[ thread ]</a>
+              <a href="subject.html#2998">[ subject ]</a>
+              <a href="author.html#2998">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Alright guys, here&#8217;s a draft of the window info block.
+
+From: Blake Burgess 
+Sent: Sunday, March 18, 2012 11:34 PM
+To: MikeOS (and similar OS) developers 
+Subject: [mikeos-developer] GUI layer for applications
+
+I mentioned not too long ago about a GUI layer for MikeOS applications that I&#8217;ve been working on called Xypher. After much thought and comparing screen resolution to memory size to difficulty ratios, I&#8217;ve decided to, instead of settling with a full blown graphics mode framework with custom font handling and the works, to opt with the simple mode 03h text mode.
+
+The framework is a TSR that will be loaded into a segment out of reach from the application and will be accessed via interrupt 30h. The windows&#8217; designs will be specified in an information block. This block will consist of the unique window ID number, the window type, and the controls it will have. I haven&#8217;t thought about it much beyond that.
+
+There won&#8217;t be any mouse support for now. Nor movable windows. (However, windows can overlap each other.)
+
+Does anyone have any suggestions or features they would like? I don&#8217;t want to really get into this and leave out something important.
+
+
+--------------------------------------------------------------------------------
+_______________________________________________
+mikeos-developer mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A> 
+
+
+--------------------------------------------------------------------------------
+
+No virus found in this message.
+Checked by AVG - www.avg.com
+Version: 2012.0.1913 / Virus Database: 2114/4880 - Release Date: 03/19/12
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120324/af82c2d2/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120324/af82c2d2/attachment.html</A>&gt;
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: infoblock draft.txt
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120324/af82c2d2/attachment.txt">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20120324/af82c2d2/attachment.txt</A>&gt;
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002995.html">[mikeos-developer] GUI layer for applications
+</A></li>
+	<LI>Next message: <A HREF="003001.html">[mikeos-developer] GUI layer for applications
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2998">[ date ]</a>
+              <a href="thread.html#2998">[ thread ]</a>
+              <a href="subject.html#2998">[ subject ]</a>
+              <a href="author.html#2998">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

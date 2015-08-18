@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] GUI Mouse Driver Repair (Maybe?)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2013-October/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20GUI%20Mouse%20Driver%20Repair%20%28Maybe%3F%29&In-Reply-To=%3CDUB113-W845B054BBF1718FB4478E0830F0%40phx.gbl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003212.html">
+   <LINK REL="Next"  HREF="003214.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] GUI Mouse Driver Repair (Maybe?)</H1>
+    <B>Dan Barry</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20GUI%20Mouse%20Driver%20Repair%20%28Maybe%3F%29&In-Reply-To=%3CDUB113-W845B054BBF1718FB4478E0830F0%40phx.gbl%3E"
+       TITLE="[mikeos-developer] GUI Mouse Driver Repair (Maybe?)">danbarry at hotmail.co.uk
+       </A><BR>
+    <I>Sun Oct 27 15:42:04 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="003212.html">[mikeos-developer] GUI Mouse Driver Repair (Maybe?)
+</A></li>
+        <LI>Next message: <A HREF="003214.html">[mikeos-developer] Optimisation (nasm -Ox)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3213">[ date ]</a>
+              <a href="thread.html#3213">[ thread ]</a>
+              <a href="subject.html#3213">[ subject ]</a>
+              <a href="author.html#3213">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> It's an interesting project you've got. I hope you can fit the driver&gt; in your limited kernel space!
+</I>Haha, I think a slight redesign may be needed to get it into the kernel!
+&gt;<i> &gt;What would make that version better?
+</I>&gt;<i> More helpful comments and better ordering. The code is essentially the same.
+</I>Oh okay, seems like a good idea to use that one then :)
+
+&gt;<i> No setup required, the mouse driver handles them at runtime.
+</I>&gt;<i> There is a little bit of setup required on the operating system's
+</I>&gt;<i> behalf however.
+</I>&gt;<i> Before using the mouse API, the operating system must install the
+</I>&gt;<i> driver and setup a proper range and scale.
+</I>&gt;<i> The scale is a value the raw position is shifted by to reduced the
+</I>&gt;<i> speed of the mouse depending on the resolution/aspect ratio of the
+</I>&gt;<i> screen. The range is the minimum and maximum positions of the mouse,
+</I>&gt;<i> this is usually the number of pixels/character on the screen but can
+</I>&gt;<i> be useful for locking the mouse to a specific area.
+</I>&gt;<i> TachyonOS uses the following boot code to initialize the mouse for
+</I>&gt;<i> 80x25 text mode.
+</I>&gt;<i> 
+</I>&gt;<i> call os_mouse_setup
+</I>&gt;<i> mov ax, 0
+</I>&gt;<i> mov bx, 0
+</I>&gt;<i> mov cx, 79
+</I>&gt;<i> mov dx, 24
+</I>&gt;<i> call os_mouse_range
+</I>&gt;<i> mov dh, 3
+</I>&gt;<i> mov dl, 2
+</I>&gt;<i> call os_mouse_scale
+</I>
+All seems good to me, I'll give it ago when I get home tonight. Thank you for sharing, I've been looking for a light mouse driver for a while now :)
+Dan 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131027/2e8da67f/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20131027/2e8da67f/attachment.html</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="003212.html">[mikeos-developer] GUI Mouse Driver Repair (Maybe?)
+</A></li>
+	<LI>Next message: <A HREF="003214.html">[mikeos-developer] Optimisation (nasm -Ox)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3213">[ date ]</a>
+              <a href="thread.html#3213">[ thread ]</a>
+              <a href="subject.html#3213">[ subject ]</a>
+              <a href="author.html#3213">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

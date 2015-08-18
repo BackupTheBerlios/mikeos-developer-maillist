@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Three questions.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Three%20questions.&In-Reply-To=%3CCAPRjAGjA6%3DoQX9y%3DM4mg2h2UFgj7XAzq3vL%2Bn-e7xg-43e-yWQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002228.html">
+   <LINK REL="Next"  HREF="002236.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Three questions.</H1>
+    <B>Paulo V</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Three%20questions.&In-Reply-To=%3CCAPRjAGjA6%3DoQX9y%3DM4mg2h2UFgj7XAzq3vL%2Bn-e7xg-43e-yWQ%40mail.gmail.com%3E"
+       TITLE="[mikeos-developer] Three questions.">paulomobilemail at gmail.com
+       </A><BR>
+    <I>Wed Sep 21 23:24:46 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="002228.html">[mikeos-developer] Three questions.
+</A></li>
+        <LI>Next message: <A HREF="002236.html">[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 41
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2231">[ date ]</a>
+              <a href="thread.html#2231">[ thread ]</a>
+              <a href="subject.html#2231">[ subject ]</a>
+              <a href="author.html#2231">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I always use 256 colour RLL encoded Zsoft PCX format.
+Apparently there are differences in the several versions of PCX that Zsoft
+came out with.
+Open your PCX with a hex editor and check the following bytes in the header:
+
+Offset 00h = 0Ah = Zsoft PCX
+Offset 01h = 05h = version, it should be version 3 (yes 05h = version 3 )
+Offset 02h = 01h = Run Length Encoded
+Offset 03h = 08h = number of bits to represent a pixel (per plane)
+
+Then at Offset 41h there must be a 01h which means the pcx only has 1 plane.
+
+I have stuck to these &quot;rules&quot; and never had a problem.
+
+Paulo.
+
+
+
+On Wed, Sep 21, 2011 at 11:02 PM, &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">wisecracker at tesco.net</A>&gt; wrote:
+
+&gt;<i> Hi Paulo...
+</I>&gt;<i>
+</I>&gt;<i> &gt; All pcx pics I have ever made for MikeOS are 320 X 200 X 8bit (256
+</I>&gt;<i> colour)
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/pipermail/mikeos-developer/2010-December/001643.html">https://lists.berlios.de/pipermail/mikeos-developer/2010-December/001643.html</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> 73...
+</I>&gt;<i>
+</I>&gt;<i> Bazza, G0LCU...
+</I>&gt;<i>
+</I>&gt;<i> Team AMIGA...
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://homepages.tesco.net/wisecracker/">http://homepages.tesco.net/wisecracker/</A>
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://main.aminet.net/search?readme=wisecracker">http://main.aminet.net/search?readme=wisecracker</A>
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://mikeos.berlios.de/">http://mikeos.berlios.de/</A>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> mikeos-developer mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">https://lists.berlios.de/mailman/listinfo/mikeos-developer</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110921/f581591f/attachment.html">https://lists.berlios.de/pipermail/mikeos-developer/attachments/20110921/f581591f/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="002228.html">[mikeos-developer] Three questions.
+</A></li>
+	<LI>Next message: <A HREF="002236.html">[mikeos-developer] mikeos-developer Digest, Vol 36, Issue 41
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2231">[ date ]</a>
+              <a href="thread.html#2231">[ thread ]</a>
+              <a href="subject.html#2231">[ subject ]</a>
+              <a href="author.html#2231">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>

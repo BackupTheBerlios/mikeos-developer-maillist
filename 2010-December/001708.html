@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [mikeos-developer] Implementing System Calls (API)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/mikeos-developer/2010-December/index.html" >
+   <LINK REL="made" HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Implementing%20System%20Calls%20%28API%29&In-Reply-To=%3C67355192E0944BFAB3791C54D29DEB4B%40userfe6b65a555%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001709.html">
+   <LINK REL="Next"  HREF="001710.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[mikeos-developer] Implementing System Calls (API)</H1>
+    <B>Mike Gonta</B> 
+    <A HREF="mailto:mikeos-developer%40lists.berlios.de?Subject=Re%3A%20%5Bmikeos-developer%5D%20Implementing%20System%20Calls%20%28API%29&In-Reply-To=%3C67355192E0944BFAB3791C54D29DEB4B%40userfe6b65a555%3E"
+       TITLE="[mikeos-developer] Implementing System Calls (API)">mikegonta at gmail.com
+       </A><BR>
+    <I>Thu Dec 30 23:15:22 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001709.html">[mikeos-developer] Implementing System Calls (API)
+</A></li>
+        <LI>Next message: <A HREF="001710.html">[mikeos-developer] Implementing API Calls (SOLVED)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1708">[ date ]</a>
+              <a href="thread.html#1708">[ thread ]</a>
+              <a href="subject.html#1708">[ subject ]</a>
+              <a href="author.html#1708">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+----- Original Message ----- 
+From: &quot;Mike Gonta&quot;
+To: &quot;MikeOS (and similar OS) developers&quot;Sent: Thursday, December 30, 2010 
+3:37 PM
+Subject: Re: [mikeos-developer] Implementing System Calls (API)
+
+
+&gt;<i> ----- Original Message ----- 
+</I>&gt;<i> From: Muzaffar Auhammud
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/mikeos-developer">mikeos-developer at lists.berlios.de</A>
+</I>&gt;<i> Sent: Thursday, December 30, 2010 3:12 PM
+</I>&gt;<i> Subject: [mikeos-developer] Implementing System Calls (API)
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;&gt;<i> Hi! I've started making my own OS from scratch some weeks ago and
+</I>&gt;&gt;<i> I came upon MikeOS through Google. I ran through the source code and
+</I>&gt;&gt;<i> I've found that MikeOS is not coded in a difficult manner. The code
+</I>&gt;&gt;<i> has helped me a lot in my OS.
+</I>&gt;<i>
+</I>&gt;<i> Have you also seen this? It's MikeOS translated to 32 bit protected mode.
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://board.flatassembler.net/topic.php?t=12381">http://board.flatassembler.net/topic.php?t=12381</A>
+</I>&gt;<i>
+</I>&gt;&gt;<i> But I'm having problems with implementing system calls in my os (Not in 
+</I>&gt;&gt;<i> MikeOS).
+</I>&gt;&gt;<i> I've added jump instructions at the top like in MikeOS and I've even 
+</I>&gt;&gt;<i> create a
+</I>&gt;&gt;<i> dev.inc file with the call in it.
+</I>&gt;<i>
+</I>&gt;&gt;<i> part of kernel.asm (at the top where system calls are being implemented):
+</I>&gt;&gt;<i> jmp System.IO.Screen.DisplayString
+</I>&gt;&gt;<i> part of dev.inc:
+</I>&gt;&gt;<i> System.IO.Screen.DisplayString  equ 0003h
+</I>&gt;&gt;<i> I've tried to create a program using the dev.inc and it would not work.
+</I>&gt;<i>
+</I>&gt;<i> If the jump table is not big enough the first jump before the one in 
+</I>&gt;<i> question
+</I>&gt;<i> may only be a 2 byte short jump. If that's the case use:
+</I>&gt;<i>
+</I>
+Oops, the first jump needs to be at 0:
+
+&gt;<i> align 3
+</I>&gt;<i> jmp ...
+</I>&gt;<i> align 3
+</I>&gt;<i> jmp ...
+</I>&gt;<i>
+</I>&gt;<i> to ensure that the equates are correct.
+</I>
+Should be:
+org 0
+jmp ...
+align 3
+jmp ...               ; and so on
+
+&gt;&gt;<i> I've attached my OS source code in this email...
+</I>&gt;<i>
+</I>&gt;<i> Sorry, no source code attachments here.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Mike Gonta
+</I>&gt;<i> look and see - many look but few see
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://aeBIOS.com">http://aeBIOS.com</A>
+</I>&gt;<i> 
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001709.html">[mikeos-developer] Implementing System Calls (API)
+</A></li>
+	<LI>Next message: <A HREF="001710.html">[mikeos-developer] Implementing API Calls (SOLVED)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1708">[ date ]</a>
+              <a href="thread.html#1708">[ thread ]</a>
+              <a href="subject.html#1708">[ subject ]</a>
+              <a href="author.html#1708">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/mikeos-developer">More information about the mikeos-developer
+mailing list</a><br>
+</body></html>
